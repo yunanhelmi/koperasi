@@ -149,6 +149,10 @@ class Simpanan3thMastercon extends CI_Controller {
 		$this->simpanan3thmastermodel->deleteData($id);
 		redirect('simpanan3thmastercon');
 	}
+
+	function view_transaksi($id) {
+		
+	}
 }
 
 ?>
