@@ -151,7 +151,10 @@ class Simpanan3thMastercon extends CI_Controller {
 	}
 
 	function view_transaksi($id) {
-		
+		$session_data = $this->session->userdata('logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
 	}
 }
 
