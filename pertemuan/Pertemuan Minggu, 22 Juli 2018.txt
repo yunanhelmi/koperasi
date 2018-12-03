@@ -1,0 +1,29 @@
+Pertemuan Minggu, 22 Juli 2018
+
+*) Field yang ditambahkan untuk data nasabah:
+1. No. HP (Sudah)
+2. Pekerjaan (Sudah)
+3. Nomor Nasabah (Sudah)
+
+*) Simpanan wajib piutang, ditambahkan 1% dari pinjaman.
+
+*) Sub Menu Yg ditambahkan pada Menu Simpanan
+-) Simpanan Khusus (Sudah)
+-) Simpanan 3 Tahunan (Sudah)
+-) Simpanan Pihak Ketiga (Non Nasabah) (Sudah)
+-) Simpanan Dana Sosial (Sudah)
+-) Simpanan Kanzun (Sudah)
+
+*) Tampilan awal sesuai alur koperasi, yaitu 
+-) Data Anggota, ketika anggota dipilih, maka akan masuk pada form untuk semua transaksinya.
+
+*) Transaksi untuk ambil pinjaman dan tabungan
+
+*) Laporan Perkiraan Kas Harian (Rincian uang keluar masuk untuk hari ini) untuk rekap dan rincian per anggota.
+
+*) Membuat Transaksi yang dibutuhkan untuk Laporan Akuntansi
+
+*) Membuat Setting untuk Mapping Akuntansi
+
+
+

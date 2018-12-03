@@ -1,0 +1,43 @@
+/* info-box */
+.info-box {
+    padding: 5px;
+    vertical-align: middle;
+    background-color: #CCFFCC;
+    border: 1px solid #00CC66;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.info-box2 {
+    padding: 5px;
+    vertical-align: middle;
+    background-color: red;
+    border: 1px solid #00CC66;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: white;
+}
+
+.info-box3 {
+    padding: 5px;
+    vertical-align: middle;
+    background-color: orange;
+    border: 1px solid #00CC66;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: white;
+}
+
+.info-box4 {
+    padding: 5px;
+    vertical-align: middle;
+    background-color: white;
+    border: 1px solid red;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: red;
+}
