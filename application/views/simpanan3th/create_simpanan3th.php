@@ -4,6 +4,7 @@
 <script src="<?php echo base_url(); ?>assets/js/data.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/canvas-tools.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/export-csv.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/bootstrap-typeahead.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/bower_components/select2/dist/js/select2.full.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/select2/dist/css/select2.min.css">
 <!-- Content Wrapper. Contains page content -->
@@ -15,7 +16,8 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url(); ?>index.php/simpanan3thcon"><i class="fa fa-users"></i> Simpanan 3 Th</a></li>
-        <li class="active"><a href="<?php echo base_url(); ?>iindex.php/simpanan3thcon/create_simpanan3th"><i class="fa fa-table"></i>Simpanan 3 Th</a></li>
+        <li class="active"><a href="<?php echo base_url(); ?>index.php/simpanan3thmastercon/transaksi_simpanan3thmaster/<?php echo $simpanan3thmaster->id?>"><i class="fa fa-credit-card"></i>Transaksi Simpanan 3 Th</a></li>
+        <li class="active"><a href="<?php echo base_url(); ?>index.php/simpanan3thcon/create_simpanan3th/<?php echo $simpanan3thmaster->id?>"><i class="fa fa-plus"></i> Tambah Simpanan 3 Th Anggota</a></li>
       </ol>
     </section>
     <!-- Main content -->
@@ -41,7 +43,7 @@
                   <input type="hidden" class="form-control" id="nama_nasabah" name="nama_nasabah">
                 </div>
                 <div class="form-group col-xs-6">
-                  <label for="exampleInputPassword1">Nomor ANggota</label>
+                  <label for="exampleInputPassword1">Nomor Anggota</label>
                   <input type="text" class="form-control" id="nomor_nasabah" name="nomor_nasabah" placeholder="Nomor Anggota" readonly>
                 </div>
                 <div class="form-group col-xs-6">
@@ -49,8 +51,9 @@
                   <input type="text" class="form-control" id="nik_nasabah" name="nik_nasabah" placeholder="NIK Anggota" readonly>
                 </div>
                 <div class="form-group col-xs-6">
-                  <label for="exampleInputPassword1">SIMPANAN KE</label>
-                  <input type="text" class="form-control" id="simpanan_ke" name="simpanan_ke" placeholder="Simpanan ke-">
+                  <label for="exampleInputPassword1">Nama Simpanan</label>
+                  <input type="text" class="form-control" id="nama_simpanan" name="nama_simpanan" placeholder="">
+                  <input type="hidden" class="form-control" id="id_master" name="id_master">
                 </div>
                 <div class="form-group col-xs-6">
                   <label for="exampleInputPassword1">Tanggal</label>
@@ -102,6 +105,44 @@
                 console.log(nik[1]);
               }
             });
+        });
+
+        var simpanan3thmaster = [<?php echo $simpanan3thmaster_dropdown; ?>];
+
+        $('#nama_simpanan').typeahead({
+            source: function (query, process) {
+            states2 = [];
+            map2 = {};
+            
+            var source = [];
+            $.each(simpanan3thmaster, function (i, state) {
+              map2[state.stateName] = state;
+              states2.push(state.stateName);
+            });
+           
+            process(states2);
+            
+            },
+
+            updater: function (item) {
+            selectedState = map2[item].stateCode;
+            selectedState2 = map2[item].stateDisplay;
+            $('#id_master').val(selectedState);
+            return selectedState2;
+            },
+            matcher: function (item) {
+                if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1) {
+              return true;
+            }
+            },
+            sorter: function (items) {
+                return items.sort();
+            },
+            highlighter: function (item) {
+            var regex = new RegExp( '(' + this.query + ')', 'gi' );
+            return item.replace( regex, "<strong>$1</strong>" );
+            
+            },
         });
 
       });

@@ -15,7 +15,7 @@ class Simpanan3thMasterModel extends CI_Model {
 		}
 	}
 
-	function get_simpanan3th_master_by_id($id) {
+	function get_simpanan3thmaster_by_id($id) {
 		$query = $this->db->query("SELECT * from `simpanan3th_master` WHERE id = '$id'");
 		$a = $query->row();
 		return $a;

@@ -16,7 +16,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url(); ?>index.php/simpanan3thmastercon"><i class="fa fa-credit-card"></i> Simpanan 3 Th</a></li>
-        <li class="active"><a href="<?php echo base_url(); ?>iindex.php/simpanan3thmastercon/create_simpanan3thmaster"><i class="fa fa-credit-card"></i>Tambah Simpanan 3 Th Baru</a></li>
+        <li class="active"><a href="<?php echo base_url(); ?>index.php/simpanan3thmastercon/view_simpanan3thmaster<?php echo $simpanan3thmaster->id?>"><i class="fa fa-credit-card"></i>View Simpanan 3 Th Baru</a></li>
       </ol>
     </section>
     <!-- Main content -->

@@ -7,6 +7,7 @@ class Simpanan3thcon extends CI_Controller {
 		parent::__construct();
 		$this->load->model('usermodel');
 		$this->load->model('nasabahmodel');
+		$this->load->model('simpanan3thmastermodel');
 		$this->load->model('simpanan3thmodel');
 		$this->load->model('detailsimpanan3thmodel');
 		$this->load->library('session');
@@ -30,14 +31,26 @@ class Simpanan3thcon extends CI_Controller {
 		$this->load->view('/layouts/footer', $data);
 	}
 
-	function create_simpanan3th() {
+	function create_simpanan3th($id_master) {
 		$session_data = $this->session->userdata('logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
-		$data['username'] = $session_data['username'];
-		$data['status'] = $session_data['status'];
-		$data['nasabah'] = $this->nasabahmodel->showData();
+
+		$simpanan3thmaster = $this->simpanan3thmastermodel->showData();
+		$temp = '';
+		foreach ($simpanan3thmaster as $s) {
+			$temp = $temp.'{"stateCode": "'.$s["id"].'", "stateDisplay": "'.$s["nama"].'", "stateName": "'.$s["nama"].'"},';
+		}
+		$temp=substr_replace($temp ,"",-1);
+		$temp=trim(preg_replace('/\s+/', ' ', $temp));
+		$data['simpanan3thmaster_dropdown']		= $temp;
+
+		$data['simpanan3thmaster'] = $this->simpanan3thmastermodel->get_simpanan3thmaster_by_id($id_master);
+		$data['username'] 	= $session_data['username'];
+		$data['status'] 	= $session_data['status'];
+		$data['nasabah'] 	= $this->nasabahmodel->showData();
+
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/simpanan3th/create_simpanan3th', $data);
 		$this->load->view('/layouts/footer', $data);
@@ -46,7 +59,7 @@ class Simpanan3thcon extends CI_Controller {
 	function pickNasabah() {
 		$nasabah = $this->nasabahmodel->get_nasabah_by_id($this->input->post('id_nasabah'));
 
-		echo $nasabah->nama. '||'.$nasabah->nik. '||'.$nasabah->nomor_nasabah;
+		echo $nasabah->nama. '||'.$nasabah->nik. '||'.$nasabah->nomor_koperasi;
 	}
 
 	function insert_simpanan3th() {
@@ -56,15 +69,17 @@ class Simpanan3thcon extends CI_Controller {
 		}
 		$data = array();
 		$data['id'] = $this->simpanan3thmodel->getNewId();
-		$data['id_nasabah'] = $this->input->post('id_nasabah');
-		$data['nama_nasabah'] = $this->input->post('nama_nasabah');
-		$data['nomor_nasabah'] = $this->input->post('nomor_nasabah');
-		$data['nik_nasabah'] = $this->input->post('nik_nasabah');
-		$data['simpanan_ke'] = $this->input->post('simpanan_ke');
-		$date1 = $this->input->post('tanggal');
-		$date = strtotime($date1);
-		$data['waktu'] = date("Y-m-d",$date);
-		$data['total'] = 0;
+		$data['id_nasabah'] 	= $this->input->post('id_nasabah');
+		$data['nama_nasabah'] 	= $this->input->post('nama_nasabah');
+		$data['nomor_nasabah'] 	= $this->input->post('nomor_nasabah');
+		$data['nik_nasabah'] 	= $this->input->post('nik_nasabah');
+		$data['id_master'] 		= $this->input->post('id_master');
+		$data['nama_simpanan'] 	= $this->input->post('nama_simpanan');
+		$date1 	= $this->input->post('tanggal');
+		$date 	= strtotime($date1);
+		$data['waktu'] 			= date("Y-m-d",$date);
+		$data['total'] 			= 0;
+
 		$this->simpanan3thmodel->inputData($data);
 		redirect('simpanan3thcon/view_simpanan3th/'.$data['id']);
 	}
@@ -74,10 +89,23 @@ class Simpanan3thcon extends CI_Controller {
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
-		$data['simpanan3th'] 	= $this->simpanan3thmodel->get_simpanan3th_by_id($id);
-		$data['username'] 		= $session_data['username'];
-		$data['status'] 		= $session_data['status'];
-		$data['nasabah'] 		= $this->nasabahmodel->showData();
+		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id($id);
+		$id_master 					= $data['simpanan3th']->id_master;
+		$data['simpanan3thmaster']	= $this->simpanan3thmastermodel->get_simpanan3thmaster_by_id($id_master);
+
+		$simpanan3thmaster = $this->simpanan3thmastermodel->showData();
+		$temp = '';
+		foreach ($simpanan3thmaster as $s) {
+			$temp = $temp.'{"stateCode": "'.$s["id"].'", "stateDisplay": "'.$s["nama"].'", "stateName": "'.$s["nama"].'"},';
+		}
+		$temp=substr_replace($temp ,"",-1);
+		$temp=trim(preg_replace('/\s+/', ' ', $temp));
+		$data['simpanan3thmaster_dropdown']		= $temp;
+
+		$data['username'] 			= $session_data['username'];
+		$data['status'] 			= $session_data['status'];
+		$data['nasabah'] 			= $this->nasabahmodel->showData();
+
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/simpanan3th/edit_simpanan3th', $data);
 		$this->load->view('/layouts/footer', $data);
@@ -94,15 +122,17 @@ class Simpanan3thcon extends CI_Controller {
 		$data['nama_nasabah'] 	= $this->input->post('nama_nasabah');
 		$data['nomor_nasabah'] 	= $this->input->post('nomor_nasabah');
 		$data['nik_nasabah'] 	= $this->input->post('nik_nasabah');
-		$data['simpanan_ke'] 	= $this->input->post('simpanan_ke');
+		$data['id_master'] 		= $this->input->post('id_master');
+		$data['nama_simpanan'] 	= $this->input->post('nama_simpanan');
 		$date1 					= $this->input->post('tanggal');
 		$date 					= strtotime($date1);
 		$tanggal 				= date("Y-m-d",$date);
 		$waktu 					= $tanggal." 00:00:00";
 		$data['waktu'] 			= $waktu;
 		$data['total'] 			= $this->input->post('total');
+
 		$this->simpanan3thmodel->updateData($id, $data);
-		redirect('simpanan3thcon');
+		redirect('simpanan3thmastercon/transaksi_simpanan3thmaster/'.$data['id_master']);
 	}
 
 	function view_simpanan3th($id_simpanan3th) {
@@ -112,6 +142,8 @@ class Simpanan3thcon extends CI_Controller {
 		}
 		$data 							= array();
 		$data['simpanan3th'] 			= $this->simpanan3thmodel->get_simpanan3th_by_id($id_simpanan3th);
+		$id_master 						= $data['simpanan3th']->id_master;
+		$data['simpanan3thmaster']		= $this->simpanan3thmastermodel->get_simpanan3thmaster_by_id($id_master);
 		$data['username'] 				= $session_data['username'];
 		$data['status'] 				= $session_data['status'];
 		$data['nasabah'] 				= $this->nasabahmodel->showData();
@@ -127,10 +159,13 @@ class Simpanan3thcon extends CI_Controller {
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
+
+		$simpanan3th 			= $this->simpanan3thmodel->get_simpanan3th_by_id($id);
+
 		$this->simpanan3thmodel->deleteData($id);
 		$this->detailsimpanan3thmodel->delete_by_id_simpanan3th($id);
 
-		redirect('simpanan3thcon');
+		redirect('simpanan3thmastercon/transaksi_simpanan3thmaster/'.$simpanan3th->id_master);
 	}
 
 	function insert_detail_simpanan3th() {

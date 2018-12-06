@@ -27,6 +27,12 @@ class Simpanan3thModel extends CI_Model {
 		return $a;
 	}
 
+	function get_simpanan3th_by_id_master($id_master) {
+		$query = $this->db->query("SELECT * from `simpanan3th` WHERE id_master = '$id_master'");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function update_total($id, $total) {
 		$this->db->query("UPDATE `simpanan3th` SET total = '$total' WHERE id = '$id'");
 	}

@@ -8,6 +8,7 @@ class Simpanan3thMastercon extends CI_Controller {
 		$this->load->model('usermodel');
 		$this->load->model('nasabahmodel');
 		$this->load->model('simpanan3thmastermodel');
+		$this->load->model('simpanan3thmodel');
 		$this->load->model('kodeakunmodel');
 		$this->load->library('session');
 		$this->load->library('form_validation');
@@ -92,7 +93,7 @@ class Simpanan3thMastercon extends CI_Controller {
 		$temp=trim(preg_replace('/\s+/', ' ', $temp));
 		$data['kode_akun']		= $temp;
 
-		$data['simpanan3thmaster'] 	= $this->simpanan3thmastermodel->get_simpanan3th_master_by_id($id);
+		$data['simpanan3thmaster'] 	= $this->simpanan3thmastermodel->get_simpanan3thmaster_by_id($id);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -131,7 +132,7 @@ class Simpanan3thMastercon extends CI_Controller {
 			redirect("usercon/login", "refresh");
 		}
 		$data 							= array();
-		$data['simpanan3thmaster'] 		= $this->simpanan3thmastermodel->get_simpanan3th_master_by_id($id);
+		$data['simpanan3thmaster'] 		= $this->simpanan3thmastermodel->get_simpanan3thmaster_by_id($id);
 		$data['username'] 				= $session_data['username'];
 		$data['status'] 				= $session_data['status'];
 
@@ -150,11 +151,21 @@ class Simpanan3thMastercon extends CI_Controller {
 		redirect('simpanan3thmastercon');
 	}
 
-	function view_transaksi($id) {
+	function transaksi_simpanan3thmaster($id) {
 		$session_data = $this->session->userdata('logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
+
+		$data = array();
+		$data['simpanan3thmaster'] 	= $this->simpanan3thmastermodel->get_simpanan3thmaster_by_id($id);
+		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_master($id);
+		$data['username'] 			= $session_data['username'];
+		$data['status'] 			= $session_data['status'];
+
+		$this->load->view('/layouts/menu', $data);
+		$this->load->view('/simpanan3thmaster/transaksi', $data);
+		$this->load->view('/layouts/footer', $data);
 	}
 }
 
