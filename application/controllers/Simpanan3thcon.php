@@ -218,6 +218,8 @@ class Simpanan3thcon extends CI_Controller {
 		}
 
 		$data['simpanan3th'] 			= $this->simpanan3thmodel->get_simpanan3th_by_id($id_simpanan3th);
+		$id_master 						= $data['simpanan3th']->id_master;
+		$data['simpanan3thmaster']		= $this->simpanan3thmastermodel->get_simpanan3thmaster_by_id($id_master);
 		$data['username'] 					= $session_data['username'];
 		$data['status'] 					= $session_data['status'];
 		$data['nasabah'] 					= $this->nasabahmodel->showData();

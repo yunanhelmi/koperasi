@@ -14,7 +14,8 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url(); ?>index.php/simpanan3thcon"><i class="fa fa-users"></i> Simpanan 3 Th</a></li>
-			<li class="active"><a href="<?php echo base_url(); ?>index.php/simpanan3thcon/create_simpanan3th"><i class="fa fa-table"></i>Simpanan 3 Th</a></li>
+      <li><a href="<?php echo base_url(); ?>index.php/simpanan3thmastercon/transaksi_simpanan3thmaster/<?php echo $simpanan3thmaster->id ?>"><i class="fa fa-credit-card"></i>Transaksi Simpanan 3 Th</a></li>
+      <li class="active"><a href="<?php echo base_url(); ?>index.php/simpanan3thcon/view_simpanan3th/<?php echo $simpanan3th->id ?>"><i class="fa fa-eye"></i> Detail Simpanan 3 Th Anggota</a></li>
 		</ol>
 	</section>
 	<section class="content">
@@ -36,8 +37,8 @@
 		                  	<p><?php echo $simpanan3th->nik_nasabah;?></p>
 		                </div>
 		                <div class="form-group col-xs-6">
-		                  	<label for="exampleInputEmail1">Simpanan Ke-</label>
-		                  	<p><?php echo $simpanan3th->simpanan_ke;?></p>
+		                  	<label for="exampleInputEmail1">Nama Simpanan</label>
+		                  	<p><?php echo $simpanan3th->nama_simpanan;?></p>
 		                </div>
 		                <div class="form-group col-xs-6">
 							<label for="exampleInputPassword1">Tanggal</label>
@@ -249,6 +250,7 @@ function formatRupiah(nilaiUang2) {
 
 function label_jumlah() {
     var jumlah = $('#jumlah').val();
+    console.log(jumlah);
     $("#label_jumlah").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(jumlah)));
 }
 
@@ -271,17 +273,6 @@ function tambahDetailSimpanan3th() {
 	document.getElementById("div_edit_detail_simpanan3th").style.display = "none";
 	document.getElementById("div_tambah_detail_simpanan3th").style.display = "block";
 }
-
-$(function () {
-    $('#detail_simpanan3th_table').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-})
 
 $(document).ready(function(){
 	$('.select2').select2();

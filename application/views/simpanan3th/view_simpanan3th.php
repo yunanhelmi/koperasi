@@ -4,8 +4,6 @@
 <script src="<?php echo base_url(); ?>assets/js/data.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/canvas-tools.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/export-csv.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets/bower_components/select2/dist/js/select2.full.min.js"></script>
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/select2/dist/css/select2.min.css">
 
 <div class="content-wrapper">
 	<section class="content-header">
@@ -65,7 +63,7 @@
 										<i class="fa fa-calendar"></i>
 									</div>
 									<input type="text" class="form-control pull-right" name="waktu" id="waktu" value="<?php echo date("d-m-Y");?>" data-date-format="dd-mm-yyyy">
-                    				<input type="hidden" class="form-control" value="<?php echo $simpanan3th->id?>" id="id_simpanan3th" name="id_simpanan3th">
+                  <input type="hidden" class="form-control" value="<?php echo $simpanan3th->id?>" id="id_simpanan3th" name="id_simpanan3th">
 								</div>
 							</div>
               <div class="form-group col-xs-6">
@@ -147,7 +145,7 @@
                       $sisa_simpanan[$i] = $total_debet - $total_kredit;
                     ?>
                     <td style='text-align: right'><?php echo "Rp " . number_format($sisa_simpanan[$i],2,',','.');?></td>
-                    <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_detail_simpanan3th/".$simpanan3th->id."/".$detail_simpanan3th[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+                    <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("simpanan3thcon/edit_detail_simpanan3th/".$simpanan3th->id."/".$detail_simpanan3th[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                     <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmation('<?php echo $simpanan3th->id?>','<?php echo $detail_simpanan3th[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                   </tr>
                   <?php $no++;}?>
@@ -187,7 +185,7 @@
     }
 </style>
 
-<script>
+<script type="text/javascript">
 function formatRupiah(nilaiUang2) {
     var nilaiUang=nilaiUang2+"";
     var nilaiRupiah   = "";
@@ -208,8 +206,12 @@ function formatRupiah(nilaiUang2) {
 }
 
 function label_jumlah() {
-    var jumlah = $('#jumlah').val();
-    $("#label_jumlah").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(jumlah)));
+      var jumlah = $('#jumlah').val();
+      $("#label_jumlah").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(jumlah)));
+    }
+
+function tambahDetailSimpanan3th() {
+	document.getElementById("div_tambah_detail_simpanan3th").style.display = "block";
 }
 
 function getConfirmation(id_simpanan3th, id_detail_simpanan3th){
@@ -222,24 +224,7 @@ function getConfirmation(id_simpanan3th, id_detail_simpanan3th){
     }
 }
 
-function tambahDetailSimpanan3th() {
-	document.getElementById("div_tambah_detail_simpanan3th").style.display = "block";
-}
-
-$(function () {
-    $('#detail_simpanan3th_table').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-})
-
 $(document).ready(function(){
-	$('.select2').select2();
-
     $('#waktu').datepicker({}).on('changeDate', function(ev){});
 
     label_jumlah();
