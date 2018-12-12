@@ -174,6 +174,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="#"><i class="fa fa-dollar"></i>Laba Rugi</a></li>
           </ul>
         </li>-->
+        <li>
+          <a href="<?php echo base_url(); ?>index.php/transaksicon">
+            <i class="fa fa-usd"></i> <span>Transaksi Lain-lain</span>
+          </a>
+        </li>
         <li class="treeview">
           <a href="<?php echo base_url()."assets/"; ?>#">
             <i class="fa fa-book"></i> <span>Akuntansi</span>
@@ -186,11 +191,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="<?php echo base_url(); ?>index.php/mappingkodeakuncon"><i class="fa fa-book"></i>Mapping Kode Akun</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/transaksiakuntansicon"><i class="fa fa-book"></i>Transaksi</a></li>
           </ul>
-        </li>
-        <li>
-          <a href="<?php echo base_url(); ?>index.php/transaksicon">
-            <i class="fa fa-usd"></i> <span>Transaksi Lain-lain</span>
-          </a>
         </li>
         <li class="treeview">
           <a href="<?php echo base_url()."assets/"; ?>#">

@@ -663,6 +663,59 @@ class TransaksianggotaCon extends CI_Controller {
 		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
 	}
 
+	function angsuran_unpost_akuntansi($id_pinjaman, $id_detail_angsuran) {
+		$session_data = $this->session->userdata('logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		$data = array();
+		$data['pinjaman'] 				= $this->pinjamanmodel->get_pinjaman_by_id($id_pinjaman);
+		$id_nasabah						= $data['pinjaman']->id_nasabah;
+		$data['detail_angsuran'] 		= $this->detailangsuranmodel->get_detail_angsuran_by_id_pinjaman($id_pinjaman);
+		$data['post_detail_angsuran'] 	= $this->detailangsuranmodel->get_detail_angsuran_by_id($id_detail_angsuran);
+		$data['nasabah'] 				= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
+		$data['simpananpokok'] 			= $this->simpananpokokmodel->get_simpananpokok_by_id_nasabah($id_nasabah);
+		$data['simpananwajib'] 			= $this->simpananwajibmodel->get_simpananwajib_by_id_nasabah($id_nasabah);
+		$data['simpanankhusus'] 		= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
+		$data['simpanandanasosial'] 	= $this->simpanandanasosialmodel->get_simpanandanasosial_by_id_nasabah($id_nasabah);
+		$data['simpanankanzun'] 		= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
+		$data['simpanan3th'] 			= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
+		$data['simpananpihakketiga']	= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
+		$data['username'] 				= $session_data['username'];
+		$data['status'] 				= $session_data['status'];
+
+		$id_debet_transaksi_akuntansi 	= $data['post_detail_angsuran']->id_debet_transaksi_akuntansi;
+		$id_kredit_transaksi_akuntansi 	= $data['post_detail_angsuran']->id_kredit_transaksi_akuntansi;
+
+		$id_debet 	= explode(",", $id_debet_transaksi_akuntansi);
+		$id_kredit 	= explode(",", $id_kredit_transaksi_akuntansi);
+
+		for($i = 0; $i < sizeof($id_debet); $i++) {
+			$this->transaksiakuntansimodel->deleteData($id_debet[$i]);
+		}
+
+		for($i = 0; $i < sizeof($id_kredit); $i++) {
+			$this->transaksiakuntansimodel->deleteData($id_kredit[$i]);
+		}
+
+		$update = array();
+		$id 									= $data['post_detail_angsuran']->id;
+		$update['waktu'] 						= $data['post_detail_angsuran']->waktu;
+		$update['bulan_ke'] 					= $data['post_detail_angsuran']->bulan_ke;
+		$update['jenis'] 						= $data['post_detail_angsuran']->jenis;
+		$update['id_pinjaman'] 					= $data['post_detail_angsuran']->id_pinjaman;
+		$update['angsuran'] 					= $data['post_detail_angsuran']->angsuran;
+		$update['jasa'] 						= $data['post_detail_angsuran']->jasa;
+		$update['denda'] 						= $data['post_detail_angsuran']->denda;
+		$update['total'] 						= $data['post_detail_angsuran']->total;
+		$update['status_post']					= 0;
+		$update['id_debet_transaksi_akuntansi']	= 0;
+		$update['id_kredit_transaksi_akuntansi']= 0;
+		$this->detailangsuranmodel->updateData($id, $update);
+
+		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
+	}
 
 	/*** End of Transaksi Pinjaman ***/
 
