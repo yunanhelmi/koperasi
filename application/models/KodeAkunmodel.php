@@ -21,6 +21,12 @@ class KodeAkunModel extends CI_Model {
 		return $a;
 	}
 
+	function get_kode_akun_by_kode($kode) {
+		$query = $this->db->query("SELECT * from `kode_akun` WHERE kode_akun = '$kode'");
+		$a = $query->row();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `kode_akun`");
 		$a = $query->result_array();

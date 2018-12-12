@@ -187,6 +187,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="<?php echo base_url(); ?>index.php/transaksiakuntansicon"><i class="fa fa-book"></i>Transaksi</a></li>
           </ul>
         </li>
+        <li>
+          <a href="<?php echo base_url(); ?>index.php/transaksicon">
+            <i class="fa fa-usd"></i> <span>Transaksi Lain-lain</span>
+          </a>
+        </li>
         <li class="treeview">
           <a href="<?php echo base_url()."assets/"; ?>#">
             <i class="fa fa-file-o"></i> <span>Laporan</span>

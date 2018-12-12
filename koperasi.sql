@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2018 at 01:28 PM
+-- Generation Time: Dec 12, 2018 at 06:37 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -35,34 +35,38 @@ CREATE TABLE `detail_angsuran` (
   `jasa` double DEFAULT NULL,
   `denda` int(11) DEFAULT NULL,
   `total` double DEFAULT NULL,
-  `bulan_ke` int(11) DEFAULT NULL
+  `bulan_ke` int(11) DEFAULT NULL,
+  `status_post` int(11) DEFAULT NULL,
+  `id_debet_transaksi_akuntansi` varchar(8) DEFAULT NULL,
+  `id_kredit_transaksi_akuntansi` varchar(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detail_angsuran`
 --
 
-INSERT INTO `detail_angsuran` (`id`, `id_pinjaman`, `waktu`, `jenis`, `angsuran`, `jasa`, `denda`, `total`, `bulan_ke`) VALUES
-(1, 1, '2018-06-02', 'Angsuran', 1000000, 200000, 0, 1200000, 1),
-(2, 1, '2018-06-02', 'Angsuran', 1000000, 200000, 10000, 1210000, 0),
-(32, 2, '2018-08-23', 'Pinjaman', 0, 0, 0, 1000000, 0),
-(33, 2, '2018-08-23', 'Pinjaman', 0, 0, 0, 1000000, 0),
-(35, 2, '2018-08-23', 'Angsuran', 500000, 60000, 0, 560000, 1),
-(36, 2, '2018-09-15', 'Angsuran', 200000, 45000, 0, 245000, 2),
-(37, 2, '2018-08-23', 'Pinjaman', 0, 0, 0, 1000000, 0),
-(38, 3, '2018-09-15', 'Pinjaman', NULL, NULL, NULL, 10000000, NULL),
-(39, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 1),
-(40, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 2),
-(41, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 3),
-(42, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 4),
-(43, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 5),
-(44, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 6),
-(45, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 7),
-(46, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 8),
-(47, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 9),
-(48, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 10),
-(49, 3, '2018-09-15', 'Angsuran', 0, -300000, 0, -300000, 0),
-(50, 2, '2018-08-23', 'Angsuran', 162500, 39000, 10000, 211500, 3);
+INSERT INTO `detail_angsuran` (`id`, `id_pinjaman`, `waktu`, `jenis`, `angsuran`, `jasa`, `denda`, `total`, `bulan_ke`, `status_post`, `id_debet_transaksi_akuntansi`, `id_kredit_transaksi_akuntansi`) VALUES
+(1, 1, '2018-06-02', 'Angsuran', 1000000, 200000, 0, 1200000, 1, NULL, NULL, NULL),
+(2, 1, '2018-06-02', 'Angsuran', 1000000, 200000, 10000, 1210000, 0, NULL, NULL, NULL),
+(32, 2, '2018-08-23', 'Pinjaman', 0, 0, 0, 1000000, 0, NULL, NULL, NULL),
+(33, 2, '2018-08-23', 'Pinjaman', 0, 0, 0, 1000000, 0, NULL, NULL, NULL),
+(35, 2, '2018-08-23', 'Angsuran', 500000, 60000, 0, 560000, 1, NULL, NULL, NULL),
+(36, 2, '2018-09-15', 'Angsuran', 200000, 45000, 0, 245000, 2, NULL, NULL, NULL),
+(37, 2, '2018-08-23', 'Pinjaman', 0, 0, 0, 1000000, 0, NULL, NULL, NULL),
+(38, 3, '2018-09-15', 'Pinjaman', NULL, NULL, NULL, 10000000, NULL, NULL, NULL, NULL),
+(39, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 1, NULL, NULL, NULL),
+(40, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 2, NULL, NULL, NULL),
+(41, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 3, NULL, NULL, NULL),
+(42, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 4, NULL, NULL, NULL),
+(43, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 5, NULL, NULL, NULL),
+(44, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 6, NULL, NULL, NULL),
+(45, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 7, NULL, NULL, NULL),
+(46, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 8, NULL, NULL, NULL),
+(47, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 9, NULL, NULL, NULL),
+(48, 3, '2018-09-15', 'Angsuran', 1000000, 200000, 0, 1200000, 10, NULL, NULL, NULL),
+(49, 3, '2018-09-15', 'Angsuran', 0, -300000, 0, -300000, 0, NULL, NULL, NULL),
+(50, 2, '2018-08-23', 'Angsuran', 162500, 39000, 10000, 211500, 3, NULL, NULL, NULL),
+(51, 4, '2018-12-12', 'Pinjaman', NULL, NULL, NULL, 2000000, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -76,17 +80,19 @@ CREATE TABLE `detail_simpanan3th` (
   `waktu` date DEFAULT NULL,
   `jenis` varchar(32) DEFAULT NULL,
   `bulan_tahun` varchar(64) DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL
+  `jumlah` int(11) DEFAULT NULL,
+  `status_post` int(11) DEFAULT NULL,
+  `id_transaksi_akuntansi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detail_simpanan3th`
 --
 
-INSERT INTO `detail_simpanan3th` (`id`, `id_simpanan3th`, `waktu`, `jenis`, `bulan_tahun`, `jumlah`) VALUES
-(1, 1, '2018-09-02', 'Setoran', '2018-09', 200000),
-(3, 1, '2018-09-02', 'Tarikan', NULL, 100000),
-(4, 1, '2018-11-23', 'Setoran', '2018-11', 200000);
+INSERT INTO `detail_simpanan3th` (`id`, `id_simpanan3th`, `waktu`, `jenis`, `bulan_tahun`, `jumlah`, `status_post`, `id_transaksi_akuntansi`) VALUES
+(1, 1, '2018-09-02', 'Setoran', '2018-09', 200000, NULL, NULL),
+(3, 1, '2018-09-02', 'Tarikan', NULL, 100000, NULL, NULL),
+(4, 1, '2018-11-23', 'Setoran', '2018-11', 300000, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -100,18 +106,20 @@ CREATE TABLE `detail_simpanandanasosial` (
   `waktu` date DEFAULT NULL,
   `jenis` varchar(32) DEFAULT NULL,
   `bulan_tahun` varchar(64) DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL
+  `jumlah` int(11) DEFAULT NULL,
+  `status_post` int(11) DEFAULT NULL,
+  `id_transaksi_akuntansi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detail_simpanandanasosial`
 --
 
-INSERT INTO `detail_simpanandanasosial` (`id`, `id_simpanandanasosial`, `waktu`, `jenis`, `bulan_tahun`, `jumlah`) VALUES
-(1, 1, '2018-08-08', 'Setoran', '2018-08', 100000),
-(2, 1, '2018-09-09', 'Setoran', '2018-09', 90000),
-(3, 1, '2018-11-18', 'Setoran', '2018-09', 100000),
-(4, 1, '2018-11-25', 'Setoran', '2018-11', 300000);
+INSERT INTO `detail_simpanandanasosial` (`id`, `id_simpanandanasosial`, `waktu`, `jenis`, `bulan_tahun`, `jumlah`, `status_post`, `id_transaksi_akuntansi`) VALUES
+(1, 1, '2018-08-08', 'Setoran', '2018-08', 100000, NULL, NULL),
+(2, 1, '2018-09-09', 'Setoran', '2018-09', 90000, NULL, NULL),
+(3, 1, '2018-11-18', 'Setoran', '2018-09', 100000, NULL, NULL),
+(4, 1, '2018-11-25', 'Setoran', '2018-11', 300000, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -125,17 +133,19 @@ CREATE TABLE `detail_simpanankanzun` (
   `waktu` date DEFAULT NULL,
   `jenis` varchar(32) DEFAULT NULL,
   `bulan_tahun` varchar(64) DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL
+  `jumlah` int(11) DEFAULT NULL,
+  `status_post` int(11) DEFAULT NULL,
+  `id_transaksi_akuntansi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detail_simpanankanzun`
 --
 
-INSERT INTO `detail_simpanankanzun` (`id`, `id_simpanankanzun`, `waktu`, `jenis`, `bulan_tahun`, `jumlah`) VALUES
-(1, 1, '2018-08-12', 'Setoran', NULL, 100000),
-(2, 2, '2018-09-02', 'Setoran', '2018-09', 100000),
-(3, 2, '2018-09-27', 'Setoran', '2018-09', 210000);
+INSERT INTO `detail_simpanankanzun` (`id`, `id_simpanankanzun`, `waktu`, `jenis`, `bulan_tahun`, `jumlah`, `status_post`, `id_transaksi_akuntansi`) VALUES
+(1, 1, '2018-08-12', 'Setoran', NULL, 100000, NULL, NULL),
+(2, 2, '2018-09-02', 'Setoran', '2018-09', 100000, NULL, NULL),
+(3, 2, '2018-09-27', 'Setoran', '2018-09', 210000, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -149,17 +159,19 @@ CREATE TABLE `detail_simpanankhusus` (
   `waktu` date DEFAULT NULL,
   `jenis` varchar(32) DEFAULT NULL,
   `bulan_tahun` varchar(64) DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL
+  `jumlah` int(11) DEFAULT NULL,
+  `status_post` int(11) DEFAULT NULL,
+  `id_transaksi_akuntansi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detail_simpanankhusus`
 --
 
-INSERT INTO `detail_simpanankhusus` (`id`, `id_simpanankhusus`, `waktu`, `jenis`, `bulan_tahun`, `jumlah`) VALUES
-(1, 2, '2018-09-27', 'Setoran', '2018-09', 300000),
-(2, 2, '2018-09-27', 'Tarikan', NULL, 100000),
-(3, 2, '2018-11-18', 'Setoran', '2018-10', 400000);
+INSERT INTO `detail_simpanankhusus` (`id`, `id_simpanankhusus`, `waktu`, `jenis`, `bulan_tahun`, `jumlah`, `status_post`, `id_transaksi_akuntansi`) VALUES
+(1, 2, '2018-09-27', 'Setoran', '2018-09', 300000, NULL, NULL),
+(2, 2, '2018-09-27', 'Tarikan', NULL, 100000, NULL, NULL),
+(3, 2, '2018-11-18', 'Setoran', '2018-10', 400000, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -173,16 +185,18 @@ CREATE TABLE `detail_simpananpihakketiga` (
   `waktu` date DEFAULT NULL,
   `jenis` varchar(32) DEFAULT NULL,
   `bulan_tahun` varchar(64) DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL
+  `jumlah` int(11) DEFAULT NULL,
+  `status_post` int(11) DEFAULT NULL,
+  `id_transaksi_akuntansi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detail_simpananpihakketiga`
 --
 
-INSERT INTO `detail_simpananpihakketiga` (`id`, `id_simpananpihakketiga`, `waktu`, `jenis`, `bulan_tahun`, `jumlah`) VALUES
-(1, 1, '2018-08-01', 'Setoran', '2018-08', 1000000),
-(2, 1, '2018-09-01', 'Setoran', '2018-09', 500000);
+INSERT INTO `detail_simpananpihakketiga` (`id`, `id_simpananpihakketiga`, `waktu`, `jenis`, `bulan_tahun`, `jumlah`, `status_post`, `id_transaksi_akuntansi`) VALUES
+(1, 1, '2018-08-01', 'Setoran', '2018-08', 1000000, NULL, NULL),
+(2, 1, '2018-09-01', 'Setoran', '2018-09', 500000, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -196,19 +210,21 @@ CREATE TABLE `detail_simpananwajib` (
   `waktu` date DEFAULT NULL,
   `jenis` varchar(32) DEFAULT NULL,
   `bulan_tahun` varchar(64) DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL
+  `jumlah` int(11) DEFAULT NULL,
+  `status_post` int(11) DEFAULT NULL,
+  `id_transaksi_akuntansi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detail_simpananwajib`
 --
 
-INSERT INTO `detail_simpananwajib` (`id`, `id_simpananwajib`, `waktu`, `jenis`, `bulan_tahun`, `jumlah`) VALUES
-(1, 1, '2018-07-18', 'Setoran', '2018-07', 200000),
-(2, 1, '2018-07-22', 'Setoran', '2018-08', 50000),
-(3, 1, '2018-08-26', 'Setoran', '2018-08', 100000),
-(6, 1, '2018-08-26', 'Tarikan', '', 250000),
-(7, 1, '2018-09-15', 'Setoran', '2018-09', 600000);
+INSERT INTO `detail_simpananwajib` (`id`, `id_simpananwajib`, `waktu`, `jenis`, `bulan_tahun`, `jumlah`, `status_post`, `id_transaksi_akuntansi`) VALUES
+(1, 1, '2018-07-18', 'Setoran', '2018-07', 200000, NULL, NULL),
+(2, 1, '2018-07-22', 'Setoran', '2018-08', 50000, NULL, NULL),
+(3, 1, '2018-08-26', 'Setoran', '2018-08', 100000, NULL, NULL),
+(6, 1, '2018-08-26', 'Tarikan', '', 250000, NULL, NULL),
+(7, 1, '2018-09-15', 'Setoran', '2018-09', 600000, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -306,9 +322,9 @@ CREATE TABLE `mapping_kode_akun` (
 --
 
 INSERT INTO `mapping_kode_akun` (`id`, `nama_transaksi`, `kode_debet`, `kode_kredit`) VALUES
-(1, 'Penerimaan Piutang', '101', '103'),
-(4, 'Pemberian Pinjaman', '103', '101'),
-(5, 'Penerimaan Jasa', '101', '401'),
+(1, 'penerimaan piutang', '101', '103'),
+(4, 'pemberian pinjaman', '103', '101'),
+(5, 'penerimaan jasa', '101', '401'),
 (6, 'penerimaan simp 3 th 17', '101', '213'),
 (7, 'penerimaan simp 3 th 18', '101', '215'),
 (8, 'penerimaan simp 3th 19', '101', '217'),
@@ -447,9 +463,10 @@ CREATE TABLE `pinjaman` (
 --
 
 INSERT INTO `pinjaman` (`id`, `id_nasabah`, `jenis_pinjaman`, `nama_nasabah`, `nomor_nasabah`, `alamat_nasabah`, `nik_nasabah`, `jaminan`, `waktu`, `jatuh_tempo`, `jumlah_pinjaman`, `jumlah_angsuran`, `angsuran_perbulan`, `jasa_perbulan`, `total_angsuran_perbulan`, `sisa_angsuran`, `status`) VALUES
-(1, 2, 'Angsuran', 'Arzak', NULL, NULL, '3576010807920001', 'BPKB Motor Vario 125 S 6576 BA', '2018-06-02', '2', 10000000, 10, 1000000, 200000, 1200000, 8000000, NULL),
-(2, 1, 'Musiman', 'Yunan Helmi Mahendra', 1, NULL, '3576010910940001', 'STNK Mobil', '2018-08-23', '23', 2000000, 10, 162500, 34125, 196625, 1137500, NULL),
-(3, 1, 'Musiman', 'Yunan Helmi Mahendra', 1, NULL, '3576010910940001', 'STNK Mobil Jazz', '2018-09-15', '15', 10000000, 10, 1000000, 300000, 1300000, 0, NULL);
+(1, 2, 'Angsuran', 'Arzak', 100002, NULL, '3576010807920001', 'BPKB Motor Vario 125 S 6576 BA', '2018-06-02', '2', 10000000, 10, 1000000, 200000, 1200000, 8000000, NULL),
+(2, 1, 'Musiman', 'Yunan Helmi Mahendra', 100001, NULL, '3576010910940001', 'STNK Mobil', '2018-08-23', '23', 2000000, 10, 162500, 34125, 196625, 1137500, NULL),
+(3, 1, 'Musiman', 'Yunan Helmi Mahendra', 100001, NULL, '3576010910940001', 'STNK Mobil Jazz', '2018-09-15', '15', 10000000, 10, 1000000, 300000, 1300000, 0, NULL),
+(4, 1, 'Musiman', 'Yunan Helmi Mahendra', 100001, NULL, '3576010910940001', 'STNK Motor Vario S2345BV', '2018-12-12', '2', 2000000, 10, 200000, 60000, 260000, 2000000, NULL);
 
 -- --------------------------------------------------------
 
@@ -459,22 +476,23 @@ INSERT INTO `pinjaman` (`id`, `id_nasabah`, `jenis_pinjaman`, `nama_nasabah`, `n
 
 CREATE TABLE `simpanan3th` (
   `id` int(11) NOT NULL,
+  `id_master` int(11) NOT NULL,
+  `nama_simpanan` varchar(64) NOT NULL,
   `id_nasabah` int(11) DEFAULT NULL,
   `nama_nasabah` varchar(128) DEFAULT NULL,
   `nomor_nasabah` int(11) DEFAULT NULL,
   `nik_nasabah` varchar(32) DEFAULT NULL,
   `total` int(11) DEFAULT NULL,
-  `waktu` date DEFAULT NULL,
-  `simpanan_ke` int(11) DEFAULT NULL
+  `waktu` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `simpanan3th`
 --
 
-INSERT INTO `simpanan3th` (`id`, `id_nasabah`, `nama_nasabah`, `nomor_nasabah`, `nik_nasabah`, `total`, `waktu`, `simpanan_ke`) VALUES
-(1, 1, 'Yunan Helmi Mahendra', 100001, '3576010910940001', 300000, '2018-09-02', NULL),
-(2, 1, 'Yunan Helmi Mahendra', 100001, '3576010910940001', 0, '2018-11-25', NULL);
+INSERT INTO `simpanan3th` (`id`, `id_master`, `nama_simpanan`, `id_nasabah`, `nama_nasabah`, `nomor_nasabah`, `nik_nasabah`, `total`, `waktu`) VALUES
+(1, 1, 'Simpanan 3 Th Ke 17', 1, 'Yunan Helmi Mahendra', 100001, '3576010910940001', -100000, '2018-09-02'),
+(3, 1, 'Simpanan 3 Th Ke 17', 2, 'Arzak', 100002, '3576010807920001', 0, '2018-12-05');
 
 -- --------------------------------------------------------
 
@@ -496,6 +514,13 @@ CREATE TABLE `simpanan3th_master` (
   `kode_debet_penyesuaian_jasa` varchar(32) DEFAULT NULL,
   `kode_kredit_penyesuaian_jasa` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `simpanan3th_master`
+--
+
+INSERT INTO `simpanan3th_master` (`id`, `nama`, `kode_debet_penerimaan_simp`, `kode_kredit_penerimaan_simp`, `kode_debet_pencairan_simp`, `kode_kredit_pencairan_simp`, `kode_debet_pencairan_hutang_jasa`, `kode_kredit_pencairan_hutang_jasa`, `kode_debet_pembayaran_jasa`, `kode_kredit_pembayaran_jasa`, `kode_debet_penyesuaian_jasa`, `kode_kredit_penyesuaian_jasa`) VALUES
+(1, 'Simpanan 3 Th Ke 17', '101', '211', '213', '101', '214', '101', '514', '101', '514', '214');
 
 -- --------------------------------------------------------
 
@@ -614,15 +639,17 @@ CREATE TABLE `simpananpokok` (
   `nomor_nasabah` int(11) DEFAULT NULL,
   `nik_nasabah` varchar(32) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL,
-  `waktu` date DEFAULT NULL
+  `waktu` date DEFAULT NULL,
+  `status_post` int(11) DEFAULT NULL,
+  `id_transaksi_akuntansi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `simpananpokok`
 --
 
-INSERT INTO `simpananpokok` (`id`, `id_nasabah`, `nama_nasabah`, `nomor_nasabah`, `nik_nasabah`, `jumlah`, `waktu`) VALUES
-(1, 1, 'Yunan Helmi Mahendra', 100001, '3576010910940001', 500000, '2018-07-19');
+INSERT INTO `simpananpokok` (`id`, `id_nasabah`, `nama_nasabah`, `nomor_nasabah`, `nik_nasabah`, `jumlah`, `waktu`, `status_post`, `id_transaksi_akuntansi`) VALUES
+(1, 1, 'Yunan Helmi Mahendra', 100001, '3576010910940001', 500000, '2018-07-19', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -666,6 +693,32 @@ CREATE TABLE `tabungan` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transaksi`
+--
+
+CREATE TABLE `transaksi` (
+  `id` int(11) NOT NULL,
+  `tanggal` date DEFAULT NULL,
+  `nama_transaksi` varchar(128) DEFAULT NULL,
+  `keterangan` varchar(128) DEFAULT NULL,
+  `kode_debet` varchar(32) DEFAULT NULL,
+  `kode_kredit` varchar(32) DEFAULT NULL,
+  `jumlah` int(11) DEFAULT NULL,
+  `status_post` int(11) DEFAULT NULL,
+  `id_debet_transaksi_akuntansi` int(11) DEFAULT NULL,
+  `id_kredit_transaksi_akuntansi` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id`, `tanggal`, `nama_transaksi`, `keterangan`, `kode_debet`, `kode_kredit`, `jumlah`, `status_post`, `id_debet_transaksi_akuntansi`, `id_kredit_transaksi_akuntansi`) VALUES
+(1, '2018-12-11', 'pembelian ATK', 'Bulan Desember 2018', '532', '101', 1000000, 1, 7, 8);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `transaksi_akuntansi`
 --
 
@@ -690,7 +743,10 @@ INSERT INTO `transaksi_akuntansi` (`id`, `tanggal`, `kode_akun`, `nama_akun`, `k
 (3, '2018-11-28', '101', 'Kas', 'Pembayaran Angsuran Anggota 100001', 500000, 500000, 0),
 (4, '2018-11-28', '103', 'Pembiayaan (Piutang) diberikan', 'Pembayaran Angsuran Anggota 100001', 500000, 0, 500000),
 (5, '2018-12-02', '531', 'Biaya Ziarah & Silaturahmi TTBH', 'Biaya Ziarah & Silaturahmi TTBH', 1000000, 1000000, 0),
-(6, '2018-12-02', '101', 'Kas', 'Biaya Ziarah & Silaturahmi TTBH', 1000000, 0, 1000000);
+(6, '2018-12-02', '101', 'Kas', 'Biaya Ziarah & Silaturahmi TTBH', 1000000, 0, 1000000),
+(7, '2018-12-11', '532', 'ATK Koperasi', 'Bulan Desember 2018', 1000000, 1000000, 0),
+(8, '2018-12-11', '101', 'Kas', 'Bulan Desember 2018', 1000000, 0, 1000000),
+(9, NULL, '101', 'Kas', NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -842,6 +898,12 @@ ALTER TABLE `tabungan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `transaksi_akuntansi`
 --
 ALTER TABLE `transaksi_akuntansi`
@@ -861,7 +923,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `detail_angsuran`
 --
 ALTER TABLE `detail_angsuran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `detail_simpanan3th`
 --
@@ -911,17 +973,17 @@ ALTER TABLE `nasabah`
 -- AUTO_INCREMENT for table `pinjaman`
 --
 ALTER TABLE `pinjaman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `simpanan3th`
 --
 ALTER TABLE `simpanan3th`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `simpanan3th_master`
 --
 ALTER TABLE `simpanan3th_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `simpanandanasosial`
 --
@@ -958,10 +1020,15 @@ ALTER TABLE `simpananwajib`
 ALTER TABLE `tabungan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `transaksi_akuntansi`
 --
 ALTER TABLE `transaksi_akuntansi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `user`
 --

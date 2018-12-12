@@ -152,6 +152,8 @@ class TransaksiAkuntansiCon extends CI_Controller {
 		$this->transaksiakuntansimodel->deleteData($id);
 		redirect('transaksiakuntansicon');
 	}
+
+	
 }
 
 ?>

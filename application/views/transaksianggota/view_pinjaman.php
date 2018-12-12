@@ -149,7 +149,7 @@ function rupiah($angka){
             <li><a href="#simpanan_khusus" data-toggle="tab">Simpanan Khusus</a></li>
             <li><a href="#simpanan_dana_sosial" data-toggle="tab">Simpanan Dana Sosial</a></li>
             <li><a href="#simpanan_kanzun" data-toggle="tab">Simpanan Kanzun</a></li>
-            <li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>
+            <!--<li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>-->
             <li><a href="#simpanan_pihak_ketiga" data-toggle="tab">Simpanan Pihak Ketiga</a></li>
           </ul>
           <div class="tab-content">
@@ -302,6 +302,7 @@ function rupiah($angka){
                             <th>Jasa Tambahan</th>
                             <th>Edit</th>
                             <th>Delete</th>
+                            <th>Post</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -363,6 +364,17 @@ function rupiah($angka){
                             ?>
                             <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_detail_angsuran/".$pinjaman->id."/".$detail_angsuran[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                             <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationDeleteAngsuran('<?php echo $pinjaman->id?>','<?php echo $detail_angsuran[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                            <?php 
+                            if($detail_angsuran[$i]['status_post'] == 1) {
+                            ?>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/angsuran_post_akuntansi/".$pinjaman->id."/".$detail_angsuran[$i]['id']); ?>"><i class="fa fa-times"></i></a></td>
+                            <?php
+                            } else {
+                            ?>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/angsuran_post_akuntansi/".$pinjaman->id."/".$detail_angsuran[$i]['id']); ?>"><i class="fa fa-upload"></i></a></td>
+                            <?php
+                            }
+                            ?>                            
                           </tr>
                           <?php $no++;}?>
                           <tr>

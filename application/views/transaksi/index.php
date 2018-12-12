@@ -5,6 +5,14 @@
 <script src="<?php echo base_url(); ?>assets/js/canvas-tools.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/export-csv.js" type="text/javascript"></script>
 <!-- Content Wrapper. Contains page content -->
+<?php
+
+function rupiah($angka){
+  $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+  return $hasil_rupiah;
+}
+
+?>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -12,7 +20,7 @@
         Transaksi
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>index.php/nasabahcon"><i class="fa fa-users"></i> Transaksi</a></li>
+        <li class="active"><a href="<?php echo base_url(); ?>index.php/transaksicon"><i class="fa fa-usd"></i> Transaksi Lain-Lain</a></li>
       </ol>
     </section>
     <!-- Main content -->
@@ -21,31 +29,59 @@
 	     <div class="col-md-12 pull-left">
           <!-- general form elements -->
           <div class="box box-danger">
-  		      <legend style="text-align:center;">TRANSAKSI ANGGOTA KOPERASI</legend>
+  		      <legend style="text-align:center;">TRANSAKSI LAIN - LAIN</legend>
+            <div class="box-header" style="text-align:left" >
+              <h3>
+                <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksicon/create_transaksi"); ?>">Tambahkan Transaksi Lain-Lain</a>
+              </h3>
+            </div>
             <div class="box-body">
               <table id="transaksi_table" class="table table-bordered table-hover"  width="100%">
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Nama</th>
-                    <th>Nomor Nasabah</th>
-                    <th>NIK</th>
-                    <th>Alamat</th>
-                    <th>Transaksi</th>
+                    <th>Tanggal</th>
+                    <th>Nama Transaksi</th>
+                    <th>Keterangan</th>
+                    <th>Kode Debet</th>
+                    <th>Kode Kredit</th>
+                    <th>Jumlah</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Post</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                     $no = 1;
-                    for($i = 0; $i < sizeof($nasabah); $i++) {
+                    for($i = 0; $i < sizeof($transaksi); $i++) {
                   ?>
                   <tr>
                     <td style='text-align: center'><?php echo $no."."?></td>
-                    <td><?php echo $nasabah[$i]['nama']?></td>
-                    <td><?php echo $nasabah[$i]['nomor_nasabah']?></td>
-                    <td><?php echo $nasabah[$i]['nik']?></td>
-                    <td><?php echo $nasabah[$i]['alamat']?></td>
-                    <td style='text-align: center'><a class="btn btn-danger" href="<?php echo site_url("transaksicon/transaksi/".$nasabah[$i]['id']); ?>"><i class="fa fa-credit-card"></i></a></td>
+                    <?php 
+                    $waktu = strtotime( $transaksi[$i]['tanggal'] );
+                    $wkt = date( 'd F Y', $waktu );
+                    ?>
+                    <td style='text-align: center'><?php echo $wkt?></td>
+                    <td><?php echo $transaksi[$i]['nama_transaksi']?></td>
+                    <td><?php echo $transaksi[$i]['keterangan']?></td>
+                    <td><?php echo $transaksi[$i]['kode_debet']?></td>
+                    <td><?php echo $transaksi[$i]['kode_kredit']?></td>
+                    <td><?php echo rupiah($transaksi[$i]['jumlah'])?></td>
+                    <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksicon/transaksi/".$transaksi[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+                    <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmation('<?php echo $transaksi[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                    <?php
+                    if($transaksi[$i]['status_post'] == 1) {
+                    ?>
+                    <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksicon/unpost_akuntansi/".$transaksi[$i]['id']); ?>"><i class="fa fa-times"></i></a></td>
+                    <?php
+                    } else {
+                    ?>
+                    <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksicon/post_akuntansi/".$transaksi[$i]['id']); ?>"><i class="fa fa-upload"></i></a></td>
+                    <?php
+                    }
+                    ?>
+                    
                   </tr>
                   <?php $no++;}?>
                 </tbody>
@@ -82,7 +118,7 @@
       var controller = 'transaksicon';
       var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
       if( retVal == true ){
-        window.location.href= base_url + controller + '/delete_nasabah/' + id;
+        window.location.href= base_url + controller + '/delete_transaksi/' + id;
         //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
       }
     }

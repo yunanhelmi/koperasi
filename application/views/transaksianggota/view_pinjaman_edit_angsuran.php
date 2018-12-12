@@ -149,7 +149,7 @@ function rupiah($angka){
             <li><a href="#simpanan_khusus" data-toggle="tab">Simpanan Khusus</a></li>
             <li><a href="#simpanan_dana_sosial" data-toggle="tab">Simpanan Dana Sosial</a></li>
             <li><a href="#simpanan_kanzun" data-toggle="tab">Simpanan Kanzun</a></li>
-            <li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>
+            <!--<li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>-->
             <li><a href="#simpanan_pihak_ketiga" data-toggle="tab">Simpanan Pihak Ketiga</a></li>
           </ul>
           <div class="tab-content">
