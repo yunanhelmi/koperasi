@@ -753,6 +753,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$date1 						= $this->input->post('tanggal');
 		$date 						= strtotime($date1);
 		$insert['waktu'] 			= date("Y-m-d",$date);
+		$insert['jenis'] 			= $this->input->post('jenis');
 		$insert['jumlah'] 			= $this->input->post('jumlah');
 		$this->simpananpokokmodel->inputData($insert);
 
@@ -797,6 +798,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$date1 						= $this->input->post('tanggal');
 		$date 						= strtotime($date1);
 		$update['waktu'] 			= date("Y-m-d",$date);
+		$update['jenis'] 			= $this->input->post('jenis');
 		$update['jumlah'] 			= $this->input->post('jumlah');
 		$this->simpananpokokmodel->updateData($id_simpananpokok, $update);
 
@@ -839,6 +841,131 @@ class TransaksianggotaCon extends CI_Controller {
 		$id_nasabah					= $data['simpananpokok']->id_nasabah;
 
 		$this->simpananpokokmodel->deleteData($id_simpananpokok);
+		redirect('transaksianggotacon/simpananpokok/'.$id_nasabah);
+	}
+
+	function simpananpokok_post_akuntansi($id_simpananpokok) {
+		$session_data = $this->session->userdata('logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		$data['simpananpokok'] 		= $this->simpananpokokmodel->get_simpananpokok_by_id($id_simpananpokok);
+		$id_nasabah 				= $data['simpananpokok']->id_nasabah;
+
+		if($data['simpananpokok']->jenis == "Setoran") {
+			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan simp pokok');
+			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
+			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
+
+			$data_debet 				= array();
+			$data_debet['id'] 			= $this->transaksiakuntansimodel->getNewId();
+			$data_debet['tanggal'] 		= $data['simpananpokok']->waktu;
+			$data_debet['kode_akun'] 	= $mapping_kode_akun->kode_debet;
+			$data_debet['nama_akun'] 	= $debet->nama_akun;
+			$data_debet['keterangan'] 	= "Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+			$data_debet['jumlah'] 		= $data['simpananpokok']->jumlah;
+			$data_debet['debet'] 		= $data['simpananpokok']->jumlah;
+			$data_debet['kredit'] 		= 0;
+			$this->transaksiakuntansimodel->inputData($data_debet);
+
+			$data_kredit 				= array();
+			$data_kredit['id'] 			= $this->transaksiakuntansimodel->getNewId();
+			$data_kredit['tanggal'] 	= $data['simpananpokok']->waktu;
+			$data_kredit['kode_akun'] 	= $mapping_kode_akun->kode_kredit;
+			$data_kredit['nama_akun'] 	= $kredit->nama_akun;
+			$data_kredit['keterangan'] 	= "Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+			$data_kredit['jumlah'] 		= $data['simpananpokok']->jumlah;
+			$data_kredit['debet'] 		= 0;
+			$data_kredit['kredit'] 		= $data['simpananpokok']->jumlah;
+			$this->transaksiakuntansimodel->inputData($data_kredit);
+
+			$update = array();
+			$id 									= $data['simpananpokok']->id;
+			$update['id_nasabah'] 					= $data['simpananpokok']->id_nasabah;
+			$update['nama_nasabah'] 				= $data['simpananpokok']->nama_nasabah;
+			$update['nomor_nasabah'] 				= $data['simpananpokok']->nomor_nasabah;
+			$update['nik_nasabah'] 					= $data['simpananpokok']->nik_nasabah;
+			$update['waktu'] 						= $data['simpananpokok']->waktu;
+			$update['jenis'] 						= $data['simpananpokok']->jenis;
+			$update['jumlah'] 						= $data['simpananpokok']->jumlah;
+			$update['status_post'] 					= 1;
+			$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
+			$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
+			$this->simpananpokokmodel->updateData($id, $update);
+		} else {
+			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan simpanan pokok');
+			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
+			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
+
+			$data_debet 				= array();
+			$data_debet['id'] 			= $this->transaksiakuntansimodel->getNewId();
+			$data_debet['tanggal'] 		= $data['simpananpokok']->waktu;
+			$data_debet['kode_akun'] 	= $mapping_kode_akun->kode_debet;
+			$data_debet['nama_akun'] 	= $debet->nama_akun;
+			$data_debet['keterangan'] 	= "Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+			$data_debet['jumlah'] 		= $data['simpananpokok']->jumlah;
+			$data_debet['debet'] 		= $data['simpananpokok']->jumlah;
+			$data_debet['kredit'] 		= 0;
+			$this->transaksiakuntansimodel->inputData($data_debet);
+
+			$data_kredit 				= array();
+			$data_kredit['id'] 			= $this->transaksiakuntansimodel->getNewId();
+			$data_kredit['tanggal'] 	= $data['simpananpokok']->waktu;
+			$data_kredit['kode_akun'] 	= $mapping_kode_akun->kode_kredit;
+			$data_kredit['nama_akun'] 	= $kredit->nama_akun;
+			$data_kredit['keterangan'] 	= "Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+			$data_kredit['jumlah'] 		= $data['simpananpokok']->jumlah;
+			$data_kredit['debet'] 		= 0;
+			$data_kredit['kredit'] 		= $data['simpananpokok']->jumlah;
+			$this->transaksiakuntansimodel->inputData($data_kredit);
+
+			$update = array();
+			$id 									= $data['simpananpokok']->id;
+			$update['id_nasabah'] 					= $data['simpananpokok']->id_nasabah;
+			$update['nama_nasabah'] 				= $data['simpananpokok']->nama_nasabah;
+			$update['nomor_nasabah'] 				= $data['simpananpokok']->nomor_nasabah;
+			$update['nik_nasabah'] 					= $data['simpananpokok']->nik_nasabah;
+			$update['waktu'] 						= $data['simpananpokok']->waktu;
+			$update['jenis'] 						= $data['simpananpokok']->jenis;
+			$update['jumlah'] 						= $data['simpananpokok']->jumlah;
+			$update['status_post'] 					= 1;
+			$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
+			$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
+			$this->simpananpokokmodel->updateData($id, $update);
+		}
+		redirect('transaksianggotacon/simpananpokok/'.$id_nasabah);
+	}
+
+	function simpananpokok_unpost_akuntansi($id_simpananpokok) {
+		$session_data = $this->session->userdata('logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		$data['simpananpokok'] 		= $this->simpananpokokmodel->get_simpananpokok_by_id($id_simpananpokok);
+		$id_nasabah 				= $data['simpananpokok']->id_nasabah;
+
+		$id_debet_transaksi_akuntansi 	= $data['simpananpokok']->id_debet_transaksi_akuntansi;
+		$id_kredit_transaksi_akuntansi 	= $data['simpananpokok']->id_kredit_transaksi_akuntansi;
+
+		$this->transaksiakuntansimodel->deleteData($id_debet_transaksi_akuntansi);
+		$this->transaksiakuntansimodel->deleteData($id_kredit_transaksi_akuntansi);
+
+		$update = array();
+		$id 									= $data['simpananpokok']->id;
+		$update['id_nasabah'] 					= $data['simpananpokok']->id_nasabah;
+		$update['nama_nasabah'] 				= $data['simpananpokok']->nama_nasabah;
+		$update['nomor_nasabah'] 				= $data['simpananpokok']->nomor_nasabah;
+		$update['nik_nasabah'] 					= $data['simpananpokok']->nik_nasabah;
+		$update['waktu'] 						= $data['simpananpokok']->waktu;
+		$update['jenis'] 						= $data['simpananpokok']->jenis;
+		$update['jumlah'] 						= $data['simpananpokok']->jumlah;
+		$update['status_post'] 					= 0;
+		$update['id_debet_transaksi_akuntansi']	= 0;
+		$update['id_kredit_transaksi_akuntansi']= 0;
+		$this->simpananpokokmodel->updateData($id, $update);
+
 		redirect('transaksianggotacon/simpananpokok/'.$id_nasabah);
 	}
 	/*** End of Transaksi Simpanan Pokok ***/

@@ -227,6 +227,13 @@ function rupiah($angka){
                     </div>
                   </div>
                   <div class="form-group col-xs-6">
+                    <label for="exampleInputPassword1">Jenis</label>
+                    <select id="jenis" name="jenis" class="form-control" style="width: 100%;">
+                      <option value='Setoran'>Setoran</option>
+                      <option value='Tarikan'>Tarikan</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-xs-6">
                     <label for="exampleInputPassword1">Jumlah</label>
                     <div class="input-group margin-bottom-sm">
                       <span class="input-group-addon">Rp</span>
