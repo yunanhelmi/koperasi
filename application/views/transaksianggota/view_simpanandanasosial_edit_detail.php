@@ -476,6 +476,7 @@ function rupiah($angka){
                             <th>Saldo</th>
                             <th>Edit</th>
                             <th>Delete</th>
+                            <th>Post</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -516,6 +517,17 @@ function rupiah($angka){
                             <td style='text-align: right'><?php echo "Rp " . number_format($sisa_simpanan[$i],2,',','.');?></td>
                             <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_detail_simpanandanasosial/".$simpanandanasosial->id."/".$detail_simpanandanasosial[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                             <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationDeleteDetailSimpanandanasosial('<?php echo $simpanandanasosial->id?>','<?php echo $detail_simpanandanasosial[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                            <?php 
+                            if($detail_simpanandanasosial[$i]['status_post'] == 1) {
+                            ?>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/simpanandanasosial_unpost_akuntansi/".$simpanandanasosial->id."/".$detail_simpanandanasosial[$i]['id']); ?>"><i class="fa fa-times"></i></a></td>
+                            <?php
+                            } else {
+                            ?>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/simpanandanasosial_post_akuntansi/".$simpanandanasosial->id."/".$detail_simpanandanasosial[$i]['id']); ?>"><i class="fa fa-upload"></i></a></td>
+                            <?php
+                            }
+                            ?>
                           </tr>
                           <?php $no++;}?>
                           <tr>
