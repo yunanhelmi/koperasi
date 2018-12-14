@@ -3217,5 +3217,116 @@ class TransaksianggotaCon extends CI_Controller {
 
 		redirect('transaksianggotacon/view_simpananpihakketiga/'.$id_simpananpihakketiga);
 	}
+
+	function simpananpihakketiga_post_akuntansi($id_simpananpihakketiga, $id_detail_simpananpihakketiga) {
+		$session_data = $this->session->userdata('logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		$data['simpananpihakketiga'] 				= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id($id_simpananpihakketiga);
+		$data['post_detail_simpananpihakketiga']	= $this->detailsimpananpihakketigamodel->get_detail_simpananpihakketiga_by_id($id_detail_simpananpihakketiga);
+
+		if($data['post_detail_simpananpihakketiga']->jenis == "Setoran") {
+			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan tabungan pihak 3');
+			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
+			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
+			$bln_thn = strtotime( $data['post_detail_simpananpihakketiga']->bulan_tahun );
+            $bulan_tahun = date( 'M-Y', $bln_thn );
+
+            $data_debet 				= array();
+			$data_debet['id'] 			= $this->transaksiakuntansimodel->getNewId();
+			$data_debet['tanggal'] 		= $data['post_detail_simpananpihakketiga']->waktu;
+			$data_debet['kode_akun'] 	= $mapping_kode_akun->kode_debet;
+			$data_debet['nama_akun'] 	= $debet->nama_akun;
+			$data_debet['keterangan'] 	= "Simpanan Pihak Ketiga Bulan ".$bulan_tahun." a.n. ".$data['simpananpihakketiga']->nama." Nomor : ".$data['simpananpihakketiga']->nomor_nasabah;
+			$data_debet['jumlah'] 		= $data['post_detail_simpananpihakketiga']->jumlah;
+			$data_debet['debet'] 		= $data['post_detail_simpananpihakketiga']->jumlah;
+			$data_debet['kredit'] 		= 0;
+			$this->transaksiakuntansimodel->inputData($data_debet);
+
+			$data_kredit 				= array();
+			$data_kredit['id'] 			= $this->transaksiakuntansimodel->getNewId();
+			$data_kredit['tanggal'] 	= $data['post_detail_simpananpihakketiga']->waktu;
+			$data_kredit['kode_akun'] 	= $mapping_kode_akun->kode_kredit;
+			$data_kredit['nama_akun'] 	= $kredit->nama_akun;
+			$data_kredit['keterangan'] 	= "Simpanan Pihak Ketiga Bulan ".$bulan_tahun." a.n. ".$data['simpananpihakketiga']->nama." Nomor : ".$data['simpananpihakketiga']->nomor_nasabah;
+			$data_kredit['jumlah'] 		= $data['post_detail_simpananpihakketiga']->jumlah;
+			$data_kredit['debet'] 		= 0;
+			$data_kredit['kredit'] 		= $data['post_detail_simpananpihakketiga']->jumlah;
+			$this->transaksiakuntansimodel->inputData($data_kredit);
+		} else {
+			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan tabungan pihak 3');
+			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
+			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
+			$bln_thn = strtotime( $data['post_detail_simpananpihakketiga']->bulan_tahun );
+            $bulan_tahun = date( 'M-Y', $bln_thn );
+
+            $data_debet 				= array();
+			$data_debet['id'] 			= $this->transaksiakuntansimodel->getNewId();
+			$data_debet['tanggal'] 		= $data['post_detail_simpananpihakketiga']->waktu;
+			$data_debet['kode_akun'] 	= $mapping_kode_akun->kode_debet;
+			$data_debet['nama_akun'] 	= $debet->nama_akun;
+			$data_debet['keterangan'] 	= "Pencairan Simpanan Pihak Ketiga Bulan ".$bulan_tahun." a.n. ".$data['simpananpihakketiga']->nama." Nomor : ".$data['simpananpihakketiga']->nomor_nasabah;
+			$data_debet['jumlah'] 		= $data['post_detail_simpananpihakketiga']->jumlah;
+			$data_debet['debet'] 		= $data['post_detail_simpananpihakketiga']->jumlah;
+			$data_debet['kredit'] 		= 0;
+			$this->transaksiakuntansimodel->inputData($data_debet);
+
+			$data_kredit 				= array();
+			$data_kredit['id'] 			= $this->transaksiakuntansimodel->getNewId();
+			$data_kredit['tanggal'] 	= $data['post_detail_simpananpihakketiga']->waktu;
+			$data_kredit['kode_akun'] 	= $mapping_kode_akun->kode_kredit;
+			$data_kredit['nama_akun'] 	= $kredit->nama_akun;
+			$data_kredit['keterangan'] 	= "Pencairan Simpanan Pihak Ketiga Bulan ".$bulan_tahun." a.n. ".$data['simpananpihakketiga']->nama." Nomor : ".$data['simpananpihakketiga']->nomor_nasabah;
+			$data_kredit['jumlah'] 		= $data['post_detail_simpananpihakketiga']->jumlah;
+			$data_kredit['debet'] 		= 0;
+			$data_kredit['kredit'] 		= $data['post_detail_simpananpihakketiga']->jumlah;
+			$this->transaksiakuntansimodel->inputData($data_kredit);
+		}
+		$update = array();
+		$id 									= $data['post_detail_simpananpihakketiga']->id;
+		$update['id_simpananpihakketiga'] 		= $data['post_detail_simpananpihakketiga']->id_simpananpihakketiga;
+		$update['waktu'] 						= $data['post_detail_simpananpihakketiga']->waktu;
+		$update['jenis'] 						= $data['post_detail_simpananpihakketiga']->jenis;
+		$update['bulan_tahun'] 					= $data['post_detail_simpananpihakketiga']->bulan_tahun;
+		$update['jumlah'] 						= $data['post_detail_simpananpihakketiga']->jumlah;
+		$update['status_post'] 					= 1;
+		$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
+		$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
+		$this->detailsimpananpihakketigamodel->updateData($id, $update);
+
+		redirect('transaksianggotacon/view_simpananpihakketiga/'.$id_simpananpihakketiga);
+	}
+
+	function simpananpihakketiga_unpost_akuntansi($id_simpananpihakketiga, $id_detail_simpananpihakketiga) {
+		$session_data = $this->session->userdata('logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		$data['simpananpihakketiga'] 				= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id($id_simpananpihakketiga);
+		$data['post_detail_simpananpihakketiga']	= $this->detailsimpananpihakketigamodel->get_detail_simpananpihakketiga_by_id($id_detail_simpananpihakketiga);
+
+		$id_debet_transaksi_akuntansi 	= $data['post_detail_simpananpihakketiga']->id_debet_transaksi_akuntansi;
+		$id_kredit_transaksi_akuntansi 	= $data['post_detail_simpananpihakketiga']->id_kredit_transaksi_akuntansi;
+
+		$this->transaksiakuntansimodel->deleteData($id_debet_transaksi_akuntansi);
+		$this->transaksiakuntansimodel->deleteData($id_kredit_transaksi_akuntansi);
+
+		$update = array();
+		$id 									= $data['post_detail_simpananpihakketiga']->id;
+		$update['id_simpananpihakketiga'] 		= $data['post_detail_simpananpihakketiga']->id_simpananpihakketiga;
+		$update['waktu'] 						= $data['post_detail_simpananpihakketiga']->waktu;
+		$update['jenis'] 						= $data['post_detail_simpananpihakketiga']->jenis;
+		$update['bulan_tahun'] 					= $data['post_detail_simpananpihakketiga']->bulan_tahun;
+		$update['jumlah'] 						= $data['post_detail_simpananpihakketiga']->jumlah;
+		$update['status_post'] 					= 0;
+		$update['id_debet_transaksi_akuntansi']	= 0;
+		$update['id_kredit_transaksi_akuntansi']= 0;
+		$this->detailsimpananpihakketigamodel->updateData($id, $update);
+
+		redirect('transaksianggotacon/view_simpananpihakketiga/'.$id_simpananpihakketiga);
+	}
 	/*** End of Transaksi Simpanan Pihak Ketiga ***/	
 }

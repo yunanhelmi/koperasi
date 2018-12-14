@@ -569,6 +569,7 @@ function rupiah($angka){
                             <th>Saldo</th>
                             <th>Edit</th>
                             <th>Delete</th>
+                            <th>Post</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -609,6 +610,17 @@ function rupiah($angka){
                             <td style='text-align: right'><?php echo "Rp " . number_format($sisa_simpanan[$i],2,',','.');?></td>
                             <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_detail_simpananpihakketiga/".$simpananpihakketiga->id."/".$detail_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                             <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationDeleteDetailSimpananpihakketiga('<?php echo $simpananpihakketiga->id?>','<?php echo $detail_simpananpihakketiga[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                            <?php 
+                            if($detail_simpananpihakketiga[$i]['status_post'] == 1) {
+                            ?>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/simpananpihakketiga_unpost_akuntansi/".$simpananpihakketiga->id."/".$detail_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-times"></i></a></td>
+                            <?php
+                            } else {
+                            ?>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/simpananpihakketiga_post_akuntansi/".$simpananpihakketiga->id."/".$detail_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-upload"></i></a></td>
+                            <?php
+                            }
+                            ?>
                           </tr>
                           <?php $no++;}?>
                           <tr>
