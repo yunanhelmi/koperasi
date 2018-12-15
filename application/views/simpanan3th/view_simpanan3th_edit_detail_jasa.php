@@ -95,51 +95,6 @@
 						</div>
 					</form>
 				</div>
-				<div class="box box-danger" id="div_edit_detail_simpanan3th">
-					<legend style="text-align:center;">EDIT DETAIL SIMPANAN 3 TH</legend>
-					<form action="<?php echo base_url();?>index.php/simpanan3thcon/update_detail_simpanan3th" method="post" enctype="multipart/form-data" role="form">
-						<div class="box-body">
-							<div class="form-group col-xs-6">
-								<label for="exampleInputPassword1">Tanggal</label>
-								<div class="input-group date">
-									<div class="input-group-addon">
-										<i class="fa fa-calendar"></i>
-									</div>
-									<?php 
-										$tgl = strtotime($edit_detail_simpanan3th->waktu);
-									?>
-									<input type="text" class="form-control pull-right" name="edit_waktu" id="edit_waktu" value="<?php echo date("d-m-Y", $tgl);?>" data-date-format="dd-mm-yyyy">
-                    				<input type="hidden" class="form-control" value="<?php echo $edit_detail_simpanan3th->id?>" id="edit_id" name="edit_id">
-                    				<input type="hidden" class="form-control" value="<?php echo $edit_detail_simpanan3th->id_simpanan3th?>" id="edit_id_simpanan3th" name="edit_id_simpanan3th">
-								</div>
-							</div>
-							<div class="form-group col-xs-6">
-	                          <label for="exampleInputPassword1">Jenis</label>
-	                          <select id="edit_jenis" name="edit_jenis" class="form-control" style="width: 100%;">
-	                            <option value='Setoran' <?php echo $edit_detail_simpanan3th->jenis == 'Setoran' ? 'selected' : ''?> >Setoran</option>
-	                            <option value='Tarikan' <?php echo $edit_detail_simpanan3th->jenis == 'Tarikan' ? 'selected' : ''?> >Tarikan</option>
-	                          </select>
-	                        </div>
-	                        <div class="form-group col-xs-6">
-	                          <label for="exampleInputPassword1">Bulan-Tahun</label>
-	                          <input type="month" class="form-control" value="<?php echo $edit_detail_simpanan3th->bulan_tahun?>" id="edit_bulan_tahun" name="edit_bulan_tahun" placeholder="">
-	                        </div>
-							<div class="form-group col-xs-6">
-								<label for="exampleInputPassword1">Jumlah</label>
-								<div class="input-group margin-bottom-sm">
-									<span class="input-group-addon">Rp</span>
-									<input type="text" class="form-control" value="<?php echo $edit_detail_simpanan3th->jumlah?>" id="edit_jumlah" name="edit_jumlah" placeholder="0">
-								</div>
-								<div id="label_edit_jumlah" class="alert-danger"></div>
-							</div>
-						</div>
-						<div class="box-footer">
-							<div class="col-xs-3">
-								<button type="submit" class="btn btn-primary">Update</button>
-							</div>
-						</div>
-					</form>
-				</div>
 				<div class="box box-danger">
 					<legend style="text-align:center;">DETAIL SIMPANAN 3 TH</legend>
 					<div class="box-body">
@@ -174,9 +129,9 @@
                           <tr>
                             <td style='text-align: center'><?php echo $no."."?></td>
                             <?php 
-							  $date = strtotime( $detail_simpanan3th[$i]['waktu'] );
-							  $tanggal = date( 'd F Y', $date );
-							  $bln_thn = strtotime( $detail_simpanan3th[$i]['bulan_tahun'] );
+                              $date = strtotime( $detail_simpanan3th[$i]['waktu'] );
+                              $tanggal = date( 'd F Y', $date );
+                              $bln_thn = strtotime( $detail_simpanan3th[$i]['bulan_tahun'] );
                       			$bulan_tahun = date( 'M-Y', $bln_thn );
                             ?>
                             <td><?php echo $tanggal;?></td>
@@ -267,6 +222,52 @@
 		            </div>
 		          </form>
 		        </div>
+				<div class="box box-danger" id="div_edit_detail_simpanan3th">
+					<legend style="text-align:center;">EDIT DETAIL JASA SIMPANAN 3 TH</legend>
+					<form action="<?php echo base_url();?>index.php/simpanan3thcon/update_detail_jasa_simpanan3th" method="post" enctype="multipart/form-data" role="form">
+						<div class="box-body">
+							<div class="form-group col-xs-6">
+								<label for="exampleInputPassword1">Tanggal</label>
+								<div class="input-group date">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<?php 
+										$tgl = strtotime($edit_detail_jasa_simpanan3th->waktu);
+									?>
+									<input type="text" class="form-control pull-right" name="edit_jasa_waktu" id="edit_jasa_waktu" value="<?php echo date("d-m-Y", $tgl);?>" data-date-format="dd-mm-yyyy">
+                    				<input type="hidden" class="form-control" value="<?php echo $edit_detail_jasa_simpanan3th->id?>" id="edit_jasa_id" name="edit_jasa_id">
+                    				<input type="hidden" class="form-control" value="<?php echo $edit_detail_jasa_simpanan3th->id_simpanan3th?>" id="edit_jasa_id_simpanan3th" name="edit_jasa_id_simpanan3th">
+								</div>
+							</div>
+							<div class="form-group col-xs-6">
+	                          <label for="exampleInputPassword1">Jenis</label>
+	                          <select id="edit_jasa_jenis" name="edit_jasa_jenis" class="form-control" style="width: 100%;">
+	                            <option value='Penyesuaian Jasa' <?php echo $edit_detail_jasa_simpanan3th->jenis == 'Penyesuaian Jasa' ? 'selected' : ''?> >Penyesuaian Jasa</option>
+	                            <option value='Pencairan Hutang Jasa' <?php echo $edit_detail_jasa_simpanan3th->jenis == 'Pencairan Hutang Jasa' ? 'selected' : ''?> >Pencairan Hutang Jasa</option>
+	                            <option value='Pembayaran Biaya Jasa' <?php echo $edit_detail_jasa_simpanan3th->jenis == 'Pembayaran Biaya Jasa' ? 'selected' : ''?> >Pembayaran Biaya Jasa</option>
+	                          </select>
+	                        </div>
+	                        <div class="form-group col-xs-6">
+	                          <label for="exampleInputPassword1">Bulan-Tahun</label>
+	                          <input type="month" class="form-control" value="<?php echo $edit_detail_jasa_simpanan3th->bulan_tahun?>" id="edit_jasa_bulan_tahun" name="edit_jasa_bulan_tahun" placeholder="">
+	                        </div>
+							<div class="form-group col-xs-6">
+								<label for="exampleInputPassword1">Jumlah</label>
+								<div class="input-group margin-bottom-sm">
+									<span class="input-group-addon">Rp</span>
+									<input type="text" class="form-control" value="<?php echo $edit_detail_jasa_simpanan3th->jumlah?>" id="edit_jasa_jumlah" name="edit_jasa_jumlah" placeholder="0">
+								</div>
+								<div id="label_edit_jasa_jumlah" class="alert-danger"></div>
+							</div>
+						</div>
+						<div class="box-footer">
+							<div class="col-xs-3">
+								<button type="submit" class="btn btn-primary">Update</button>
+							</div>
+						</div>
+					</form>
+				</div>
 				<div class="box box-danger">
 		          <legend style="text-align:center;">DETAIL JASA SIMPANAN 3 TH</legend>
 		          <div class="box-body">

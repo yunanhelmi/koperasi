@@ -37,6 +37,10 @@ class Simpanan3thModel extends CI_Model {
 		$this->db->query("UPDATE `simpanan3th` SET total = '$total' WHERE id = '$id'");
 	}
 
+	function update_jasa_total($id, $jasa_total) {
+		$this->db->query("UPDATE `simpanan3th` SET jasa_total = '$jasa_total' WHERE id = '$id'");
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpanan3th`");
 		$a = $query->result_array();
