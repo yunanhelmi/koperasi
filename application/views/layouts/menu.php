@@ -194,14 +194,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </li>
         <li class="treeview">
           <a href="<?php echo base_url()."assets/"; ?>#">
-            <i class="fa fa-file-o"></i> <span>Laporan</span>
+            <i class="fa fa-book"></i> <span>Laporan</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-book"></i>Neraca</a></li>
-            <li><a href="#"><i class="fa fa-book"></i>Rugi Laba</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporanneracacon/index"><i class="fa fa-balance-scale"></i>Neraca</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporanrugilabacon/index"><i class="fa fa-book"></i>Rugi Laba</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporankeuangancon/index"><i class="fa fa-money"></i>Keuangan</a></li>
           </ul>
         </li>
         <li>

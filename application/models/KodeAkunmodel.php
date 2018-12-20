@@ -27,6 +27,12 @@ class KodeAkunModel extends CI_Model {
 		return $a;
 	}
 
+	function get_kode_akun_by_first_char($c) {
+		$query = $this->db->query("SELECT *, 0 as debet, 0 as kredit, 0 as selisih from `kode_akun` WHERE kode_akun LIKE '$c%' ORDER BY kode_akun");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `kode_akun`");
 		$a = $query->result_array();
