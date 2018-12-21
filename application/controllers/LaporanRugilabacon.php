@@ -2,7 +2,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class LaporanNeracaCon extends CI_Controller {
+class LaporanRugilabaCon extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 
@@ -29,7 +29,7 @@ class LaporanNeracaCon extends CI_Controller {
 		$data['nasabah'] 	= $this->nasabahmodel->showData();
 		
 		$this->load->view('/layouts/menu', $data);
-		$this->load->view('/laporan/neraca', $data);
+		$this->load->view('/laporan/rugilaba', $data);
 		$this->load->view('/layouts/footer', $data);
 	}
 
@@ -189,11 +189,11 @@ class LaporanNeracaCon extends CI_Controller {
         $file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
         $file->getProperties ()->setLastModifiedBy ( "System" );
-        $file->getProperties ()->setTitle ( "Laporan Neraca" );
-        $file->getProperties ()->setSubject ( "Laporan Neraca" );
-        $file->getProperties ()->setDescription ( "Laporan Neraca" );
-        $file->getProperties ()->setKeywords ( "Laporan Neraca" );
-        $file->getProperties ()->setCategory ( "Laporan Neraca" );
+        $file->getProperties ()->setTitle ( "Laporan Rugi Laba" );
+        $file->getProperties ()->setSubject ( "Laporan Rugi Laba" );
+        $file->getProperties ()->setDescription ( "Laporan Rugi Laba" );
+        $file->getProperties ()->setKeywords ( "Laporan Rugi Laba" );
+        $file->getProperties ()->setCategory ( "Laporan Rugi Laba" );
         
         $sheet = $file->getActiveSheet ();
         $i = 2;
@@ -202,7 +202,7 @@ class LaporanNeracaCon extends CI_Controller {
         $sheet->getStyle("A".$i.":G".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":G".$i)->getFont()->setSize(14)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":G".$i)->setCellValue("A".$i, "LAPORAN NERACA ".$tgl_dari1." - ".$tgl_sampai1);
+        $sheet->mergeCells("A".$i.":G".$i)->setCellValue("A".$i, "LAPORAN RUGI LABA ".$tgl_dari1." - ".$tgl_sampai1);
         $sheet->getStyle("A".$i.":G".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":G".$i)->getFont()->setSize(12)->setBold(true);
         $i++;
@@ -221,75 +221,58 @@ class LaporanNeracaCon extends CI_Controller {
 
         /* AKTIVA */
         $sheet->setCellValue("A".$index_kiri, "NO");
-        $sheet->setCellValue("B".$index_kiri, "AKTIVA");
+        $sheet->setCellValue("B".$index_kiri, "PENDAPATAN");
         $sheet->setCellValue("C".$index_kiri, "JUMLAH");
         $sheet->getStyle("A".$index_kiri.":C".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$index_kiri.":C".$index_kiri)->getFont()->setSize(10)->setBold(true);
         $index_kiri++;
-        $sheet->setCellValue("B".$index_kiri, "HARTA");
+        $sheet->setCellValue("B".$index_kiri, "PENDAPATAN");
         $sheet->getStyle("B".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("B".$index_kiri)->getFont()->setSize(10)->setBold(true);
         $index_kiri++;
-        for($i = 0; $i < sizeof($kode_aset); $i++) {
-        	$sheet->setCellValue("A".$index_kiri, $kode_aset[$i]['kode_akun']);
+        for($i = 0; $i < sizeof($kode_pendapatan); $i++) {
+        	$sheet->setCellValue("A".$index_kiri, $kode_pendapatan[$i]['kode_akun']);
         	$sheet->getStyle("A".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        	$sheet->setCellValue("B".$index_kiri, $kode_aset[$i]['nama_akun']);
-        	$sheet->setCellValue("C".$index_kiri, $kode_aset[$i]['selisih']);
+        	$sheet->setCellValue("B".$index_kiri, $kode_pendapatan[$i]['nama_akun']);
+        	$sheet->setCellValue("C".$index_kiri, $kode_pendapatan[$i]['selisih']);
         	$index_kiri++;
         }
-        $sheet->setCellValue("B".$index_kiri, "JUMLAH HARTA");
-        $sheet->setCellValue("C".$index_kiri, $total_aset);
+        $sheet->setCellValue("B".$index_kiri, "JUMLAH PENDAPATAN");
+        $sheet->setCellValue("C".$index_kiri, $total_pendapatan);
         $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getFont()->setSize(10)->setBold(true);
         $index_kiri += 2;
-        $sheet->setCellValue("B".$index_kiri, "JUMLAH AKTIVA");
-        $sheet->setCellValue("C".$index_kiri, $total_aset);
+        $sheet->setCellValue("B".$index_kiri, "JUMLAH PENDAPATAN");
+        $sheet->setCellValue("C".$index_kiri, $total_pendapatan);
         $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getFont()->setSize(10)->setBold(true);
         /* END OF AKTIVA*/
 
         /* PASIVA */
         $sheet->setCellValue("E".$index_kanan, "NO");
-        $sheet->setCellValue("F".$index_kanan, "PASIVA");
+        $sheet->setCellValue("F".$index_kanan, "BEBAN");
         $sheet->setCellValue("G".$index_kanan, "JUMLAH");
         $sheet->getStyle("E".$index_kanan.":G".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("E".$index_kanan.":G".$index_kanan)->getFont()->setSize(10)->setBold(true);
         $index_kanan++;
-        $sheet->setCellValue("F".$index_kanan, "HUTANG");
+        $sheet->setCellValue("F".$index_kanan, "BIAYA");
         $sheet->getStyle("F".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("F".$index_kanan)->getFont()->setSize(10)->setBold(true);
         $index_kanan++;
-        for($i = 0; $i < sizeof($kode_hutang); $i++) {
-        	$sheet->setCellValue("E".$index_kanan, $kode_hutang[$i]['kode_akun']);
+        for($i = 0; $i < sizeof($kode_beban); $i++) {
+        	$sheet->setCellValue("E".$index_kanan, $kode_beban[$i]['kode_akun']);
         	$sheet->getStyle("E".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        	$sheet->setCellValue("F".$index_kanan, $kode_hutang[$i]['nama_akun']);
-        	$sheet->setCellValue("G".$index_kanan, $kode_hutang[$i]['selisih']);
+        	$sheet->setCellValue("F".$index_kanan, $kode_beban[$i]['nama_akun']);
+        	$sheet->setCellValue("G".$index_kanan, $kode_beban[$i]['selisih']);
         	$index_kanan++;
         }
-        $sheet->setCellValue("F".$index_kanan, "JUMLAH HUTANG");
-        $sheet->setCellValue("G".$index_kanan, $total_hutang);
+        $sheet->setCellValue("F".$index_kanan, "JUMLAH BIAYA");
+        $sheet->setCellValue("G".$index_kanan, $total_beban);
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getFont()->setSize(10)->setBold(true);
         $index_kanan += 2;
-
-        $sheet->setCellValue("F".$index_kanan, "MODAL");
-        $sheet->getStyle("F".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("F".$index_kanan)->getFont()->setSize(10)->setBold(true);
-        $index_kanan++;
-        for($i = 0; $i < sizeof($kode_modal); $i++) {
-        	$sheet->setCellValue("E".$index_kanan, $kode_modal[$i]['kode_akun']);
-        	$sheet->getStyle("E".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        	$sheet->setCellValue("F".$index_kanan, $kode_modal[$i]['nama_akun']);
-        	$sheet->setCellValue("G".$index_kanan, $kode_modal[$i]['selisih']);
-        	$index_kanan++;
-        }
-        $sheet->setCellValue("F".$index_kanan, "JUMLAH MODAL");
-        $sheet->setCellValue("G".$index_kanan, $total_modal);
-        $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getFont()->setSize(10)->setBold(true);
-        $index_kanan += 2;
-        $sheet->setCellValue("F".$index_kanan, "JUMLAH PASIVA");
-        $sheet->setCellValue("G".$index_kanan, $total_modal);
+        $sheet->setCellValue("F".$index_kanan, "JUMLAH BEBAN");
+        $sheet->setCellValue("G".$index_kanan, $total_beban);
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getFont()->setSize(10)->setBold(true);
         /* END OF PASIVA */
@@ -297,11 +280,17 @@ class LaporanNeracaCon extends CI_Controller {
         /* FOOTER */
         if($index_kiri > $index_kanan) {
         	$index_footer = $index_kiri;
-        	$border_end     = $index_kiri;
         } else {
         	$index_footer = $index_kanan;
-        	$border_end     = $index_kanan;
         }
+
+        $index_footer += 2;
+        $sheet->setCellValue("F".$index_footer, "SHU = PENDPATAN - BIAYA");
+        $shu = $total_pendapatan - $total_beban;
+        $sheet->setCellValue("G".$index_footer, $shu);
+        $sheet->getStyle("E".$index_footer.":F".$index_footer)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("E".$index_footer.":F".$index_footer)->getFont()->setSize(10)->setBold(true);
+        $border_end = $index_footer;
 
         $index_footer += 2;
         $sheet->setCellValue("F".$index_footer, "Bojonegoro, ".date("d-m-Y"));
@@ -319,7 +308,7 @@ class LaporanNeracaCon extends CI_Controller {
         $thin['borders']['allborders']['style']=PHPExcel_Style_Border::BORDER_THIN ;
         $sheet  ->getStyle ( "A".$border_start.":G".$border_end )->applyFromArray ($thin);
 
-        $filename = "Laporan Neraca_".$tgl_dari1."_".$tgl_sampai1.".xlsx";
+        $filename = "Laporan Rugi Laba_".$tgl_dari1."_".$tgl_sampai1.".xlsx";
         
         header ( 'Content-Type: application/vnd.ms-excel' );
         header ( 'Content-Disposition: attachment;filename="'.$filename.'"' );

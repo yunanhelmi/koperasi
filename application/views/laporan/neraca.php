@@ -54,7 +54,7 @@
 							</div>
 							<div class="col-xs-3">
 				            	<div class="form-group pull-left">
-									<button type="submit" class="btn btn-success" name="excel"><i class="fa fa-file-excel-o"></i> Excel</button>
+									<button type="submit" class="btn btn-success" name="excel"><i class="fa fa-file-excel-o"></i> Download Excel</button>
 								</div>
 							</div>
 						</div>  

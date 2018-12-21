@@ -55,59 +55,79 @@ class LaporanKeuanganCon extends CI_Controller {
 		$kode_pendapatan 	= $this->kodeakunmodel->get_kode_akun_by_first_char('4');
 		$kode_beban 		= $this->kodeakunmodel->get_kode_akun_by_first_char('5');
 
+		$total_aset = 0;
 		for($i = 0; $i < sizeof($kode_aset); $i++) {
 			for($a = 0; $a < sizeof($transaksi_aset); $a++) {
 				if($kode_aset[$i]['kode_akun'] == $transaksi_aset[$a]['kode_akun']) {
 					$kode_aset[$i]['debet'] 	= $transaksi_aset[$a]['jumlah_debet'];
 					$kode_aset[$i]['kredit'] 	= $transaksi_aset[$a]['jumlah_kredit'];
 					$kode_aset[$i]['selisih']	= $transaksi_aset[$a]['jumlah_debet'] - $transaksi_aset[$a]['jumlah_kredit'];
+					$total_aset 				+= $kode_aset[$i]['selisih'];
 				}
 			}
 		}
 
+		$total_hutang = 0;
 		for($i = 0; $i < sizeof($kode_hutang); $i++) {
 			for($a = 0; $a < sizeof($transaksi_hutang); $a++) {
 				if($kode_hutang[$i]['kode_akun'] == $transaksi_hutang[$a]['kode_akun']) {
 					$kode_hutang[$i]['debet'] 	= $transaksi_hutang[$a]['jumlah_debet'];
 					$kode_hutang[$i]['kredit'] 	= $transaksi_hutang[$a]['jumlah_kredit'];
 					$kode_hutang[$i]['selisih']	= $transaksi_hutang[$a]['jumlah_debet'] - $transaksi_hutang[$a]['jumlah_kredit'];
+					$total_hutang 				+= $kode_hutang[$i]['selisih'];
 				}
 			}
 		}
 
+		$total_modal = 0;
 		for($i = 0; $i < sizeof($kode_modal); $i++) {
 			for($a = 0; $a < sizeof($transaksi_modal); $a++) {
 				if($kode_modal[$i]['kode_akun'] == $transaksi_modal[$a]['kode_akun']) {
 					$kode_modal[$i]['debet'] 	= $transaksi_modal[$a]['jumlah_debet'];
 					$kode_modal[$i]['kredit'] 	= $transaksi_modal[$a]['jumlah_kredit'];
 					$kode_modal[$i]['selisih']	= $transaksi_modal[$a]['jumlah_debet'] - $transaksi_modal[$a]['jumlah_kredit'];
+					//$total_modal 				+= $kode_modal[$i]['selisih'];
 				}
 			}
 		}
 
+		$total_pendapatan = 0;
 		for($i = 0; $i < sizeof($kode_pendapatan); $i++) {
 			for($a = 0; $a < sizeof($transaksi_pendapatan); $a++) {
 				if($kode_pendapatan[$i]['kode_akun'] == $transaksi_pendapatan[$a]['kode_akun']) {
 					$kode_pendapatan[$i]['debet'] 	= $transaksi_pendapatan[$a]['jumlah_debet'];
 					$kode_pendapatan[$i]['kredit'] 	= $transaksi_pendapatan[$a]['jumlah_kredit'];
 					$kode_pendapatan[$i]['selisih']	= $transaksi_pendapatan[$a]['jumlah_debet'] - $transaksi_pendapatan[$a]['jumlah_kredit'];
+					$total_pendapatan 				+= $kode_pendapatan[$i]['selisih'];
 				}
 			}
 		}
 
+		$total_beban = 0;
 		for($i = 0; $i < sizeof($kode_beban); $i++) {
 			for($a = 0; $a < sizeof($transaksi_beban); $a++) {
 				if($kode_beban[$i]['kode_akun'] == $transaksi_beban[$a]['kode_akun']) {
 					$kode_beban[$i]['debet'] 	= $transaksi_beban[$a]['jumlah_debet'];
 					$kode_beban[$i]['kredit'] 	= $transaksi_beban[$a]['jumlah_kredit'];
 					$kode_beban[$i]['selisih']	= $transaksi_beban[$a]['jumlah_debet'] - $transaksi_beban[$a]['jumlah_kredit'];
+					$total_beban 				+= $kode_beban[$i]['selisih'];
 				}
 			}
 		}
+		$data['kode_aset']			= $kode_aset;
+		$data['total_aset']			= $total_aset;
+		$data['kode_hutang']		= $kode_hutang;
+		$data['total_hutang']		= $total_hutang;
+		$data['kode_modal']			= $kode_modal;
+		$data['total_modal']		= $total_modal;
+		$data['kode_pendapatan']	= $kode_pendapatan;
+		$data['total_pendapatan']	= $total_pendapatan;
+		$data['kode_beban']			= $kode_beban;
+		$data['total_beban']		= $total_beban;
 
-		echo "<pre>";
-		var_dump($kode_beban);
-		echo "</pre>";
+		/*$this->load->view('/layouts/menu', $data);
+		$this->load->view('/laporan/keuangan', $data);
+		$this->load->view('/layouts/footer', $data);	*/
 	}
 
 	function excel() {
@@ -205,11 +225,11 @@ class LaporanKeuanganCon extends CI_Controller {
         $file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
         $file->getProperties ()->setLastModifiedBy ( "System" );
-        $file->getProperties ()->setTitle ( "Laporan Neraca" );
-        $file->getProperties ()->setSubject ( "Laporan Neraca" );
-        $file->getProperties ()->setDescription ( "Laporan Neraca" );
-        $file->getProperties ()->setKeywords ( "Laporan Neraca" );
-        $file->getProperties ()->setCategory ( "Laporan Neraca" );
+        $file->getProperties ()->setTitle ( "Laporan Keuangan" );
+        $file->getProperties ()->setSubject ( "Laporan Keuangan" );
+        $file->getProperties ()->setDescription ( "Laporan Keuangan" );
+        $file->getProperties ()->setKeywords ( "Laporan Keuangan" );
+        $file->getProperties ()->setCategory ( "Laporan Keuangan" );
         
         $sheet = $file->getActiveSheet ();
         $i = 2;

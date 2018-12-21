@@ -16,7 +16,7 @@
       </h1>
       <ol class="breadcrumb">
         <li> <i class="fa fa-book"></i> Laporan</li>
-        <li class="active"><a href="<?php echo base_url(); ?>index.php/laporankeuangancon/index"><i class="fa fa-money"></i> Keuangan</a></li>
+        <li class="active"><a href="<?php echo base_url(); ?>index.php/laporanrugilabacon/index"><i class="fa fa-balance-scale"></i> Rugi Laba</a></li>
       </ol>
     </section>
 
@@ -24,8 +24,8 @@
     	<div class="row">
     		<div class="col-md-12 pull-left">
     			<div class="box box-danger">
-    				<legend style="text-align:center;">LAPORAN KEUANGAN</legend>
-    				<form action="<?php echo base_url();?>index.php/laporankeuangancon/excel" method="post" enctype="multipart/form-data" role="form">
+    				<legend style="text-align:center;">LAPORAN RUGI LABA</legend>
+    				<form action="<?php echo base_url();?>index.php/laporanrugilabacon/excel" method="post" enctype="multipart/form-data" role="form">
 						<div class="box-body">
 							<div class="form-group col-xs-3">
 								<label for="exampleInputPassword1">Dari</label>
@@ -60,43 +60,10 @@
 						</div>  
 					</form>
     			</div>
-    			<?php
-    			if(isset($kode_aset) && isset($kode_hutang) && isset($kode_modal) && isset($kode_pendapatan) && isset($kode_beban)) {
-    			?>
-    			<div class="box box-danger">
-    				<legend style="text-align:center;">KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYYAH</legend>
-    				<div class="box-body">
-    					<div class="col-xs-6">
-    						<table>
-    							<tr>
-    								<th colspan="3" width="100px">NERACA</th>
-    							</tr>
-    							<tr>
-    								<th>NO</th>
-    								<th>AKTIVA</th>
-    								<th>JUMLAH</th>
-    							</tr>
-    						</table>
-    					</div>
-    					<div class="col-xs-6">
-    						<table>
-    							<tr>
-    								<th colspan="3">PERHITUNGAN HASIL USAHA</th>
-    							</tr>
-    						</table>
-    					</div>
-    				</div>
-    			</div>
-    			<?php
-    			}
-    			?>
     		</div>
     	</div>
     </section>
 </div>
-
-<style type="text/css">
-</style>
 
 <script>
 
@@ -128,7 +95,7 @@ function view_laporan() {
 			}
 		}
 
-		var controller = 'laporankeuangancon';
+		var controller = 'laporanrugilabacon';
 		var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
 		window.location.href = base_url + '/' + controller + '/view/' + tgl_dari + '/' + tgl_sampai;
 	}
