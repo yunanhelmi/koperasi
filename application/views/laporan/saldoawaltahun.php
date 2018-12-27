@@ -161,7 +161,7 @@ function rupiah($angka){
     				<div class="box-footer">
     					<div class="col-xs-3">
 			            	<div class="form-group pull-left">
-								<a class="btn btn-primary" onClick="post_saldo();"><i class="fa fa-eye"></i> Tampilkan</a>
+								<a class="btn btn-primary" onClick="post_saldo();"><i class="fa fa-upload"></i> Post</a>
 							</div>
 						</div>
     				</div>
