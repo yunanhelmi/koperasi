@@ -66,25 +66,22 @@
     			<div class="box box-danger">
     				<legend style="text-align:center;">KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYYAH</legend>
     				<div class="box-body">
-    					<div class="col-xs-6">
-    						<table>
-    							<tr>
-    								<th colspan="3" width="100px">NERACA</th>
-    							</tr>
-    							<tr>
-    								<th>NO</th>
-    								<th>AKTIVA</th>
-    								<th>JUMLAH</th>
-    							</tr>
-    						</table>
-    					</div>
-    					<div class="col-xs-6">
-    						<table>
-    							<tr>
-    								<th colspan="3">PERHITUNGAN HASIL USAHA</th>
-    							</tr>
-    						</table>
-    					</div>
+						<table id="keuangan_table" class="table table-bordered table-hover"  width="50%">
+							<tr>
+								<th colspan="3">NERACA</th>
+								<th></th>
+								<th colspan="3">PERHITUNGAN HASIL USAHA</th>
+							</tr>
+							<tr>
+								<th>NO</th>
+								<th>AKTIVA</th>
+								<th>JUMLAH</th>
+								<th></th>
+								<th>NO</th>
+								<th>AKTIVA</th>
+								<th>JUMLAH</th>
+							</tr>
+						</table>
     				</div>
     			</div>
     			<?php
@@ -96,6 +93,22 @@
 </div>
 
 <style type="text/css">
+table.table-bordered{
+  border:1px solid silver;
+  margin-top:20px;
+}
+table.table-bordered > thead > tr > th{
+  border:1px solid silver;
+}
+table.table-bordered > tbody > tr > td{
+  border:1px solid silver;
+}
+.table th {
+   text-align: center;   
+}
+#keuangan_table_filter {
+  text-align:right;
+}
 </style>
 
 <script>

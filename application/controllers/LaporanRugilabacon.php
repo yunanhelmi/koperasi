@@ -151,7 +151,7 @@ class LaporanRugilabaCon extends CI_Controller {
 					$kode_modal[$i]['debet'] 	= $transaksi_modal[$a]['jumlah_debet'];
 					$kode_modal[$i]['kredit'] 	= $transaksi_modal[$a]['jumlah_kredit'];
 					$kode_modal[$i]['selisih']	= $transaksi_modal[$a]['jumlah_debet'] - $transaksi_modal[$a]['jumlah_kredit'];
-					//$total_modal 				+= $kode_modal[$i]['selisih'];
+					$total_modal 				+= $kode_modal[$i]['selisih'];
 				}
 			}
 		}
