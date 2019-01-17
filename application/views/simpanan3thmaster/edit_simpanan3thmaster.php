@@ -4,7 +4,6 @@
 <script src="<?php echo base_url(); ?>assets/js/data.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/canvas-tools.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/export-csv.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets/js/bootstrap-typeahead.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/bower_components/select2/dist/js/select2.full.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/select2/dist/css/select2.min.css">
 <!-- Content Wrapper. Contains page content -->

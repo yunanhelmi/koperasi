@@ -117,13 +117,22 @@ class TransaksiAkuntansiCon extends CI_Controller {
 		$data['kode_akun'] 	= $this->input->post('kode_akun');
 		$data['nama_akun'] 	= $this->input->post('nama_akun');
 		$data['keterangan'] = $this->input->post('keterangan');
-		$data['debet'] 		= $this->input->post('debet');
-		$data['kredit']	 	= $this->input->post('kredit');
-		if($data['debet'] == NULL || $data['debet'] == 0 || $data['debet'] == "0" || $data['debet'] == "") {
+		
+		if($this->input->post('debet') == NULL || $this->input->post('debet') == 0 || $this->input->post('debet') == "0" || $this->input->post('debet') == "") {
 			$data['jumlah']	 	= $this->input->post('kredit');
-		} else if($data['kredit'] == NULL || $data['kredit'] == 0 || $data['kredit'] == "0" || $data['kredit'] == "") {
+		} else if($this->input->post('kredit') == NULL || $this->input->post('kredit') == 0 || $this->input->post('kredit') == "0" || $this->input->post('kredit') == "") {
 			$data['jumlah']	 	= $this->input->post('debet');
 		}
+		$data['debet'] 		= $this->input->post('debet');
+		$data['kredit']	 	= $this->input->post('kredit');
+
+		/*echo "<pre>";
+		var_dump($id);
+		echo "</pre>";
+
+		echo "<pre>";
+		var_dump($data);
+		echo "</pre>";*/
 
 		$this->transaksiakuntansimodel->updateData($id, $data);
 		redirect('transaksiakuntansicon');

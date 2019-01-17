@@ -1667,7 +1667,7 @@ class TransaksianggotaCon extends CI_Controller {
 
 		if($data['post_detail_simpanankhusus']->jenis == "Setoran") {
 			if(substr($data['simpanankhusus']->nomor_nasabah, 0, 1) == '1') {
-				$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan simp kusus (shu)');
+				$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan sisa shu anggota');
 				$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 				$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
 				$bln_thn = strtotime( $data['post_detail_simpanankhusus']->bulan_tahun );
@@ -1707,7 +1707,7 @@ class TransaksianggotaCon extends CI_Controller {
 				$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
 				$this->detailsimpanankhususmodel->updateData($id, $update);
 			} else {
-				$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan simp kusus (phak 3)');
+				$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan jasa pihak 3');
 				$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 				$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
 				$bln_thn = strtotime( $data['post_detail_simpanankhusus']->bulan_tahun );

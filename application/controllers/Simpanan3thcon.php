@@ -549,7 +549,7 @@ class Simpanan3thcon extends CI_Controller {
             $data_debet 				= array();
 			$data_debet['id'] 			= $this->transaksiakuntansimodel->getNewId();
 			$data_debet['tanggal'] 		= $data['post_detail_jasa_simpanan3th']->waktu;
-			$data_debet['kode_akun'] 	= $data['simpanan3thmaster']->kode_debet_penerimaan_simp;
+			$data_debet['kode_akun'] 	= $data['simpanan3thmaster']->kode_debet_penyesuaian_jasa;
 			$data_debet['nama_akun'] 	= $debet->nama_akun;
 			$data_debet['keterangan'] 	= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah;
 			$data_debet['jumlah'] 		= $data['post_detail_jasa_simpanan3th']->jumlah;
@@ -560,7 +560,7 @@ class Simpanan3thcon extends CI_Controller {
 			$data_kredit 				= array();
 			$data_kredit['id'] 			= $this->transaksiakuntansimodel->getNewId();
 			$data_kredit['tanggal'] 	= $data['post_detail_jasa_simpanan3th']->waktu;
-			$data_kredit['kode_akun'] 	= $data['simpanan3thmaster']->kode_kredit_penerimaan_simp;
+			$data_kredit['kode_akun'] 	= $data['simpanan3thmaster']->kode_kredit_penyesuaian_jasa;
 			$data_kredit['nama_akun'] 	= $kredit->nama_akun;
 			$data_kredit['keterangan'] 	= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah;
 			$data_kredit['jumlah'] 		= $data['post_detail_jasa_simpanan3th']->jumlah;

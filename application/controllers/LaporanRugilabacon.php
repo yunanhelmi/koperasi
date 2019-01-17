@@ -56,7 +56,11 @@ class LaporanRugilabaCon extends CI_Controller {
 				if($kode_aset[$i]['kode_akun'] == $transaksi_aset[$a]['kode_akun']) {
 					$kode_aset[$i]['debet'] 	= $transaksi_aset[$a]['jumlah_debet'];
 					$kode_aset[$i]['kredit'] 	= $transaksi_aset[$a]['jumlah_kredit'];
-					$kode_aset[$i]['selisih']	= $transaksi_aset[$a]['jumlah_debet'] - $transaksi_aset[$a]['jumlah_kredit'];
+					if($kode_aset[$i]['kode_akun'] == '105') {
+						$kode_aset[$i]['selisih']	= $transaksi_aset[$a]['jumlah_kredit'] - $transaksi_aset[$a]['jumlah_debet'];
+					} else {
+						$kode_aset[$i]['selisih']	= $transaksi_aset[$a]['jumlah_debet'] - $transaksi_aset[$a]['jumlah_kredit'];	
+					}
 				}
 			}
 		}
@@ -66,7 +70,7 @@ class LaporanRugilabaCon extends CI_Controller {
 				if($kode_hutang[$i]['kode_akun'] == $transaksi_hutang[$a]['kode_akun']) {
 					$kode_hutang[$i]['debet'] 	= $transaksi_hutang[$a]['jumlah_debet'];
 					$kode_hutang[$i]['kredit'] 	= $transaksi_hutang[$a]['jumlah_kredit'];
-					$kode_hutang[$i]['selisih']	= $transaksi_hutang[$a]['jumlah_debet'] - $transaksi_hutang[$a]['jumlah_kredit'];
+					$kode_hutang[$i]['selisih']	= $transaksi_hutang[$a]['jumlah_kredit'] - $transaksi_hutang[$a]['jumlah_debet'];
 				}
 			}
 		}
@@ -76,7 +80,7 @@ class LaporanRugilabaCon extends CI_Controller {
 				if($kode_modal[$i]['kode_akun'] == $transaksi_modal[$a]['kode_akun']) {
 					$kode_modal[$i]['debet'] 	= $transaksi_modal[$a]['jumlah_debet'];
 					$kode_modal[$i]['kredit'] 	= $transaksi_modal[$a]['jumlah_kredit'];
-					$kode_modal[$i]['selisih']	= $transaksi_modal[$a]['jumlah_debet'] - $transaksi_modal[$a]['jumlah_kredit'];
+					$kode_modal[$i]['selisih']	= $transaksi_modal[$a]['jumlah_kredit'] - $transaksi_modal[$a]['jumlah_debet'];
 				}
 			}
 		}
@@ -126,8 +130,13 @@ class LaporanRugilabaCon extends CI_Controller {
 				if($kode_aset[$i]['kode_akun'] == $transaksi_aset[$a]['kode_akun']) {
 					$kode_aset[$i]['debet'] 	= $transaksi_aset[$a]['jumlah_debet'];
 					$kode_aset[$i]['kredit'] 	= $transaksi_aset[$a]['jumlah_kredit'];
-					$kode_aset[$i]['selisih']	= $transaksi_aset[$a]['jumlah_debet'] - $transaksi_aset[$a]['jumlah_kredit'];
-					$total_aset 				+= $kode_aset[$i]['selisih'];
+					if($kode_aset[$i]['kode_akun'] == '105') {
+						$kode_aset[$i]['selisih']	= $transaksi_aset[$a]['jumlah_kredit'] - $transaksi_aset[$a]['jumlah_debet'];
+						$total_aset 				-= $kode_aset[$i]['selisih'];
+					} else {
+						$kode_aset[$i]['selisih']	= $transaksi_aset[$a]['jumlah_debet'] - $transaksi_aset[$a]['jumlah_kredit'];
+						$total_aset 				+= $kode_aset[$i]['selisih'];
+					}
 				}
 			}
 		}
@@ -138,7 +147,7 @@ class LaporanRugilabaCon extends CI_Controller {
 				if($kode_hutang[$i]['kode_akun'] == $transaksi_hutang[$a]['kode_akun']) {
 					$kode_hutang[$i]['debet'] 	= $transaksi_hutang[$a]['jumlah_debet'];
 					$kode_hutang[$i]['kredit'] 	= $transaksi_hutang[$a]['jumlah_kredit'];
-					$kode_hutang[$i]['selisih']	= $transaksi_hutang[$a]['jumlah_debet'] - $transaksi_hutang[$a]['jumlah_kredit'];
+					$kode_hutang[$i]['selisih']	= $transaksi_hutang[$a]['jumlah_kredit'] - $transaksi_hutang[$a]['jumlah_debet'];
 					$total_hutang 				+= $kode_hutang[$i]['selisih'];
 				}
 			}
@@ -150,7 +159,7 @@ class LaporanRugilabaCon extends CI_Controller {
 				if($kode_modal[$i]['kode_akun'] == $transaksi_modal[$a]['kode_akun']) {
 					$kode_modal[$i]['debet'] 	= $transaksi_modal[$a]['jumlah_debet'];
 					$kode_modal[$i]['kredit'] 	= $transaksi_modal[$a]['jumlah_kredit'];
-					$kode_modal[$i]['selisih']	= $transaksi_modal[$a]['jumlah_debet'] - $transaksi_modal[$a]['jumlah_kredit'];
+					$kode_modal[$i]['selisih']	= $transaksi_modal[$a]['jumlah_kredit'] - $transaksi_modal[$a]['jumlah_debet'];
 					$total_modal 				+= $kode_modal[$i]['selisih'];
 				}
 			}
@@ -162,7 +171,7 @@ class LaporanRugilabaCon extends CI_Controller {
 				if($kode_pendapatan[$i]['kode_akun'] == $transaksi_pendapatan[$a]['kode_akun']) {
 					$kode_pendapatan[$i]['debet'] 	= $transaksi_pendapatan[$a]['jumlah_debet'];
 					$kode_pendapatan[$i]['kredit'] 	= $transaksi_pendapatan[$a]['jumlah_kredit'];
-					$kode_pendapatan[$i]['selisih']	= $transaksi_pendapatan[$a]['jumlah_debet'] - $transaksi_pendapatan[$a]['jumlah_kredit'];
+					$kode_pendapatan[$i]['selisih']	= $transaksi_pendapatan[$a]['jumlah_kredit'] - $transaksi_pendapatan[$a]['jumlah_debet'];
 					$total_pendapatan 				+= $kode_pendapatan[$i]['selisih'];
 				}
 			}
@@ -219,63 +228,69 @@ class LaporanRugilabaCon extends CI_Controller {
         $index_kanan = $i;
         $border_start   = $i;
 
-        /* AKTIVA */
+        /* BEBAN */
         $sheet->setCellValue("A".$index_kiri, "NO");
-        $sheet->setCellValue("B".$index_kiri, "PENDAPATAN");
+        $sheet->setCellValue("B".$index_kiri, "BEBAN");
         $sheet->setCellValue("C".$index_kiri, "JUMLAH");
         $sheet->getStyle("A".$index_kiri.":C".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$index_kiri.":C".$index_kiri)->getFont()->setSize(10)->setBold(true);
         $index_kiri++;
-        $sheet->setCellValue("B".$index_kiri, "PENDAPATAN");
+        $sheet->setCellValue("B".$index_kiri, "BIAYA");
         $sheet->getStyle("B".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("B".$index_kiri)->getFont()->setSize(10)->setBold(true);
         $index_kiri++;
-        for($i = 0; $i < sizeof($kode_pendapatan); $i++) {
-        	$sheet->setCellValue("A".$index_kiri, $kode_pendapatan[$i]['kode_akun']);
+        for($i = 0; $i < sizeof($kode_beban); $i++) {
+        	$sheet->setCellValue("A".$index_kiri, $kode_beban[$i]['kode_akun']);
         	$sheet->getStyle("A".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        	$sheet->setCellValue("B".$index_kiri, $kode_pendapatan[$i]['nama_akun']);
-        	$sheet->setCellValue("C".$index_kiri, $kode_pendapatan[$i]['selisih']);
+        	$sheet->setCellValue("B".$index_kiri, $kode_beban[$i]['nama_akun']);
+        	$sheet->setCellValue("C".$index_kiri, $kode_beban[$i]['selisih']);
+        	$sheet->getStyle("C".$index_kiri)->getNumberFormat()->setFormatCode('#,##0');
         	$index_kiri++;
         }
-        $sheet->setCellValue("B".$index_kiri, "JUMLAH PENDAPATAN");
-        $sheet->setCellValue("C".$index_kiri, $total_pendapatan);
-        $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getFont()->setSize(10)->setBold(true);
+        $sheet->setCellValue("B".$index_kiri, "JUMLAH BIAYA");
+        $sheet->setCellValue("C".$index_kiri, $total_beban);
+        $sheet->getStyle("C".$index_kiri)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$index_kiri.":C".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$index_kiri.":C".$index_kiri)->getFont()->setSize(10)->setBold(true);
         $index_kiri += 2;
-        $sheet->setCellValue("B".$index_kiri, "JUMLAH PENDAPATAN");
-        $sheet->setCellValue("C".$index_kiri, $total_pendapatan);
-        $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getFont()->setSize(10)->setBold(true);
-        /* END OF AKTIVA*/
+        $sheet->setCellValue("B".$index_kiri, "JUMLAH BEBAN");
+        $sheet->setCellValue("C".$index_kiri, $total_beban);
+        $sheet->getStyle("C".$index_kiri)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$index_kiri.":C".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$index_kiri.":C".$index_kiri)->getFont()->setSize(10)->setBold(true);
+        /* END OF BEBAN */
 
-        /* PASIVA */
+        /* PENDAPATAN */
         $sheet->setCellValue("E".$index_kanan, "NO");
-        $sheet->setCellValue("F".$index_kanan, "BEBAN");
+        $sheet->setCellValue("F".$index_kanan, "PENDAPATAN");
         $sheet->setCellValue("G".$index_kanan, "JUMLAH");
         $sheet->getStyle("E".$index_kanan.":G".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("E".$index_kanan.":G".$index_kanan)->getFont()->setSize(10)->setBold(true);
         $index_kanan++;
-        $sheet->setCellValue("F".$index_kanan, "BIAYA");
+        $sheet->setCellValue("F".$index_kanan, "PENDAPATAN");
         $sheet->getStyle("F".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("F".$index_kanan)->getFont()->setSize(10)->setBold(true);
         $index_kanan++;
-        for($i = 0; $i < sizeof($kode_beban); $i++) {
-        	$sheet->setCellValue("E".$index_kanan, $kode_beban[$i]['kode_akun']);
+        for($i = 0; $i < sizeof($kode_pendapatan); $i++) {
+        	$sheet->setCellValue("E".$index_kanan, $kode_pendapatan[$i]['kode_akun']);
         	$sheet->getStyle("E".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        	$sheet->setCellValue("F".$index_kanan, $kode_beban[$i]['nama_akun']);
-        	$sheet->setCellValue("G".$index_kanan, $kode_beban[$i]['selisih']);
+        	$sheet->setCellValue("F".$index_kanan, $kode_pendapatan[$i]['nama_akun']);
+        	$sheet->setCellValue("G".$index_kanan, $kode_pendapatan[$i]['selisih']);
+        	$sheet->getStyle("G".$index_kanan)->getNumberFormat()->setFormatCode('#,##0');
         	$index_kanan++;
         }
-        $sheet->setCellValue("F".$index_kanan, "JUMLAH BIAYA");
-        $sheet->setCellValue("G".$index_kanan, $total_beban);
+        $sheet->setCellValue("F".$index_kanan, "JUMLAH PENDAPATAN");
+        $sheet->setCellValue("G".$index_kanan, $total_pendapatan);
+        $sheet->getStyle("G".$index_kanan)->getNumberFormat()->setFormatCode('#,##0');
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getFont()->setSize(10)->setBold(true);
         $index_kanan += 2;
-        $sheet->setCellValue("F".$index_kanan, "JUMLAH BEBAN");
-        $sheet->setCellValue("G".$index_kanan, $total_beban);
+        $sheet->setCellValue("F".$index_kanan, "JUMLAH PENDAPATAN");
+        $sheet->setCellValue("G".$index_kanan, $total_pendapatan);
+        $sheet->getStyle("G".$index_kanan)->getNumberFormat()->setFormatCode('#,##0');
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getFont()->setSize(10)->setBold(true);
-        /* END OF PASIVA */
+        /* END OF PENDAPATAN*/
 
         /* FOOTER */
         if($index_kiri > $index_kanan) {
@@ -288,6 +303,7 @@ class LaporanRugilabaCon extends CI_Controller {
         $sheet->setCellValue("F".$index_footer, "SHU = PENDPATAN - BIAYA");
         $shu = $total_pendapatan - $total_beban;
         $sheet->setCellValue("G".$index_footer, $shu);
+        $sheet->getStyle("G".$index_footer)->getNumberFormat()->setFormatCode('#,##0');
         $sheet->getStyle("E".$index_footer.":F".$index_footer)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("E".$index_footer.":F".$index_footer)->getFont()->setSize(10)->setBold(true);
         $border_end = $index_footer;
@@ -301,6 +317,10 @@ class LaporanRugilabaCon extends CI_Controller {
         $sheet->setCellValue("B".$index_footer, "Drs. SUPRAPTO");
         $sheet->setCellValue("F".$index_footer, "DWI AGUNG, M.Pd.");
         /* END OF FOOTER */
+
+        foreach(range('A','G') as $columnID) {
+		    $sheet->getColumnDimension($columnID)->setAutoSize(true);
+		}
 
         $thin = array ();
         $thin['borders']=array();

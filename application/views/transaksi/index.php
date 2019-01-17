@@ -68,7 +68,7 @@ function rupiah($angka){
                     <td><?php echo $transaksi[$i]['kode_debet']?></td>
                     <td><?php echo $transaksi[$i]['kode_kredit']?></td>
                     <td><?php echo rupiah($transaksi[$i]['jumlah'])?></td>
-                    <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksicon/transaksi/".$transaksi[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+                    <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksicon/edit_transaksi/".$transaksi[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                     <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmation('<?php echo $transaksi[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                     <?php
                     if($transaksi[$i]['status_post'] == 1) {
