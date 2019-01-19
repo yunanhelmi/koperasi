@@ -231,11 +231,32 @@ class LaporanKeuanganCon extends CI_Controller {
 		var_dump($kode_aset);
 		echo "</pre>";*/
 
-		/*for($i = 0; $i < sizeof($kode_modal); $i++) {
+		for($i = 0; $i < sizeof($kode_modal); $i++) {
 			if($kode_modal[$i]['kode_akun'] == '305') {
 				$kode_modal[$i]['selisih'] = $total_pendapatan - $total_beban;
+				$total_modal 				+= $kode_modal[$i]['selisih'];
+			}
+		}
+
+		/*$total_modal = 0;
+		for($i = 0; $i < sizeof($kode_modal); $i++) {
+			for($a = 0; $a < sizeof($transaksi_modal); $a++) {
+				if($kode_modal[$i]['kode_akun'] == $transaksi_modal[$a]['kode_akun']) {
+					$kode_modal[$i]['debet'] 	= $transaksi_modal[$a]['jumlah_debet'];
+					$kode_modal[$i]['kredit'] 	= $transaksi_modal[$a]['jumlah_kredit'];$kode_modal[$i]['selisih']	= $transaksi_modal[$a]['jumlah_kredit'] - $transaksi_modal[$a]['jumlah_debet'];
+					$total_modal 				+= $kode_modal[$i]['selisih'];
+				}
+				if($kode_modal[$i]['kode_akun'] == '305') {
+					$kode_modal[$i]['selisih'] = $total_pendapatan - $total_beban;
+					$total_modal 				+= $kode_modal[$i]['selisih'];
+				}
+
 			}
 		}*/
+
+		/*echo "<pre>";
+		var_dump($kode_modal);
+		echo "</pre>";*/
 
         $file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
