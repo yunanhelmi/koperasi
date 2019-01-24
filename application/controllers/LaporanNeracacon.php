@@ -195,6 +195,13 @@ class LaporanNeracaCon extends CI_Controller {
 			}
 		}*/
 
+		for($i = 0; $i < sizeof($kode_modal); $i++) {
+			if($kode_modal[$i]['kode_akun'] == '305') {
+				$kode_modal[$i]['selisih'] = $total_pendapatan - $total_beban;
+				$total_modal 				+= $kode_modal[$i]['selisih'];
+			}
+		}
+
         $file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
         $file->getProperties ()->setLastModifiedBy ( "System" );
@@ -281,7 +288,7 @@ class LaporanNeracaCon extends CI_Controller {
         }
         $sheet->setCellValue("F".$index_kanan, "JUMLAH HUTANG");
         $sheet->setCellValue("G".$index_kanan, $total_hutang);
-        $sheet->getStyle("C".$index_kiri)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("G".$index_kanan)->getNumberFormat()->setFormatCode('#,##0');
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getFont()->setSize(10)->setBold(true);
         $index_kanan += 2;
@@ -304,8 +311,9 @@ class LaporanNeracaCon extends CI_Controller {
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getFont()->setSize(10)->setBold(true);
         $index_kanan += 2;
+        $jumlah_pasiva = $total_hutang + $total_modal;
         $sheet->setCellValue("F".$index_kanan, "JUMLAH PASIVA");
-        $sheet->setCellValue("G".$index_kanan, $total_modal);
+        $sheet->setCellValue("G".$index_kanan, $jumlah_pasiva);
         $sheet->getStyle("G".$index_kanan)->getNumberFormat()->setFormatCode('#,##0');
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("E".$index_kanan.":F".$index_kanan)->getFont()->setSize(10)->setBold(true);
