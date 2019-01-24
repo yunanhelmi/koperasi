@@ -260,11 +260,11 @@ class LaporanNeracaCon extends CI_Controller {
         $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getFont()->setSize(10)->setBold(true);
         $index_kiri += 2;
-        $sheet->setCellValue("B".$index_kiri, "JUMLAH AKTIVA");
+        /*$sheet->setCellValue("B".$index_kiri, "JUMLAH AKTIVA");
         $sheet->setCellValue("C".$index_kiri, $total_aset);
         $sheet->getStyle("C".$index_kiri)->getNumberFormat()->setFormatCode('#,##0');
         $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getFont()->setSize(10)->setBold(true);
+        $sheet->getStyle("A".$index_kiri.":B".$index_kiri)->getFont()->setSize(10)->setBold(true);*/
         /* END OF AKTIVA*/
 
         /* PASIVA */
@@ -327,6 +327,17 @@ class LaporanNeracaCon extends CI_Controller {
         	$index_footer = $index_kanan;
         	$border_end     = $index_kanan;
         }
+        $sheet->setCellValue("B".$border_end, "JUMLAH AKTIVA");
+        $sheet->setCellValue("C".$border_end, $total_aset);
+        $sheet->getStyle("C".$border_end)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$border_end.":B".$border_end)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$border_end.":B".$border_end)->getFont()->setSize(10)->setBold(true);
+
+        $sheet->setCellValue("F".$border_end, "JUMLAH PASIVA");
+        $sheet->setCellValue("G".$border_end, $jumlah_pasiva);
+        $sheet->getStyle("G".$border_end)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("E".$border_end.":F".$border_end)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("E".$border_end.":F".$border_end)->getFont()->setSize(10)->setBold(true);
 
         $index_footer += 2;
         $sheet->setCellValue("F".$index_footer, "Bojonegoro, ".date("d-m-Y"));
