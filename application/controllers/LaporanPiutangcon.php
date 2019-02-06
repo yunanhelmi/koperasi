@@ -147,16 +147,16 @@ class LaporanPiutangCon extends CI_Controller {
                     $d2 = new DateTime($hari_ini);
                     $diff = $d2->diff($d1);
                     $interval = $diff->format('%m');
-                    if($interval <= 3) {
+                    if($interval < 3) {
                         $sheet->setCellValue("L".$i, "Hijau");
                         $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
-                    } else if ($interval >= 3 && $interval <= 6) {
+                    } else if ($interval >= 3 && $interval < 6) {
                         $sheet->setCellValue("L".$i, "Kuning");
                         $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFFF00');
-                    } else if ($interval >= 6 && $interval <= 9) {
+                    } else if ($interval >= 6 && $interval < 9) {
                         $sheet->setCellValue("L".$i, "Merah 1");
                         $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFC0CB');
-                    } else if ($interval > 9) {
+                    } else if ($interval >= 9) {
                         $sheet->setCellValue("L".$i, "Merah 2");
                         $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000');
                     }
@@ -167,16 +167,16 @@ class LaporanPiutangCon extends CI_Controller {
                     $d2 = new DateTime($hari_ini);
                     $diff = $d2->diff($d1);
                     $interval = $diff->format('%m');
-                    if($interval <= 3) {
+                    if($interval < 3) {
                         $sheet->setCellValue("L".$i, "Hijau");
                         $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
-                    } else if ($interval >= 3 && $interval <= 6) {
+                    } else if ($interval >= 3 && $interval < 6) {
                         $sheet->setCellValue("L".$i, "Kuning");
                         $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFFF00');
-                    } else if ($interval >= 6 && $interval <= 9) {
+                    } else if ($interval >= 6 && $interval < 9) {
                         $sheet->setCellValue("L".$i, "Merah 1");
                         $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFC0CB');
-                    } else if ($interval > 9) {
+                    } else if ($interval >= 9) {
                         $sheet->setCellValue("L".$i, "Merah 2");
                         $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000');
                     }
@@ -188,16 +188,16 @@ class LaporanPiutangCon extends CI_Controller {
                 $d2 = new DateTime($hari_ini);
                 $diff = $d2->diff($d1);
                 $interval = $diff->format('%m');
-                if($interval <= 3) {
+                if($interval < 3) {
                     $sheet->setCellValue("L".$i, "Hijau");
                     $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
-                } else if ($interval >= 3 && $interval <= 5) {
+                } else if ($interval >= 3 && $interval < 5) {
                     $sheet->setCellValue("L".$i, "Kuning");
                     $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFFF00');
-                } else if ($interval >= 5 && $interval <= 9) {
+                } else if ($interval >= 5 && $interval < 9) {
                     $sheet->setCellValue("L".$i, "Merah 1");
                     $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFC0CB');
-                } else if ($interval > 9) {
+                } else if ($interval >= 9) {
                     $sheet->setCellValue("L".$i, "Merah 2");
                     $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000');
                 }
