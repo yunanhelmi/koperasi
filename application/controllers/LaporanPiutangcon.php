@@ -22,6 +22,56 @@ class LaporanPiutangCon extends CI_Controller {
 		$this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
 	}
 
+    function isLeapYear($year) {
+        return ((($year % 4 === 0) && ($year % 100 !== 0)) || ($year % 400 === 0));
+    }
+
+    function getDaysInMonth($year, $month) {
+        return [31, ($this->isLeapYear($year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][$month - 1];
+    }
+
+    function addMonths($d, $value) {
+        $date = new DateTime($d);
+        $tanggal1 = $date->format('d');
+
+        $date->setDate($date->format('Y'), $date->format('m'), 1);
+        $date->setDate($date->format('Y'), $date->format('m') + $value, $date->format('d'));
+        
+        $tahun = $date->format('Y');
+        $bulan = (int)$date->format('m');
+
+        $tanggal2 = $this->getDaysInMonth($tahun, $bulan);
+
+        if($tanggal1 <= $tanggal2) {
+            $date->setDate($date->format('Y'), $date->format('m'), $tanggal1);
+        } else {
+            $date->setDate($date->format('Y'), $date->format('m'), $tanggal2);
+        }
+
+        return $date->format('Y-m-d');
+    }
+
+    function diffMonths($d, $value) {
+        $date = new DateTime($d);
+        $tanggal1 = $date->format('d');
+
+        $date->setDate($date->format('Y'), $date->format('m'), 1);
+        $date->setDate($date->format('Y'), $date->format('m') - $value, $date->format('d'));
+        
+        $tahun = $date->format('Y');
+        $bulan = (int)$date->format('m');
+
+        $tanggal2 = $this->getDaysInMonth($tahun, $bulan);
+
+        if($tanggal1 <= $tanggal2) {
+            $date->setDate($date->format('Y'), $date->format('m'), $tanggal1);
+        } else {
+            $date->setDate($date->format('Y'), $date->format('m'), $tanggal2);
+        }
+
+        return $date->format('Y-m-d');
+    }
+
 	function index() {
 		$session_data = $this->session->userdata('logged_in');
 		if($session_data == NULL) {
@@ -134,38 +184,31 @@ class LaporanPiutangCon extends CI_Controller {
         	$waktu = $this->tanggal_indo($data_piutang[$a]['waktu']);
         	$sheet->setCellValue("I".$i, $waktu);
         	$sisa_kali_angsuran = $data_piutang[$a]['jumlah_angsuran'] - $data_piutang[$a]['total_angsuran'];
-        	$sheet->setCellValue("J".$i, $sisa_kali_angsuran);
+            if($data_piutang[$a]['jenis_pinjaman'] == 'Angsuran') {
+                $sheet->setCellValue("J".$i, $sisa_kali_angsuran);    
+            } else if($data_piutang[$a]['jenis_pinjaman'] == 'Musiman') {
+                $sheet->setCellValue("J".$i, "1");    
+            }
         	$sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         	$sheet->setCellValue("K".$i, $data_piutang[$a]['sisa_angsuran']);
         	$sheet->getStyle("K".$i)->getNumberFormat()->setFormatCode('#,##0');
         	$total_sisa += $data_piutang[$a]['sisa_angsuran'];
             if($data_piutang[$a]['jenis_pinjaman'] == 'Angsuran') {
-                if($data_piutang[$a]['waktu_terakhir_angsuran'] == NULL) {
-                    $jatuh_tempo = date('Y-m-d',strtotime($data_piutang[$a]['waktu']." +1 Months"));
-                    $hari_ini = date("Y-m-d");
-                    $d1 = new DateTime($jatuh_tempo);
-                    $d2 = new DateTime($hari_ini);
-                    $diff = $d2->diff($d1);
-                    $interval = $diff->format('%m');
-                    if($interval < 3) {
-                        $sheet->setCellValue("L".$i, "Hijau");
-                        $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
-                    } else if ($interval >= 3 && $interval < 6) {
-                        $sheet->setCellValue("L".$i, "Kuning");
-                        $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFFF00');
-                    } else if ($interval >= 6 && $interval < 9) {
-                        $sheet->setCellValue("L".$i, "Merah 1");
-                        $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFC0CB');
-                    } else if ($interval >= 9) {
-                        $sheet->setCellValue("L".$i, "Merah 2");
-                        $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000');
-                    }
+                // GET Today and Jatuh Tempo
+                if($data_piutang[$a]['jatuh_tempo'] == "0000-00-00" || $data_piutang[$a]['jatuh_tempo'] == NULL) {
+                    $today = new DateTime(date("Y-m-d"));
+                    $jatuh_tempo = new DateTime($this->addMonths($data_piutang[$a]['waktu'], $total_angsuran + 1));
+                    
                 } else {
-                    $jatuh_tempo = date('Y-m-d',strtotime($data_piutang[$a]['waktu_terakhir_angsuran']." +1 Months"));
-                    $hari_ini = date("Y-m-d");
-                    $d1 = new DateTime($jatuh_tempo);
-                    $d2 = new DateTime($hari_ini);
-                    $diff = $d2->diff($d1);
+                    $today = new DateTime(date("Y-m-d"));
+                    $jatuh_tempo = new DateTime($data_piutang[$a]['jatuh_tempo']);
+                }
+                // GET Diff Today and Jatuh Tempo
+                if($today < $jatuh_tempo) {
+                    $sheet->setCellValue("L".$i, "Hijau");
+                    $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
+                } else {
+                    $diff = $today->diff($jatuh_tempo);
                     $interval = $diff->format('%m');
                     if($interval < 3) {
                         $sheet->setCellValue("L".$i, "Hijau");
@@ -182,24 +225,35 @@ class LaporanPiutangCon extends CI_Controller {
                     }
                 }
             } else if($data_piutang[$a]['jenis_pinjaman'] == 'Musiman') {
-                $jatuh_tempo = date('Y-m-d',strtotime($data_piutang[$a]['waktu']." +4 Months"));
-                $hari_ini = date("Y-m-d");
-                $d1 = new DateTime($jatuh_tempo);
-                $d2 = new DateTime($hari_ini);
-                $diff = $d2->diff($d1);
-                $interval = $diff->format('%m');
-                if($interval < 3) {
+                // GET Today and Jatuh Tempo
+                if($data_piutang[$a]['jatuh_tempo'] == "0000-00-00" || $data_piutang[$a]['jatuh_tempo'] == NULL) {
+                    $today = new DateTime(date("Y-m-d"));
+                    $jatuh_tempo = new DateTime($this->addMonths($data_piutang[$a]['waktu'], $total_angsuran + 4));
+                    
+                } else {
+                    $today = new DateTime(date("Y-m-d"));
+                    $jatuh_tempo = new DateTime($data_piutang[$a]['jatuh_tempo']);
+                }
+                // GET Diff Today and Jatuh Tempo
+                if($today < $jatuh_tempo) {
                     $sheet->setCellValue("L".$i, "Hijau");
                     $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
-                } else if ($interval >= 3 && $interval < 5) {
-                    $sheet->setCellValue("L".$i, "Kuning");
-                    $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFFF00');
-                } else if ($interval >= 5 && $interval < 9) {
-                    $sheet->setCellValue("L".$i, "Merah 1");
-                    $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFC0CB');
-                } else if ($interval >= 9) {
-                    $sheet->setCellValue("L".$i, "Merah 2");
-                    $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000');
+                } else {
+                    $diff = $today->diff($jatuh_tempo);
+                    $interval = $diff->format('%m');
+                    if($interval < 3) {
+                        $sheet->setCellValue("L".$i, "Hijau");
+                        $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
+                    } else if ($interval >= 3 && $interval < 6) {
+                        $sheet->setCellValue("L".$i, "Kuning");
+                        $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFFF00');
+                    } else if ($interval >= 6 && $interval < 9) {
+                        $sheet->setCellValue("L".$i, "Merah 1");
+                        $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFC0CB');
+                    } else if ($interval >= 9) {
+                        $sheet->setCellValue("L".$i, "Merah 2");
+                        $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000');
+                    }
                 }
             }
         	//$sheet->setCellValue("L".$i, "");

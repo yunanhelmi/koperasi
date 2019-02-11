@@ -257,7 +257,11 @@ function rupiah($angka){
                       </div>
                       <div class="form-group col-xs-3">
                         <label for="exampleInputPassword1">Tanggal Jatuh Tempo</label>
-                        <p><?php echo $pinjaman->jatuh_tempo;?></p>
+                        <?php 
+                            $jatuh_tempo = strtotime( $pinjaman->jatuh_tempo );
+                            $jatuh_tempo1 = date( 'd F Y', $jatuh_tempo );
+                          ?>
+                          <p><?php echo $jatuh_tempo1;?></p>
                       </div>
                       <div class="form-group col-xs-3">
                         <label for="exampleInputPassword1">Jumlah Pinjaman Awal</label>

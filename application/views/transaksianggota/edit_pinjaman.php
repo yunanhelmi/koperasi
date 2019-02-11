@@ -196,7 +196,8 @@ function rupiah($angka){
                   </div>
                   <div class="form-group col-xs-6">
                     <label for="exampleInputPassword1">Jatuh Tempo</label>
-                    <input type="text" class="form-control" value="<?php echo $pinjaman->jatuh_tempo?>" id="jatuh_tempo" name="jatuh_tempo" placeholder="Jatuh Tempo">
+                    <?php $jatuh_tempo = strtotime($pinjaman->jatuh_tempo)?>
+                    <input type="text" class="form-control" value="<?php echo date("d-m-Y",$jatuh_tempo);?>" id="jatuh_tempo" name="jatuh_tempo" placeholder="Jatuh Tempo">
                   </div>
                   <div class="form-group col-xs-6">
                     <label for="exampleInputPassword1">Jumlah Pinjaman</label>
@@ -697,6 +698,41 @@ function rupiah($angka){
     }
   }
 
+  function isLeapYear(year) {
+      return (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0));   
+  }
+
+  function getDaysInMonth(year, month) {
+      return [31, (isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
+  }
+
+  function pad(s) { 
+      return (s < 10) ? '0' + s : s; 
+  }
+
+  function convertDate(inputFormat) {
+    var d = new Date(inputFormat);
+    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-');
+  }
+
+  function addMonths(date, value) {
+    var CurrentDate = new Date(date);
+    date = CurrentDate.getDate();
+
+    CurrentDate.setDate(1);
+    CurrentDate.setMonth(CurrentDate.getMonth() + value);
+
+    var year = CurrentDate.getFullYear();
+    var month = CurrentDate.getMonth();
+    var tgl = getDaysInMonth(year, month);
+    CurrentDate.setDate(Math.min(date, tgl));
+
+    var res = CurrentDate.toISOString().substring(0, 10);
+    var res1 = convertDate(res);
+
+    return res1;
+  }
+
   $(function () {
     $('#pinjaman_table').DataTable({
       'paging'      : true,
@@ -891,6 +927,19 @@ function rupiah($angka){
         //}
       }
 
+      function hitung_jatuh_tempo() {
+        var tanggal_pinjaman = $('#waktu').val();
+        tanggal_pinjaman = tanggal_pinjaman.split("-").reverse().join("-");
+        console.log(tanggal_pinjaman);
+        if($('#jenis_pinjaman').val() == 'Musiman') {
+          var jatuh_tempo = addMonths(tanggal_pinjaman, 4);
+          $('#jatuh_tempo').val(jatuh_tempo);
+        } else if($('#jenis_pinjaman').val() == 'Angsuran') {
+          var jatuh_tempo = addMonths(tanggal_pinjaman, 1);
+          $('#jatuh_tempo').val(jatuh_tempo);
+        }
+      }
+
       $(document).ready(function(){
         $('#waktu').datepicker({}).on('changeDate', function(ev){});
 
@@ -918,6 +967,7 @@ function rupiah($angka){
 
         $('#jenis_pinjaman').change(function() {
           hitung_jasa_perbulan();
+          hitung_jatuh_tempo();
         });
 
         $('#jumlah_pinjaman').keyup(function() {
@@ -929,6 +979,10 @@ function rupiah($angka){
         $('#jumlah_angsuran').keyup(function() {
           hitung_angsuran_perbulan();
           hitung_total_angsuran_perbulan();
+        });
+
+        $('#waktu').change(function() {
+          hitung_jatuh_tempo();
         });
 
       });
