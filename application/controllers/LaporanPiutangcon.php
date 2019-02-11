@@ -228,7 +228,7 @@ class LaporanPiutangCon extends CI_Controller {
                 // GET Today and Jatuh Tempo
                 if($data_piutang[$a]['jatuh_tempo'] == "0000-00-00" || $data_piutang[$a]['jatuh_tempo'] == NULL) {
                     $today = new DateTime(date("Y-m-d"));
-                    $jatuh_tempo = new DateTime($this->addMonths($data_piutang[$a]['waktu'], $total_angsuran + 4));
+                    $jatuh_tempo = new DateTime($this->addMonths($data_piutang[$a]['waktu'], 4));
                     
                 } else {
                     $today = new DateTime(date("Y-m-d"));
