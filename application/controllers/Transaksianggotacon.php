@@ -348,11 +348,20 @@ class TransaksianggotaCon extends CI_Controller {
 				$wkt_pinjam			= new DateTime($wkt_pinjam);
 				$tgl_pinjam			= $wkt_pinjam->format('d');
 
-				$jatuh_tempo_old 	= $data['pinjaman']->jatuh_tempo;
-				$jatuh_tempo_old 	= new DateTime($jatuh_tempo_old);
+				if($data['pinjaman']->jatuh_tempo == "0000-00-00" || $data['pinjaman']->jatuh_tempo == NULL) {
+					$detail = $this->detailangsuranmodel->get_total_kali_angsuran($data['pinjaman']->id);
+					$total_kali_angsuran = $detail;
 
-				$jatuh_tempo_new 	= $this->addMonths($jatuh_tempo_old->format('Y-m-d'), 1);
-				$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
+					$jatuh_tempo_new 	= $this->addMonths($wkt_pinjam->format('Y-m-d'), $total_kali_angsuran + 1);
+					$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
+
+				} else {
+					$jatuh_tempo_old 	= $data['pinjaman']->jatuh_tempo;
+					$jatuh_tempo_old 	= new DateTime($jatuh_tempo_old);	
+
+					$jatuh_tempo_new 	= $this->addMonths($jatuh_tempo_old->format('Y-m-d'), 1);
+					$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
+				}
 
 				$bulan_jatuh_tempo_new = (int)$jatuh_tempo_new->format('m');
 				$tahun_jatuh_tempo_new = $jatuh_tempo_new->format('Y');
@@ -376,11 +385,19 @@ class TransaksianggotaCon extends CI_Controller {
 				$wkt_pinjam			= new DateTime($wkt_pinjam);
 				$tgl_pinjam			= $wkt_pinjam->format('d');
 
-				$jatuh_tempo_old 	= $data['pinjaman']->jatuh_tempo;
-				$jatuh_tempo_old 	= new DateTime($jatuh_tempo_old);
+				if($data['pinjaman']->jatuh_tempo == "0000-00-00" || $data['pinjaman']->jatuh_tempo == NULL) {
+					$detail = $this->detailangsuranmodel->get_total_kali_pinjaman($data['pinjaman']->id);
+					$total_kali_pinjaman = $detail;
 
-				$jatuh_tempo_new 	= $this->addMonths($jatuh_tempo_old->format('Y-m-d'), 4);
-				$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
+					$jatuh_tempo_new 	= $this->addMonths($wkt_pinjam->format('Y-m-d'), $total_kali_pinjaman * 4);
+					$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
+				} else {
+					$jatuh_tempo_old 	= $data['pinjaman']->jatuh_tempo;
+					$jatuh_tempo_old 	= new DateTime($jatuh_tempo_old);
+
+					$jatuh_tempo_new 	= $this->addMonths($jatuh_tempo_old->format('Y-m-d'), 4);
+					$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
+				}
 
 				$bulan_jatuh_tempo_new = (int)$jatuh_tempo_new->format('m');
 				$tahun_jatuh_tempo_new = $jatuh_tempo_new->format('Y');
@@ -598,11 +615,19 @@ class TransaksianggotaCon extends CI_Controller {
 				$wkt_pinjam			= new DateTime($wkt_pinjam);
 				$tgl_pinjam			= $wkt_pinjam->format('d');
 
-				$jatuh_tempo_old 	= $update->jatuh_tempo;
-				$jatuh_tempo_old 	= new DateTime($jatuh_tempo_old);
+				if($update->jatuh_tempo == "0000-00-00" || $update->jatuh_tempo == NULL) {
+					$detail = $this->detailangsuranmodel->get_total_kali_angsuran($update->id);
+					$total_kali_angsuran = $detail;
 
-				$jatuh_tempo_new 	= $this->diffMonths($jatuh_tempo_old->format('Y-m-d'), 1);
-				$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
+					$jatuh_tempo_new 	= $this->addMonths($wkt_pinjam->format('Y-m-d'), $total_kali_angsuran + 1);
+					$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
+				} else {
+					$jatuh_tempo_old 	= $update->jatuh_tempo;
+					$jatuh_tempo_old 	= new DateTime($jatuh_tempo_old);
+
+					$jatuh_tempo_new 	= $this->diffMonths($jatuh_tempo_old->format('Y-m-d'), 1);
+					$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);	
+				}
 
 				$bulan_jatuh_tempo_new = (int)$jatuh_tempo_new->format('m');
 				$tahun_jatuh_tempo_new = $jatuh_tempo_new->format('Y');
@@ -626,11 +651,19 @@ class TransaksianggotaCon extends CI_Controller {
 				$wkt_pinjam			= new DateTime($wkt_pinjam);
 				$tgl_pinjam			= $wkt_pinjam->format('d');
 
-				$jatuh_tempo_old 	= $update->jatuh_tempo;
-				$jatuh_tempo_old 	= new DateTime($jatuh_tempo_old);
+				if($update->jatuh_tempo == "0000-00-00" || $update->jatuh_tempo == NULL) {
+					$detail = $this->detailangsuranmodel->get_total_kali_pinjaman($update->id);
+					$total_kali_pinjaman = $detail;
 
-				$jatuh_tempo_new 	= $this->diffMonths($jatuh_tempo_old->format('Y-m-d'), 4);
-				$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
+					$jatuh_tempo_new 	= $this->addMonths($wkt_pinjam->format('Y-m-d'), $total_kali_pinjaman * 4 );
+					$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
+				} else {
+					$jatuh_tempo_old 	= $update->jatuh_tempo;
+					$jatuh_tempo_old 	= new DateTime($jatuh_tempo_old);
+
+					$jatuh_tempo_new 	= $this->diffMonths($jatuh_tempo_old->format('Y-m-d'), 4);
+					$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
+				}
 
 				$bulan_jatuh_tempo_new = (int)$jatuh_tempo_new->format('m');
 				$tahun_jatuh_tempo_new = $jatuh_tempo_new->format('Y');

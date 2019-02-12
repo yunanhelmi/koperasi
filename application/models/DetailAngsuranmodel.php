@@ -27,6 +27,18 @@ class DetailAngsuranModel extends CI_Model {
 		return $a;
 	}
 
+	function get_total_kali_angsuran($id_pinjaman) {
+		$query = $this->db->query("SELECT COUNT(id) as total_kali_angsuran from `detail_angsuran` WHERE id_pinjaman = '$id_pinjaman' AND jenis = 'Angsuran' GROUP BY id_pinjaman");
+		$a = $query->row();
+		return $a->total_kali_angsuran;
+	}
+
+	function get_total_kali_pinjaman($id_pinjaman) {
+		$query = $this->db->query("SELECT COUNT(id) as total_kali_angsuran from `detail_angsuran` WHERE id_pinjaman = '$id_pinjaman' AND jenis = 'Pinjaman' GROUP BY id_pinjaman");
+		$a = $query->row();
+		return $a->total_kali_angsuran;
+	}
+
 	function get_max_bulanke($id_pinjaman) {
 		$query = $this->db->query("SELECT COUNT(id) as max_bulanke from `detail_angsuran` WHERE id_pinjaman = '$id_pinjaman' AND jenis = 'Angsuran'");
 		$a = $query->row();
