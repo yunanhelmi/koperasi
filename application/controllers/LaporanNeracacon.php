@@ -124,7 +124,7 @@ class LaporanNeracaCon extends CI_Controller {
 		$kode_pendapatan 	= $this->kodeakunmodel->get_kode_akun_by_first_char('4');
 		$kode_beban 		= $this->kodeakunmodel->get_kode_akun_by_first_char('5');
 
-		$total_aset = 0;
+		$total_aset 	= 0;
 		for($i = 0; $i < sizeof($kode_aset); $i++) {
 			for($a = 0; $a < sizeof($transaksi_aset); $a++) {
 				if($kode_aset[$i]['kode_akun'] == $transaksi_aset[$a]['kode_akun']) {
@@ -197,10 +197,27 @@ class LaporanNeracaCon extends CI_Controller {
 
 		for($i = 0; $i < sizeof($kode_modal); $i++) {
 			if($kode_modal[$i]['kode_akun'] == '305') {
-				$kode_modal[$i]['selisih'] = $total_pendapatan - $total_beban;
+				$kode_modal[$i]['selisih']  = $total_pendapatan - $total_beban;
+				$shu_berjalan				= $kode_modal[$i]['selisih'];
 				$total_modal 				+= $kode_modal[$i]['selisih'];
 			}
 		}
+
+
+		$harta_lancar 	= 0;
+		$harta_tetap 	= 0;
+		for($i = 0; $i < sizeof($kode_aset); $i++) {
+			if($kode_aset[$i]['kode_akun'] == '101' || $kode_aset[$i]['kode_akun'] == '102' || $kode_aset[$i]['kode_akun'] == '103') {
+				$harta_lancar 	+= $kode_aset[$i]['selisih'];
+			} else if($kode_aset[$i]['kode_akun'] == '104' || $kode_aset[$i]['kode_akun'] == '105') {
+				$harta_tetap	+= $kode_aset[$i]['selisih'];
+			}
+		}
+
+
+		$rentabilitas 	= ($shu_berjalan / $total_modal) * 100;
+		$solvabilitas 	= $total_aset / $total_hutang;
+		$likuiditas		= $harta_lancar / $total_hutang;
 
         $file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
@@ -341,12 +358,27 @@ class LaporanNeracaCon extends CI_Controller {
 
         $index_footer += 2;
         $sheet->setCellValue("F".$index_footer, "Bojonegoro, ".date("d-m-Y"));
+        $sheet->getStyle("B".$index_footer.":F".$index_footer)->getFont()->setBold(true);
         $index_footer++;
         $sheet->setCellValue("B".$index_footer, "Ketua,");
         $sheet->setCellValue("F".$index_footer, "Bendahara,");
+        $sheet->getStyle("B".$index_footer.":F".$index_footer)->getFont()->setBold(true);
         $index_footer += 4;
         $sheet->setCellValue("B".$index_footer, "Drs. SUPRAPTO");
         $sheet->setCellValue("F".$index_footer, "DWI AGUNG, M.Pd.");
+        $sheet->getStyle("B".$index_footer.":F".$index_footer)->getFont()->setBold(true);
+        $index_footer += 5;
+        $sheet->setCellValue("B".$index_footer, "RENTABILITAS (%) : SHU / MODAL SENDIRI  X 100 %");
+        $sheet->setCellValue("C".$index_footer, $rentabilitas);
+        $sheet->getStyle("B".$index_footer.":C".$index_footer)->getFont()->setBold(true);
+        $index_footer++;
+        $sheet->setCellValue("B".$index_footer, "LIKUIDITAS  : HARTA LANCAR / HUTANG LANCAR");
+        $sheet->setCellValue("C".$index_footer, $likuiditas);
+        $sheet->getStyle("B".$index_footer.":C".$index_footer)->getFont()->setBold(true);
+        $index_footer++;
+        $sheet->setCellValue("B".$index_footer, "SOLVABILITAS  : TOTAL AKTIVA / TOTAL HUTANG");
+        $sheet->setCellValue("C".$index_footer, $solvabilitas);
+        $sheet->getStyle("B".$index_footer.":C".$index_footer)->getFont()->setBold(true);
         /* END OF FOOTER */
 
         foreach(range('A','G') as $columnID) {
