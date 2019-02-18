@@ -215,9 +215,24 @@ class LaporanNeracaCon extends CI_Controller {
 		}
 
 
-		$rentabilitas 	= ($shu_berjalan / $total_modal) * 100;
-		$solvabilitas 	= $total_aset / $total_hutang;
-		$likuiditas		= $harta_lancar / $total_hutang;
+		if($total_modal == 0) {
+			$rentabilitas 	= 0;	
+		} else {
+			$rentabilitas 	= ($shu_berjalan / $total_modal) * 100;	
+		}
+		
+		if($total_hutang == 0) {
+			$solvabilitas 	= 0;
+		} else {
+			$solvabilitas 	= $total_aset / $total_hutang;	
+		}
+
+		if($total_hutang == 0) {
+			$likuiditas		= 0;
+		} else {
+			$likuiditas		= $harta_lancar / $total_hutang;	
+		}
+		
 
         $file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
