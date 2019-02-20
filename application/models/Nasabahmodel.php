@@ -47,6 +47,34 @@ class NasabahModel extends CI_Model {
 		return $a;
 	}
 
+	function getDataPostUnpost() {
+		$query = $this->db->query("
+									SELECT
+										nasabah.*, pinjaman.id as id_pinjaman, COUNT(detail_angsuran.id) as total_unpost
+									FROM 
+										nasabah
+										LEFT JOIN
+											pinjaman
+										ON
+											nasabah.id = pinjaman.id_nasabah
+									LEFT JOIN
+										(SELECT
+									     	*
+									     FROM
+											detail_angsuran
+										WHERE
+											detail_angsuran.status_post IS NULL
+											OR detail_angsuran.status_post = 0
+										) as detail_angsuran
+									ON 
+										pinjaman.id = detail_angsuran.id_pinjaman
+									GROUP BY 
+										nasabah.id
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function inputData($data) {
 		$this->db->insert("nasabah",$data);
 	}

@@ -32,6 +32,7 @@
                     <th>NIK</th>
                     <th>Desa</th>
                     <th>Transaksi</th>
+                    <th>Post/Unpost</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -46,6 +47,13 @@
                     <td style='text-align: center'><?php echo $nasabah[$i]['nik']?></td>
                     <td><?php echo $nasabah[$i]['kelurahan']?></td>
                     <td style='text-align: center'><a class="btn btn-danger" href="<?php echo site_url("transaksianggotacon/pinjaman/".$nasabah[$i]['id']); ?>"><i class="fa fa-money"></i></a></td>
+                    <?php
+                      if($nasabah[$i]['total_unpost'] == 0) {
+                        echo "<td style='text-align: center; color:green'>Post</td>";
+                      } else {
+                        echo "<td style='text-align: center; color:red'>Unpost</td>";
+                      }
+                    ?>
                   </tr>
                   <?php $no++;}?>
                 </tbody>

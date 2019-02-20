@@ -91,7 +91,7 @@ class TransaksianggotaCon extends CI_Controller {
 		}
 		$data['username'] 	= $session_data['username'];
 		$data['status'] 	= $session_data['status'];
-		$data['nasabah'] 	= $this->nasabahmodel->showData();
+		$data['nasabah'] 	= $this->nasabahmodel->getDataPostUnpost();
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/transaksianggota/index', $data);
 		$this->load->view('/layouts/footer', $data);
