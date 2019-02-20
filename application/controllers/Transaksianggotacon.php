@@ -1204,6 +1204,7 @@ class TransaksianggotaCon extends CI_Controller {
 			redirect("usercon/login", "refresh");
 		}
 		$data['nasabah'] 			= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
+		$data['pinjaman'] 			= $this->pinjamanmodel->get_pinjaman_by_id_nasabah($id_nasabah);
 		$data['simpananpokok'] 		= $this->simpananpokokmodel->get_simpananpokok_by_id_nasabah($id_nasabah);
 		$data['simpananwajib'] 		= $this->simpananwajibmodel->get_simpananwajib_by_id_nasabah($id_nasabah);
 		$data['simpanankhusus'] 	= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
