@@ -188,6 +188,10 @@ function rupiah($angka){
                         <input type="text" class="form-control" id="bulan_ke" name="bulan_ke" placeholder="">
                       </div>
                       <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Bulan-Tahun</label>
+                        <input type="month" class="form-control" id="bulan_tahun" name="bulan_tahun" placeholder="">
+                      </div>
+                      <div class="form-group col-xs-6">
                         <label for="exampleInputPassword1">Angsuran</label>
                         <div class="input-group margin-bottom-sm">
                           <span class="input-group-addon">Rp</span>
@@ -254,6 +258,10 @@ function rupiah($angka){
                       <div class="form-group col-xs-6">
                         <label for="exampleInputPassword1">Bulan ke-</label>
                         <input type="text" class="form-control" value="<?php echo $edit_detail_angsuran->bulan_ke;?>" id="edit_bulan_ke" name="edit_bulan_ke" placeholder="">
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Bulan-Tahun</label>
+                        <input type="month" class="form-control" value="<?php echo $edit_detail_angsuran->bulan_tahun;?>" id="edit_bulan_tahun" name="edit_bulan_tahun" placeholder="">
                       </div>
                       <div class="form-group col-xs-6">
                         <label for="exampleInputPassword1">Angsuran</label>
@@ -413,8 +421,10 @@ function rupiah($angka){
                           <?php } else if($detail_angsuran[$i]['jenis'] == "Angsuran") {?>
                           <?php
                             if($detail_angsuran[$i]['jasa'] >= 0) {
+                              $bln_thn = strtotime( $detail_angsuran[$i]['bulan_tahun'] );
+                              $bulan_tahun = date( 'M-Y', $bln_thn );
                           ?>
-                          <td style='text-align: left'><?php echo $detail_angsuran[$i]['jenis']." Bulan ke-".$detail_angsuran[$i]['bulan_ke']?></td>
+                          <td style='text-align: left'><?php echo $detail_angsuran[$i]['jenis']." Bulan ke-".$detail_angsuran[$i]['bulan_ke']." (".$bulan_tahun.")"?></td>
                           <?php
                             } else {
                           ?>

@@ -290,6 +290,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$date 					= strtotime($date1);
 		$input['waktu'] 		= date("Y-m-d",$date);
 		$input['bulan_ke'] 		= $this->input->post('bulan_ke');
+		$input['bulan_tahun'] 	= $this->input->post('bulan_tahun');
 		$input['jenis'] 		= $this->input->post('jenis');
 		$input['id_pinjaman'] 	= $this->input->post('id_pinjaman');
 		$input['angsuran'] 		= $this->input->post('angsuran');
@@ -501,6 +502,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$date 					= strtotime($date1);
 		$input['waktu'] 		= date("Y-m-d",$date);
 		$input['bulan_ke'] 		= $this->input->post('edit_bulan_ke');
+		$input['bulan_tahun'] 		= $this->input->post('edit_bulan_tahun');
 		$input['jenis'] 		= $this->input->post('edit_jenis');
 		$input['id_pinjaman'] 	= $this->input->post('edit_id_pinjaman');
 		$input['angsuran'] 		= $this->input->post('edit_angsuran');
