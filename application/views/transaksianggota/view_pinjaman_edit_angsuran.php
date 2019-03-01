@@ -195,7 +195,14 @@ function rupiah($angka){
                         <label for="exampleInputPassword1">Angsuran</label>
                         <div class="input-group margin-bottom-sm">
                           <span class="input-group-addon">Rp</span>
-                          <input type="text" class="form-control" value="<?php echo $pinjaman->angsuran_perbulan?>" id="angsuran" name="angsuran" placeholder="0">
+                          <?php
+                            if($pinjaman->jenis_pinjaman == "Angsuran") {
+                              $angsuran = $pinjaman->angsuran_perbulan;
+                            } else if($pinjaman->jenis_pinjaman == "Musiman") {
+                              $angsuran = 0;
+                            }
+                          ?>
+                          <input type="text" class="form-control" value="<?php echo $angsuran?>" id="angsuran" name="angsuran" placeholder="0">
                         </div>
                         <div id="label_angsuran" class="alert-danger"></div>
                       </div>

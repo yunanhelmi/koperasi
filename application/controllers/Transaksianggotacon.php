@@ -2346,7 +2346,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['post_detail_simpanandanasosial'] = $this->detailsimpanandanasosialmodel->get_detail_simpanandanasosial_by_id($id_detail_simpanandanasosial);
 
 		if($data['post_detail_simpanandanasosial']->jenis == "Setoran") {
-			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan dana pendidikan & sosial');
+			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan simp dansos anggota');
 			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
 			$bln_thn = strtotime( $data['post_detail_simpananwajib']->bulan_tahun );
@@ -2385,7 +2385,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
 			$this->detailsimpanandanasosialmodel->updateData($id, $update);
 		} else {
-			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan dana pendidikan & sosial');
+			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan simp dansos anggota');
 			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
 			$bln_thn = strtotime( $data['post_detail_simpananwajib']->bulan_tahun );
