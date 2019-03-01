@@ -526,7 +526,7 @@ function rupiah($angka){
                     </form>
                   </div>
                   <div class="box box-danger">
-                    <legend style="text-align:center;">DETAIL SIMPANAN KANZUN</legend>
+                    <legend style="text-align:center;">DETAIL SIMPANAN PIHAK KETIGA</legend>
                     <div class="box-body">
                       <div class="form-group col-xs-4">
                         <label for="exampleInputEmail1">Nama Anggota</label>
