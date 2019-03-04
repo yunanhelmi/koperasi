@@ -333,13 +333,18 @@ class TransaksianggotaCon extends CI_Controller {
 			$this->pinjamanmodel->update_sisa_angsuran($id_pinjaman, $sisa_angsuran);
 		}
 
-		//Updte Jasa Perbulan, Total Angsuran Per Bulan ketik Jenis Pinjaman = 'Musiman'
+		//Updte Jasa Perbulan, Total Angsuran Per Bulan ketika Jenis Pinjaman = 'Musiman'
 		$data['pinjaman'] = $this->pinjamanmodel->get_pinjaman_by_id($id_pinjaman);
 		$sisa_angsuran = $data['pinjaman']->sisa_angsuran;
 		if($data['pinjaman']->jenis_pinjaman == "Musiman") {
 			$jasa_perbulan = ($sisa_angsuran * 3) / 100;
 			$total_angsuran_perbulan = $data['pinjaman']->angsuran_perbulan + $jasa_perbulan;
 			$this->pinjamanmodel->update_jasa_total_angsuran_perbulan($id_pinjaman, $jasa_perbulan, $total_angsuran_perbulan);
+		}
+
+		//Update Jaminan ketika Sisa Pinjaman = 0
+		if($data['pinjaman']->sisa_angsuran == 0) {
+			$this->pinjamanmodel->update_jaminan($id_pinjaman, "");
 		}
 
 		/* UPDATE Jatuh Tempo */
@@ -553,6 +558,11 @@ class TransaksianggotaCon extends CI_Controller {
 			$jasa_perbulan = ($sisa_angsuran * 3) / 100;
 			$total_angsuran_perbulan = $data['pinjaman']->angsuran_perbulan + $jasa_perbulan;
 			$this->pinjamanmodel->update_jasa_total_angsuran_perbulan($id_pinjaman, $jasa_perbulan, $total_angsuran_perbulan);
+		}
+
+		//Update Jaminan ketika Sisa Pinjaman = 0
+		if($data['pinjaman']->sisa_angsuran == 0) {
+			$this->pinjamanmodel->update_jaminan($id_pinjaman, "");
 		}
 
 		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
