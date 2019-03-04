@@ -185,7 +185,8 @@ function rupiah($angka){
                       </div>
                       <div class="form-group col-xs-6">
                         <label for="exampleInputPassword1">Bulan ke-</label>
-                        <input type="text" class="form-control" id="bulan_ke" name="bulan_ke" placeholder="">
+                        <?php $max = $max_bulanke_angsuran + 1;?>
+                        <input type="text" class="form-control" value="<?php echo $max?>" id="bulan_ke" name="bulan_ke" placeholder="">
                       </div>
                       <div class="form-group col-xs-6">
                         <label for="exampleInputPassword1">Bulan-Tahun</label>

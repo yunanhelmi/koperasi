@@ -262,6 +262,7 @@ class TransaksianggotaCon extends CI_Controller {
 
 		$data['pinjaman'] 			= $this->pinjamanmodel->get_pinjaman_by_id($id_pinjaman);
 		$data['detail_angsuran'] 	= $this->detailangsuranmodel->get_detail_angsuran_by_id_pinjaman($id_pinjaman);
+		$data['max_bulanke_angsuran'] = $this->detailangsuranmodel->get_max_bulanke($id_pinjaman);
 		$id_nasabah					= $data['pinjaman']->id_nasabah;
 		$data['nasabah'] 			= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
 		$data['simpananpokok'] 		= $this->simpananpokokmodel->get_simpananpokok_by_id_nasabah($id_nasabah);
@@ -476,6 +477,7 @@ class TransaksianggotaCon extends CI_Controller {
 		}
 		
 		$data['pinjaman'] 				= $this->pinjamanmodel->get_pinjaman_by_id($id_pinjaman);
+		$data['max_bulanke_angsuran'] = $this->detailangsuranmodel->get_max_bulanke($id_pinjaman);
 		$id_nasabah						= $data['pinjaman']->id_nasabah;
 		$data['detail_angsuran'] 		= $this->detailangsuranmodel->get_detail_angsuran_by_id_pinjaman($id_pinjaman);
 		$data['edit_detail_angsuran'] 	= $this->detailangsuranmodel->get_detail_angsuran_by_id($id_detail_angsuran);
