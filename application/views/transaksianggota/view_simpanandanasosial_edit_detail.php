@@ -22,7 +22,7 @@ function rupiah($angka){
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url(); ?>index.php/transaksianggotacon"><i class="fa fa-users"></i> Transaksi Anggota</a></li>
-        <li><a href="<?php echo base_url()."index.php/transaksianggotacon/simpanandanasosial/".$nasabah->id; ?>" ><i class="fa fa-credit-card"></i> Simpanan Dana Sosial</a></li>
+        <li><a href="<?php echo base_url()."index.php/transaksianggotacon/simpanandanasosial/".$nasabah->id; ?>" ><i class="fa fa-credit-card"></i> Simpanan Dansos Anggota</a></li>
         <li class="active"><i class="fa fa-user"></i> Tambah</li>
       </ol>
     </section>
@@ -147,7 +147,7 @@ function rupiah($angka){
             <li><a href="#simpanan_pokok" data-toggle="tab">Simpanan Pokok</a></li>
             <li><a href="#simpanan_wajib" data-toggle="tab">Simpanan Wajib</a></li>
             <li><a href="#simpanan_khusus" data-toggle="tab">Simpanan Khusus</a></li>
-            <li class="active"><a href="#simpanan_dana_sosial" data-toggle="tab">Simpanan Dana Sosial</a></li>
+            <li class="active"><a href="#simpanan_dana_sosial" data-toggle="tab">Simpanan Dansos Anggota</a></li>
             <li><a href="#simpanan_kanzun" data-toggle="tab">Simpanan Kanzun</a></li>
             <!--<li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>-->
             <li><a href="#simpanan_pihak_ketiga" data-toggle="tab">Simpanan Pihak Ketiga</a></li>
@@ -462,7 +462,7 @@ function rupiah($angka){
                     </div>
                     <div class="box-body">
                       <div class="form-group col-xs-6">
-                        <button onclick="tambahDetailSimpananDanaSosial()" type="submit" class="btn btn-success">Tambah Detail Simpanan Dana Sosial</button>
+                        <button onclick="tambahDetailSimpananDanaSosial()" type="submit" class="btn btn-success">Tambah Detail Simpanan Dansos Anggota</button>
                       </div>
                       <div class="form-group col-xs-12">
                       <br>

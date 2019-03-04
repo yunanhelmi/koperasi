@@ -147,7 +147,7 @@ function rupiah($angka){
             <li><a href="#simpanan_pokok" data-toggle="tab">Simpanan Pokok</a></li>
             <li><a href="#simpanan_wajib" data-toggle="tab">Simpanan Wajib</a></li>
             <li class="active"><a href="#simpanan_khusus" data-toggle="tab">Simpanan Khusus</a></li>
-            <li><a href="#simpanan_dana_sosial" data-toggle="tab">Simpanan Dana Sosial</a></li>
+            <li><a href="#simpanan_dana_sosial" data-toggle="tab">Simpanan Dansos Anggota</a></li>
             <li><a href="#simpanan_kanzun" data-toggle="tab">Simpanan Kanzun</a></li>
             <!--<li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>-->
             <li><a href="#simpanan_pihak_ketiga" data-toggle="tab">Simpanan Pihak Ketiga</a></li>
@@ -464,7 +464,7 @@ function rupiah($angka){
             <div class="tab-pane" id="simpanan_dana_sosial">
               <div class="box-header" style="text-align:left" >
                 <h3>
-                  <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksianggotacon/create_simpanandanasosial/".$nasabah->id); ?>">Tambahkan Simpanan Dana Sosial Baru</a>
+                  <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksianggotacon/create_simpanandanasosial/".$nasabah->id); ?>">Tambahkan Simpanan Dansos Anggota Baru</a>
                 </h3>
               </div> 
               <div class="box-body">
