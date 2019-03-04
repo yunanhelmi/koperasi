@@ -184,10 +184,10 @@ function rupiah($angka){
                       <td style='text-align: center'><?php echo $no."."?></td>
                       <td><?php echo $pinjaman[$i]['nama_nasabah']?></td>
                       <?php $waktu = strtotime($pinjaman[$i]['waktu'])?>
-                      <td><?php echo date("d M Y", $waktu)?></td>
+                      <td><?php echo date("d-m-Y", $waktu)?></td>
                       <td><?php echo $pinjaman[$i]['jaminan']?></td>
                       <?php $jatuh_tempo = strtotime($pinjaman[$i]['jatuh_tempo'])?>
-                      <td><?php echo date("d M Y", $jatuh_tempo)?></td>
+                      <td><?php echo date("d-m-Y", $jatuh_tempo)?></td>
                       <td><?php echo rupiah($pinjaman[$i]['jumlah_pinjaman'])?></td>
                       <td><?php echo rupiah($pinjaman[$i]['sisa_angsuran'])?></td>
                       <td><?php echo $pinjaman[$i]['jumlah_angsuran']?></td>
@@ -233,7 +233,7 @@ function rupiah($angka){
                       <td><?php echo $simpananpokok[$i]['nomor_nasabah']?></td>
                       <td><?php echo $simpananpokok[$i]['nik_nasabah']?></td>
                       <?php $date = strtotime($simpananpokok[$i]['waktu']);?>
-                      <td><?php echo date("d-M-Y",$date)?></td>
+                      <td><?php echo date("d-m-Y",$date)?></td>
                       <td><?php echo rupiah($simpananpokok[$i]['jumlah'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpananpokok/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpananpokok/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
@@ -287,7 +287,7 @@ function rupiah($angka){
                       <td><?php echo $simpananwajib[$i]['nomor_nasabah']?></td>
                       <td><?php echo $simpananwajib[$i]['nik_nasabah']?></td>
                       <?php $date = strtotime($simpananwajib[$i]['waktu']);?>
-                      <td><?php echo date("d-M-Y",$date)?></td>
+                      <td><?php echo date("d-m-Y",$date)?></td>
                       <td><?php echo rupiah($simpananwajib[$i]['total'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpananwajib/".$simpananwajib[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpananwajib/".$simpananwajib[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
@@ -330,7 +330,7 @@ function rupiah($angka){
                       <td><?php echo $simpanankhusus[$i]['nomor_nasabah']?></td>
                       <td><?php echo $simpanankhusus[$i]['nik_nasabah']?></td>
                       <?php $date = strtotime($simpanankhusus[$i]['waktu']);?>
-                      <td><?php echo date("d-M-Y",$date)?></td>
+                      <td><?php echo date("d-m-Y",$date)?></td>
                       <td><?php echo rupiah($simpanankhusus[$i]['total'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpanankhusus/".$simpanankhusus[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpanankhusus/".$simpanankhusus[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
@@ -373,7 +373,7 @@ function rupiah($angka){
                       <td><?php echo $simpanandanasosial[$i]['nomor_nasabah']?></td>
                       <td><?php echo $simpanandanasosial[$i]['nik_nasabah']?></td>
                       <?php $date = strtotime($simpanandanasosial[$i]['waktu']);?>
-                      <td><?php echo date("d-M-Y",$date)?></td>
+                      <td><?php echo date("d-m-Y",$date)?></td>
                       <td><?php echo rupiah($simpanandanasosial[$i]['total'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpanandanasosial/".$simpanandanasosial[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpanandanasosial/".$simpanandanasosial[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
@@ -416,7 +416,7 @@ function rupiah($angka){
                       <td><?php echo $simpanankanzun[$i]['nomor_nasabah']?></td>
                       <td><?php echo $simpanankanzun[$i]['nik_nasabah']?></td>
                       <?php $date = strtotime($simpanankanzun[$i]['waktu']);?>
-                      <td><?php echo date("d-M-Y",$date)?></td>
+                      <td><?php echo date("d-m-Y",$date)?></td>
                       <td><?php echo rupiah($simpanankanzun[$i]['total'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpanankanzun/".$simpanankanzun[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpanankanzun/".$simpanankanzun[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
@@ -460,7 +460,7 @@ function rupiah($angka){
                       <td><?php echo $simpanan3th[$i]['nomor_nasabah']?></td>
                       <td><?php echo $simpanan3th[$i]['nik_nasabah']?></td>
                       <?php $date = strtotime($simpanan3th[$i]['waktu']);?>
-                      <td><?php echo date("d-M-Y",$date)?></td>
+                      <td><?php echo date("d-m-Y",$date)?></td>
                       <td><?php echo rupiah($simpanan3th[$i]['total'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpanan3th/".$simpanan3th[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpanan3th/".$simpanan3th[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
@@ -506,7 +506,7 @@ function rupiah($angka){
                       <td><?php echo $simpananpihakketiga[$i]['nomor_nasabah']?></td>
                       <td><?php echo $simpananpihakketiga[$i]['nik']?></td>
                       <?php $date = strtotime($simpananpihakketiga[$i]['waktu']);?>
-                      <td><?php echo date("d-M-Y",$date)?></td>
+                      <td><?php echo date("d-m-Y",$date)?></td>
                       <td><?php echo rupiah($simpananpihakketiga[$i]['total'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpananpihakketiga/".$simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpananpihakketiga/".$simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
