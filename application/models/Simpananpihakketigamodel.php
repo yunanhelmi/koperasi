@@ -31,6 +31,42 @@ class SimpananpihakketigaModel extends CI_Model {
 		$this->db->query("UPDATE `simpananpihakketiga` SET total = '$total' WHERE id = '$id'");
 	}
 
+	function get_data_laporan($dari, $sampai) {
+		$query = $this->db->query("
+									SELECT 
+										simpananpihakketiga.*, 
+										nasabah.alamat as alamat_n, 
+										nasabah.kelurahan as kelurahan_n, 
+										nasabah.dusun as dusun_n, 
+										nasabah.rw as rw_n, 
+										nasabah.rt as rt_n, 
+										SUM(IF(detail_simpananpihakketiga.jenis = 'Setoran', detail_simpananpihakketiga.jumlah, 0)) as jumlah_setoran,
+										SUM(IF(detail_simpananpihakketiga.jenis = 'Tarikan', detail_simpananpihakketiga.jumlah, 0)) as jumlah_tarikan
+									FROM 
+										simpananpihakketiga
+										LEFT JOIN 
+											nasabah 
+										ON 
+											simpananpihakketiga.id_nasabah = nasabah.id
+									LEFT JOIN 
+										(SELECT
+									     	*
+									     FROM
+											detail_simpananpihakketiga
+										WHERE
+											detail_simpananpihakketiga.waktu >= '$dari'
+											AND detail_simpananpihakketiga.waktu <= '$sampai'
+										ORDER BY
+											detail_simpananpihakketiga.waktu DESC) as detail_simpananpihakketiga
+									ON 
+										simpananpihakketiga.id = detail_simpananpihakketiga.id_simpananpihakketiga
+									GROUP BY 
+										simpananpihakketiga.id
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpananpihakketiga`");
 		$a = $query->result_array();

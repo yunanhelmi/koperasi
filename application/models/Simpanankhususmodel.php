@@ -31,6 +31,42 @@ class SimpanankhususModel extends CI_Model {
 		$this->db->query("UPDATE `simpanankhusus` SET total = '$total' WHERE id = '$id'");
 	}
 
+	function get_data_laporan($dari, $sampai) {
+		$query = $this->db->query("
+									SELECT 
+										simpanankhusus.*, 
+										nasabah.alamat, 
+										nasabah.kelurahan, 
+										nasabah.dusun, 
+										nasabah.rw, 
+										nasabah.rt, 
+										SUM(IF(detail_simpanankhusus.jenis = 'Setoran', detail_simpanankhusus.jumlah, 0)) as jumlah_setoran,
+										SUM(IF(detail_simpanankhusus.jenis = 'Tarikan', detail_simpanankhusus.jumlah, 0)) as jumlah_tarikan
+									FROM 
+										simpanankhusus
+										LEFT JOIN 
+											nasabah 
+										ON 
+											simpanankhusus.id_nasabah = nasabah.id
+									LEFT JOIN 
+										(SELECT
+									     	*
+									     FROM
+											detail_simpanankhusus
+										WHERE
+											detail_simpanankhusus.waktu >= '$dari'
+											AND detail_simpanankhusus.waktu <= '$sampai'
+										ORDER BY
+											detail_simpanankhusus.waktu DESC) as detail_simpanankhusus
+									ON 
+										simpanankhusus.id = detail_simpanankhusus.id_simpanankhusus
+									GROUP BY 
+										simpanankhusus.id
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpanankhusus`");
 		$a = $query->result_array();

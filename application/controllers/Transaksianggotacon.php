@@ -2129,7 +2129,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$insert['total'] 			= 0;
 		$this->simpanandanasosialmodel->inputData($insert);
 
-		redirect('transaksianggotacon/simpanankhusus/'.$id_nasabah);
+		redirect('transaksianggotacon/simpanandanasosial/'.$id_nasabah);
 	}
 
 	function edit_simpanandanasosial($id_simpanandanasosial) {

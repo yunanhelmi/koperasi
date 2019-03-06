@@ -31,6 +31,42 @@ class SimpanandanasosialModel extends CI_Model {
 		$this->db->query("UPDATE `simpanandanasosial` SET total = '$total' WHERE id = '$id'");
 	}
 
+	function get_data_laporan($dari, $sampai) {
+		$query = $this->db->query("
+									SELECT 
+										simpanandanasosial.*, 
+										nasabah.alamat, 
+										nasabah.kelurahan, 
+										nasabah.dusun, 
+										nasabah.rw, 
+										nasabah.rt, 
+										SUM(IF(detail_simpanandanasosial.jenis = 'Setoran', detail_simpanandanasosial.jumlah, 0)) as jumlah_setoran,
+										SUM(IF(detail_simpanandanasosial.jenis = 'Tarikan', detail_simpanandanasosial.jumlah, 0)) as jumlah_tarikan
+									FROM 
+										simpanandanasosial
+										LEFT JOIN 
+											nasabah 
+										ON 
+											simpanandanasosial.id_nasabah = nasabah.id
+									LEFT JOIN 
+										(SELECT
+									     	*
+									     FROM
+											detail_simpanandanasosial
+										WHERE
+											detail_simpanandanasosial.waktu >= '$dari'
+											AND detail_simpanandanasosial.waktu <= '$sampai'
+										ORDER BY
+											detail_simpanandanasosial.waktu DESC) as detail_simpanandanasosial
+									ON 
+										simpanandanasosial.id = detail_simpanandanasosial.id_simpanandanasosial
+									GROUP BY 
+										simpanandanasosial.id
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpanandanasosial`");
 		$a = $query->result_array();
