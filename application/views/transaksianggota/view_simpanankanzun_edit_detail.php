@@ -495,7 +495,7 @@ function rupiah($angka){
                         <label for="exampleInputPassword1">Tanggal</label>
                         <?php 
                           $date = strtotime( $simpanankanzun->waktu );
-                          $mydate = date( 'd F Y', $date );
+                          $mydate = date( 'd-m-Y', $date );
                         ?>
                         <p><?php echo $mydate;?></p>
                       </div>
@@ -537,7 +537,7 @@ function rupiah($angka){
                             <td style='text-align: center'><?php echo $no."."?></td>
                             <?php 
                               $date = strtotime( $detail_simpanankanzun[$i]['waktu'] );
-                              $tanggal = date( 'd F Y', $date );
+                              $tanggal = date( 'd-m-Y', $date );
                               $bln_thn = strtotime( $detail_simpanankanzun[$i]['bulan_tahun'] );
                               $bulan_tahun = date( 'M-Y', $bln_thn );
                             ?>

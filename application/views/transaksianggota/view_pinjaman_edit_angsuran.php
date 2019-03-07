@@ -160,7 +160,7 @@ function rupiah($angka){
                <div class="col-md-12 pull-left">
                   <?php 
                     $date = strtotime( $pinjaman->waktu );
-                    $mydate = date( 'd F Y', $date );
+                    $mydate = date( 'd-m-Y', $date );
                   ?>
                   <div class="box box-danger" id="div_tambah_angsuran" style="display:none">
                     <legend style="text-align:center;">TAMBAH ANGSURAN</legend>
@@ -336,7 +336,7 @@ function rupiah($angka){
                           <label for="exampleInputPassword1">Tanggal Pinjaman</label>
                           <?php 
                             $date = strtotime( $pinjaman->waktu );
-                            $mydate = date( 'd F Y', $date );
+                            $mydate = date( 'd-m-Y', $date );
                           ?>
                           <p><?php echo $mydate;?></p>
                         </div>
@@ -344,7 +344,7 @@ function rupiah($angka){
                           <label for="exampleInputPassword1">Tanggal Jatuh Tempo</label>
                           <?php 
                             $jatuh_tempo = strtotime( $pinjaman->jatuh_tempo );
-                            $jatuh_tempo1 = date( 'd F Y', $jatuh_tempo );
+                            $jatuh_tempo1 = date( 'd-m-Y', $jatuh_tempo );
                           ?>
                           <p><?php echo $jatuh_tempo1;?></p>
                         </div>
@@ -408,7 +408,7 @@ function rupiah($angka){
                             <td style='text-align: center'><?php echo $no."."?></td>
                           <?php 
                           $waktu = strtotime( $detail_angsuran[$i]['waktu'] );
-                          $wkt = date( 'd F Y', $waktu );
+                          $wkt = date( 'd-m-Y', $waktu );
                           ?>
                           <td><?php echo $wkt?></td>
                           <?php if($detail_angsuran[$i]['jenis'] == "Pinjaman") {?>
