@@ -215,6 +215,49 @@
 						</div>  
 					</form>
     			</div>
+    			<div class="box box-danger">
+    				<legend style="text-align:center;">LAPORAN SIMPANAN 3 TH</legend>
+    				<form action="<?php echo base_url();?>index.php/laporansimpanancon/excel_simpanan3th" method="post" enctype="multipart/form-data" role="form">
+						<div class="box-body">
+							<div class="form-group col-xs-3">
+			                  <label for="exampleInputEmail1">Nama Simpanan 3Th</label>
+			                  <select id="id_master" name="id_master" class="form-control select2" style="width: 100%;">
+			                    <option></option>
+			                    <?php 
+			                      for($i=0; $i<sizeof($simpanan3thmaster); $i++) {
+			                        echo '<option value="'.$simpanan3thmaster[$i]['id'].'">'.$simpanan3thmaster[$i]['nama'].'</option>';
+			                      }
+			                    ?>
+			                  </select>
+			                </div>
+							<div class="form-group col-xs-3">
+								<label for="exampleInputPassword1">Dari</label>
+								<div class="input-group date">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<input type="text" class="form-control pull-right" name="dari_simpanan3th" id="dari_simpanan3th" value="" data-date-format="dd-mm-yyyy">
+								</div>
+							</div>
+							<div class="form-group col-xs-3">
+								<label for="exampleInputPassword1">Sampai</label>
+								<div class="input-group date">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<input type="text" class="form-control pull-right" name="sampai_simpanan3th" id="sampai_simpanan3th" value="" data-date-format="dd-mm-yyyy">
+								</div>
+							</div>
+			            </div>
+			            <div class="box-footer">
+							<div class="col-xs-3">
+				            	<div class="form-group pull-left">
+									<button type="submit" class="btn btn-success" name="excel"><i class="fa fa-file-excel-o"></i> Download Excel</button>
+								</div>
+							</div>
+						</div>  
+					</form>
+    			</div>
     		</div>
     	</div>
     </section>
@@ -259,6 +302,9 @@ $(document).ready(function() {
 
 	$('#dari_simpananpihakketiga').datepicker({}).on('changeDate', function(ev){});
 	$('#sampai_simpananpihakketiga').datepicker({}).on('changeDate', function(ev){});
+
+	$('#dari_simpanan3th').datepicker({}).on('changeDate', function(ev){});
+	$('#sampai_simpanan3th').datepicker({}).on('changeDate', function(ev){});
 });
 
 </script>

@@ -17,7 +17,8 @@ class LaporanSimpananCon extends CI_Controller {
 		$this->load->model('detailsimpanandanasosialmodel');
 		$this->load->model('simpanankanzunmodel');
 		$this->load->model('detailsimpanankanzunmodel');
-		$this->load->model('simpanan3thmodel');
+		$this->load->model('simpanan3thmastermodel');
+        $this->load->model('simpanan3thmodel');
 		$this->load->model('detailsimpanan3thmodel');
 		$this->load->model('simpananpihakketigamodel');
 		$this->load->model('detailsimpananpihakketigamodel');
@@ -34,9 +35,10 @@ class LaporanSimpananCon extends CI_Controller {
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
-		$data['username'] 	= $session_data['username'];
-		$data['status'] 	= $session_data['status'];
-		$data['nasabah'] 	= $this->nasabahmodel->showData();
+		$data['username']         = $session_data['username'];
+		$data['status']           = $session_data['status'];
+		$data['nasabah'] 	        = $this->nasabahmodel->showData();
+        $data['simpanan3thmaster']  = $this->simpanan3thmastermodel->showData();
 		
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/laporan/simpanan', $data);
@@ -693,6 +695,134 @@ class LaporanSimpananCon extends CI_Controller {
         $sheet  ->getStyle ( "A".$border_start.":H".$border_end )->applyFromArray ($thin);
 
         $filename = "Laporan Simpanan Pihak Ketiga_".$tgl_dari1."_".$tgl_sampai1.".xlsx";
+
+        header ( 'Content-Type: application/vnd.ms-excel' );
+        header ( 'Content-Disposition: attachment;filename="'.$filename.'"' );
+        header ( 'Cache-Control: max-age=0' );
+        $writer = PHPExcel_IOFactory::createWriter ( $file, 'Excel2007' );
+        $writer->save ( 'php://output' );
+        return;
+    }
+
+    function excel_simpanan3th() {
+        $session_data = $this->session->userdata('logged_in');
+        if($session_data == NULL) {
+            redirect("usercon/login", "refresh");
+        }
+
+        $tgl_dari1  = $this->input->post('dari_simpanan3th');
+        $tgl_dari   = strtotime($tgl_dari1);
+        $dari       = date("Y-m-d",$tgl_dari);
+
+        $tgl_sampai1    = $this->input->post('sampai_simpanan3th');
+        $tgl_sampai     = strtotime($tgl_sampai1);
+        $sampai         = date("Y-m-d",$tgl_sampai);
+
+        $id_master  = $this->input->post('id_master');
+
+        $data = $this->simpanan3thmodel->get_data_laporan($id_master, $dari, $sampai);
+
+        /*echo "<pre>";
+        var_dump($data);
+        echo "</pre>";*/
+
+        $title = strtoupper($data[0]['nama_simpanan']);
+        $file = new PHPExcel ();
+        $file->getProperties ()->setCreator ( "YHM" );
+        $file->getProperties ()->setLastModifiedBy ( "System" );
+        $file->getProperties ()->setTitle ( $title );
+        $file->getProperties ()->setSubject ( $title );
+        $file->getProperties ()->setDescription ( $title );
+        $file->getProperties ()->setKeywords ( $title );
+        $file->getProperties ()->setCategory ( $title );
+
+        $sheet = $file->getActiveSheet ();
+        $i = 2;
+
+        $sheet->mergeCells("A".$i.":K".$i)->setCellValue("A".$i, "KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYYAH");
+        $sheet->getStyle("A".$i.":K".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":K".$i)->getFont()->setSize(14)->setBold(true);
+        $i++;
+        $sheet->mergeCells("A".$i.":K".$i)->setCellValue("A".$i, $title." ".$tgl_dari1." - ".$tgl_sampai1);
+        $sheet->getStyle("A".$i.":K".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":K".$i)->getFont()->setSize(12)->setBold(true);
+        $i++;
+        $sheet->mergeCells("A".$i.":K".$i)->setCellValue("A".$i, "KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYYAH");
+        $sheet->getStyle("A".$i.":K".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":K".$i)->getFont()->setSize(10)->setBold(true);
+        $i++;
+        $sheet->mergeCells("A".$i.":K".$i)->setCellValue("A".$i, "NGRASEH DANDER BOJONEGORO  TELP (0353) 886039       BH : 8181/BH/II/95");
+        $sheet->getStyle("A".$i.":K".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":K".$i)->getFont()->setSize(10)->setBold(true);
+        $i += 2;
+
+        $border_start = $i;
+        $sheet->setCellValue("A".$i, "NO");
+        $sheet->setCellValue("B".$i, "NAMA");
+        $sheet->setCellValue("C".$i, "ALAMAT");
+        $sheet->setCellValue("D".$i, "DESA");
+        $sheet->setCellValue("E".$i, "DUSUN");
+        $sheet->setCellValue("F".$i, "RW");
+        $sheet->setCellValue("G".$i, "RT");
+        $sheet->setCellValue("H".$i, "JUMLAH SIMPANAN");
+        $sheet->setCellValue("I".$i, "JUMLAH PENYESUAIAN JASA");
+        $sheet->setCellValue("J".$i, "JUMLAH PENCAIRAN HUTANG JASA");
+        $sheet->setCellValue("K".$i, "JUMLAH PEMBAYARAN BIAYA JASA");
+        $sheet->getStyle("A".$i.":K".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":K".$i)->getFont()->setBold(true);
+        $i++;
+
+        $no = 1;
+        $total = 0;
+        $total_penyesuaian_jasa = 0;
+        $total_pencairan_hutang_jasa = 0;
+        $total_pembayaran_biaya_jasa = 0;
+
+        for($a = 0; $a < sizeof($data); $a++) {
+            $sheet->setCellValue("A".$i, $no);
+            $sheet->setCellValue("B".$i, $data[$a]['nama_nasabah']);
+            $sheet->setCellValue("C".$i, $data[$a]['alamat']);
+            $sheet->setCellValue("D".$i, $data[$a]['kelurahan']);
+            $sheet->setCellValue("E".$i, $data[$a]['dusun']);
+            $sheet->setCellValue("F".$i, $data[$a]['rw']);
+            $sheet->setCellValue("G".$i, $data[$a]['rt']);
+            $jumlah = $data[$a]['jumlah_setoran'] - $data[$a]['jumlah_tarikan'];
+            $sheet->setCellValue("H".$i, $jumlah);
+            $sheet->setCellValue("I".$i, $data[$a]['jumlah_penyesuaian_jasa']);
+            $sheet->setCellValue("J".$i, $data[$a]['jumlah_pencairan_hutang_jasa']);
+            $sheet->setCellValue("K".$i, $data[$a]['jumlah_pembayaran_biaya_jasa']);
+            $sheet->getStyle("H".$i.":K".$i)->getNumberFormat()->setFormatCode('#,##0');
+            $sheet->getStyle("A".$i.":G".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+            $total += $jumlah;
+            $total_penyesuaian_jasa += $data[$a]['jumlah_penyesuaian_jasa'];
+            $total_pencairan_hutang_jasa += $data[$a]['jumlah_pencairan_hutang_jasa'];
+            $total_pembayaran_biaya_jasa += $data[$a]['jumlah_pembayaran_biaya_jasa'];
+            $no++;
+            $i++;
+        }
+
+        $sheet->mergeCells("A".$i.":G".$i)->setCellValue("A".$i, "TOTAL");
+        $sheet->setCellValue("H".$i, $total);
+        $sheet->setCellValue("I".$i, $total_penyesuaian_jasa);
+        $sheet->setCellValue("J".$i, $total_pencairan_hutang_jasa);
+        $sheet->setCellValue("K".$i, $total_pembayaran_biaya_jasa);
+        $sheet->getStyle("H".$i.":K".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":K".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":G".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $border_end = $i;
+
+        foreach(range('A','K') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
+
+        $thin = array ();
+        $thin['borders']=array();
+        $thin['borders']['allborders']=array();
+        $thin['borders']['allborders']['style']=PHPExcel_Style_Border::BORDER_THIN ;
+        $sheet  ->getStyle ( "A".$border_start.":K".$border_end )->applyFromArray ($thin);
+
+        $filename = $title."_".$tgl_dari1."_".$tgl_sampai1.".xlsx";
 
         header ( 'Content-Type: application/vnd.ms-excel' );
         header ( 'Content-Disposition: attachment;filename="'.$filename.'"' );
