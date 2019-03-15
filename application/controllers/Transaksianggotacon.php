@@ -1073,7 +1073,12 @@ class TransaksianggotaCon extends CI_Controller {
 		$id_nasabah 				= $data['simpananpokok']->id_nasabah;
 
 		if($data['simpananpokok']->jenis == "Setoran") {
-			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan simp pokok');
+			if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "1") {
+				$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan simp pokok');	
+			} else if (substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "2") {
+				$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan simp pokok istimewa');
+			}
+			
 			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
 
@@ -1082,7 +1087,12 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 		= $data['simpananpokok']->waktu;
 			$data_debet['kode_akun'] 	= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 	= $debet->nama_akun;
-			$data_debet['keterangan'] 	= "Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+			if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "1") {
+				$data_debet['keterangan'] 	= "Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;	
+			} else if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "2") {
+				$data_debet['keterangan'] 	= "Simpanan Pokok Istimewa a.n. ".$data['simpananpokok']->nama_nasabah." Nomor: ".$data['simpananpokok']->nomor_nasabah;
+			}
+			
 			$data_debet['jumlah'] 		= $data['simpananpokok']->jumlah;
 			$data_debet['debet'] 		= $data['simpananpokok']->jumlah;
 			$data_debet['kredit'] 		= 0;
@@ -1093,7 +1103,11 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 	= $data['simpananpokok']->waktu;
 			$data_kredit['kode_akun'] 	= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 	= $kredit->nama_akun;
-			$data_kredit['keterangan'] 	= "Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+			if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "1") {
+				$data_kredit['keterangan'] 	= "Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+			} else if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "2") {
+				$data_kredit['keterangan'] 	= "Simpanan Pokok Istimewa a.n. ".$data['simpananpokok']->nama_nasabah." Nomor: ".$data['simpananpokok']->nomor_nasabah;
+			}
 			$data_kredit['jumlah'] 		= $data['simpananpokok']->jumlah;
 			$data_kredit['debet'] 		= 0;
 			$data_kredit['kredit'] 		= $data['simpananpokok']->jumlah;
@@ -1113,7 +1127,12 @@ class TransaksianggotaCon extends CI_Controller {
 			$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
 			$this->simpananpokokmodel->updateData($id, $update);
 		} else {
-			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan simpanan pokok');
+			if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "1") {
+				$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan simpanan pokok');
+			} else if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "2") {
+				$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan simp pokok istimewa');
+			}
+			
 			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
 
@@ -1122,7 +1141,11 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 		= $data['simpananpokok']->waktu;
 			$data_debet['kode_akun'] 	= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 	= $debet->nama_akun;
-			$data_debet['keterangan'] 	= "Pencairan Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+			if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "1") {
+				$data_debet['keterangan'] 	= "Pencairan Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+			} else if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "2") {
+				$data_debet['keterangan'] 	= "Pencairan Simpanan Pokok Istimewa a.n. ".$data['simpananpokok']->nama_nasabah." Nomor : ".$data['simpananpokok']->nomor_nasabah;
+			}
 			$data_debet['jumlah'] 		= $data['simpananpokok']->jumlah;
 			$data_debet['debet'] 		= $data['simpananpokok']->jumlah;
 			$data_debet['kredit'] 		= 0;
@@ -1133,7 +1156,11 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 	= $data['simpananpokok']->waktu;
 			$data_kredit['kode_akun'] 	= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 	= $kredit->nama_akun;
-			$data_kredit['keterangan'] 	= "Pencairan Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+			if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "1") {
+				$data_kredit['keterangan'] 	= "Pencairan Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+			} else if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "2") {
+				$data_kredit['keterangan'] 	= "Pencairan Simpanan Pokok Istimewa a.n. ".$data['simpananpokok']->nama_nasabah." Nomor: ".$data['simpananpokok']->nomor_nasabah;
+			}
 			$data_kredit['jumlah'] 		= $data['simpananpokok']->jumlah;
 			$data_kredit['debet'] 		= 0;
 			$data_kredit['kredit'] 		= $data['simpananpokok']->jumlah;

@@ -22,7 +22,17 @@ function rupiah($angka){
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url(); ?>index.php/transaksianggotacon"><i class="fa fa-users"></i> Transaksi Anggota</a></li>
+        <?php
+          if(substr($nasabah->nomor_koperasi, 0, 1) == "1") {
+        ?>
         <li><a href="<?php echo base_url()."index.php/transaksianggotacon/simpananpokok/".$nasabah->id; ?>" ><i class="fa fa-credit-card"></i> Simpanan Pokok</a></li>
+        <?php
+          } else if(substr($nasabah->nomor_koperasi, 0, 1) == "2") {
+        ?>
+        <li><a href="<?php echo base_url()."index.php/transaksianggotacon/simpananpokok/".$nasabah->id; ?>" ><i class="fa fa-credit-card"></i> Simpanan Pokok Istimewa</a></li>
+        <?php
+          }
+        ?> 
         <li class="active"><i class="fa fa-user"></i> View</li>
       </ol>
     </section>
@@ -144,7 +154,17 @@ function rupiah($angka){
         <div class="nav-tabs-custom">
           <ul class="nav nav-tabs">
             <li><a href="#pinjaman" data-toggle="tab">Pinjaman</a></li>
+            <?php
+              if(substr($nasabah->nomor_koperasi, 0, 1) == "1") {
+            ?>
             <li class="active"><a href="#simpanan_pokok" data-toggle="tab">Simpanan Pokok</a></li>
+            <?php
+              } else if(substr($nasabah->nomor_koperasi, 0, 1) == "2") {
+            ?>
+            <li class="active"><a href="#simpanan_pokok" data-toggle="tab">Simpanan Pokok Istimewa</a></li>
+            <?php
+              }
+            ?>
             <li><a href="#simpanan_wajib" data-toggle="tab">Simpanan Wajib</a></li>
             <li><a href="#simpanan_khusus" data-toggle="tab">Simpanan Khusus</a></li>
             <li><a href="#simpanan_dana_sosial" data-toggle="tab">Simpanan Dansos Anggota</a></li>

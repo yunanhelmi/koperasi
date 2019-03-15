@@ -144,7 +144,17 @@ function rupiah($angka){
         <div class="nav-tabs-custom">
           <ul class="nav nav-tabs">
             <li><a href="#pinjaman" data-toggle="tab">Pinjaman</a></li>
+            <?php
+              if(substr($nasabah->nomor_koperasi, 0, 1) == "1") {
+            ?>
             <li><a href="#simpanan_pokok" data-toggle="tab">Simpanan Pokok</a></li>
+            <?php
+              } else if(substr($nasabah->nomor_koperasi, 0, 1) == "2") {
+            ?>
+            <li><a href="#simpanan_pokok" data-toggle="tab">Simpanan Pokok Istimewa</a></li>
+            <?php
+              }
+            ?>       
             <li><a href="#simpanan_wajib" data-toggle="tab">Simpanan Wajib</a></li>
             <li><a href="#simpanan_khusus" data-toggle="tab">Simpanan Khusus</a></li>
             <li class="active"><a href="#simpanan_dana_sosial" data-toggle="tab">Simpanan Dansos Anggota</a></li>
@@ -204,7 +214,17 @@ function rupiah($angka){
             <div class="tab-pane" id="simpanan_pokok">
               <div class="box-header" style="text-align:left" >
                 <h3>
+                  <?php
+                    if(substr($nasabah->nomor_koperasi, 0, 1) == "1") {
+                  ?>
                   <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksianggotacon/create_simpananpokok/".$nasabah->id); ?>">Tambahkan Simpanan Pokok Baru</a>
+                  <?php
+                    } else if(substr($nasabah->nomor_koperasi, 0, 1) == "2") {
+                  ?>
+                  <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksianggotacon/create_simpananpokok/".$nasabah->id); ?>">Tambahkan Simpanan Pokok Istimewa Baru</a>
+                  <?php
+                    }
+                  ?>     
                 </h3>
               </div> 
               <div class="box-body">

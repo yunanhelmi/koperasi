@@ -34,7 +34,7 @@ class KodeAkunModel extends CI_Model {
 	}
 
 	function showData() {
-		$query = $this->db->query("SELECT * from `kode_akun`");
+		$query = $this->db->query("SELECT * from `kode_akun` ORDER BY `kode_akun`");
 		$a = $query->result_array();
 		return $a;
 	}
