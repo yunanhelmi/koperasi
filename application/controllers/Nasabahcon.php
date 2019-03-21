@@ -288,6 +288,107 @@ class NasabahCon extends CI_Controller {
 
 		echo $nomor_nasabah;
 	}
+
+	function excel() {
+		$session_data = $this->session->userdata('logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		$nasabah 	= $this->nasabahmodel->showData();
+
+		/*echo "<pre>";
+		var_dump($nasabah);
+		echo "</pre>";*/
+
+		$file = new PHPExcel ();
+        $file->getProperties ()->setCreator ( "YHM" );
+        $file->getProperties ()->setLastModifiedBy ( "System" );
+        $file->getProperties ()->setTitle ( "Laporan Neraca" );
+        $file->getProperties ()->setSubject ( "Laporan Neraca" );
+        $file->getProperties ()->setDescription ( "Laporan Neraca" );
+        $file->getProperties ()->setKeywords ( "Laporan Neraca" );
+        $file->getProperties ()->setCategory ( "Laporan Neraca" );
+        
+        $sheet = $file->getActiveSheet ();
+        $i = 2;
+
+        $sheet->mergeCells("A".$i.":M".$i)->setCellValue("A".$i, "KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYYAH");
+        $sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":M".$i)->getFont()->setSize(14)->setBold(true);
+        $i++;
+        $sheet->mergeCells("A".$i.":M".$i)->setCellValue("A".$i, "DAFTAR ANGGOTA");
+        $sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":M".$i)->getFont()->setSize(12)->setBold(true);
+        $i++;
+        $sheet->mergeCells("A".$i.":M".$i)->setCellValue("A".$i, "KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYYAH");
+        $sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":M".$i)->getFont()->setSize(10)->setBold(true);
+        $i++;
+        $sheet->mergeCells("A".$i.":M".$i)->setCellValue("A".$i, "NGRASEH DANDER BOJONEGORO  TELP (0353) 886039       BH : 8181/BH/II/95");
+        $sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":M".$i)->getFont()->setSize(10)->setBold(true);
+        $i += 2;
+
+        $border_start = $i;
+        $sheet->setCellValue("A".$i, "NO.");
+        $sheet->setCellValue("B".$i, "NAMA");
+        $sheet->setCellValue("C".$i, "NOMOR NASABAH");
+        $sheet->setCellValue("D".$i, "NIK");
+        $sheet->setCellValue("E".$i, "ALAMAT");
+        $sheet->setCellValue("F".$i, "RT");
+        $sheet->setCellValue("G".$i, "RW");
+        $sheet->setCellValue("H".$i, "DUSUN");
+        $sheet->setCellValue("I".$i, "DESA / KELURAHAN");
+        $sheet->setCellValue("J".$i, "KECAMATAN");
+        $sheet->setCellValue("K".$i, "KABUPATEN / KOTA");
+        $sheet->setCellValue("L".$i, "NO. TELP");
+        $sheet->setCellValue("M".$i, "PEKERJAAN");
+        $sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":M".$i)->getFont()->setBold(true);
+        $i++;
+
+        $no = 1;
+        for($a = 0; $a < sizeof($nasabah); $a++) {
+        	$sheet->setCellValue("A".$i, $no);
+        	$sheet->setCellValue("B".$i, $nasabah[$a]['nama']);
+        	$sheet->setCellValue("C".$i, $nasabah[$a]['nomor_koperasi']);
+        	$sheet->setCellValue("D".$i, $nasabah[$a]['nik']);
+        	$sheet->setCellValue("E".$i, $nasabah[$a]['alamat']);
+        	$sheet->setCellValue("F".$i, $nasabah[$a]['rt']);
+        	$sheet->setCellValue("G".$i, $nasabah[$a]['rw']);
+        	$sheet->setCellValue("H".$i, $nasabah[$a]['dusun']);
+        	$sheet->setCellValue("I".$i, $nasabah[$a]['kelurahan']);
+        	$sheet->setCellValue("J".$i, $nasabah[$a]['kecamatan']);
+        	$sheet->setCellValue("K".$i, $nasabah[$a]['kota']);
+        	$sheet->setCellValue("L".$i, $nasabah[$a]['telpon']);
+        	$sheet->setCellValue("M".$i, $nasabah[$a]['pekerjaan']);
+        	$sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        	$no++;
+            $i++;
+        }
+
+        $border_end = $i - 1;
+
+        foreach(range('A','M') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
+
+        $thin = array ();
+        $thin['borders']=array();
+        $thin['borders']['allborders']=array();
+        $thin['borders']['allborders']['style']=PHPExcel_Style_Border::BORDER_THIN ;
+        $sheet  ->getStyle ( "A".$border_start.":M".$border_end )->applyFromArray ($thin);
+
+        $filename = "Laporan Daftar Anggota.xlsx";
+
+        header ( 'Content-Type: application/vnd.ms-excel' );
+        header ( 'Content-Disposition: attachment;filename="'.$filename.'"' );
+        header ( 'Cache-Control: max-age=0' );
+        $writer = PHPExcel_IOFactory::createWriter ( $file, 'Excel2007' );
+        $writer->save ( 'php://output' );
+        return;
+	}
 }
 
 ?>

@@ -26,6 +26,11 @@
               <h3>
                 <a class="btn btn-primary btn-success" href="<?php echo site_url("nasabahcon/create_nasabah"); ?>">Tambahkan Anggota Baru</a>
               </h3>
+              <h3>
+                <form action="<?php echo base_url();?>index.php/nasabahcon/excel" method="post" enctype="multipart/form-data" role="form">
+                  <button type="submit" class="btn btn-info" name="excel"><i class="fa fa-file-excel-o"></i> Download Excel</button>
+                </form>
+              </h3>
             </div>  
             <div class="box-body">
               <table id="nasabah_table" class="table table-bordered table-hover"  width="100%">
