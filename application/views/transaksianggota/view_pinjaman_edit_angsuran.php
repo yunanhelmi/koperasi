@@ -396,9 +396,9 @@ function rupiah($angka){
                             <th>Keterangan</th>
                             <th>Debet</th>
                             <th>Kredit</th>
-                            <th>Sisa Pinjaman</th>
                             <th>Jasa</th>
                             <th>Jasa Tambahan</th>
+                            <th>Sisa Pinjaman</th>
                             <th>Edit</th>
                             <th>Delete</th>
                             <th>Post</th>
@@ -456,9 +456,9 @@ function rupiah($angka){
                           <?php }
                           $sisa_pinjaman[$i] = $total_kredit - $total_debet;
                           ?>
-                          <td style='text-align: right'><?php echo "Rp " . number_format($sisa_pinjaman[$i],2,',','.');?></td>
                           <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['jasa'],2,',','.');?></td>
                           <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['denda'],2,',','.');?></td>
+                          <td style='text-align: right'><?php echo "Rp " . number_format($sisa_pinjaman[$i],2,',','.');?></td>
                           <?php 
                             $total_jasa += $detail_angsuran[$i]['jasa'];
                             $total_denda += $detail_angsuran[$i]['denda'];
@@ -482,9 +482,9 @@ function rupiah($angka){
                             <td colspan='3'><strong>TOTAL</strong></td>
                             <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_debet,2,',','.');?></strong></td>
                             <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_kredit,2,',','.');?></strong></td>
-                            <td></td>
                             <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_jasa,2,',','.');?></strong></td>
                             <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_denda,2,',','.');?></strong></td>
+                            <td></td>
                           </tr>
                         </tbody>
                       </table>
