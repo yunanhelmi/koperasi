@@ -51,6 +51,28 @@ class PinjamanModel extends CI_Model {
 		$this->db->query("UPDATE `pinjaman` SET jaminan = '$jaminan' WHERE id = '$id'");
 	}
 
+	function get_data_laporan_harian($tanggal) {
+		$query = $this->db->query("
+									SELECT 
+										detail_angsuran.*, 
+										pinjaman.nama_nasabah,
+										pinjaman.nomor_nasabah,
+										pinjaman.nik_nasabah
+									FROM 
+										detail_angsuran
+										LEFT JOIN 
+											pinjaman
+										ON 
+											detail_angsuran.id_pinjaman = pinjaman.id
+									WHERE
+										detail_angsuran.waktu = '$tanggal'
+									ORDER BY
+										detail_angsuran.id
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `pinjaman`");
 		$a = $query->result_array();

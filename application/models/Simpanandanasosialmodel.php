@@ -67,6 +67,28 @@ class SimpanandanasosialModel extends CI_Model {
 		return $a;
 	}
 
+	function get_data_laporan_harian($tanggal) {
+		$query = $this->db->query("
+									SELECT 
+										detail_simpanandanasosial.*, 
+										simpanandanasosial.nama_nasabah,
+										simpanandanasosial.nomor_nasabah,
+										simpanandanasosial.nik_nasabah
+									FROM 
+										detail_simpanandanasosial
+										LEFT JOIN 
+											simpanandanasosial
+										ON
+											detail_simpanandanasosial.id_simpanandanasosial = simpanandanasosial.id
+									WHERE
+										detail_simpanandanasosial.waktu = '$tanggal'
+									ORDER BY
+										detail_simpanandanasosial.id
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpanandanasosial`");
 		$a = $query->result_array();

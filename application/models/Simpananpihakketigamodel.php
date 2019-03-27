@@ -67,6 +67,28 @@ class SimpananpihakketigaModel extends CI_Model {
 		return $a;
 	}
 
+	function get_data_laporan_harian($tanggal) {
+		$query = $this->db->query("
+									SELECT 
+										detail_simpananpihakketiga.*, 
+										simpananpihakketiga.nama,
+										simpananpihakketiga.nomor_nasabah,
+										simpananpihakketiga.nik
+									FROM 
+										detail_simpananpihakketiga
+										LEFT JOIN 
+											simpananpihakketiga
+										ON
+											detail_simpananpihakketiga.id_simpananpihakketiga = simpananpihakketiga.id
+									WHERE
+										detail_simpananpihakketiga.waktu = '$tanggal'
+									ORDER BY
+										detail_simpananpihakketiga.id
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpananpihakketiga`");
 		$a = $query->result_array();

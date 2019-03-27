@@ -67,6 +67,28 @@ class SimpananwajibModel extends CI_Model {
 		return $a;
 	}
 
+	function get_data_laporan_harian($tanggal) {
+		$query = $this->db->query("
+									SELECT 
+										detail_simpananwajib.*, 
+										simpananwajib.nama_nasabah,
+										simpananwajib.nomor_nasabah,
+										simpananwajib.nik_nasabah
+									FROM 
+										detail_simpananwajib
+										LEFT JOIN 
+											simpananwajib
+										ON 
+											detail_simpananwajib.id_simpananwajib = simpananwajib.id
+									WHERE
+										detail_simpananwajib.waktu = '$tanggal'
+									ORDER BY
+										detail_simpananwajib.id
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpananwajib`");
 		$a = $query->result_array();

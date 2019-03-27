@@ -94,6 +94,29 @@ class Simpanan3thModel extends CI_Model {
 		return $a;
 	}
 
+	function get_data_laporan_harian($tanggal) {
+		$query = $this->db->query("
+									SELECT 
+										detail_simpanan3th.*, 
+										simpanan3th.nama_simpanan,
+										simpanan3th.nama_nasabah,
+										simpanan3th.nomor_nasabah,
+										simpanan3th.nik_nasabah
+									FROM 
+										detail_simpanan3th
+										LEFT JOIN 
+											simpanan3th
+										ON
+											detail_simpanan3th.id_simpanan3th = simpanan3th.id
+									WHERE
+										detail_simpanan3th.waktu = '$tanggal'
+									ORDER BY
+										detail_simpanan3th.id
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpanan3th`");
 		$a = $query->result_array();

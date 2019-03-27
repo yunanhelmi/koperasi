@@ -67,6 +67,28 @@ class SimpanankanzunModel extends CI_Model {
 		return $a;
 	}
 
+	function get_data_laporan_harian($tanggal) {
+		$query = $this->db->query("
+									SELECT 
+										detail_simpanankanzun.*, 
+										simpanankanzun.nama_nasabah,
+										simpanankanzun.nomor_nasabah,
+										simpanankanzun.nik_nasabah
+									FROM 
+										detail_simpanankanzun
+										LEFT JOIN 
+											simpanankanzun
+										ON
+											detail_simpanankanzun.id_simpanankanzun = simpanankanzun.id
+									WHERE
+										detail_simpanankanzun.waktu = '$tanggal'
+									ORDER BY
+										detail_simpanankanzun.id
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpanankanzun`");
 		$a = $query->result_array();

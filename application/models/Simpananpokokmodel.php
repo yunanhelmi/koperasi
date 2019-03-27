@@ -46,6 +46,21 @@ class SimpananpokokModel extends CI_Model {
 		return $a;
 	}
 
+	function get_data_laporan_harian($tanggal) {
+		$query = $this->db->query("
+									SELECT 
+										simpananpokok.*
+									FROM 
+										simpananpokok
+									WHERE
+										simpananpokok.waktu = '$tanggal'
+									ORDER BY
+										simpananpokok.id
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpananpokok`");
 		$a = $query->result_array();
