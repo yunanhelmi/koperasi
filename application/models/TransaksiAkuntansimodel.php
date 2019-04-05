@@ -39,6 +39,12 @@ class TransaksiAkuntansiModel extends CI_Model {
 		return $a;
 	}
 
+	function get_jumlah_by_sampai_first_char($sampai, $c) {
+		$query = $this->db->query(" SELECT kode_akun, nama_akun, SUM(debet) as jumlah_debet, SUM(kredit) as jumlah_kredit from `transaksi_akuntansi` WHERE `tanggal` < '$sampai' AND kode_akun LIKE '$c%' GROUP BY kode_akun ");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function inputData($data) {
 		$this->db->insert("transaksi_akuntansi",$data);
 	}

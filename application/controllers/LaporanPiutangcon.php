@@ -209,7 +209,7 @@ class LaporanPiutangCon extends CI_Controller {
                     $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
                 } else {
                     $diff = $today->diff($jatuh_tempo);
-                    $interval = $diff->format('%m');
+                    $interval = ($diff->format('%y') * 12) + $diff->format('%m');
                     if($interval < 3) {
                         $sheet->setCellValue("L".$i, "Hijau");
                         $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
@@ -240,7 +240,7 @@ class LaporanPiutangCon extends CI_Controller {
                     $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
                 } else {
                     $diff = $today->diff($jatuh_tempo);
-                    $interval = $diff->format('%m');
+                    $interval = ($diff->format('%y') * 12) + $diff->format('%m');
                     if($interval < 3) {
                         $sheet->setCellValue("L".$i, "Hijau");
                         $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');

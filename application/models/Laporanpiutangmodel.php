@@ -32,7 +32,6 @@ class LaporanPiutangModel extends CI_Model {
 								WHERE
 									pinjaman.waktu >= '$dari'
 									AND pinjaman.waktu <= '$sampai'
-									AND pinjaman.sisa_angsuran > 0
 								GROUP BY 
 									pinjaman.id
 								");
