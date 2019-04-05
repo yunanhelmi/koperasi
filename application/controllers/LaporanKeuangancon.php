@@ -150,6 +150,10 @@ class LaporanKeuanganCon extends CI_Controller {
 		$tgl_sampai 	= strtotime($tgl_sampai1);
 		$sampai 		= date("Y-m-d",$tgl_sampai);
 
+		$transaksi_prev_aset	= $this->transaksiakuntansimodel->get_jumlah_by_sampai_first_char($dari, '1');
+		$transaksi_prev_hutang	= $this->transaksiakuntansimodel->get_jumlah_by_sampai_first_char($dari, '2');
+		$transaksi_prev_modal	= $this->transaksiakuntansimodel->get_jumlah_by_sampai_first_char($dari, '3');
+
 		$transaksi_aset 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '1');
 		$transaksi_hutang 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '2');
 		$transaksi_modal 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '3');
@@ -162,7 +166,52 @@ class LaporanKeuanganCon extends CI_Controller {
 		$kode_pendapatan 	= $this->kodeakunmodel->get_kode_akun_by_first_char('4');
 		$kode_beban 		= $this->kodeakunmodel->get_kode_akun_by_first_char('5');
 
+		// Sebelum Tanggal Dari
 		$total_aset = 0;
+		for($i = 0; $i < sizeof($kode_aset); $i++) {
+			for($a = 0; $a < sizeof($transaksi_prev_aset); $a++) {
+				if($kode_aset[$i]['kode_akun'] == $transaksi_prev_aset[$a]['kode_akun']) {
+					$kode_aset[$i]['debet'] 	= $transaksi_prev_aset[$a]['jumlah_debet'];
+					$kode_aset[$i]['kredit'] 	= $transaksi_prev_aset[$a]['jumlah_kredit'];
+					if($kode_aset[$i]['kode_akun'] == '105') {
+						$kode_aset[$i]['selisih']	= $transaksi_prev_aset[$a]['jumlah_kredit'] - $transaksi_prev_aset[$a]['jumlah_debet'];
+						$total_aset 				-= $kode_aset[$i]['selisih'];
+					} else {
+						$kode_aset[$i]['selisih']	= $transaksi_prev_aset[$a]['jumlah_debet'] - $transaksi_prev_aset[$a]['jumlah_kredit'];
+						$total_aset 				+= $kode_aset[$i]['selisih'];
+					}
+				}
+			}
+		}
+
+		$total_hutang = 0;
+		for($i = 0; $i < sizeof($kode_hutang); $i++) {
+			for($a = 0; $a < sizeof($transaksi_prev_hutang); $a++) {
+				if($kode_hutang[$i]['kode_akun'] == $transaksi_prev_hutang[$a]['kode_akun']) {
+					$kode_hutang[$i]['debet'] 	= $transaksi_prev_hutang[$a]['jumlah_debet'];
+					$kode_hutang[$i]['kredit'] 	= $transaksi_prev_hutang[$a]['jumlah_kredit'];
+					$kode_hutang[$i]['selisih']	= $transaksi_prev_hutang[$a]['jumlah_kredit'] - $transaksi_prev_hutang[$a]['jumlah_debet'];
+					$total_hutang 				+= $kode_hutang[$i]['selisih'];
+				}
+			}
+		}
+
+		$total_modal = 0;
+		for($i = 0; $i < sizeof($kode_modal); $i++) {
+			if($kode_modal[$i]['kode_akun'] != '305' && $kode_modal[$i]['kode_akun'] != '306') {
+				for($a = 0; $a < sizeof($transaksi_prev_modal); $a++) {
+					if($kode_modal[$i]['kode_akun'] == $transaksi_prev_modal[$a]['kode_akun']) {
+						$kode_modal[$i]['debet'] 	= $transaksi_prev_modal[$a]['jumlah_debet'];
+						$kode_modal[$i]['kredit'] 	= $transaksi_prev_modal[$a]['jumlah_kredit'];
+						$kode_modal[$i]['selisih']	= $transaksi_prev_modal[$a]['jumlah_kredit'] - $transaksi_prev_modal[$a]['jumlah_debet'];
+						$total_modal 				+= $kode_modal[$i]['selisih'];
+					}
+				}		
+			}
+		}
+
+		// Antara Dari dan Sampai
+		//$total_aset = 0;
 		for($i = 0; $i < sizeof($kode_aset); $i++) {
 			for($a = 0; $a < sizeof($transaksi_aset); $a++) {
 				if($kode_aset[$i]['kode_akun'] == $transaksi_aset[$a]['kode_akun']) {
@@ -179,7 +228,7 @@ class LaporanKeuanganCon extends CI_Controller {
 			}
 		}
 
-		$total_hutang = 0;
+		//$total_hutang = 0;
 		for($i = 0; $i < sizeof($kode_hutang); $i++) {
 			for($a = 0; $a < sizeof($transaksi_hutang); $a++) {
 				if($kode_hutang[$i]['kode_akun'] == $transaksi_hutang[$a]['kode_akun']) {
@@ -191,7 +240,7 @@ class LaporanKeuanganCon extends CI_Controller {
 			}
 		}
 
-		$total_modal = 0;
+		//$total_modal = 0;
 		for($i = 0; $i < sizeof($kode_modal); $i++) {
 			for($a = 0; $a < sizeof($transaksi_modal); $a++) {
 				if($kode_modal[$i]['kode_akun'] == $transaksi_modal[$a]['kode_akun']) {
