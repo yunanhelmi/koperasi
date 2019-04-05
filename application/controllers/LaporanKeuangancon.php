@@ -167,7 +167,7 @@ class LaporanKeuanganCon extends CI_Controller {
 		$kode_beban 		= $this->kodeakunmodel->get_kode_akun_by_first_char('5');
 
 		// Sebelum Tanggal Dari
-		$total_aset = 0;
+		/*$total_aset = 0;
 		for($i = 0; $i < sizeof($kode_aset); $i++) {
 			for($a = 0; $a < sizeof($transaksi_prev_aset); $a++) {
 				if($kode_aset[$i]['kode_akun'] == $transaksi_prev_aset[$a]['kode_akun']) {
@@ -208,10 +208,10 @@ class LaporanKeuanganCon extends CI_Controller {
 					}
 				}		
 			}
-		}
+		}*/
 
 		// Antara Dari dan Sampai
-		//$total_aset = 0;
+		$total_aset = 0;
 		for($i = 0; $i < sizeof($kode_aset); $i++) {
 			for($a = 0; $a < sizeof($transaksi_aset); $a++) {
 				if($kode_aset[$i]['kode_akun'] == $transaksi_aset[$a]['kode_akun']) {
@@ -228,7 +228,7 @@ class LaporanKeuanganCon extends CI_Controller {
 			}
 		}
 
-		//$total_hutang = 0;
+		$total_hutang = 0;
 		for($i = 0; $i < sizeof($kode_hutang); $i++) {
 			for($a = 0; $a < sizeof($transaksi_hutang); $a++) {
 				if($kode_hutang[$i]['kode_akun'] == $transaksi_hutang[$a]['kode_akun']) {
@@ -240,7 +240,7 @@ class LaporanKeuanganCon extends CI_Controller {
 			}
 		}
 
-		//$total_modal = 0;
+		$total_modal = 0;
 		for($i = 0; $i < sizeof($kode_modal); $i++) {
 			for($a = 0; $a < sizeof($transaksi_modal); $a++) {
 				if($kode_modal[$i]['kode_akun'] == $transaksi_modal[$a]['kode_akun']) {
