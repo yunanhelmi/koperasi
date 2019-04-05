@@ -30,7 +30,8 @@ class LaporanPiutangModel extends CI_Model {
 								ON 
 									pinjaman.id = detail_angsuran.id_pinjaman
 								WHERE
-									pinjaman.waktu <= '$sampai'
+									pinjaman.waktu >= '$dari'
+									AND pinjaman.waktu <= '$sampai'
 								GROUP BY 
 									pinjaman.id
 								");
