@@ -190,15 +190,15 @@ class LaporanPiutangCon extends CI_Controller {
                 $sheet->setCellValue("J".$i, "1");    
             }
         	$sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        	$sheet->setCellValue("K".$i, $data_piutang[$a]['sisa_angsuran']);
+            $sisa_pinjaman = $data_piutang[$a]['jumlah_pinjaman'] - $data_piutang[$a]['total_jumlah_angsuran'];
+        	$sheet->setCellValue("K".$i, $sisa_pinjaman);
         	$sheet->getStyle("K".$i)->getNumberFormat()->setFormatCode('#,##0');
-        	$total_sisa += $data_piutang[$a]['sisa_angsuran'];
+        	$total_sisa += $sisa_pinjaman;
             if($data_piutang[$a]['jenis_pinjaman'] == 'Angsuran') {
                 // GET Today and Jatuh Tempo
                 if($data_piutang[$a]['jatuh_tempo'] == "0000-00-00" || $data_piutang[$a]['jatuh_tempo'] == NULL) {
                     $today = new DateTime(date("Y-m-d"));
                     $jatuh_tempo = new DateTime($this->addMonths($data_piutang[$a]['waktu'], $data_piutang[$a]['total_angsuran'] + 1));
-                    
                 } else {
                     $today = new DateTime(date("Y-m-d"));
                     $jatuh_tempo = new DateTime($data_piutang[$a]['jatuh_tempo']);

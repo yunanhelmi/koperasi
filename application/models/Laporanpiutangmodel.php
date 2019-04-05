@@ -8,7 +8,7 @@ class LaporanPiutangModel extends CI_Model {
 	function get_data_piutang($dari, $sampai) {
 		$query = $this->db->query("
 								SELECT 
-									pinjaman.*, nasabah.nama, nasabah.alamat, nasabah.kelurahan, nasabah.dusun, nasabah.rw, nasabah.rt, COUNT(detail_angsuran.id) as total_angsuran, MAX(detail_angsuran.waktu) as waktu_terakhir_angsuran
+									pinjaman.*, nasabah.nama, nasabah.alamat, nasabah.kelurahan, nasabah.dusun, nasabah.rw, nasabah.rt, COUNT(detail_angsuran.id) as total_angsuran, SUM(detail_angsuran.angsuran) as total_jumlah_angsuran, MAX(detail_angsuran.waktu) as waktu_terakhir_angsuran
 								FROM 
 									pinjaman
 									LEFT JOIN 
@@ -22,6 +22,9 @@ class LaporanPiutangModel extends CI_Model {
 										detail_angsuran
 									WHERE
 										detail_angsuran.jenis = 'Angsuran'
+										AND detail_angsuran.status_post = '1'
+										AND detail_angsuran.waktu >= '$dari'
+										AND detail_angsuran.waktu <= '$sampai'
 									ORDER BY
 										detail_angsuran.waktu DESC) as detail_angsuran
 								ON 
