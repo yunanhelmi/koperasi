@@ -24,7 +24,7 @@
     	<div class="row">
     		<div class="col-md-12 pull-left">
     			<div class="box box-danger">
-    				<legend style="text-align:center;">LAPORAN SIMPANAN</legend>
+    				<legend style="text-align:center;">LAPORAN PINJAMAN</legend>
     				<form action="<?php echo base_url();?>index.php/laporanpiutangcon/excel" method="post" enctype="multipart/form-data" role="form">
 						<div class="box-body">
 							<div class="form-group col-xs-3">
