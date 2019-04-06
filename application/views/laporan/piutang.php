@@ -16,7 +16,7 @@
       </h1>
       <ol class="breadcrumb">
         <li> <i class="fa fa-book"></i> Laporan</li>
-        <li class="active"><a href="<?php echo base_url(); ?>index.php/laporanpiutangcon/index"><i class="fa fa-book"></i> Piutang</a></li>
+        <li class="active"><a href="<?php echo base_url(); ?>index.php/laporanpiutangcon/index"><i class="fa fa-book"></i> Simpanan</a></li>
       </ol>
     </section>
 
@@ -24,7 +24,7 @@
     	<div class="row">
     		<div class="col-md-12 pull-left">
     			<div class="box box-danger">
-    				<legend style="text-align:center;">LAPORAN PIUTANG</legend>
+    				<legend style="text-align:center;">LAPORAN SIMPANAN</legend>
     				<form action="<?php echo base_url();?>index.php/laporanpiutangcon/excel" method="post" enctype="multipart/form-data" role="form">
 						<div class="box-body">
 							<div class="form-group col-xs-3">

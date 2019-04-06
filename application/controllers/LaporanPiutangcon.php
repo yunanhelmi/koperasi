@@ -140,7 +140,7 @@ class LaporanPiutangCon extends CI_Controller {
         $sheet->getStyle("A".$i.":L".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":L".$i)->getFont()->setSize(14)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":L".$i)->setCellValue("A".$i, "LAPORAN PIUTANG ".$tgl_dari1." - ".$tgl_sampai1);
+        $sheet->mergeCells("A".$i.":L".$i)->setCellValue("A".$i, "LAPORAN SIMPANAN ".$tgl_dari1." - ".$tgl_sampai1);
         $sheet->getStyle("A".$i.":L".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":L".$i)->getFont()->setSize(12)->setBold(true);
         $i++;
@@ -190,7 +190,12 @@ class LaporanPiutangCon extends CI_Controller {
                 $sheet->setCellValue("J".$i, "1");    
             }
         	$sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $sisa_pinjaman = $data_piutang[$a]['jumlah_pinjaman'] - $data_piutang[$a]['total_jumlah_angsuran'];
+            if($data_piutang[$a]['total_jumlah_angsuran'] > 0) {
+                $sisa_pinjaman = $data_piutang[$a]['jumlah_pinjaman'] - $data_piutang[$a]['total_jumlah_angsuran'];    
+            } else {
+                $sisa_pinjaman = $data_piutang[$a]['jumlah_pinjaman'];
+            }
+            
         	$sheet->setCellValue("K".$i, $sisa_pinjaman);
         	$sheet->getStyle("K".$i)->getNumberFormat()->setFormatCode('#,##0');
         	$total_sisa += $sisa_pinjaman;
@@ -279,7 +284,7 @@ class LaporanPiutangCon extends CI_Controller {
         $thin['borders']['allborders']['style']=PHPExcel_Style_Border::BORDER_THIN ;
         $sheet  ->getStyle ( "A".$border_start.":L".$border_end )->applyFromArray ($thin);
 
-        $filename = "Laporan Piutang_".$tgl_dari1."_".$tgl_sampai1.".xlsx";
+        $filename = "Laporan Simpanan_".$tgl_dari1."_".$tgl_sampai1.".xlsx";
 
         header ( 'Content-Type: application/vnd.ms-excel' );
         header ( 'Content-Disposition: attachment;filename="'.$filename.'"' );
