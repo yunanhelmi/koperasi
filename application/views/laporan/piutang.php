@@ -16,7 +16,7 @@
       </h1>
       <ol class="breadcrumb">
         <li> <i class="fa fa-book"></i> Laporan</li>
-        <li class="active"><a href="<?php echo base_url(); ?>index.php/laporanpiutangcon/index"><i class="fa fa-book"></i> Simpanan</a></li>
+        <li class="active"><a href="<?php echo base_url(); ?>index.php/laporanpiutangcon/index"><i class="fa fa-book"></i> Pinjaman</a></li>
       </ol>
     </section>
 
