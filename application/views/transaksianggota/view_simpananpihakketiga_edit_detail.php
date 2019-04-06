@@ -257,15 +257,18 @@ function rupiah($angka){
                       <td><?php echo date("d-m-Y",$date)?></td>
                       <td><?php echo rupiah($simpananpokok[$i]['jumlah'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpananpokok/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
-                      <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpananpokok/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
-                      <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationSimpananpokok('<?php echo $simpananpokok[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                      
                       <?php 
                       if($simpananpokok[$i]['status_post'] == 1) {
                       ?>
+                      <td></td>
+                      <td></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/simpananpokok_unpost_akuntansi/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-times"></i></a></td>
                       <?php
                       } else {
                       ?>
+                      <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpananpokok/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+                      <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationSimpananpokok('<?php echo $simpananpokok[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/simpananpokok_post_akuntansi/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-upload"></i></a></td>
                       <?php
                       }
@@ -675,15 +678,18 @@ function rupiah($angka){
                               $sisa_simpanan[$i] = $total_debet - $total_kredit;
                             ?>
                             <td style='text-align: right'><?php echo "Rp " . number_format($sisa_simpanan[$i],2,',','.');?></td>
-                            <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_detail_simpananpihakketiga/".$simpananpihakketiga->id."/".$detail_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
-                            <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationDeleteDetailSimpananpihakketiga('<?php echo $simpananpihakketiga->id?>','<?php echo $detail_simpananpihakketiga[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                            
                             <?php 
                             if($detail_simpananpihakketiga[$i]['status_post'] == 1) {
                             ?>
+                            <td></td>
+                            <td></td>
                             <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/simpananpihakketiga_unpost_akuntansi/".$simpananpihakketiga->id."/".$detail_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-times"></i></a></td>
                             <?php
                             } else {
                             ?>
+                            <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_detail_simpananpihakketiga/".$simpananpihakketiga->id."/".$detail_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+                            <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationDeleteDetailSimpananpihakketiga('<?php echo $simpananpihakketiga->id?>','<?php echo $detail_simpananpihakketiga[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                             <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/simpananpihakketiga_post_akuntansi/".$simpananpihakketiga->id."/".$detail_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-upload"></i></a></td>
                             <?php
                             }
