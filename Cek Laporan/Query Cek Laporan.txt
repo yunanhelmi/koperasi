@@ -1,0 +1,12 @@
+202133
+
+201752
+
+SELECT * FROM `transaksi_akuntansi` WHERE tanggal >= '2019-01-03' AND tanggal <= '2019-01-03' AND kode_akun = '103' AND keterangan != 'SALDO AWAL' ORDER BY `id` ASC LIMIT 100
+
+SELECT * FROM `detail_angsuran` WHERE waktu >= '2019-01-03' AND waktu <= '2019-01-03' AND status_post = '1' ORDER BY `detail_angsuran`.`id_debet_transaksi_akuntansi` ASC LIMIT 100
+
+Tanggal Detail Angsuran tidak sama dengan Tanggal Transaksi Akuntansi
+Atas Nama MARIYANA
+Tanggal Detail Angsuran 4 Januari 2019
+Tanggal Transaksi Akuntansi 3 Januari 2019

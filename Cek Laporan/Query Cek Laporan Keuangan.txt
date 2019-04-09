@@ -1,0 +1,17 @@
+SELECT SUM(debet), SUM(kredit) FROM transaksi_akuntansi WHERE tanggal <= '2018-04-16' AND kode_akun = '103' AND keterangan != 'SALDO AWAL'
+
+SELECT SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman, SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran FROM detail_angsuran WHERE detail_angsuran.waktu <= '2018-04-16' AND detail_angsuran.status_post = '1'
+
+=========================
+
+
+SELECT * FROM `transaksi_akuntansi` WHERE tanggal >= '2018-04-16' AND tanggal <= '2018-04-16' AND kode_akun = '103' AND keterangan != 'SALDO AWAL'
+
+SELECT * FROM `transaksi_akuntansi` WHERE tanggal >= '2018-04-16' AND tanggal <= '2018-04-16' AND kode_akun = '101' AND keterangan != 'SALDO AWAL'
+
+SELECT * FROM `transaksi_akuntansi` WHERE tanggal >= '2018-04-16' AND tanggal <= '2018-04-16' AND kode_akun = '401' AND keterangan != 'SALDO AWAL'
+
+SELECT * FROM `detail_angsuran` WHERE waktu >= '2018-04-16' AND waktu <= '2018-04-16' AND status_post = '1'
+
+Detail Angsuran kolom id_debet_transaksi dan id_kredit_transaksi diubah dari varchar(8) menjadi text
+Semua Table Detail + table transaksi kolom id_debet_transaksi dan id_kredit_transaksi diubah dari varchar(8) menjadi text
