@@ -25,7 +25,7 @@
     		<div class="col-md-12 pull-left">
     			<div class="box box-danger">
     				<legend style="text-align:center;">LAPORAN RINCIAN PIUTANG</legend>
-    				<form action="<?php echo base_url();?>index.php/laporanrincianpiutangcon/excel" method="post" enctype="multipart/form-data" role="form">
+    				<form action="<?php echo base_url();?>index.php/laporanrincianpiutangcon/excel_coba1" method="post" enctype="multipart/form-data" role="form">
 						<div class="box-body">
 							<div class="form-group col-xs-3">
 								<label for="exampleInputPassword1">Dari</label>

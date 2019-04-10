@@ -68,15 +68,18 @@ function rupiah($angka){
                     <td><?php echo $transaksi[$i]['kode_debet']?></td>
                     <td><?php echo $transaksi[$i]['kode_kredit']?></td>
                     <td><?php echo rupiah($transaksi[$i]['jumlah'])?></td>
-                    <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksicon/edit_transaksi/".$transaksi[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
-                    <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmation('<?php echo $transaksi[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                    
                     <?php
                     if($transaksi[$i]['status_post'] == 1) {
                     ?>
+                    <td></td>
+                    <td></td>
                     <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksicon/unpost_akuntansi/".$transaksi[$i]['id']); ?>"><i class="fa fa-times"></i></a></td>
                     <?php
                     } else {
                     ?>
+                    <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksicon/edit_transaksi/".$transaksi[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+                    <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmation('<?php echo $transaksi[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                     <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksicon/post_akuntansi/".$transaksi[$i]['id']); ?>"><i class="fa fa-upload"></i></a></td>
                     <?php
                     }

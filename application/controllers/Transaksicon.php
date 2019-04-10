@@ -141,26 +141,30 @@ class TransaksiCon extends CI_Controller {
 		$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($transaksi->kode_debet);
 		$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($transaksi->kode_kredit);
 
-		$data_debet 				= array();
-		$data_debet['id'] 			= $this->transaksiakuntansimodel->getNewId();
-		$data_debet['tanggal'] 		= $transaksi->tanggal;
-		$data_debet['kode_akun'] 	= $transaksi->kode_debet;
-		$data_debet['nama_akun'] 	= $debet->nama_akun;
-		$data_debet['keterangan'] 	= $transaksi->keterangan;
-		$data_debet['jumlah'] 		= $transaksi->jumlah;
-		$data_debet['debet'] 		= $transaksi->jumlah;
-		$data_debet['kredit'] 		= 0;
+		$data_debet 					= array();
+		$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
+		$data_debet['tanggal'] 			= $transaksi->tanggal;
+		$data_debet['kode_akun'] 		= $transaksi->kode_debet;
+		$data_debet['nama_akun'] 		= $debet->nama_akun;
+		$data_debet['keterangan'] 		= $transaksi->keterangan;
+		$data_debet['jumlah'] 			= $transaksi->jumlah;
+		$data_debet['debet'] 			= $transaksi->jumlah;
+		$data_debet['kredit'] 			= 0;
+		$data_debet['origin_table']		= 'transaksi';
+		$data_debet['origin_table_id']	= $transaksi->id;
 		$this->transaksiakuntansimodel->inputData($data_debet);
 
-		$data_kredit 				= array();
-		$data_kredit['id'] 			= $this->transaksiakuntansimodel->getNewId();
-		$data_kredit['tanggal'] 	= $transaksi->tanggal;
-		$data_kredit['kode_akun'] 	= $transaksi->kode_kredit;
-		$data_kredit['nama_akun'] 	= $kredit->nama_akun;
-		$data_kredit['keterangan'] 	= $transaksi->keterangan;
-		$data_kredit['jumlah'] 		= $transaksi->jumlah;
-		$data_kredit['debet'] 		= 0;
-		$data_kredit['kredit'] 		= $transaksi->jumlah;
+		$data_kredit 					= array();
+		$data_kredit['id'] 				= $this->transaksiakuntansimodel->getNewId();
+		$data_kredit['tanggal'] 		= $transaksi->tanggal;
+		$data_kredit['kode_akun'] 		= $transaksi->kode_kredit;
+		$data_kredit['nama_akun'] 		= $kredit->nama_akun;
+		$data_kredit['keterangan'] 		= $transaksi->keterangan;
+		$data_kredit['jumlah'] 			= $transaksi->jumlah;
+		$data_kredit['debet'] 			= 0;
+		$data_kredit['kredit'] 			= $transaksi->jumlah;
+		$data_kredit['origin_table']	= 'transaksi';
+		$data_kredit['origin_table_id']	= $transaksi->id;
 		$this->transaksiakuntansimodel->inputData($data_kredit);
 
 		$update = array();

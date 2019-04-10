@@ -167,17 +167,17 @@ class LaporanKeuanganCon extends CI_Controller {
 		$kode_beban 		= $this->kodeakunmodel->get_kode_akun_by_first_char('5');
 
 		// Sebelum Tanggal Dari
-		/*$total_aset = 0;
+		$total_aset = 0;
 		for($i = 0; $i < sizeof($kode_aset); $i++) {
 			for($a = 0; $a < sizeof($transaksi_prev_aset); $a++) {
 				if($kode_aset[$i]['kode_akun'] == $transaksi_prev_aset[$a]['kode_akun']) {
 					$kode_aset[$i]['debet'] 	= $transaksi_prev_aset[$a]['jumlah_debet'];
 					$kode_aset[$i]['kredit'] 	= $transaksi_prev_aset[$a]['jumlah_kredit'];
 					if($kode_aset[$i]['kode_akun'] == '105') {
-						$kode_aset[$i]['selisih']	= $transaksi_prev_aset[$a]['jumlah_kredit'] - $transaksi_prev_aset[$a]['jumlah_debet'];
+						$kode_aset[$i]['selisih']	+= $transaksi_prev_aset[$a]['jumlah_kredit'] - $transaksi_prev_aset[$a]['jumlah_debet'];
 						$total_aset 				-= $kode_aset[$i]['selisih'];
 					} else {
-						$kode_aset[$i]['selisih']	= $transaksi_prev_aset[$a]['jumlah_debet'] - $transaksi_prev_aset[$a]['jumlah_kredit'];
+						$kode_aset[$i]['selisih']	+= $transaksi_prev_aset[$a]['jumlah_debet'] - $transaksi_prev_aset[$a]['jumlah_kredit'];
 						$total_aset 				+= $kode_aset[$i]['selisih'];
 					}
 				}
@@ -190,7 +190,7 @@ class LaporanKeuanganCon extends CI_Controller {
 				if($kode_hutang[$i]['kode_akun'] == $transaksi_prev_hutang[$a]['kode_akun']) {
 					$kode_hutang[$i]['debet'] 	= $transaksi_prev_hutang[$a]['jumlah_debet'];
 					$kode_hutang[$i]['kredit'] 	= $transaksi_prev_hutang[$a]['jumlah_kredit'];
-					$kode_hutang[$i]['selisih']	= $transaksi_prev_hutang[$a]['jumlah_kredit'] - $transaksi_prev_hutang[$a]['jumlah_debet'];
+					$kode_hutang[$i]['selisih']	+= $transaksi_prev_hutang[$a]['jumlah_kredit'] - $transaksi_prev_hutang[$a]['jumlah_debet'];
 					$total_hutang 				+= $kode_hutang[$i]['selisih'];
 				}
 			}
@@ -198,56 +198,60 @@ class LaporanKeuanganCon extends CI_Controller {
 
 		$total_modal = 0;
 		for($i = 0; $i < sizeof($kode_modal); $i++) {
-			if($kode_modal[$i]['kode_akun'] != '305' && $kode_modal[$i]['kode_akun'] != '306') {
+			if($kode_modal[$i]['kode_akun'] != '305') {
 				for($a = 0; $a < sizeof($transaksi_prev_modal); $a++) {
 					if($kode_modal[$i]['kode_akun'] == $transaksi_prev_modal[$a]['kode_akun']) {
 						$kode_modal[$i]['debet'] 	= $transaksi_prev_modal[$a]['jumlah_debet'];
 						$kode_modal[$i]['kredit'] 	= $transaksi_prev_modal[$a]['jumlah_kredit'];
-						$kode_modal[$i]['selisih']	= $transaksi_prev_modal[$a]['jumlah_kredit'] - $transaksi_prev_modal[$a]['jumlah_debet'];
+						$kode_modal[$i]['selisih']	+= $transaksi_prev_modal[$a]['jumlah_kredit'] - $transaksi_prev_modal[$a]['jumlah_debet'];
 						$total_modal 				+= $kode_modal[$i]['selisih'];
 					}
 				}		
 			}
-		}*/
+		}
 
 		// Antara Dari dan Sampai
-		$total_aset = 0;
+		//$total_aset = 0;
 		for($i = 0; $i < sizeof($kode_aset); $i++) {
 			for($a = 0; $a < sizeof($transaksi_aset); $a++) {
 				if($kode_aset[$i]['kode_akun'] == $transaksi_aset[$a]['kode_akun']) {
 					$kode_aset[$i]['debet'] 	= $transaksi_aset[$a]['jumlah_debet'];
 					$kode_aset[$i]['kredit'] 	= $transaksi_aset[$a]['jumlah_kredit'];
 					if($kode_aset[$i]['kode_akun'] == '105') {
-						$kode_aset[$i]['selisih']	= $transaksi_aset[$a]['jumlah_kredit'] - $transaksi_aset[$a]['jumlah_debet'];
-						$total_aset 				-= $kode_aset[$i]['selisih'];
+						$kode_aset[$i]['selisih']	+= $transaksi_aset[$a]['jumlah_kredit'] - $transaksi_aset[$a]['jumlah_debet'];
+						//$total_aset 				-= $kode_aset[$i]['selisih'];
+						$total_aset 				-= $transaksi_aset[$a]['jumlah_kredit'] - $transaksi_aset[$a]['jumlah_debet'];
 					} else {
-						$kode_aset[$i]['selisih']	= $transaksi_aset[$a]['jumlah_debet'] - $transaksi_aset[$a]['jumlah_kredit'];
-						$total_aset 				+= $kode_aset[$i]['selisih'];
+						$kode_aset[$i]['selisih']	+= $transaksi_aset[$a]['jumlah_debet'] - $transaksi_aset[$a]['jumlah_kredit'];
+						//$total_aset 				+= $kode_aset[$i]['selisih'];
+						$total_aset 				+= $transaksi_aset[$a]['jumlah_debet'] - $transaksi_aset[$a]['jumlah_kredit'];
 					}
 				}
 			}
 		}
 
-		$total_hutang = 0;
+		//$total_hutang = 0;
 		for($i = 0; $i < sizeof($kode_hutang); $i++) {
 			for($a = 0; $a < sizeof($transaksi_hutang); $a++) {
 				if($kode_hutang[$i]['kode_akun'] == $transaksi_hutang[$a]['kode_akun']) {
 					$kode_hutang[$i]['debet'] 	= $transaksi_hutang[$a]['jumlah_debet'];
 					$kode_hutang[$i]['kredit'] 	= $transaksi_hutang[$a]['jumlah_kredit'];
-					$kode_hutang[$i]['selisih']	= $transaksi_hutang[$a]['jumlah_kredit'] - $transaksi_hutang[$a]['jumlah_debet'];
-					$total_hutang 				+= $kode_hutang[$i]['selisih'];
+					$kode_hutang[$i]['selisih']	+= $transaksi_hutang[$a]['jumlah_kredit'] - $transaksi_hutang[$a]['jumlah_debet'];
+					//$total_hutang 				+= $kode_hutang[$i]['selisih'];
+					$total_hutang 				+= $transaksi_hutang[$a]['jumlah_kredit'] - $transaksi_hutang[$a]['jumlah_debet'];
 				}
 			}
 		}
 
-		$total_modal = 0;
+		//$total_modal = 0;
 		for($i = 0; $i < sizeof($kode_modal); $i++) {
 			for($a = 0; $a < sizeof($transaksi_modal); $a++) {
 				if($kode_modal[$i]['kode_akun'] == $transaksi_modal[$a]['kode_akun']) {
 					$kode_modal[$i]['debet'] 	= $transaksi_modal[$a]['jumlah_debet'];
 					$kode_modal[$i]['kredit'] 	= $transaksi_modal[$a]['jumlah_kredit'];
-					$kode_modal[$i]['selisih']	= $transaksi_modal[$a]['jumlah_kredit'] - $transaksi_modal[$a]['jumlah_debet'];
-					$total_modal 				+= $kode_modal[$i]['selisih'];
+					$kode_modal[$i]['selisih']	+= $transaksi_modal[$a]['jumlah_kredit'] - $transaksi_modal[$a]['jumlah_debet'];
+					//$total_modal 				+= $kode_modal[$i]['selisih'];
+					$total_modal 				+= $transaksi_modal[$a]['jumlah_kredit'] - $transaksi_modal[$a]['jumlah_debet'];
 				}
 			}
 		}
@@ -258,8 +262,9 @@ class LaporanKeuanganCon extends CI_Controller {
 				if($kode_pendapatan[$i]['kode_akun'] == $transaksi_pendapatan[$a]['kode_akun']) {
 					$kode_pendapatan[$i]['debet'] 	= $transaksi_pendapatan[$a]['jumlah_debet'];
 					$kode_pendapatan[$i]['kredit'] 	= $transaksi_pendapatan[$a]['jumlah_kredit'];
-					$kode_pendapatan[$i]['selisih']	= $transaksi_pendapatan[$a]['jumlah_kredit'] - $transaksi_pendapatan[$a]['jumlah_debet'];
-					$total_pendapatan 				+= $kode_pendapatan[$i]['selisih'];
+					$kode_pendapatan[$i]['selisih']	+= $transaksi_pendapatan[$a]['jumlah_kredit'] - $transaksi_pendapatan[$a]['jumlah_debet'];
+					//$total_pendapatan 				+= $kode_pendapatan[$i]['selisih'];
+					$total_pendapatan 				+= $transaksi_pendapatan[$a]['jumlah_kredit'] - $transaksi_pendapatan[$a]['jumlah_debet'];
 				}
 			}
 		}
@@ -270,8 +275,9 @@ class LaporanKeuanganCon extends CI_Controller {
 				if($kode_beban[$i]['kode_akun'] == $transaksi_beban[$a]['kode_akun']) {
 					$kode_beban[$i]['debet'] 	= $transaksi_beban[$a]['jumlah_debet'];
 					$kode_beban[$i]['kredit'] 	= $transaksi_beban[$a]['jumlah_kredit'];
-					$kode_beban[$i]['selisih']	= $transaksi_beban[$a]['jumlah_debet'] - $transaksi_beban[$a]['jumlah_kredit'];
-					$total_beban 				+= $kode_beban[$i]['selisih'];
+					$kode_beban[$i]['selisih']	+= $transaksi_beban[$a]['jumlah_debet'] - $transaksi_beban[$a]['jumlah_kredit'];
+					//$total_beban 				+= $kode_beban[$i]['selisih'];
+					$total_beban 				+= $transaksi_beban[$a]['jumlah_debet'] - $transaksi_beban[$a]['jumlah_kredit'];
 				}
 			}
 		}
