@@ -2498,7 +2498,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['keterangan'] 		= "Pencairan Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah;
 			$data_kredit['jumlah'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 			$data_kredit['debet'] 			= 0;
-			$data_kredit['kredit'] 			 $data['post_detail_simpanandanasosial']->jumlah;
+			$data_kredit['kredit'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 			$data_kredit['origin_table']	= 'detail_simpanandanasosial';
 			$data_kredit['origin_table_id']	= $data['post_detail_simpanandanasosial']->id;
 			$this->transaksiakuntansimodel->inputData($data_kredit);
