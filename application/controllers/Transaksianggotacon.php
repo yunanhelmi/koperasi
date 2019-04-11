@@ -722,7 +722,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 			= $data['post_detail_angsuran']->waktu;
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= "Pembayaran Angsuran Pinjaman Bulan ke-".$data['post_detail_angsuran']->bulan_ke." Anggota a.n. ".$data['pinjaman']->nama_nasabah." Nomor Anggota: ".$data['pinjaman']->nomor_nasabah;
+			$data_debet['keterangan'] 		= "Pembayaran Angsuran Pinjaman Bulan ke-".$data['post_detail_angsuran']->bulan_ke." Anggota a.n. ".$data['pinjaman']->nama_nasabah." Nomor Anggota: ".$data['pinjaman']->nomor_nasabah." Tanggal Pinjaman: ".date("d-m-Y", strtotime($data['pinjaman']->waktu));
 			$data_debet['jumlah'] 			= $data['post_detail_angsuran']->angsuran;
 			$data_debet['debet'] 			= $data['post_detail_angsuran']->angsuran;
 			$data_debet['kredit'] 			= 0;
@@ -735,7 +735,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 		= $data['post_detail_angsuran']->waktu;
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= "Pembayaran Angsuran Pinjaman Bulan ke-".$data['post_detail_angsuran']->bulan_ke." Anggota a.n. ".$data['pinjaman']->nama_nasabah." Nomor Anggota: ".$data['pinjaman']->nomor_nasabah;
+			$data_kredit['keterangan'] 		= "Pembayaran Angsuran Pinjaman Bulan ke-".$data['post_detail_angsuran']->bulan_ke." Anggota a.n. ".$data['pinjaman']->nama_nasabah." Nomor Anggota: ".$data['pinjaman']->nomor_nasabah." Tanggal Pinjaman: ".date("d-m-Y", strtotime($data['pinjaman']->waktu));
 			$data_kredit['jumlah'] 			= $data['post_detail_angsuran']->angsuran;
 			$data_kredit['debet'] 			= 0;
 			$data_kredit['kredit'] 			= $data['post_detail_angsuran']->angsuran;
@@ -778,7 +778,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 			= $data['post_detail_angsuran']->waktu;
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= "Jasa Pembayaran Angsuran Pinjaman Bulan ke-".$data['post_detail_angsuran']->bulan_ke." Anggota a.n. ".$data['pinjaman']->nama_nasabah." Nomor Anggota: ".$data['pinjaman']->nomor_nasabah;
+			$data_debet['keterangan'] 		= "Jasa Pembayaran Angsuran Pinjaman Bulan ke-".$data['post_detail_angsuran']->bulan_ke." Anggota a.n. ".$data['pinjaman']->nama_nasabah." Nomor Anggota: ".$data['pinjaman']->nomor_nasabah." Tanggal Pinjaman: ".date("d-m-Y", strtotime($data['pinjaman']->waktu));
 			$data_debet['jumlah'] 			= $data['post_detail_angsuran']->jasa + $data['post_detail_angsuran']->denda;
 			$data_debet['debet'] 			= $data['post_detail_angsuran']->jasa + $data['post_detail_angsuran']->denda;
 			$data_debet['kredit'] 			= 0;
@@ -791,7 +791,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 		= $data['post_detail_angsuran']->waktu;
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= "Jasa Pembayaran Angsuran Pinjaman Bulan ke-".$data['post_detail_angsuran']->bulan_ke." Anggota a.n. ".$data['pinjaman']->nama_nasabah." Nomor Anggota: ".$data['pinjaman']->nomor_nasabah;
+			$data_kredit['keterangan'] 		= "Jasa Pembayaran Angsuran Pinjaman Bulan ke-".$data['post_detail_angsuran']->bulan_ke." Anggota a.n. ".$data['pinjaman']->nama_nasabah." Nomor Anggota: ".$data['pinjaman']->nomor_nasabah." Tanggal Pinjaman: ".date("d-m-Y", strtotime($data['pinjaman']->waktu));
 			$data_kredit['jumlah'] 			= $data['post_detail_angsuran']->jasa + $data['post_detail_angsuran']->denda;
 			$data_kredit['debet'] 			= 0;
 			$data_kredit['kredit'] 			= $data['post_detail_angsuran']->jasa + $data['post_detail_angsuran']->denda;
@@ -833,7 +833,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 			= $data['post_detail_angsuran']->waktu;
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= "Pemberian Pinjaman kepada Anggota a.n. ".$data['pinjaman']->nama_nasabah." Nomor Anggota: ".$data['pinjaman']->nomor_nasabah;
+			$data_debet['keterangan'] 		= "Pemberian Pinjaman kepada Anggota a.n. ".$data['pinjaman']->nama_nasabah." Nomor Anggota: ".$data['pinjaman']->nomor_nasabah." Tanggal Pinjaman: ".date("d-m-Y", strtotime($data['pinjaman']->waktu));
 			$data_debet['jumlah'] 			= $data['post_detail_angsuran']->total;
 			$data_debet['debet'] 			= $data['post_detail_angsuran']->total;
 			$data_debet['kredit'] 			= 0;
@@ -846,7 +846,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 		= $data['post_detail_angsuran']->waktu;
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= "Pemberian Pinjaman kepada Anggota a.n. ".$data['pinjaman']->nama_nasabah." Nomor Anggota: ".$data['pinjaman']->nomor_nasabah;
+			$data_kredit['keterangan'] 		= "Pemberian Pinjaman kepada Anggota a.n. ".$data['pinjaman']->nama_nasabah." Nomor Anggota: ".$data['pinjaman']->nomor_nasabah." Tanggal Pinjaman: ".date("d-m-Y", strtotime($data['pinjaman']->waktu));
 			$data_kredit['jumlah'] 			= $data['post_detail_angsuran']->total;
 			$data_kredit['debet'] 			= 0;
 			$data_kredit['kredit'] 			= $data['post_detail_angsuran']->total;
@@ -1100,9 +1100,9 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
 			if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "1") {
-				$data_debet['keterangan'] 	= "Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;	
+				$data_debet['keterangan'] 	= "Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpananpokok']->waktu));	
 			} else if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "2") {
-				$data_debet['keterangan'] 	= "Simpanan Pokok Istimewa a.n. ".$data['simpananpokok']->nama_nasabah." Nomor: ".$data['simpananpokok']->nomor_nasabah;
+				$data_debet['keterangan'] 	= "Simpanan Pokok Istimewa a.n. ".$data['simpananpokok']->nama_nasabah." Nomor: ".$data['simpananpokok']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpananpokok']->waktu));
 			}
 			
 			$data_debet['jumlah'] 			= $data['simpananpokok']->jumlah;
@@ -1118,9 +1118,9 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
 			if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "1") {
-				$data_kredit['keterangan'] 	= "Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+				$data_kredit['keterangan'] 	= "Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpananpokok']->waktu));
 			} else if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "2") {
-				$data_kredit['keterangan'] 	= "Simpanan Pokok Istimewa a.n. ".$data['simpananpokok']->nama_nasabah." Nomor: ".$data['simpananpokok']->nomor_nasabah;
+				$data_kredit['keterangan'] 	= "Simpanan Pokok Istimewa a.n. ".$data['simpananpokok']->nama_nasabah." Nomor: ".$data['simpananpokok']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpananpokok']->waktu));
 			}
 			$data_kredit['jumlah'] 			= $data['simpananpokok']->jumlah;
 			$data_kredit['debet'] 			= 0;
@@ -1158,9 +1158,9 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
 			if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "1") {
-				$data_debet['keterangan'] 	= "Pencairan Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+				$data_debet['keterangan'] 	= "Pencairan Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpananpokok']->waktu));
 			} else if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "2") {
-				$data_debet['keterangan'] 	= "Pencairan Simpanan Pokok Istimewa a.n. ".$data['simpananpokok']->nama_nasabah." Nomor : ".$data['simpananpokok']->nomor_nasabah;
+				$data_debet['keterangan'] 	= "Pencairan Simpanan Pokok Istimewa a.n. ".$data['simpananpokok']->nama_nasabah." Nomor : ".$data['simpananpokok']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpananpokok']->waktu));
 			}
 			$data_debet['jumlah'] 			= $data['simpananpokok']->jumlah;
 			$data_debet['debet'] 			= $data['simpananpokok']->jumlah;
@@ -1175,9 +1175,9 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
 			if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "1") {
-				$data_kredit['keterangan'] 	= "Pencairan Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah;
+				$data_kredit['keterangan'] 	= "Pencairan Simpanan Pokok Anggota a.n. ".$data['simpananpokok']->nama_nasabah." Nomor Anggota: ".$data['simpananpokok']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpananpokok']->waktu));
 			} else if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "2") {
-				$data_kredit['keterangan'] 	= "Pencairan Simpanan Pokok Istimewa a.n. ".$data['simpananpokok']->nama_nasabah." Nomor: ".$data['simpananpokok']->nomor_nasabah;
+				$data_kredit['keterangan'] 	= "Pencairan Simpanan Pokok Istimewa a.n. ".$data['simpananpokok']->nama_nasabah." Nomor: ".$data['simpananpokok']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpananpokok']->waktu));
 			}
 			$data_kredit['jumlah'] 			= $data['simpananpokok']->jumlah;
 			$data_kredit['debet'] 			= 0;
@@ -1539,7 +1539,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 			= $data['post_detail_simpananwajib']->waktu;
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= "Simpanan Wajib Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpananwajib']->nama_nasabah." Nomor Anggota: ".$data['simpananwajib']->nomor_nasabah;
+			$data_debet['keterangan'] 		= "Simpanan Wajib Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpananwajib']->nama_nasabah." Nomor Anggota: ".$data['simpananwajib']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpananwajib']->waktu));
 			$data_debet['jumlah'] 			= $data['post_detail_simpananwajib']->jumlah;
 			$data_debet['debet'] 			= $data['post_detail_simpananwajib']->jumlah;
 			$data_debet['kredit'] 			= 0;
@@ -1552,7 +1552,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 		= $data['post_detail_simpananwajib']->waktu;
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= "Simpanan Wajib Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpananwajib']->nama_nasabah." Nomor Anggota: ".$data['simpananwajib']->nomor_nasabah;
+			$data_kredit['keterangan'] 		= "Simpanan Wajib Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpananwajib']->nama_nasabah." Nomor Anggota: ".$data['simpananwajib']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpananwajib']->waktu));
 			$data_kredit['jumlah'] 			= $data['post_detail_simpananwajib']->jumlah;
 			$data_kredit['debet'] 			= 0;
 			$data_kredit['kredit'] 			= $data['post_detail_simpananwajib']->jumlah;
@@ -1583,7 +1583,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 			= $data['post_detail_simpananwajib']->waktu;
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= "Pencairan Simpanan Wajib Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpananwajib']->nama_nasabah." Nomor Anggota: ".$data['simpananwajib']->nomor_nasabah;
+			$data_debet['keterangan'] 		= "Pencairan Simpanan Wajib Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpananwajib']->nama_nasabah." Nomor Anggota: ".$data['simpananwajib']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpananwajib']->waktu));
 			$data_debet['jumlah'] 			= $data['post_detail_simpananwajib']->jumlah;
 			$data_debet['debet'] 			= $data['post_detail_simpananwajib']->jumlah;
 			$data_debet['kredit'] 			= 0;
@@ -1596,7 +1596,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 		= $data['post_detail_simpananwajib']->waktu;
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= "Pencairan Simpanan Wajib Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpananwajib']->nama_nasabah." Nomor Anggota: ".$data['simpananwajib']->nomor_nasabah;
+			$data_kredit['keterangan'] 		= "Pencairan Simpanan Wajib Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpananwajib']->nama_nasabah." Nomor Anggota: ".$data['simpananwajib']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpananwajib']->waktu));
 			$data_kredit['jumlah'] 			= $data['post_detail_simpananwajib']->jumlah;
 			$data_kredit['debet'] 			= 0;
 			$data_kredit['kredit'] 			= $data['post_detail_simpananwajib']->jumlah;
@@ -1953,7 +1953,7 @@ class TransaksianggotaCon extends CI_Controller {
 				$data_debet['tanggal'] 			= $data['post_detail_simpanankhusus']->waktu;
 				$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 				$data_debet['nama_akun'] 		= $debet->nama_akun;
-				$data_debet['keterangan'] 		= "Simpanan Khusus Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor Anggota: ".$data['simpanankhusus']->nomor_nasabah;
+				$data_debet['keterangan'] 		= "Simpanan Khusus Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor Anggota: ".$data['simpanankhusus']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankhusus']->waktu));
 				$data_debet['jumlah'] 			= $data['post_detail_simpanankhusus']->jumlah;
 				$data_debet['debet'] 			= $data['post_detail_simpanankhusus']->jumlah;
 				$data_debet['kredit'] 			= 0;
@@ -1966,7 +1966,7 @@ class TransaksianggotaCon extends CI_Controller {
 				$data_kredit['tanggal'] 		= $data['post_detail_simpanankhusus']->waktu;
 				$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 				$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-				$data_kredit['keterangan'] 		= "Simpanan Khusus Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor Anggota: ".$data['simpanankhusus']->nomor_nasabah;
+				$data_kredit['keterangan'] 		= "Simpanan Khusus Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor Anggota: ".$data['simpanankhusus']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankhusus']->waktu));
 				$data_kredit['jumlah'] 			= $data['post_detail_simpanankhusus']->jumlah;
 				$data_kredit['debet'] 			= 0;
 				$data_kredit['kredit'] 			= $data['post_detail_simpanankhusus']->jumlah;
@@ -1997,7 +1997,7 @@ class TransaksianggotaCon extends CI_Controller {
 				$data_debet['tanggal'] 			= $data['post_detail_simpanankhusus']->waktu;
 				$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 				$data_debet['nama_akun'] 		= $debet->nama_akun;
-				$data_debet['keterangan'] 		= "Simpanan Khusus Bulan ".$bulan_tahun." a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor : ".$data['simpanankhusus']->nomor_nasabah;
+				$data_debet['keterangan'] 		= "Simpanan Khusus Bulan ".$bulan_tahun." a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor : ".$data['simpanankhusus']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankhusus']->waktu));
 				$data_debet['jumlah'] 			= $data['post_detail_simpanankhusus']->jumlah;
 				$data_debet['debet'] 			= $data['post_detail_simpanankhusus']->jumlah;
 				$data_debet['kredit'] 			= 0;
@@ -2010,7 +2010,7 @@ class TransaksianggotaCon extends CI_Controller {
 				$data_kredit['tanggal'] 		= $data['post_detail_simpanankhusus']->waktu;
 				$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 				$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-				$data_kredit['keterangan'] 		= "Simpanan Khusus Bulan ".$bulan_tahun." a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor : ".$data['simpanankhusus']->nomor_nasabah;
+				$data_kredit['keterangan'] 		= "Simpanan Khusus Bulan ".$bulan_tahun." a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor : ".$data['simpanankhusus']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankhusus']->waktu));
 				$data_kredit['jumlah'] 			= $data['post_detail_simpanankhusus']->jumlah;
 				$data_kredit['debet'] 			= 0;
 				$data_kredit['kredit'] 			= $data['post_detail_simpanankhusus']->jumlah;
@@ -2043,7 +2043,7 @@ class TransaksianggotaCon extends CI_Controller {
 				$data_debet['tanggal'] 			= $data['post_detail_simpanankhusus']->waktu;
 				$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 				$data_debet['nama_akun'] 		= $debet->nama_akun;
-				$data_debet['keterangan'] 		= "Pencairan Simpanan Khusus Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor Anggota: ".$data['simpanankhusus']->nomor_nasabah;
+				$data_debet['keterangan'] 		= "Pencairan Simpanan Khusus Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor Anggota: ".$data['simpanankhusus']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankhusus']->waktu));
 				$data_debet['jumlah'] 			= $data['post_detail_simpanankhusus']->jumlah;
 				$data_debet['debet'] 			= $data['post_detail_simpanankhusus']->jumlah;
 				$data_debet['kredit'] 			= 0;
@@ -2056,7 +2056,7 @@ class TransaksianggotaCon extends CI_Controller {
 				$data_kredit['tanggal'] 		= $data['post_detail_simpanankhusus']->waktu;
 				$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 				$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-				$data_kredit['keterangan'] 		= "Pencairan Simpanan Khusus Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor Anggota: ".$data['simpanankhusus']->nomor_nasabah;
+				$data_kredit['keterangan'] 		= "Pencairan Simpanan Khusus Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor Anggota: ".$data['simpanankhusus']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankhusus']->waktu));
 				$data_kredit['jumlah'] 			= $data['post_detail_simpanankhusus']->jumlah;
 				$data_kredit['debet'] 			= 0;
 				$data_kredit['kredit'] 			= $data['post_detail_simpanankhusus']->jumlah;
@@ -2069,7 +2069,7 @@ class TransaksianggotaCon extends CI_Controller {
 				$data_debet['tanggal'] 			= $data['post_detail_simpanankhusus']->waktu;
 				$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 				$data_debet['nama_akun'] 		= $debet->nama_akun;
-				$data_debet['keterangan'] 		= "Pencairan Simpanan Khusus Bulan ".$bulan_tahun." a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor : ".$data['simpanankhusus']->nomor_nasabah;
+				$data_debet['keterangan'] 		= "Pencairan Simpanan Khusus Bulan ".$bulan_tahun." a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor : ".$data['simpanankhusus']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankhusus']->waktu));
 				$data_debet['jumlah'] 			= $data['post_detail_simpanankhusus']->jumlah;
 				$data_debet['debet'] 			= $data['post_detail_simpanankhusus']->jumlah;
 				$data_debet['kredit'] 			= 0;
@@ -2082,7 +2082,7 @@ class TransaksianggotaCon extends CI_Controller {
 				$data_kredit['tanggal'] 		= $data['post_detail_simpanankhusus']->waktu;
 				$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 				$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-				$data_kredit['keterangan'] 		= "Pencairan Simpanan Khusus Bulan ".$bulan_tahun." a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor : ".$data['simpanankhusus']->nomor_nasabah;
+				$data_kredit['keterangan'] 		= "Pencairan Simpanan Khusus Bulan ".$bulan_tahun." a.n. ".$data['simpanankhusus']->nama_nasabah." Nomor : ".$data['simpanankhusus']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankhusus']->waktu));
 				$data_kredit['jumlah'] 			= $data['post_detail_simpanankhusus']->jumlah;
 				$data_kredit['debet'] 			= 0;
 				$data_kredit['kredit'] 			= $data['post_detail_simpanankhusus']->jumlah;
@@ -2439,7 +2439,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 			= $data['post_detail_simpanandanasosial']->waktu;
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= "Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah;
+			$data_debet['keterangan'] 		= "Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
 			$data_debet['jumlah'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 			$data_debet['debet'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 			$data_debet['kredit'] 			= 0;
@@ -2452,7 +2452,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 		= $data['post_detail_simpanandanasosial']->waktu;
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= "Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah;
+			$data_kredit['keterangan'] 		= "Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
 			$data_kredit['jumlah'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 			$data_kredit['debet'] 			= 0;
 			$data_kredit['kredit'] 			= $data['post_detail_simpanandanasosial']->jumlah;
@@ -2482,7 +2482,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 			= $data['post_detail_simpanandanasosial']->waktu;
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= "Pencairan Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah;
+			$data_debet['keterangan'] 		= "Pencairan Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
 			$data_debet['jumlah'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 			$data_debet['debet'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 			$data_debet['kredit'] 			= 0;
@@ -2495,7 +2495,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 		= $data['post_detail_simpanandanasosial']->waktu;
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= "Pencairan Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah;
+			$data_kredit['keterangan'] 		= "Pencairan Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
 			$data_kredit['jumlah'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 			$data_kredit['debet'] 			= 0;
 			$data_kredit['kredit'] 			= $data['post_detail_simpanandanasosial']->jumlah;
@@ -2851,7 +2851,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 			= $data['post_detail_simpanankanzun']->waktu;
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= "Simpanan Kanzun Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankanzun']->nama_nasabah." Nomor Anggota: ".$data['simpanankanzun']->nomor_nasabah;
+			$data_debet['keterangan'] 		= "Simpanan Kanzun Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankanzun']->nama_nasabah." Nomor Anggota: ".$data['simpanankanzun']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankanzun']->waktu));
 			$data_debet['jumlah'] 			= $data['post_detail_simpanankanzun']->jumlah;
 			$data_debet['debet'] 			= $data['post_detail_simpanankanzun']->jumlah;
 			$data_debet['kredit'] 			= 0;
@@ -2864,7 +2864,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 		= $data['post_detail_simpanankanzun']->waktu;
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= "Simpanan Kanzun Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankanzun']->nama_nasabah." Nomor Anggota: ".$data['simpanankanzun']->nomor_nasabah;
+			$data_kredit['keterangan'] 		= "Simpanan Kanzun Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankanzun']->nama_nasabah." Nomor Anggota: ".$data['simpanankanzun']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankanzun']->waktu));
 			$data_kredit['jumlah'] 			= $data['post_detail_simpanankanzun']->jumlah;
 			$data_kredit['debet'] 			= 0;
 			$data_kredit['kredit'] 			= $data['post_detail_simpanankanzun']->jumlah;
@@ -2895,7 +2895,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 			= $data['post_detail_simpanankanzun']->waktu;
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= "Pencairan Simpanan Kanzun Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankanzun']->nama_nasabah." Nomor Anggota: ".$data['simpanankanzun']->nomor_nasabah;
+			$data_debet['keterangan'] 		= "Pencairan Simpanan Kanzun Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankanzun']->nama_nasabah." Nomor Anggota: ".$data['simpanankanzun']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankanzun']->waktu));
 			$data_debet['jumlah'] 			= $data['post_detail_simpanankanzun']->jumlah;
 			$data_debet['debet'] 			= $data['post_detail_simpanankanzun']->jumlah;
 			$data_debet['kredit'] 			= 0;
@@ -2908,7 +2908,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 		= $data['post_detail_simpanankanzun']->waktu;
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= "Pencairan Simpanan Kanzun Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankanzun']->nama_nasabah." Nomor Anggota: ".$data['simpanankanzun']->nomor_nasabah;
+			$data_kredit['keterangan'] 		= "Pencairan Simpanan Kanzun Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanankanzun']->nama_nasabah." Nomor Anggota: ".$data['simpanankanzun']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankanzun']->waktu));
 			$data_kredit['jumlah'] 			= $data['post_detail_simpanankanzun']->jumlah;
 			$data_kredit['debet'] 			= 0;
 			$data_kredit['kredit'] 			= $data['post_detail_simpanankanzun']->jumlah;
@@ -3546,7 +3546,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 			= $data['post_detail_simpananpihakketiga']->waktu;
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= "Simpanan Pihak Ketiga Bulan ".$bulan_tahun." a.n. ".$data['simpananpihakketiga']->nama." Nomor : ".$data['simpananpihakketiga']->nomor_nasabah;
+			$data_debet['keterangan'] 		= "Simpanan Pihak Ketiga Bulan ".$bulan_tahun." a.n. ".$data['simpananpihakketiga']->nama." Nomor : ".$data['simpananpihakketiga']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankanzun']->waktu));
 			$data_debet['jumlah'] 			= $data['post_detail_simpananpihakketiga']->jumlah;
 			$data_debet['debet'] 			= $data['post_detail_simpananpihakketiga']->jumlah;
 			$data_debet['kredit'] 			= 0;
@@ -3559,7 +3559,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 		= $data['post_detail_simpananpihakketiga']->waktu;
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= "Simpanan Pihak Ketiga Bulan ".$bulan_tahun." a.n. ".$data['simpananpihakketiga']->nama." Nomor : ".$data['simpananpihakketiga']->nomor_nasabah;
+			$data_kredit['keterangan'] 		= "Simpanan Pihak Ketiga Bulan ".$bulan_tahun." a.n. ".$data['simpananpihakketiga']->nama." Nomor : ".$data['simpananpihakketiga']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankanzun']->waktu));
 			$data_kredit['jumlah'] 			= $data['post_detail_simpananpihakketiga']->jumlah;
 			$data_kredit['debet'] 			= 0;
 			$data_kredit['kredit'] 			= $data['post_detail_simpananpihakketiga']->jumlah;
@@ -3578,7 +3578,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_debet['tanggal'] 			= $data['post_detail_simpananpihakketiga']->waktu;
 			$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= "Pencairan Simpanan Pihak Ketiga Bulan ".$bulan_tahun." a.n. ".$data['simpananpihakketiga']->nama." Nomor : ".$data['simpananpihakketiga']->nomor_nasabah;
+			$data_debet['keterangan'] 		= "Pencairan Simpanan Pihak Ketiga Bulan ".$bulan_tahun." a.n. ".$data['simpananpihakketiga']->nama." Nomor : ".$data['simpananpihakketiga']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankanzun']->waktu));
 			$data_debet['jumlah'] 			= $data['post_detail_simpananpihakketiga']->jumlah;
 			$data_debet['debet'] 			= $data['post_detail_simpananpihakketiga']->jumlah;
 			$data_debet['kredit'] 			= 0;
@@ -3591,7 +3591,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['tanggal'] 		= $data['post_detail_simpananpihakketiga']->waktu;
 			$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= "Pencairan Simpanan Pihak Ketiga Bulan ".$bulan_tahun." a.n. ".$data['simpananpihakketiga']->nama." Nomor : ".$data['simpananpihakketiga']->nomor_nasabah;
+			$data_kredit['keterangan'] 		= "Pencairan Simpanan Pihak Ketiga Bulan ".$bulan_tahun." a.n. ".$data['simpananpihakketiga']->nama." Nomor : ".$data['simpananpihakketiga']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanankanzun']->waktu));
 			$data_kredit['jumlah'] 			= $data['post_detail_simpananpihakketiga']->jumlah;
 			$data_kredit['debet'] 			= 0;
 			$data_kredit['kredit'] 			= $data['post_detail_simpananpihakketiga']->jumlah;
