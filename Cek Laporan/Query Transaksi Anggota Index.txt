@@ -1,0 +1,26 @@
+SELECT
+	nasabah.*, simpananpihakketiga.id as id_simpananpihakketiga, SUM(detail_simpananpihakketiga.total_unpost) as total_unpost
+FROM 
+	nasabah
+	LEFT JOIN
+		simpananpihakketiga
+	ON
+		nasabah.id = simpananpihakketiga.id_nasabah
+LEFT JOIN
+	(SELECT
+     	id_simpananpihakketiga, 
+     	COUNT(id) as total_unpost
+     FROM
+		detail_simpananpihakketiga
+	WHERE
+		detail_simpananpihakketiga.status_post IS NULL
+		OR detail_simpananpihakketiga.status_post = 0
+	GROUP BY 
+		id_simpananpihakketiga
+	) as detail_simpananpihakketiga
+ON 
+	simpananpihakketiga.id = detail_simpananpihakketiga.id_simpananpihakketiga
+GROUP BY
+	nasabah.id
+ORDER BY
+	nasabah.id

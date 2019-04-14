@@ -89,9 +89,17 @@ class TransaksianggotaCon extends CI_Controller {
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
-		$data['username'] 	= $session_data['username'];
-		$data['status'] 	= $session_data['status'];
-		$data['nasabah'] 	= $this->nasabahmodel->getDataPostUnpost();
+		
+		$data['username'] 						= $session_data['username'];
+		$data['status'] 						= $session_data['status'];
+		$data['nasabah'] 						= $this->nasabahmodel->getDataPostUnpostPinjaman();
+		$data['nasabah_simpananpokok'] 			= $this->nasabahmodel->getDataPostUnpostSimpananPokok();
+		$data['nasabah_simpananwajib'] 			= $this->nasabahmodel->getDataPostUnpostSimpananWajib();
+		$data['nasabah_simpanankhusus'] 		= $this->nasabahmodel->getDataPostUnpostSimpananKhusus();
+		$data['nasabah_simpanandanasosial']		= $this->nasabahmodel->getDataPostUnpostSimpananDanaSosial();
+		$data['nasabah_simpanankanzun'] 		= $this->nasabahmodel->getDataPostUnpostSimpananKanzun();
+		$data['nasabah_simpananpihakketiga'] 	= $this->nasabahmodel->getDataPostUnpostSimpananPihakKetiga();
+
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/transaksianggota/index', $data);
 		$this->load->view('/layouts/footer', $data);

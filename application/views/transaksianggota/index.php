@@ -48,8 +48,22 @@
                     <td><?php echo $nasabah[$i]['kelurahan']?></td>
                     <td style='text-align: center'><a class="btn btn-danger" href="<?php echo site_url("transaksianggotacon/pinjaman/".$nasabah[$i]['id']); ?>"><i class="fa fa-money"></i></a></td>
                     <?php
-                      if($nasabah[$i]['total_unpost'] == 0) {
+                      if($nasabah[$i]['total_unpost'] == '0' 
+                        && $nasabah_simpananpokok[$i]['total_unpost'] == '0' 
+                        && $nasabah_simpananwajib[$i]['total_unpost'] == '0' 
+                        && $nasabah_simpanankhusus[$i]['total_unpost'] == '0' 
+                        && $nasabah_simpanandanasosial[$i]['total_unpost'] == '0' 
+                        && $nasabah_simpanankanzun[$i]['total_unpost'] == '0' 
+                        && $nasabah_simpananpihakketiga[$i]['total_unpost'] == '0' ) {
                         echo "<td style='text-align: center; color:green'>Post</td>";
+                      } else if ($nasabah[$i]['total_unpost'] == NULL
+                        && $nasabah_simpananpokok[$i]['total_unpost'] == NULL
+                        && $nasabah_simpananwajib[$i]['total_unpost'] == NULL
+                        && $nasabah_simpanankhusus[$i]['total_unpost'] == NULL
+                        && $nasabah_simpanandanasosial[$i]['total_unpost'] == NULL
+                        && $nasabah_simpanankanzun[$i]['total_unpost'] == NULL
+                        && $nasabah_simpananpihakketiga[$i]['total_unpost'] == NULL ) {
+                        echo "<td style='text-align: center; color:black'>Tidak Ada Transaksi</td>";
                       } else {
                         echo "<td style='text-align: center; color:red'>Unpost</td>";
                       }
