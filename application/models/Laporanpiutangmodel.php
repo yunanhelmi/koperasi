@@ -5,7 +5,7 @@ class LaporanPiutangModel extends CI_Model {
 		parent::__construct();
 	}
 
-	function get_data_piutang($dari, $sampai) {
+	function get_data_piutang($tanggal) {
 		/*$query = $this->db->query("
 								SELECT 
 									pinjaman.*, 
@@ -67,14 +67,14 @@ class LaporanPiutangModel extends CI_Model {
 								     FROM
 										detail_angsuran
 									WHERE
-										detail_angsuran.waktu <= '$sampai'
+										detail_angsuran.waktu <= '$tanggal'
 										AND detail_angsuran.status_post = '1'
 									ORDER BY
 										detail_angsuran.waktu DESC) as detail_angsuran
 								ON 
 									pinjaman.id = detail_angsuran.id_pinjaman
 								WHERE
-									pinjaman.waktu <= '$sampai'
+									pinjaman.waktu <= '$tanggal'
 									AND pinjaman.sisa_angsuran > 0
 								GROUP BY 
 									pinjaman.id
@@ -83,7 +83,7 @@ class LaporanPiutangModel extends CI_Model {
 		return $a;
 	}
 
-	function get_data($sampai) {
+	function get_data($tanggal) {
 		$query = $this->db->query("
 								SELECT
 									nasabah.nama,
@@ -116,7 +116,7 @@ class LaporanPiutangModel extends CI_Model {
 										FROM 
 											detail_angsuran
 										WHERE 
-											detail_angsuran.waktu <= '$sampai'
+											detail_angsuran.waktu <= '$tanggal'
 											AND detail_angsuran.status_post = '1'
 										GROUP BY 
 											id_pinjaman

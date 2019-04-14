@@ -28,21 +28,12 @@
     				<form action="<?php echo base_url();?>index.php/laporanpiutangcon/excel_laporan" method="post" enctype="multipart/form-data" role="form">
 						<div class="box-body">
 							<div class="form-group col-xs-3">
-								<label for="exampleInputPassword1">Dari</label>
+								<label for="exampleInputPassword1">Per Tanggal</label>
 								<div class="input-group date">
 									<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</div>
-									<input type="text" class="form-control pull-right" name="dari" id="dari" value="" data-date-format="dd-mm-yyyy">
-								</div>
-							</div>
-							<div class="form-group col-xs-3">
-								<label for="exampleInputPassword1">Sampai</label>
-								<div class="input-group date">
-									<div class="input-group-addon">
-										<i class="fa fa-calendar"></i>
-									</div>
-									<input type="text" class="form-control pull-right" name="sampai" id="sampai" value="" data-date-format="dd-mm-yyyy">
+									<input type="text" class="form-control pull-right" name="tanggal" id="tanggal" value="" data-date-format="dd-mm-yyyy">
 								</div>
 							</div>
 			            </div>
@@ -87,43 +78,29 @@ table.table-bordered > tbody > tr > td{
 <script>
 
 function view_laporan() {
-	var dari = $('#dari').val();
-	var sampai = $('#sampai').val();
-	if(dari == '' || dari == null ) {
-		alert("Tanggal Dari Tidak Boleh Kosong");
-	} else if (sampai == '' || sampai == null) {
-		alert("Tanggal Sampai Tidak Boleh Kosong");
+	var tanggal = $('#tanggal').val();
+	if(tanggal == '' || tanggal == null ) {
+		alert("Tanggal Tidak Boleh Kosong");
 	} else {
-		dari = dari.split("-");
-		tgl_dari = '';
-		for(i = dari.length - 1; i >= 0; i--) {
+		tanggal = tanggal.split("-");
+		tgl = '';
+		for(i = tanggal.length - 1; i >= 0; i--) {
 			if(i == 0) {
-				tgl_dari = tgl_dari + dari[i];	
+				tgl = tgl + tanggal[i];	
 			} else {
-				tgl_dari = tgl_dari + dari[i] + "-";	
-			}
-		}
-
-		sampai = sampai.split("-");
-		tgl_sampai = '';
-		for(i = sampai.length - 1; i >= 0; i--) {
-			if(i == 0) {
-				tgl_sampai = tgl_sampai + sampai[i];	
-			} else {
-				tgl_sampai = tgl_sampai + sampai[i] + "-";	
+				tgl = tgl + tanggal[i] + "-";	
 			}
 		}
 
 		var controller = 'laporanpiutangcon';
 		var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
-		window.location.href = base_url + '/' + controller + '/view/' + tgl_dari + '/' + tgl_sampai;
+		window.location.href = base_url + '/' + controller + '/view/' + tgl;
 	}
 	
 }
 
 $(document).ready(function() {
-	$('#dari').datepicker({}).on('changeDate', function(ev){});
-	$('#sampai').datepicker({}).on('changeDate', function(ev){});
+	$('#tanggal').datepicker({}).on('changeDate', function(ev){});
 });
 
 </script>

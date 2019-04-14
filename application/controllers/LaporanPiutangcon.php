@@ -110,15 +110,11 @@ class LaporanPiutangCon extends CI_Controller {
 			redirect("usercon/login", "refresh");
 		}
 
-		$tgl_dari1 	= $this->input->post('dari');
-		$tgl_dari 	= strtotime($tgl_dari1);
-		$dari 		= date("Y-m-d",$tgl_dari);
+		$tanggal1 	= $this->input->post('tanggal');
+		$tanggal1 	= strtotime($tanggal1);
+		$tanggal 	= date("Y-m-d",$tanggal1);
 
-		$tgl_sampai1	= $this->input->post('sampai');
-		$tgl_sampai 	= strtotime($tgl_sampai1);
-		$sampai 		= date("Y-m-d",$tgl_sampai);
-
-		$data_piutang = $this->laporanpiutangmodel->get_data_piutang($dari, $sampai);
+		$data_piutang = $this->laporanpiutangmodel->get_data_piutang($tanggal);
 
 		/*echo "<pre>";
 		var_dump($data_piutang);
@@ -140,7 +136,7 @@ class LaporanPiutangCon extends CI_Controller {
         $sheet->getStyle("A".$i.":L".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":L".$i)->getFont()->setSize(14)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":L".$i)->setCellValue("A".$i, "LAPORAN SIMPANAN ".$tgl_dari1." - ".$tgl_sampai1);
+        $sheet->mergeCells("A".$i.":L".$i)->setCellValue("A".$i, "LAPORAN SIMPANAN ".$tanggal1);
         $sheet->getStyle("A".$i.":L".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":L".$i)->getFont()->setSize(12)->setBold(true);
         $i++;
@@ -288,7 +284,7 @@ class LaporanPiutangCon extends CI_Controller {
         $thin['borders']['allborders']['style']=PHPExcel_Style_Border::BORDER_THIN ;
         $sheet  ->getStyle ( "A".$border_start.":L".$border_end )->applyFromArray ($thin);
 
-        $filename = "Laporan Simpanan_".$tgl_dari1."_".$tgl_sampai1.".xlsx";
+        $filename = "Laporan Simpanan_".$tanggal1.".xlsx";
 
         header ( 'Content-Type: application/vnd.ms-excel' );
         header ( 'Content-Disposition: attachment;filename="'.$filename.'"' );
@@ -304,15 +300,19 @@ class LaporanPiutangCon extends CI_Controller {
             redirect("usercon/login", "refresh");
         }
 
-        $tgl_dari1  = $this->input->post('dari');
+        /*$tgl_dari1  = $this->input->post('dari');
         $tgl_dari   = strtotime($tgl_dari1);
         $dari       = date("Y-m-d",$tgl_dari);
 
         $tgl_sampai1    = $this->input->post('sampai');
         $tgl_sampai     = strtotime($tgl_sampai1);
-        $sampai         = date("Y-m-d",$tgl_sampai);
+        $sampai         = date("Y-m-d",$tgl_sampai);*/
 
-        $data = $this->laporanpiutangmodel->get_data($sampai); 
+        $tanggal1   = $this->input->post('tanggal');
+        $tgl        = strtotime($tanggal1);
+        $tanggal    = date("Y-m-d",$tgl);
+
+        $data = $this->laporanpiutangmodel->get_data($tanggal); 
 
         $file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
@@ -330,7 +330,7 @@ class LaporanPiutangCon extends CI_Controller {
         $sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":M".$i)->getFont()->setSize(14)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":M".$i)->setCellValue("A".$i, "LAPORAN RINCIAN PIUTANG ".$tgl_dari1." - ".$tgl_sampai1);
+        $sheet->mergeCells("A".$i.":M".$i)->setCellValue("A".$i, "LAPORAN RINCIAN PIUTANG ".$tanggal1);
         $sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":M".$i)->getFont()->setSize(12)->setBold(true);
         $i++;
@@ -466,7 +466,7 @@ class LaporanPiutangCon extends CI_Controller {
         $thin['borders']['allborders']['style']=PHPExcel_Style_Border::BORDER_THIN ;
         $sheet  ->getStyle ( "A".$border_start.":L".$border_end )->applyFromArray ($thin);
 
-        $filename = "Laporan Piutang_".$tgl_dari1."_".$tgl_sampai1.".xlsx";
+        $filename = "Laporan Piutang_".$tanggal1.".xlsx";
 
         header ( 'Content-Type: application/vnd.ms-excel' );
         header ( 'Content-Disposition: attachment;filename="'.$filename.'"' );
