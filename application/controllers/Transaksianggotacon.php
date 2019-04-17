@@ -830,7 +830,7 @@ class TransaksianggotaCon extends CI_Controller {
 			}
 			$this->detailangsuranmodel->updateData($id, $update);
 			/* End of Posting Akuntansi Untuk Jasa */
-		} else {
+		} else if($data['post_detail_angsuran']->jenis == "Pinjaman") {
 			/* Posting Akuntansi Untuk Pemberian Pinjaman */
 			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pemberian pinjaman');
 			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
@@ -1150,7 +1150,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
 			$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
 			$this->simpananpokokmodel->updateData($id, $update);
-		} else {
+		} else if($data['simpananpokok']->jenis == "Tarikan") {
 			if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "1") {
 				$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan simpanan pokok');
 			} else if(substr($data['simpananpokok']->nomor_nasabah, 0, 1) == "2") {
@@ -1579,7 +1579,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
 			$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
 			$this->detailsimpananwajibmodel->updateData($id, $update);
-		} else {
+		} else if($data['post_detail_simpananwajib']->jenis == "Tarikan") {
 			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan simpanan wajib');
 			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
@@ -2038,7 +2038,7 @@ class TransaksianggotaCon extends CI_Controller {
 				$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
 				$this->detailsimpanankhususmodel->updateData($id, $update);
 			}
-		} else {
+		} else if($data['post_detail_simpanankhusus']->jenis == "Tarikan") {
 			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan simpanan kusus');
 			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
@@ -2479,7 +2479,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
 			$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
 			$this->detailsimpanandanasosialmodel->updateData($id, $update);
-		} else {
+		} else if($data['post_detail_simpanandanasosial']->jenis == "Tarikan") {
 			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan simp dansos anggota');
 			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
@@ -2891,7 +2891,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
 			$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
 			$this->detailsimpanankanzunmodel->updateData($id, $update);
-		} else {
+		} else if($data['post_detail_simpanankanzun']->jenis == "Tarikan") {
 			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan hutang kanzun');
 			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
@@ -3574,7 +3574,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$data_kredit['origin_table']	= 'detail_simpananpihakketiga';
 			$data_kredit['origin_table_id']	= $data['post_detail_simpananpihakketiga']->id;
 			$this->transaksiakuntansimodel->inputData($data_kredit);
-		} else {
+		} else if($data['post_detail_simpananpihakketiga']->jenis == "Tarikan") {
 			$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan tabungan pihak 3');
 			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);

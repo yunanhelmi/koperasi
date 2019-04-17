@@ -336,7 +336,7 @@ class Simpanan3thcon extends CI_Controller {
 			$data_kredit['origin_table']	= 'detail_simpanan3th';
 			$data_kredit['origin_table_id']	= $data['post_detail_simpanan3th']->id;
 			$this->transaksiakuntansimodel->inputData($data_kredit);
-		} else {
+		} else if($data['post_detail_simpanan3th']->jenis == "Tarikan") {
 			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_debet_pencairan_simp);
 			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_kredit_pencairan_simp);
 			$bln_thn 	= strtotime( $data['post_detail_simpanan3th']->bulan_tahun );
