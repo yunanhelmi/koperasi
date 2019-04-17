@@ -252,7 +252,7 @@ function rupiah($angka){
                   </div>
                   <div class="form-group col-xs-6">
                     <label for="exampleInputPassword1">Jenis</label>
-                    <select id="edit_jenis" name="edit_jenis" class="form-control" style="width: 100%;">
+                    <select id="jenis" name="jenis" class="form-control" style="width: 100%;">
                       <option value='Setoran' <?php echo $simpananpokok->jenis == 'Setoran' ? 'selected' : ''?> >Setoran</option>
                       <option value='Tarikan' <?php echo $simpananpokok->jenis == 'Tarikan' ? 'selected' : ''?> >Tarikan</option>
                     </select>
