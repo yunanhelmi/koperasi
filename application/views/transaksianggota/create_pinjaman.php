@@ -287,6 +287,7 @@ function rupiah($angka){
                       <th>Nomor Anggota</th>
                       <th>NIK</th>
                       <th>Tanggal</th>
+                      <th>Jenis</th>
                       <th>Jumlah</th>
                       <th>View</th>
                       <th>Edit</th>
@@ -306,6 +307,7 @@ function rupiah($angka){
                       <td><?php echo $simpananpokok[$i]['nik_nasabah']?></td>
                       <?php $date = strtotime($simpananpokok[$i]['waktu']);?>
                       <td><?php echo date("d-m-Y",$date)?></td>
+                      <td><?php echo $simpananpokok[$i]['jenis']?></td>
                       <td><?php echo rupiah($simpananpokok[$i]['jumlah'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpananpokok/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpananpokok/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
