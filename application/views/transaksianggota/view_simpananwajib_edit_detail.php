@@ -259,7 +259,6 @@ function rupiah($angka){
                       <td><?php echo $simpananpokok[$i]['jenis']?></td>
                       <td><?php echo rupiah($simpananpokok[$i]['jumlah'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpananpokok/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
-                      
                       <?php 
                       if($simpananpokok[$i]['status_post'] == 1) {
                       ?>
