@@ -194,7 +194,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </li>
         <li class="treeview">
           <a href="<?php echo base_url()."assets/"; ?>#">
-            <i class="fa fa-book"></i> <span>Laporan</span>
+            <i class="fa fa-book"></i> <span>Laporan Akuntansi</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -203,11 +203,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="<?php echo base_url(); ?>index.php/laporanneracacon/index"><i class="fa fa-balance-scale"></i>Neraca</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporanrugilabacon/index"><i class="fa fa-book"></i>Rugi Laba</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporankeuangancon/index"><i class="fa fa-money"></i>Keuangan</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporanpiutangcon/index"><i class="fa fa-book"></i>Piutang</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporanrincianpiutangcon/index"><i class="fa fa-book"></i>Rincian Piutang</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanancon/index"><i class="fa fa-book"></i>Simpanan</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporanhariancon/index"><i class="fa fa-book"></i>Harian</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/saldoawaltahuncon/index"><i class="fa fa-upload"></i>Post Saldo Awal Tahun</a></li>
+            <!--<li><a href="<?php echo base_url(); ?>index.php/saldoawaltahuncon/index"><i class="fa fa-upload"></i>Post Saldo Awal Tahun</a></li>-->
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="<?php echo base_url()."assets/"; ?>#">
+            <i class="fa fa-book"></i> <span>Laporan Penunjang</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url(); ?>index.php/laporanpiutangcon/index"><i class="fa fa-list-ul"></i>Daftar Piutang Anggota</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporanrincianpiutangcon/index"><i class="fa fa-list-ul"></i>Rincian Piutang</a></li>
+            <!--<li><a href="<?php echo base_url(); ?>index.php/laporansimpanancon/index"><i class="fa fa-book"></i>Simpanan</a></li>-->
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpokokcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Pokok</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpokokcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Pokok Istimewa</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananwajibcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Wajib</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanankhususcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Khusus</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanandanasosialcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Dansos Anggota</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanankanzuncon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Kanzun</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpihakketigacon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Pihak Ketiga</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanan3thcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan 3Th</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporanhariancon/index"><i class="fa fa-list-ul"></i>Harian</a></li>
           </ul>
         </li>
         <li>
