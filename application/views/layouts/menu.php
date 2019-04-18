@@ -218,7 +218,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="<?php echo base_url(); ?>index.php/laporanrincianpiutangcon/index"><i class="fa fa-list-ul"></i>Rincian Piutang</a></li>
             <!--<li><a href="<?php echo base_url(); ?>index.php/laporansimpanancon/index"><i class="fa fa-book"></i>Simpanan</a></li>-->
             <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpokokcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Pokok</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpokokcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Pokok Istimewa</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpokokistimewacon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Pokok Istimewa</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporansimpananwajibcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Wajib</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporansimpanankhususcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Khusus</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporansimpanandanasosialcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Dansos Anggota</a></li>

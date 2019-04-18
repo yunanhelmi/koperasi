@@ -2,7 +2,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class LaporanSimpananPokokCon extends CI_Controller {
+class LaporanSimpananPokokIstimewaCon extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 
@@ -19,20 +19,6 @@ class LaporanSimpananPokokCon extends CI_Controller {
 		$this->load->library('upload');
 		$this->load->library('image_lib');
 		$this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
-	}
-
-	function index() {
-		$session_data = $this->session->userdata('logged_in');
-		if($session_data == NULL) {
-			redirect("usercon/login", "refresh");
-		}
-		$data['username'] 	= $session_data['username'];
-		$data['status'] 	= $session_data['status'];
-		$data['nasabah'] 	= $this->nasabahmodel->showData();
-		
-		$this->load->view('/layouts/menu', $data);
-		$this->load->view('/laporan/simpananpokok', $data);
-		$this->load->view('/layouts/footer', $data);	
 	}
 
 	function tanggal_indo($tanggal) {
@@ -53,6 +39,20 @@ class LaporanSimpananPokokCon extends CI_Controller {
 		return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
 	}
 
+	function index() {
+		$session_data = $this->session->userdata('logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+		$data['username'] 	= $session_data['username'];
+		$data['status'] 	= $session_data['status'];
+		$data['nasabah'] 	= $this->nasabahmodel->showData();
+		
+		$this->load->view('/layouts/menu', $data);
+		$this->load->view('/laporan/simpananpokokistimewa', $data);
+		$this->load->view('/layouts/footer', $data);	
+	}
+
 	function excel() {
 		$session_data = $this->session->userdata('logged_in');
 		if($session_data == NULL) {
@@ -63,20 +63,20 @@ class LaporanSimpananPokokCon extends CI_Controller {
         $tgl        = strtotime($tanggal1);
         $tanggal    = date("Y-m-d",$tgl);
 
-		$data = $this->laporansimpananpokokmodel->get_data_simpananpokok($tanggal);
+        $data = $this->laporansimpananpokokmodel->get_data_simpananpokok_istimewa($tanggal);
 
-		/*echo "<pre>";
+        /*echo "<pre>";
 		var_dump($data_piutang);
 		echo "</pre>";*/
 
 		$file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
         $file->getProperties ()->setLastModifiedBy ( "System" );
-        $file->getProperties ()->setTitle ( "Laporan Daftar Simpanan Pokok" );
-        $file->getProperties ()->setSubject ( "Laporan Daftar Simpanan Pokok" );
-        $file->getProperties ()->setDescription ( "Laporan Daftar Simpanan Pokok" );
-        $file->getProperties ()->setKeywords ( "Laporan Daftar Simpanan Pokok" );
-        $file->getProperties ()->setCategory ( "Laporan Daftar Simpanan Pokok" );
+        $file->getProperties ()->setTitle ( "Laporan Daftar Simpanan Pokok Istimewa" );
+        $file->getProperties ()->setSubject ( "Laporan Daftar Simpanan Pokok Istimewa" );
+        $file->getProperties ()->setDescription ( "Laporan Daftar Simpanan Pokok Istimewa" );
+        $file->getProperties ()->setKeywords ( "Laporan Daftar Simpanan Pokok Istimewa" );
+        $file->getProperties ()->setCategory ( "Laporan Daftar Simpanan Pokok Istimewa" );
 
         $sheet = $file->getActiveSheet ();
         $i = 2;
@@ -85,7 +85,7 @@ class LaporanSimpananPokokCon extends CI_Controller {
         $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":H".$i)->getFont()->setSize(14)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "LAPORAN DAFTAR SIMPANAN POKOK ".$tanggal1);
+        $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "LAPORAN DAFTAR SIMPANAN POKOK ISTIMEWA ".$tanggal1);
         $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":H".$i)->getFont()->setSize(12)->setBold(true);
         $i++;
@@ -151,7 +151,7 @@ class LaporanSimpananPokokCon extends CI_Controller {
         $thin['borders']['allborders']['style']=PHPExcel_Style_Border::BORDER_THIN ;
         $sheet  ->getStyle ( "A".$border_start.":H".$border_end )->applyFromArray ($thin);
 
-        $filename = "Laporan Daftar Simpanan Pokok_".$tanggal1.".xlsx";
+        $filename = "Laporan Daftar Simpanan Pokok Istimewa_".$tanggal1.".xlsx";
 
         header ( 'Content-Type: application/vnd.ms-excel' );
         header ( 'Content-Disposition: attachment;filename="'.$filename.'"' );
