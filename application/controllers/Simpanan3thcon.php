@@ -305,81 +305,84 @@ class Simpanan3thcon extends CI_Controller {
 		$data['simpanan3thmaster']		= $this->simpanan3thmastermodel->get_simpanan3thmaster_by_id($id_master);
 		$data['post_detail_simpanan3th']= $this->detailsimpanan3thmodel->get_detail_simpanan3th_by_id($id_detail_simpanan3th);
 
-		if($data['post_detail_simpanan3th']->jenis == "Setoran") {
-			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_debet_penerimaan_simp);
-			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_kredit_penerimaan_simp);
-			$bln_thn 	= strtotime( $data['post_detail_simpanan3th']->bulan_tahun );
-            $bulan_tahun = date( 'M-Y', $bln_thn );
+		if($data['post_detail_simpanan3th']->status_post != '1') {
+			if($data['post_detail_simpanan3th']->jenis == "Setoran") {
+				$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_debet_penerimaan_simp);
+				$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_kredit_penerimaan_simp);
+				$bln_thn 	= strtotime( $data['post_detail_simpanan3th']->bulan_tahun );
+	            $bulan_tahun = date( 'M-Y', $bln_thn );
 
-            $data_debet 					= array();
-			$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
-			$data_debet['tanggal'] 			= $data['post_detail_simpanan3th']->waktu;
-			$data_debet['kode_akun'] 		= $data['simpanan3thmaster']->kode_debet_penerimaan_simp;
-			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= $data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
-			$data_debet['jumlah'] 			= $data['post_detail_simpanan3th']->jumlah;
-			$data_debet['debet'] 			= $data['post_detail_simpanan3th']->jumlah;
-			$data_debet['kredit'] 			= 0;
-			$data_debet['origin_table']		= 'detail_simpanan3th';
-			$data_debet['origin_table_id']	= $data['post_detail_simpanan3th']->id;
-			$this->transaksiakuntansimodel->inputData($data_debet);
+	            $data_debet 					= array();
+				$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
+				$data_debet['tanggal'] 			= $data['post_detail_simpanan3th']->waktu;
+				$data_debet['kode_akun'] 		= $data['simpanan3thmaster']->kode_debet_penerimaan_simp;
+				$data_debet['nama_akun'] 		= $debet->nama_akun;
+				$data_debet['keterangan'] 		= $data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
+				$data_debet['jumlah'] 			= $data['post_detail_simpanan3th']->jumlah;
+				$data_debet['debet'] 			= $data['post_detail_simpanan3th']->jumlah;
+				$data_debet['kredit'] 			= 0;
+				$data_debet['origin_table']		= 'detail_simpanan3th';
+				$data_debet['origin_table_id']	= $data['post_detail_simpanan3th']->id;
+				$this->transaksiakuntansimodel->inputData($data_debet);
 
-			$data_kredit 					= array();
-			$data_kredit['id'] 				= $this->transaksiakuntansimodel->getNewId();
-			$data_kredit['tanggal'] 		= $data['post_detail_simpanan3th']->waktu;
-			$data_kredit['kode_akun'] 		= $data['simpanan3thmaster']->kode_kredit_penerimaan_simp;
-			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= $data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
-			$data_kredit['jumlah'] 			= $data['post_detail_simpanan3th']->jumlah;
-			$data_kredit['debet'] 			= 0;
-			$data_kredit['kredit'] 			= $data['post_detail_simpanan3th']->jumlah;
-			$data_kredit['origin_table']	= 'detail_simpanan3th';
-			$data_kredit['origin_table_id']	= $data['post_detail_simpanan3th']->id;
-			$this->transaksiakuntansimodel->inputData($data_kredit);
-		} else if($data['post_detail_simpanan3th']->jenis == "Tarikan") {
-			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_debet_pencairan_simp);
-			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_kredit_pencairan_simp);
-			$bln_thn 	= strtotime( $data['post_detail_simpanan3th']->bulan_tahun );
-            $bulan_tahun = date( 'M-Y', $bln_thn );
+				$data_kredit 					= array();
+				$data_kredit['id'] 				= $this->transaksiakuntansimodel->getNewId();
+				$data_kredit['tanggal'] 		= $data['post_detail_simpanan3th']->waktu;
+				$data_kredit['kode_akun'] 		= $data['simpanan3thmaster']->kode_kredit_penerimaan_simp;
+				$data_kredit['nama_akun'] 		= $kredit->nama_akun;
+				$data_kredit['keterangan'] 		= $data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
+				$data_kredit['jumlah'] 			= $data['post_detail_simpanan3th']->jumlah;
+				$data_kredit['debet'] 			= 0;
+				$data_kredit['kredit'] 			= $data['post_detail_simpanan3th']->jumlah;
+				$data_kredit['origin_table']	= 'detail_simpanan3th';
+				$data_kredit['origin_table_id']	= $data['post_detail_simpanan3th']->id;
+				$this->transaksiakuntansimodel->inputData($data_kredit);
+			} else if($data['post_detail_simpanan3th']->jenis == "Tarikan") {
+				$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_debet_pencairan_simp);
+				$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_kredit_pencairan_simp);
+				$bln_thn 	= strtotime( $data['post_detail_simpanan3th']->bulan_tahun );
+	            $bulan_tahun = date( 'M-Y', $bln_thn );
 
-            $data_debet 					= array();
-			$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
-			$data_debet['tanggal'] 			= $data['post_detail_simpanan3th']->waktu;
-			$data_debet['kode_akun'] 		= $data['simpanan3thmaster']->kode_debet_pencairan_simp;
-			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= "Pencairan ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
-			$data_debet['jumlah'] 			= $data['post_detail_simpanan3th']->jumlah;
-			$data_debet['debet'] 			= $data['post_detail_simpanan3th']->jumlah;
-			$data_debet['kredit'] 			= 0;
-			$data_debet['origin_table']		= 'detail_simpanan3th';
-			$data_debet['origin_table_id']	= $data['post_detail_simpanan3th']->id;
-			$this->transaksiakuntansimodel->inputData($data_debet);
+	            $data_debet 					= array();
+				$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
+				$data_debet['tanggal'] 			= $data['post_detail_simpanan3th']->waktu;
+				$data_debet['kode_akun'] 		= $data['simpanan3thmaster']->kode_debet_pencairan_simp;
+				$data_debet['nama_akun'] 		= $debet->nama_akun;
+				$data_debet['keterangan'] 		= "Pencairan ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
+				$data_debet['jumlah'] 			= $data['post_detail_simpanan3th']->jumlah;
+				$data_debet['debet'] 			= $data['post_detail_simpanan3th']->jumlah;
+				$data_debet['kredit'] 			= 0;
+				$data_debet['origin_table']		= 'detail_simpanan3th';
+				$data_debet['origin_table_id']	= $data['post_detail_simpanan3th']->id;
+				$this->transaksiakuntansimodel->inputData($data_debet);
 
-			$data_kredit 					= array();
-			$data_kredit['id'] 				= $this->transaksiakuntansimodel->getNewId();
-			$data_kredit['tanggal'] 		= $data['post_detail_simpanan3th']->waktu;
-			$data_kredit['kode_akun'] 		= $data['simpanan3thmaster']->kode_kredit_pencairan_simp;
-			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= "Pencairan ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
-			$data_kredit['jumlah'] 			= $data['post_detail_simpanan3th']->jumlah;
-			$data_kredit['debet'] 			= 0;
-			$data_kredit['kredit'] 			= $data['post_detail_simpanan3th']->jumlah;
-			$data_kredit['origin_table']	= 'detail_simpanan3th';
-			$data_kredit['origin_table_id']	= $data['post_detail_simpanan3th']->id;
-			$this->transaksiakuntansimodel->inputData($data_kredit);
+				$data_kredit 					= array();
+				$data_kredit['id'] 				= $this->transaksiakuntansimodel->getNewId();
+				$data_kredit['tanggal'] 		= $data['post_detail_simpanan3th']->waktu;
+				$data_kredit['kode_akun'] 		= $data['simpanan3thmaster']->kode_kredit_pencairan_simp;
+				$data_kredit['nama_akun'] 		= $kredit->nama_akun;
+				$data_kredit['keterangan'] 		= "Pencairan ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
+				$data_kredit['jumlah'] 			= $data['post_detail_simpanan3th']->jumlah;
+				$data_kredit['debet'] 			= 0;
+				$data_kredit['kredit'] 			= $data['post_detail_simpanan3th']->jumlah;
+				$data_kredit['origin_table']	= 'detail_simpanan3th';
+				$data_kredit['origin_table_id']	= $data['post_detail_simpanan3th']->id;
+				$this->transaksiakuntansimodel->inputData($data_kredit);
+			}
+
+			$update = array();
+			$id 									= $data['post_detail_simpanan3th']->id;
+			$update['id_simpanan3th'] 				= $data['post_detail_simpanan3th']->id_simpanan3th;
+			$update['waktu'] 						= $data['post_detail_simpanan3th']->waktu;
+			$update['jenis'] 						= $data['post_detail_simpanan3th']->jenis;
+			$update['bulan_tahun'] 					= $data['post_detail_simpanan3th']->bulan_tahun;
+			$update['jumlah'] 						= $data['post_detail_simpanan3th']->jumlah;
+			$update['status_post'] 					= 1;
+			$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
+			$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
+			$this->detailsimpanan3thmodel->updateData($id, $update);
 		}
-
-		$update = array();
-		$id 									= $data['post_detail_simpanan3th']->id;
-		$update['id_simpanan3th'] 				= $data['post_detail_simpanan3th']->id_simpanan3th;
-		$update['waktu'] 						= $data['post_detail_simpanan3th']->waktu;
-		$update['jenis'] 						= $data['post_detail_simpanan3th']->jenis;
-		$update['bulan_tahun'] 					= $data['post_detail_simpanan3th']->bulan_tahun;
-		$update['jumlah'] 						= $data['post_detail_simpanan3th']->jumlah;
-		$update['status_post'] 					= 1;
-		$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
-		$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
-		$this->detailsimpanan3thmodel->updateData($id, $update);
+		
 
 		redirect("simpanan3thcon/view_simpanan3th/".$id_simpanan3th);
 	}
@@ -548,112 +551,115 @@ class Simpanan3thcon extends CI_Controller {
 		$data['simpanan3thmaster']				= $this->simpanan3thmastermodel->get_simpanan3thmaster_by_id($id_master);
 		$data['post_detail_jasa_simpanan3th']	= $this->detailjasasimpanan3thmodel->get_detail_jasa_simpanan3th_by_id($id_detail_jasa_simpanan3th);
 
-		if($data['post_detail_jasa_simpanan3th']->jenis == "Penyesuaian Jasa") {
-			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_debet_penyesuaian_jasa);
-			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_kredit_penyesuaian_jasa);
-			$bln_thn 	= strtotime( $data['post_detail_jasa_simpanan3th']->bulan_tahun );
-            $bulan_tahun = date( 'M-Y', $bln_thn );
+		if($data['post_detail_jasa_simpanan3th']->status_post != '1') {
+			if($data['post_detail_jasa_simpanan3th']->jenis == "Penyesuaian Jasa") {
+				$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_debet_penyesuaian_jasa);
+				$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_kredit_penyesuaian_jasa);
+				$bln_thn 	= strtotime( $data['post_detail_jasa_simpanan3th']->bulan_tahun );
+	            $bulan_tahun = date( 'M-Y', $bln_thn );
 
-            $data_debet 					= array();
-			$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
-			$data_debet['tanggal'] 			= $data['post_detail_jasa_simpanan3th']->waktu;
-			$data_debet['kode_akun'] 		= $data['simpanan3thmaster']->kode_debet_penyesuaian_jasa;
-			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
-			$data_debet['jumlah'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
-			$data_debet['debet'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
-			$data_debet['kredit'] 			= 0;
-			$data_debet['origin_table']		= 'detail_jasa_simpanan3th';
-			$data_debet['origin_table_id']	= $data['post_detail_jasa_simpanan3th']->id;
-			$this->transaksiakuntansimodel->inputData($data_debet);
+	            $data_debet 					= array();
+				$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
+				$data_debet['tanggal'] 			= $data['post_detail_jasa_simpanan3th']->waktu;
+				$data_debet['kode_akun'] 		= $data['simpanan3thmaster']->kode_debet_penyesuaian_jasa;
+				$data_debet['nama_akun'] 		= $debet->nama_akun;
+				$data_debet['keterangan'] 		= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
+				$data_debet['jumlah'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
+				$data_debet['debet'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
+				$data_debet['kredit'] 			= 0;
+				$data_debet['origin_table']		= 'detail_jasa_simpanan3th';
+				$data_debet['origin_table_id']	= $data['post_detail_jasa_simpanan3th']->id;
+				$this->transaksiakuntansimodel->inputData($data_debet);
 
-			$data_kredit 					= array();
-			$data_kredit['id'] 				= $this->transaksiakuntansimodel->getNewId();
-			$data_kredit['tanggal'] 		= $data['post_detail_jasa_simpanan3th']->waktu;
-			$data_kredit['kode_akun'] 		= $data['simpanan3thmaster']->kode_kredit_penyesuaian_jasa;
-			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
-			$data_kredit['jumlah'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
-			$data_kredit['debet'] 			= 0;
-			$data_kredit['kredit'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
-			$data_kredit['origin_table']	= 'detail_jasa_simpanan3th';
-			$data_kredit['origin_table_id']	= $data['post_detail_jasa_simpanan3th']->id;
-			$this->transaksiakuntansimodel->inputData($data_kredit);
-		} else if ($data['post_detail_jasa_simpanan3th']->jenis == "Pencairan Hutang Jasa") {
-			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_debet_pencairan_hutang_jasa);
-			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_kredit_pencairan_hutang_jasa);
-			$bln_thn 	= strtotime( $data['post_detail_jasa_simpanan3th']->bulan_tahun );
-            $bulan_tahun = date( 'M-Y', $bln_thn );
+				$data_kredit 					= array();
+				$data_kredit['id'] 				= $this->transaksiakuntansimodel->getNewId();
+				$data_kredit['tanggal'] 		= $data['post_detail_jasa_simpanan3th']->waktu;
+				$data_kredit['kode_akun'] 		= $data['simpanan3thmaster']->kode_kredit_penyesuaian_jasa;
+				$data_kredit['nama_akun'] 		= $kredit->nama_akun;
+				$data_kredit['keterangan'] 		= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
+				$data_kredit['jumlah'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
+				$data_kredit['debet'] 			= 0;
+				$data_kredit['kredit'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
+				$data_kredit['origin_table']	= 'detail_jasa_simpanan3th';
+				$data_kredit['origin_table_id']	= $data['post_detail_jasa_simpanan3th']->id;
+				$this->transaksiakuntansimodel->inputData($data_kredit);
+			} else if ($data['post_detail_jasa_simpanan3th']->jenis == "Pencairan Hutang Jasa") {
+				$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_debet_pencairan_hutang_jasa);
+				$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_kredit_pencairan_hutang_jasa);
+				$bln_thn 	= strtotime( $data['post_detail_jasa_simpanan3th']->bulan_tahun );
+	            $bulan_tahun = date( 'M-Y', $bln_thn );
 
-            $data_debet 					= array();
-			$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
-			$data_debet['tanggal'] 			= $data['post_detail_jasa_simpanan3th']->waktu;
-			$data_debet['kode_akun'] 		= $data['simpanan3thmaster']->kode_debet_pencairan_hutang_jasa;
-			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
-			$data_debet['jumlah'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
-			$data_debet['debet'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
-			$data_debet['kredit'] 			= 0;
-			$data_debet['origin_table']		= 'detail_jasa_simpanan3th';
-			$data_debet['origin_table_id']	= $data['post_detail_jasa_simpanan3th']->id;
-			$this->transaksiakuntansimodel->inputData($data_debet);
+	            $data_debet 					= array();
+				$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
+				$data_debet['tanggal'] 			= $data['post_detail_jasa_simpanan3th']->waktu;
+				$data_debet['kode_akun'] 		= $data['simpanan3thmaster']->kode_debet_pencairan_hutang_jasa;
+				$data_debet['nama_akun'] 		= $debet->nama_akun;
+				$data_debet['keterangan'] 		= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
+				$data_debet['jumlah'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
+				$data_debet['debet'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
+				$data_debet['kredit'] 			= 0;
+				$data_debet['origin_table']		= 'detail_jasa_simpanan3th';
+				$data_debet['origin_table_id']	= $data['post_detail_jasa_simpanan3th']->id;
+				$this->transaksiakuntansimodel->inputData($data_debet);
 
-			$data_kredit 					= array();
-			$data_kredit['id'] 				= $this->transaksiakuntansimodel->getNewId();
-			$data_kredit['tanggal'] 		= $data['post_detail_jasa_simpanan3th']->waktu;
-			$data_kredit['kode_akun'] 		= $data['simpanan3thmaster']->kode_kredit_pencairan_hutang_jasa;
-			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
-			$data_kredit['jumlah'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
-			$data_kredit['debet'] 			= 0;
-			$data_kredit['kredit'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
-			$data_kredit['origin_table']	= 'detail_jasa_simpanan3th';
-			$data_kredit['origin_table_id']	= $data['post_detail_jasa_simpanan3th']->id;
-			$this->transaksiakuntansimodel->inputData($data_kredit);
-		} else if ($data['post_detail_jasa_simpanan3th']->jenis == "Pembayaran Biaya Jasa") {
-			$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_debet_pembayaran_jasa);
-			$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_kredit_pembayaran_jasa);
-			$bln_thn 	= strtotime( $data['post_detail_jasa_simpanan3th']->bulan_tahun );
-            $bulan_tahun = date( 'M-Y', $bln_thn );
+				$data_kredit 					= array();
+				$data_kredit['id'] 				= $this->transaksiakuntansimodel->getNewId();
+				$data_kredit['tanggal'] 		= $data['post_detail_jasa_simpanan3th']->waktu;
+				$data_kredit['kode_akun'] 		= $data['simpanan3thmaster']->kode_kredit_pencairan_hutang_jasa;
+				$data_kredit['nama_akun'] 		= $kredit->nama_akun;
+				$data_kredit['keterangan'] 		= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
+				$data_kredit['jumlah'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
+				$data_kredit['debet'] 			= 0;
+				$data_kredit['kredit'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
+				$data_kredit['origin_table']	= 'detail_jasa_simpanan3th';
+				$data_kredit['origin_table_id']	= $data['post_detail_jasa_simpanan3th']->id;
+				$this->transaksiakuntansimodel->inputData($data_kredit);
+			} else if ($data['post_detail_jasa_simpanan3th']->jenis == "Pembayaran Biaya Jasa") {
+				$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_debet_pembayaran_jasa);
+				$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($data['simpanan3thmaster']->kode_kredit_pembayaran_jasa);
+				$bln_thn 	= strtotime( $data['post_detail_jasa_simpanan3th']->bulan_tahun );
+	            $bulan_tahun = date( 'M-Y', $bln_thn );
 
-            $data_debet 					= array();
-			$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
-			$data_debet['tanggal'] 			= $data['post_detail_jasa_simpanan3th']->waktu;
-			$data_debet['kode_akun'] 		= $data['simpanan3thmaster']->kode_debet_pembayaran_jasa;
-			$data_debet['nama_akun'] 		= $debet->nama_akun;
-			$data_debet['keterangan'] 		= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
-			$data_debet['jumlah'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
-			$data_debet['debet'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
-			$data_debet['kredit'] 			= 0;
-			$data_debet['origin_table']		= 'detail_jasa_simpanan3th';
-			$data_debet['origin_table_id']	= $data['post_detail_jasa_simpanan3th']->id;
-			$this->transaksiakuntansimodel->inputData($data_debet);
+	            $data_debet 					= array();
+				$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
+				$data_debet['tanggal'] 			= $data['post_detail_jasa_simpanan3th']->waktu;
+				$data_debet['kode_akun'] 		= $data['simpanan3thmaster']->kode_debet_pembayaran_jasa;
+				$data_debet['nama_akun'] 		= $debet->nama_akun;
+				$data_debet['keterangan'] 		= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
+				$data_debet['jumlah'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
+				$data_debet['debet'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
+				$data_debet['kredit'] 			= 0;
+				$data_debet['origin_table']		= 'detail_jasa_simpanan3th';
+				$data_debet['origin_table_id']	= $data['post_detail_jasa_simpanan3th']->id;
+				$this->transaksiakuntansimodel->inputData($data_debet);
 
-			$data_kredit 					= array();
-			$data_kredit['id'] 				= $this->transaksiakuntansimodel->getNewId();
-			$data_kredit['tanggal'] 		= $data['post_detail_jasa_simpanan3th']->waktu;
-			$data_kredit['kode_akun'] 		= $data['simpanan3thmaster']->kode_kredit_pembayaran_jasa;
-			$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-			$data_kredit['keterangan'] 		= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
-			$data_kredit['jumlah'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
-			$data_kredit['debet'] 			= 0;
-			$data_kredit['kredit'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
-			$data_kredit['origin_table']	= 'detail_jasa_simpanan3th';
-			$data_kredit['origin_table_id']	= $data['post_detail_jasa_simpanan3th']->id;
-			$this->transaksiakuntansimodel->inputData($data_kredit);
+				$data_kredit 					= array();
+				$data_kredit['id'] 				= $this->transaksiakuntansimodel->getNewId();
+				$data_kredit['tanggal'] 		= $data['post_detail_jasa_simpanan3th']->waktu;
+				$data_kredit['kode_akun'] 		= $data['simpanan3thmaster']->kode_kredit_pembayaran_jasa;
+				$data_kredit['nama_akun'] 		= $kredit->nama_akun;
+				$data_kredit['keterangan'] 		= $data['post_detail_jasa_simpanan3th']->jenis." ".$data['simpanan3thmaster']->nama." Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanan3th']->nama_nasabah." Nomor Anggota: ".$data['simpanan3th']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanan3th']->waktu));
+				$data_kredit['jumlah'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
+				$data_kredit['debet'] 			= 0;
+				$data_kredit['kredit'] 			= $data['post_detail_jasa_simpanan3th']->jumlah;
+				$data_kredit['origin_table']	= 'detail_jasa_simpanan3th';
+				$data_kredit['origin_table_id']	= $data['post_detail_jasa_simpanan3th']->id;
+				$this->transaksiakuntansimodel->inputData($data_kredit);
+			}
+
+			$update = array();
+			$id 									= $data['post_detail_jasa_simpanan3th']->id;
+			$update['id_simpanan3th'] 				= $data['post_detail_jasa_simpanan3th']->id_simpanan3th;
+			$update['waktu'] 						= $data['post_detail_jasa_simpanan3th']->waktu;
+			$update['jenis'] 						= $data['post_detail_jasa_simpanan3th']->jenis;
+			$update['bulan_tahun'] 					= $data['post_detail_jasa_simpanan3th']->bulan_tahun;
+			$update['jumlah'] 						= $data['post_detail_jasa_simpanan3th']->jumlah;
+			$update['status_post'] 					= 1;
+			$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
+			$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
+			$this->detailjasasimpanan3thmodel->updateData($id, $update);
 		}
-
-		$update = array();
-		$id 									= $data['post_detail_jasa_simpanan3th']->id;
-		$update['id_simpanan3th'] 				= $data['post_detail_jasa_simpanan3th']->id_simpanan3th;
-		$update['waktu'] 						= $data['post_detail_jasa_simpanan3th']->waktu;
-		$update['jenis'] 						= $data['post_detail_jasa_simpanan3th']->jenis;
-		$update['bulan_tahun'] 					= $data['post_detail_jasa_simpanan3th']->bulan_tahun;
-		$update['jumlah'] 						= $data['post_detail_jasa_simpanan3th']->jumlah;
-		$update['status_post'] 					= 1;
-		$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
-		$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
-		$this->detailjasasimpanan3thmodel->updateData($id, $update);
+		
 
 		redirect("simpanan3thcon/view_simpanan3th/".$id_simpanan3th);
 	}

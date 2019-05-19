@@ -150,13 +150,24 @@ class LaporanKeuanganCon extends CI_Controller {
 		$tgl_sampai 	= strtotime($tgl_sampai1);
 		$sampai 		= date("Y-m-d",$tgl_sampai);
 
-		$transaksi_prev_aset	= $this->transaksiakuntansimodel->get_jumlah_by_sampai_first_char($dari, '1');
-		$transaksi_prev_hutang	= $this->transaksiakuntansimodel->get_jumlah_by_sampai_first_char($dari, '2');
-		$transaksi_prev_modal	= $this->transaksiakuntansimodel->get_jumlah_by_sampai_first_char($dari, '3');
+		if($dari < '2019-01-01' && $sampai < '2019-01-01') {
+			$transaksi_prev_aset	= $this->transaksiakuntansimodel->get_jumlah_by_sampai_first_char($dari, '1');
+			$transaksi_prev_hutang	= $this->transaksiakuntansimodel->get_jumlah_by_sampai_first_char($dari, '2');
+			$transaksi_prev_modal	= $this->transaksiakuntansimodel->get_jumlah_by_sampai_first_char($dari, '3');
 
-		$transaksi_aset 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '1');
-		$transaksi_hutang 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '2');
-		$transaksi_modal 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '3');
+			$transaksi_aset 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '1');
+			$transaksi_hutang 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '2');
+			$transaksi_modal 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '3');
+		} else if($dari >= '2019-01-01' && $sampai >= '2019-01-01') {
+			$transaksi_prev_aset	= $this->transaksiakuntansimodel->get_saldo_awal_by_dari_sampai_first_char($dari, $sampai, '1');
+			$transaksi_prev_hutang	= $this->transaksiakuntansimodel->get_saldo_awal_by_dari_sampai_first_char($dari, $sampai, '2');
+			$transaksi_prev_modal	= $this->transaksiakuntansimodel->get_saldo_awal_by_dari_sampai_first_char($dari, $sampai, '3');
+
+			$transaksi_aset 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char_except_saldo_awal($dari, $sampai, '1');
+			$transaksi_hutang 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char_except_saldo_awal($dari, $sampai, '2');
+			$transaksi_modal 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char_except_saldo_awal($dari, $sampai, '3');	
+		}
+		
 		$transaksi_pendapatan 	= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '4');
 		$transaksi_beban 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '5');
 
