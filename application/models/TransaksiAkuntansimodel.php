@@ -46,7 +46,7 @@ class TransaksiAkuntansiModel extends CI_Model {
 	}
 
 	function get_saldo_awal_by_dari_sampai_first_char($dari, $sampai, $c) {
-		$query = $this->db->query(" SELECT kode_akun, nama_akun, SUM(debet) as jumlah_debet, SUM(kredit) as jumlah_kredit from `transaksi_akuntansi` WHERE `tanggal` < '$sampai' AND kode_akun LIKE '$c%' AND keterangan LIKE 'SALDO AWAL' GROUP BY kode_akun ");
+		$query = $this->db->query(" SELECT kode_akun, nama_akun, SUM(debet) as jumlah_debet, SUM(kredit) as jumlah_kredit from `transaksi_akuntansi` WHERE `tanggal` >= '$dari' AND `tanggal` <= '$sampai' AND kode_akun LIKE '$c%' AND keterangan LIKE 'SALDO AWAL' GROUP BY kode_akun ");
 		$a = $query->result_array();
 		return $a;	
 	}
