@@ -23,9 +23,28 @@ class TransaksiAkuntansiCon extends CI_Controller {
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
+
+		if($this->input->post('dari') != NULL && $this->input->post('sampai') != NULL) {
+			$tgl_dari1 	= $this->input->post('dari');
+			$tgl_dari 	= strtotime($tgl_dari1);
+			$dari 		= date("Y-m-d",$tgl_dari);
+
+			$tgl_sampai1	= $this->input->post('sampai');
+			$tgl_sampai 	= strtotime($tgl_sampai1);
+			$sampai 		= date("Y-m-d",$tgl_sampai);
+
+			$data['transaksi_akuntansi'] 	= $this->transaksiakuntansimodel->show_by_dari_sampai($dari, $sampai);
+			$data['tgl_dari'] = $tgl_dari1;
+			$data['tgl_sampai'] = $tgl_sampai1;
+		} else {
+			$data['transaksi_akuntansi'] 	= $this->transaksiakuntansimodel->show_by_dari_sampai('', '');
+			$data['tgl_dari'] = '';
+			$data['tgl_sampai'] = '';
+		}
+
 		$data['username'] 	= $session_data['username'];
 		$data['status'] 	= $session_data['status'];
-		$data['transaksi_akuntansi'] 	= $this->transaksiakuntansimodel->showData();
+		//$data['transaksi_akuntansi'] 	= $this->transaksiakuntansimodel->showData();
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/transaksi_akuntansi/index', $data);
 		$this->load->view('/layouts/footer', $data);

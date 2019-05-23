@@ -28,7 +28,7 @@ class TransaksiAkuntansiModel extends CI_Model {
 	}
 
 	function show_by_dari_sampai($dari, $sampai) {
-		$query = $this->db->query("SELECT * from `transaksi_akuntansi` WHERE tanggal >= '$dari' AND tanggal <= '$sampai'");
+		$query = $this->db->query("SELECT * from `transaksi_akuntansi` WHERE tanggal >= '$dari' AND tanggal <= '$sampai' ORDER BY tanggal ASC");
 		$a = $query->result_array();
 		return $a;
 	}

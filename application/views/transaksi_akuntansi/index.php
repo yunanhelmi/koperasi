@@ -26,15 +26,52 @@ function rupiah($angka){
     <!-- Main content -->
     <section class="content">
       <div class="row">
+        <div class="col-md-12 pull-left">
+          <div class="box box-danger">
+            <legend style="text-align:center;">DAFTAR TRANSAKSI AKUNTANSI</legend>
+            <form action="<?php echo base_url();?>index.php/transaksiakuntansicon/index" method="post" enctype="multipart/form-data" role="form">
+            <div class="box-body">
+              <div class="form-group col-xs-3">
+                <label for="exampleInputPassword1">Dari</label>
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" name="dari" id="dari" value="<?php echo $tgl_dari ?>" data-date-format="dd-mm-yyyy">
+                </div>
+              </div>
+              <div class="form-group col-xs-3">
+                <label for="exampleInputPassword1">Sampai</label>
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" name="sampai" id="sampai" value="<?php echo $tgl_sampai ?>" data-date-format="dd-mm-yyyy">
+                </div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <div class="col-xs-3">
+                <div class="form-group pull-left">
+                  <button type="submit" class="btn btn-info" name="excel"><i class="fa fa-eye"></i> Tampilkan</button>
+                </div>
+              </div>
+            </div>  
+          </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">
 	     <div class="col-md-12 pull-left">
           <!-- general form elements -->
-          <div class="box box-danger">
-  		      <legend style="text-align:center;">DAFTAR TRANSAKSI AKUNTANSI</legend>
-            <div class="box-header" style="text-align:left" >
-              <h3>
-                <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksiakuntansicon/create_transaksi_akuntansi"); ?>">Tambahkan Transaksi</a>
-              </h3>
-            </div>  
+          <div class="box box-danger"> 
+            <div class="box-header">
+              <div class="col-xs-3">
+                <div class="form-group pull-left">
+                  <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksiakuntansicon/create_transaksi_akuntansi"); ?>"><i class="fa fa-plus-square-o"></i> Tambahkan Transaksi</a>
+                </div>
+              </div>
+            </div>
             <div class="box-body">
               <table id="transaksi_akuntansi_table" class="table table-bordered table-hover"  width="100%">
                 <thead>
@@ -61,7 +98,7 @@ function rupiah($angka){
                     <td style='text-align: center'><?php echo $no."."?></td>
                     <?php 
                     $waktu = strtotime( $transaksi_akuntansi[$i]['tanggal'] );
-                    $wkt = date( 'd F Y', $waktu );
+                    $wkt = date( 'd M Y', $waktu );
                     ?>
                     <td style='text-align: center'><?php echo $wkt?></td>
                     <td style='text-align: center'><?php echo $transaksi_akuntansi[$i]['kode_akun']?></td>
@@ -132,5 +169,8 @@ function rupiah($angka){
   })
   </script>
   <script type="text/javascript">
-    
+    $(document).ready(function() {
+      $('#dari').datepicker({}).on('changeDate', function(ev){});
+      $('#sampai').datepicker({}).on('changeDate', function(ev){});
+    });
   </script>
