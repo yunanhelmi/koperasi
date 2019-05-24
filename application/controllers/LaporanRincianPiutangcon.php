@@ -164,14 +164,14 @@ class LaporanRincianPiutangCon extends CI_Controller {
         $no = 1;
         $total_sisa = 0;
         for($a = 0; $a < sizeof($data); $a++) {
-            $saldo = $data[$a]['total_pinjaman_detail'] - $data[$a]['total_angsuran_detail'];
+            $saldo = $data[$a]['total_pinjaman'] - $data[$a]['total_angsuran'];
             if($saldo != 0) {
                 $sheet->setCellValue("A".$i, $no);
                 $sheet->setCellValue("B".$i, $data[$a]['id_pinjaman_detail']);
-                $sheet->setCellValue("C".$i, $data[$a]['jumlah_pinjaman_detail']);
-                $sheet->setCellValue("D".$i, $data[$a]['jumlah_angsuran_detail']);
-                $sheet->setCellValue("E".$i, $data[$a]['total_pinjaman_detail']);
-                $sheet->setCellValue("F".$i, $data[$a]['total_angsuran_detail']);
+                $sheet->setCellValue("C".$i, $data[$a]['jumlah_pinjaman']);
+                $sheet->setCellValue("D".$i, $data[$a]['jumlah_angsuran']);
+                $sheet->setCellValue("E".$i, $data[$a]['total_pinjaman']);
+                $sheet->setCellValue("F".$i, $data[$a]['total_angsuran']);
                 $total_sisa += $saldo;
                 $sheet->setCellValue("G".$i, $saldo);
                 $sheet->getStyle("E".$i.":G".$i)->getNumberFormat()->setFormatCode('#,##0');
