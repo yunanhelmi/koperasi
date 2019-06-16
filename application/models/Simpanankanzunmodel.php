@@ -73,13 +73,25 @@ class SimpanankanzunModel extends CI_Model {
 										detail_simpanankanzun.*, 
 										simpanankanzun.nama_nasabah,
 										simpanankanzun.nomor_nasabah,
-										simpanankanzun.nik_nasabah
+										simpanankanzun.nik_nasabah,
+										simpanankanzun.id_nasabah,
+										nasabah.alamat,
+										nasabah.kota,
+										nasabah.kecamatan,
+										nasabah.kelurahan,
+										nasabah.dusun,
+										nasabah.rw,
+										nasabah.rt
 									FROM 
 										detail_simpanankanzun
 										LEFT JOIN 
 											simpanankanzun
 										ON
 											detail_simpanankanzun.id_simpanankanzun = simpanankanzun.id
+									LEFT JOIN
+										nasabah
+									ON
+										simpanankanzun.id_nasabah = nasabah.id
 									WHERE
 										detail_simpanankanzun.waktu = '$tanggal'
 									ORDER BY

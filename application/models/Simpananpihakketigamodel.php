@@ -73,13 +73,25 @@ class SimpananpihakketigaModel extends CI_Model {
 										detail_simpananpihakketiga.*, 
 										simpananpihakketiga.nama,
 										simpananpihakketiga.nomor_nasabah,
-										simpananpihakketiga.nik
+										simpananpihakketiga.nik,
+										simpananpihakketiga.id_nasabah,
+										nasabah.alamat,
+										nasabah.kota,
+										nasabah.kecamatan,
+										nasabah.kelurahan,
+										nasabah.dusun,
+										nasabah.rw,
+										nasabah.rt
 									FROM 
 										detail_simpananpihakketiga
 										LEFT JOIN 
 											simpananpihakketiga
 										ON
 											detail_simpananpihakketiga.id_simpananpihakketiga = simpananpihakketiga.id
+									LEFT JOIN
+										nasabah
+									ON
+										simpananpihakketiga.id_nasabah = nasabah.id
 									WHERE
 										detail_simpananpihakketiga.waktu = '$tanggal'
 									ORDER BY

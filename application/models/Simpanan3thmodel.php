@@ -101,13 +101,25 @@ class Simpanan3thModel extends CI_Model {
 										simpanan3th.nama_simpanan,
 										simpanan3th.nama_nasabah,
 										simpanan3th.nomor_nasabah,
-										simpanan3th.nik_nasabah
+										simpanan3th.nik_nasabah,
+										simpanan3th.id_nasabah,
+										nasabah.alamat,
+										nasabah.kota,
+										nasabah.kecamatan,
+										nasabah.kelurahan,
+										nasabah.dusun,
+										nasabah.rw,
+										nasabah.rt
 									FROM 
 										detail_simpanan3th
 										LEFT JOIN 
 											simpanan3th
 										ON
 											detail_simpanan3th.id_simpanan3th = simpanan3th.id
+									LEFT JOIN
+										nasabah
+									ON
+										simpanan3th.id_nasabah = nasabah.id
 									WHERE
 										detail_simpanan3th.waktu = '$tanggal'
 									ORDER BY

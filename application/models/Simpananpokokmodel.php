@@ -49,9 +49,20 @@ class SimpananpokokModel extends CI_Model {
 	function get_data_laporan_harian($tanggal) {
 		$query = $this->db->query("
 									SELECT 
-										simpananpokok.*
+										simpananpokok.*,
+										nasabah.alamat,
+										nasabah.kota,
+										nasabah.kecamatan,
+										nasabah.kelurahan,
+										nasabah.dusun,
+										nasabah.rw,
+										nasabah.rt
 									FROM 
 										simpananpokok
+										LEFT JOIN
+											nasabah
+										ON
+											simpananpokok.id_nasabah = nasabah.id
 									WHERE
 										simpananpokok.waktu = '$tanggal'
 									ORDER BY

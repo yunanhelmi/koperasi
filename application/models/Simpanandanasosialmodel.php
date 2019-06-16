@@ -73,13 +73,25 @@ class SimpanandanasosialModel extends CI_Model {
 										detail_simpanandanasosial.*, 
 										simpanandanasosial.nama_nasabah,
 										simpanandanasosial.nomor_nasabah,
-										simpanandanasosial.nik_nasabah
+										simpanandanasosial.nik_nasabah,
+										simpanandanasosial.id_nasabah,
+										nasabah.alamat,
+										nasabah.kota,
+										nasabah.kecamatan,
+										nasabah.kelurahan,
+										nasabah.dusun,
+										nasabah.rw,
+										nasabah.rt
 									FROM 
 										detail_simpanandanasosial
 										LEFT JOIN 
 											simpanandanasosial
 										ON
 											detail_simpanandanasosial.id_simpanandanasosial = simpanandanasosial.id
+									LEFT JOIN
+										nasabah
+									ON
+										simpanandanasosial.id_nasabah = nasabah.id
 									WHERE
 										detail_simpanandanasosial.waktu = '$tanggal'
 									ORDER BY

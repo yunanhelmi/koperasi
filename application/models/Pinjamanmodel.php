@@ -57,13 +57,25 @@ class PinjamanModel extends CI_Model {
 										detail_angsuran.*, 
 										pinjaman.nama_nasabah,
 										pinjaman.nomor_nasabah,
-										pinjaman.nik_nasabah
+										pinjaman.nik_nasabah,
+										pinjaman.id_nasabah,
+										nasabah.alamat,
+										nasabah.kota,
+										nasabah.kecamatan,
+										nasabah.kelurahan,
+										nasabah.dusun,
+										nasabah.rw,
+										nasabah.rt
 									FROM 
 										detail_angsuran
-										LEFT JOIN 
+										LEFT JOIN
 											pinjaman
 										ON 
 											detail_angsuran.id_pinjaman = pinjaman.id
+									LEFT JOIN
+										nasabah
+									ON
+										pinjaman.id_nasabah = nasabah.id
 									WHERE
 										detail_angsuran.waktu = '$tanggal'
 									ORDER BY

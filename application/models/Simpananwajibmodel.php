@@ -73,13 +73,25 @@ class SimpananwajibModel extends CI_Model {
 										detail_simpananwajib.*, 
 										simpananwajib.nama_nasabah,
 										simpananwajib.nomor_nasabah,
-										simpananwajib.nik_nasabah
+										simpananwajib.nik_nasabah,
+										simpananwajib.id_nasabah,
+										nasabah.alamat,
+										nasabah.kota,
+										nasabah.kecamatan,
+										nasabah.kelurahan,
+										nasabah.dusun,
+										nasabah.rw,
+										nasabah.rt
 									FROM 
 										detail_simpananwajib
 										LEFT JOIN 
 											simpananwajib
 										ON 
 											detail_simpananwajib.id_simpananwajib = simpananwajib.id
+									LEFT JOIN
+										nasabah
+									ON
+										simpananwajib.id_nasabah = nasabah.id
 									WHERE
 										detail_simpananwajib.waktu = '$tanggal'
 									ORDER BY
