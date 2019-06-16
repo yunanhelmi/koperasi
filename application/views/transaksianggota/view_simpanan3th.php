@@ -495,6 +495,9 @@ function rupiah($angka){
                         <div class="col-xs-3">
                           <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
+                        <div class="col-xs-3">
+                          <button type="button" onclick="cancelTambahDetailSimpanan3Th()" class="btn btn-warning">Batal</button>
+                        </div>
                       </div>
                     </form>
                   </div>
@@ -908,6 +911,10 @@ function rupiah($angka){
     function tambahDetailSimpanan3th() {
       document.getElementById("div_tambah_detail_simpanan3th").style.display = "block";
     }
+
+    function cancelTambahDetailSimpanan3Th() {
+      document.getElementById("div_tambah_detail_simpanan3th").style.display = "none";
+    }    
 
     $(document).ready(function(){
       $('#waktu').datepicker({}).on('changeDate', function(ev){});

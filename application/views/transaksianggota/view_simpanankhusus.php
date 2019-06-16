@@ -367,6 +367,9 @@ function rupiah($angka){
                         <div class="col-xs-3">
                           <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
+                        <div class="col-xs-3">
+                          <button type="button" onclick="cancelTambahDetailSimpananKhusus()" class="btn btn-warning">Batal</button>
+                        </div>
                       </div>
                     </form>
                   </div>
@@ -925,6 +928,10 @@ function rupiah($angka){
 
     function tambahDetailSimpananKhusus() {
       document.getElementById("div_tambah_detail_simpanankhusus").style.display = "block";
+    }
+
+    function cancelTambahDetailSimpananKhusus() {
+      document.getElementById("div_tambah_detail_simpanankhusus").style.display = "none"; 
     }
 
     $(document).ready(function(){
