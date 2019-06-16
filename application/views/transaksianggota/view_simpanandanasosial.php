@@ -380,7 +380,7 @@ function rupiah($angka){
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control pull-right" name="waktu" id="waktu" value="<?php echo date("d-m-Y");?>" data-date-format="dd-mm-yyyy">
+                            <input type="text" class="form-control pull-right" name="waktu" id="waktu" value="" data-date-format="dd-mm-yyyy" required>
                             <input type="hidden" class="form-control" value="<?php echo $simpanandanasosial->id?>" id="id_simpanandanasosial" name="id_simpanandanasosial">
                           </div>
                         </div>

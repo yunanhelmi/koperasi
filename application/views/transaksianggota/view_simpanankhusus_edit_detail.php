@@ -338,7 +338,7 @@ function rupiah($angka){
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control pull-right" name="waktu" id="waktu" value="<?php echo date("d-m-Y");?>" data-date-format="dd-mm-yyyy">
+                            <input type="text" class="form-control pull-right" name="waktu" id="waktu" value="" data-date-format="dd-mm-yyyy" required>
                             <input type="hidden" class="form-control" value="<?php echo $simpanankhusus->id?>" id="id_simpanankhusus" name="id_simpanankhusus">
                           </div>
                         </div>
@@ -365,6 +365,9 @@ function rupiah($angka){
                       <div class="box-footer">
                         <div class="col-xs-3">
                           <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                        <div class="col-xs-3">
+                          <button type="button" onclick="cancelTambahDetailSimpananKhusus()" class="btn btn-warning">Batal</button>
                         </div>
                       </div>
                     </form>
@@ -974,6 +977,10 @@ function rupiah($angka){
     function tambahDetailSimpananKhusus() {
       document.getElementById("div_edit_detail_simpanankhusus").style.display = "none";
       document.getElementById("div_tambah_detail_simpanankhusus").style.display = "block";
+    }
+
+    function cancelTambahDetailSimpananKhusus() {
+      document.getElementById("div_tambah_detail_simpanankhusus").style.display = "none"; 
     }
 
     $(document).ready(function(){

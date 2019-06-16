@@ -182,7 +182,7 @@ function rupiah($angka){
                           <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                           </div>
-                          <input type="text" class="form-control pull-right" name="waktu" id="waktu" value="<?php echo date("d-m-Y",$date);?>" data-date-format="dd-mm-yyyy">
+                          <input type="text" class="form-control pull-right" name="waktu" id="waktu" value="" data-date-format="dd-mm-yyyy" required>
                           <input type="hidden" class="form-control" value="<?php echo $pinjaman->id?>" id="id_pinjaman" name="id_pinjaman">
                         </div>
                       </div>
@@ -246,6 +246,9 @@ function rupiah($angka){
                       <div class="col-xs-3">
                         <button type="submit" class="btn btn-primary">Simpan</button>
                       </div>
+                      <div class="col-xs-3">
+                          <button type="button" onclick="cancelTambahAngsuran()" class="btn btn-warning">Batal</button>
+                        </div>
                     </div>
                     </form>
                   </div>
@@ -1176,6 +1179,10 @@ function rupiah($angka){
       function tambahAngsuran() {
         document.getElementById("div_edit_angsuran").style.display = "none";
         document.getElementById("div_tambah_angsuran").style.display = "block";
+      }
+
+      function cancelTambahAngsuran() {
+        document.getElementById("div_tambah_angsuran").style.display = "none";
       }
 
       function editAngsuran(angsuran) {
