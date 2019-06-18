@@ -66,9 +66,13 @@ class LaporanSimpananWajibCon extends CI_Controller {
 
 		$data = $this->laporansimpananwajibmodel->get_data($tanggal);
 
-		/*echo "<pre>";
-		var_dump($data);
-		echo "</pre>";*/
+        // Total Simpanan Wajib pada neraca
+        if($tanggal < '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_sampai_kode_akun($tanggal, '302');
+        } else if($tanggal >= '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun('2019-01-01', $tanggal, '302');
+        }
+        $total_neraca = $transaksi[0]['jumlah_kredit'] - $transaksi[0]['jumlah_debet'];
 
 		$file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
@@ -136,9 +140,20 @@ class LaporanSimpananWajibCon extends CI_Controller {
         		$i++;	
         	}
         }
-
         $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "TOTAL");
         $sheet->setCellValue("I".$i, $total);
+        $sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":I".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+        $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "TOTAL (NERACA)");
+        $sheet->setCellValue("I".$i, $total_neraca);
+        $sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":I".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+        $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "SELISIH");
+        $sheet->setCellValue("I".$i, $total - $total_neraca);
         $sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
         $sheet->getStyle("A".$i.":I".$i)->getFont()->setBold(true);
         $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);

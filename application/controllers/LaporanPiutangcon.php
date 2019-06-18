@@ -116,9 +116,9 @@ class LaporanPiutangCon extends CI_Controller {
 
 		$data_piutang = $this->laporanpiutangmodel->get_data_piutang($tanggal);
 
-		/*echo "<pre>";
-		var_dump($data_piutang);
-		echo "</pre>";*/
+		echo "<pre>";
+		var_dump($transaksi_piutang);
+		echo "</pre>";
 
 		$file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
@@ -314,6 +314,17 @@ class LaporanPiutangCon extends CI_Controller {
 
         $data = $this->laporanpiutangmodel->get_data($tanggal); 
 
+        // Total Piutang pada neraca
+        if($tanggal < '2019-01-01') {
+            $transaksi_piutang    = $this->transaksiakuntansimodel->get_jumlah_by_sampai_kode_akun($tanggal, '103');
+        } else if($tanggal >= '2019-01-01') {
+            $transaksi_piutang    = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun('2019-01-01', $tanggal, '103');
+        }
+        $piutang_neraca = $transaksi_piutang[0]['jumlah_debet'] - $transaksi_piutang[0]['jumlah_kredit'];
+        /*echo "<pre>";
+        var_dump($transaksi_piutang);
+        echo "</pre>";*/
+
         $file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
         $file->getProperties ()->setLastModifiedBy ( "System" );
@@ -450,6 +461,18 @@ class LaporanPiutangCon extends CI_Controller {
 
         $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "TOTAL PIUTANG");
         $sheet->setCellValue("K".$i, $total_sisa);
+        $sheet->getStyle("K".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":L".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "TOTAL PIUTANG (NERACA)");
+        $sheet->setCellValue("K".$i, $piutang_neraca);
+        $sheet->getStyle("K".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":L".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "SELISIH");
+        $sheet->setCellValue("K".$i, $total_sisa - $piutang_neraca);
         $sheet->getStyle("K".$i)->getNumberFormat()->setFormatCode('#,##0');
         $sheet->getStyle("A".$i.":L".$i)->getFont()->setBold(true);
         $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);

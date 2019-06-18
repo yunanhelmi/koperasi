@@ -66,9 +66,13 @@ class LaporanSimpananKanzunCon extends CI_Controller {
 
 		$data = $this->laporansimpanankanzunmodel->get_data($tanggal);
 
-		/*echo "<pre>";
-		var_dump($data);
-		echo "</pre>";*/
+		// Total Simpanan Kanzun pada neraca
+        if($tanggal < '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_sampai_kode_akun($tanggal, '203');
+        } else if($tanggal >= '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun('2019-01-01', $tanggal, '203');
+        }
+        $total_neraca = $transaksi[0]['jumlah_kredit'] - $transaksi[0]['jumlah_debet'];
 
 		$file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
@@ -139,6 +143,18 @@ class LaporanSimpananKanzunCon extends CI_Controller {
 
         $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "TOTAL");
         $sheet->setCellValue("I".$i, $total);
+        $sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":I".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+        $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "TOTAL (NERACA)");
+        $sheet->setCellValue("I".$i, $total_neraca);
+        $sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":I".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+        $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "SELISIH");
+        $sheet->setCellValue("I".$i, $total - $total_neraca);
         $sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
         $sheet->getStyle("A".$i.":I".$i)->getFont()->setBold(true);
         $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
