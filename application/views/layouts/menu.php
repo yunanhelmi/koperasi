@@ -203,6 +203,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="<?php echo base_url(); ?>index.php/laporanneracacon/index"><i class="fa fa-balance-scale"></i>Neraca</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporanrugilabacon/index"><i class="fa fa-book"></i>Rugi Laba</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporankeuangancon/index"><i class="fa fa-money"></i>Keuangan</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporanaruskascon/index"><i class="fa fa-money"></i>Arus Kas</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporanarusbankcon/index"><i class="fa fa-money"></i>Arus Bank</a></li>
             <!--<li><a href="<?php echo base_url(); ?>index.php/saldoawaltahuncon/index"><i class="fa fa-upload"></i>Post Saldo Awal Tahun</a></li>-->
           </ul>
         </li>
