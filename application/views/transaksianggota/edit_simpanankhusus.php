@@ -157,7 +157,17 @@ function rupiah($angka){
             ?>       
             <li><a href="#simpanan_wajib" data-toggle="tab">Simpanan Wajib</a></li>
             <li class="active"><a href="#simpanan_khusus" data-toggle="tab">Simpanan Khusus</a></li>
+            <?php
+              if(substr($nasabah->nomor_koperasi, 0, 1) == "1") {
+            ?>
             <li><a href="#simpanan_dana_sosial" data-toggle="tab">Simpanan Dansos Anggota</a></li>
+            <?php
+              } else if(substr($nasabah->nomor_koperasi, 0, 1) == "2") {
+            ?>
+            <li><a href="#simpanan_dana_sosial" data-toggle="tab">Simpanan Dansos Anggota Istimewa</a></li>
+            <?php
+              }
+            ?>
             <li><a href="#simpanan_kanzun" data-toggle="tab">Simpanan Kanzun</a></li>
             <!--<li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>-->
             <li><a href="#simpanan_pihak_ketiga" data-toggle="tab">Simpanan Pihak Ketiga</a></li>

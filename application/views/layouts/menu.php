@@ -216,17 +216,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>index.php/laporanpiutangcon/index"><i class="fa fa-list-ul"></i>Daftar Piutang Anggota</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporanpiutangcon/index"><i class="fa fa-list-ul"></i>Piutang Anggota</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporanrincianpiutangcon/index"><i class="fa fa-list-ul"></i>Rincian Piutang</a></li>
             <!--<li><a href="<?php echo base_url(); ?>index.php/laporansimpanancon/index"><i class="fa fa-book"></i>Simpanan</a></li>-->
-            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpokokcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Pokok</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpokokistimewacon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Pokok Istimewa</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananwajibcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Wajib</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanankhususcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Khusus</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanandanasosialcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Dansos Anggota</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanankanzuncon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Kanzun</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpihakketigacon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan Pihak Ketiga</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanan3thcon/index"><i class="fa fa-list-ul"></i>Daftar Simpanan 3Th</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpokokcon/index"><i class="fa fa-list-ul"></i>Simpanan Pokok</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpokokistimewacon/index"><i class="fa fa-list-ul"></i>Simpanan Pokok Istimewa</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananwajibcon/index"><i class="fa fa-list-ul"></i>Simpanan Wajib</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanankhususcon/index"><i class="fa fa-list-ul"></i>Simpanan Khusus</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanandanasosialcon/index"><i class="fa fa-list-ul"></i>Simpanan Dansos Anggota</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanandanasosialistimewacon/index"><i class="fa fa-list-ul"></i>Simpanan Dansos Anggota Istimewa</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanankanzuncon/index"><i class="fa fa-list-ul"></i>Simpanan Kanzun</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpihakketigacon/index"><i class="fa fa-list-ul"></i>Simpanan Pihak Ketiga</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporansimpanan3thcon/index"><i class="fa fa-list-ul"></i>Simpanan 3Th</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporanhariancon/index"><i class="fa fa-list-ul"></i>Harian</a></li>
           </ul>
         </li>

@@ -2448,17 +2448,26 @@ class TransaksianggotaCon extends CI_Controller {
 
 		if($data['post_detail_simpanandanasosial']->status_post != '1') {
 			if($data['post_detail_simpanandanasosial']->jenis == "Setoran") {
-				$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan simp dansos anggota');
+				if(substr($data['simpanandanasosial']->nomor_nasabah, 0, 1) == "1") {
+					$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan simp dansos anggota');	
+				} else if (substr($data['simpanandanasosial']->nomor_nasabah, 0, 1) == "2") {
+					$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('penerimaan simpanan dansos anggota istimewa');
+				}
 				$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 				$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
-				$bln_thn = strtotime( $data['post_detail_simpananwajib']->bulan_tahun );
+				$bln_thn = strtotime( $data['post_detail_simpanandanasosial']->bulan_tahun );
+				$bulan_tahun = date( 'M-Y', $bln_thn );
 
 				$data_debet 					= array();
 				$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
 				$data_debet['tanggal'] 			= $data['post_detail_simpanandanasosial']->waktu;
 				$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 				$data_debet['nama_akun'] 		= $debet->nama_akun;
-				$data_debet['keterangan'] 		= "Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
+				if(substr($data['simpanandanasosial']->nomor_nasabah, 0, 1) == "1") {
+					$data_debet['keterangan'] 	= "Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
+				} else if(substr($data['simpanandanasosial']->nomor_nasabah, 0, 1) == "2") {
+					$data_debet['keterangan'] 	= "Simpanan Dana Sosial Istimewa Bulan ".$bulan_tahun." a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
+				}
 				$data_debet['jumlah'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 				$data_debet['debet'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 				$data_debet['kredit'] 			= 0;
@@ -2471,7 +2480,11 @@ class TransaksianggotaCon extends CI_Controller {
 				$data_kredit['tanggal'] 		= $data['post_detail_simpanandanasosial']->waktu;
 				$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 				$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-				$data_kredit['keterangan'] 		= "Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
+				if(substr($data['simpanandanasosial']->nomor_nasabah, 0, 1) == "1") {
+					$data_kredit['keterangan'] 	= "Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
+				} else if(substr($data['simpanandanasosial']->nomor_nasabah, 0, 1) == "2") {
+					$data_kredit['keterangan'] 	= "Simpanan Dana Sosial Istimewa Bulan ".$bulan_tahun." a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
+				}
 				$data_kredit['jumlah'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 				$data_kredit['debet'] 			= 0;
 				$data_kredit['kredit'] 			= $data['post_detail_simpanandanasosial']->jumlah;
@@ -2491,17 +2504,26 @@ class TransaksianggotaCon extends CI_Controller {
 				$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
 				$this->detailsimpanandanasosialmodel->updateData($id, $update);
 			} else if($data['post_detail_simpanandanasosial']->jenis == "Tarikan") {
-				$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan simp dansos anggota');
+				if(substr($data['simpanandanasosial']->nomor_nasabah, 0, 1) == "1") {
+					$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan simp dansos anggota');	
+				} else if (substr($data['simpanandanasosial']->nomor_nasabah, 0, 1) == "2") {
+					$mapping_kode_akun = $this->mappingkodeakunmodel->get_mapping_kode_akun_by_nama_transaksi('pencairan simpanan dansos anggota istimewa');
+				}
 				$debet 		= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_debet);
 				$kredit 	= $this->kodeakunmodel->get_kode_akun_by_kode($mapping_kode_akun->kode_kredit);
-				$bln_thn = strtotime( $data['post_detail_simpananwajib']->bulan_tahun );
+				$bln_thn = strtotime( $data['post_detail_simpanandanasosial']->bulan_tahun );
+				$bulan_tahun = date( 'M-Y', $bln_thn );
 
 				$data_debet 					= array();
 				$data_debet['id'] 				= $this->transaksiakuntansimodel->getNewId();
 				$data_debet['tanggal'] 			= $data['post_detail_simpanandanasosial']->waktu;
 				$data_debet['kode_akun'] 		= $mapping_kode_akun->kode_debet;
 				$data_debet['nama_akun'] 		= $debet->nama_akun;
-				$data_debet['keterangan'] 		= "Pencairan Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
+				if(substr($data['simpanandanasosial']->nomor_nasabah, 0, 1) == "1") {
+					$data_debet['keterangan'] 	= "Pencairan Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
+				} else if(substr($data['simpanandanasosial']->nomor_nasabah, 0, 1) == "2") {
+					$data_debet['keterangan'] 	= "Pencairan Simpanan Dana Sosial Istimewa Bulan ".$bulan_tahun." a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
+				}
 				$data_debet['jumlah'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 				$data_debet['debet'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 				$data_debet['kredit'] 			= 0;
@@ -2514,7 +2536,11 @@ class TransaksianggotaCon extends CI_Controller {
 				$data_kredit['tanggal'] 		= $data['post_detail_simpanandanasosial']->waktu;
 				$data_kredit['kode_akun'] 		= $mapping_kode_akun->kode_kredit;
 				$data_kredit['nama_akun'] 		= $kredit->nama_akun;
-				$data_kredit['keterangan'] 		= "Pencairan Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
+				if(substr($data['simpanandanasosial']->nomor_nasabah, 0, 1) == "1") {
+					$data_kredit['keterangan'] 	= "Pencairan Simpanan Dana Sosial Bulan ".$bulan_tahun." Anggota a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor Anggota: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
+				} else if(substr($data['simpanandanasosial']->nomor_nasabah, 0, 1) == "2") {
+					$data_kredit['keterangan'] 	= "Pencairan Simpanan Dana Sosial Istimewa Bulan ".$bulan_tahun." a.n. ".$data['simpanandanasosial']->nama_nasabah." Nomor: ".$data['simpanandanasosial']->nomor_nasabah." Tanggal Simpanan: ".date("d-m-Y", strtotime($data['simpanandanasosial']->waktu));
+				}
 				$data_kredit['jumlah'] 			= $data['post_detail_simpanandanasosial']->jumlah;
 				$data_kredit['debet'] 			= 0;
 				$data_kredit['kredit'] 			= $data['post_detail_simpanandanasosial']->jumlah;

@@ -22,7 +22,17 @@ function rupiah($angka){
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url(); ?>index.php/transaksianggotacon"><i class="fa fa-users"></i> Transaksi Anggota</a></li>
+        <?php
+          if(substr($nasabah->nomor_koperasi, 0, 1) == "1") {
+        ?>
         <li class="active"><i class="fa fa-credit-card"></i> Simpanan Dansos Anggota</li>
+        <?php
+          } else if(substr($nasabah->nomor_koperasi, 0, 1) == "2") {
+        ?>
+        <li class="active"><i class="fa fa-credit-card"></i> Simpanan Dansos Anggota Istimewa</li>
+        <?php
+          }
+        ?>
       </ol>
     </section>
 
@@ -156,7 +166,17 @@ function rupiah($angka){
             ?>       
             <li><a href="#simpanan_wajib" data-toggle="tab">Simpanan Wajib</a></li>
             <li><a href="#simpanan_khusus" data-toggle="tab">Simpanan Khusus</a></li>
+            <?php
+              if(substr($nasabah->nomor_koperasi, 0, 1) == "1") {
+            ?>
             <li class="active"><a href="#simpanan_dana_sosial" data-toggle="tab">Simpanan Dansos Anggota</a></li>
+            <?php
+              } else if(substr($nasabah->nomor_koperasi, 0, 1) == "2") {
+            ?>
+            <li class="active"><a href="#simpanan_dana_sosial" data-toggle="tab">Simpanan Dansos Anggota Istimewa</a></li>
+            <?php
+              }
+            ?>
             <li><a href="#simpanan_kanzun" data-toggle="tab">Simpanan Kanzun</a></li>
             <!--<li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>-->
             <li><a href="#simpanan_pihak_ketiga" data-toggle="tab">Simpanan Pihak Ketiga</a></li>
@@ -368,7 +388,18 @@ function rupiah($angka){
             <div class="active tab-pane" id="simpanan_dana_sosial">
               <div class="box-header" style="text-align:left" >
                 <h3>
+                  <?php
+                    if(substr($nasabah->nomor_koperasi, 0, 1) == "1") {
+                  ?>
                   <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksianggotacon/create_simpanandanasosial/".$nasabah->id); ?>">Tambahkan Simpanan Dansos Anggota Baru</a>
+                  <?php
+                    } else if(substr($nasabah->nomor_koperasi, 0, 1) == "2") {
+                  ?>
+                  <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksianggotacon/create_simpanandanasosial/".$nasabah->id); ?>">Tambahkan Simpanan Dansos Anggota Istimewa Baru</a>
+                  <?php
+                    }
+                  ?>
+                  
                 </h3>
               </div> 
               <div class="box-body">
