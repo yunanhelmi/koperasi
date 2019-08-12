@@ -25,7 +25,7 @@ class UserCon extends CI_Controller {
 	
 	function login() {
 		if($this->session->userdata('logged_in')) {
-			redirect('GuestCon/diskominfoTower', 'refresh');
+			redirect("usercon/login", "refresh");
 		} else {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
