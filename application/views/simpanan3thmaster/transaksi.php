@@ -37,7 +37,7 @@ function rupiah($angka){
               </h3>
             </div>  
             <div class="box-body">
-              <table id="user_table" class="table table-bordered table-hover"  width="100%">
+              <table id="simpanan3thmaster_table" class="table table-bordered table-hover"  width="100%">
                 <thead>
                   <tr>
                     <th>No.</th>

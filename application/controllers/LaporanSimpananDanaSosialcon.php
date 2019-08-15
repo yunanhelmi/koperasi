@@ -74,6 +74,13 @@ class LaporanSimpananDanaSosialCon extends CI_Controller {
         }
         $total_neraca = $transaksi[0]['jumlah_kredit'] - $transaksi[0]['jumlah_debet'];
 
+        $simp3th19 = $this->laporansimpanandanasosialmodel->get_simpanan_3th_19($tanggal);
+        if($simp3th19 == NULL) {
+            $jumlah_simp3th19 = 0;
+        } else {
+            $jumlah_simp3th19 = $simp3th19[0]['total_setoran_detail'] - $simp3th19[0]['total_tarikan_detail'];
+        }
+
 		$file = new PHPExcel ();
         $file->getProperties ()->setCreator ( "YHM" );
         $file->getProperties ()->setLastModifiedBy ( "System" );
@@ -157,6 +164,18 @@ class LaporanSimpananDanaSosialCon extends CI_Controller {
         $i++;
         $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "SELISIH");
         $sheet->setCellValue("J".$i, $total - $total_neraca);
+        $sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "PENCAIRAN");
+        $sheet->setCellValue("J".$i, $jumlah_simp3th19);
+        $sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "SELISIH");
+        $sheet->setCellValue("J".$i, ($total - $total_neraca) - $jumlah_simp3th19);
         $sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
         $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
         $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);

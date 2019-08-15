@@ -97,6 +97,21 @@ class LaporanSimpananDanaSosialModel extends CI_Model {
 		return $a;
 	}
 
+	function get_simpanan_3th_19($tanggal) {
+		$query = $this->db->query("
+									SELECT 
+										SUM(IF(jenis = 'Setoran', jumlah, 0)) as total_setoran_detail,
+										SUM(IF(jenis = 'Tarikan', jumlah, 0)) as total_tarikan_detail
+									FROM
+										detail_simpanan3th
+									WHERE
+										id_simpanan3th = 82
+										AND waktu <= '$tanggal'
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function get_data_dansos_istimewa($tanggal) {
 		$query = $this->db->query("
 								SELECT
