@@ -16,7 +16,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url(); ?>index.php/simpanan3thcon"><i class="fa fa-users"></i> Simpanan 3 Th</a></li>
-        <li class="active"><a href="<?php echo base_url(); ?>index.php/simpanan3thmastercon/transaksi_simpanan3thmaster/<?php echo $simpanan3thmaster->id?>"><i class="fa fa-credit-card"></i>Transaksi Simpanan 3 Th</a></li>
+        <li class="active"><a href="<?php echo base_url(); ?>index.php/simpanan3thmastercon/transaksi_simpanan3thmaster/<?php echo $simpanan3thmaster->id?>"><i class="fa fa-credit-card"></i>Transaksi <?php echo $simpanan3thmaster->nama?></a></li>
         <li class="active"><a href="<?php echo base_url(); ?>index.php/simpanan3thcon/create_simpanan3th/<?php echo $simpanan3thmaster->id?>"><i class="fa fa-plus"></i> Tambah Simpanan 3 Th Anggota</a></li>
       </ol>
     </section>
@@ -52,8 +52,8 @@
                 </div>
                 <div class="form-group col-xs-6">
                   <label for="exampleInputPassword1">Nama Simpanan</label>
-                  <input type="text" class="form-control" id="nama_simpanan" name="nama_simpanan" placeholder="">
-                  <input type="hidden" class="form-control" id="id_master" name="id_master">
+                  <input type="text" class="form-control" id="nama_simpanan" name="nama_simpanan" placeholder="" value="<?php echo $simpanan3thmaster->nama?>">
+                  <input type="hidden" class="form-control" id="id_master" name="id_master" value="<?php echo $simpanan3thmaster->id?>">
                 </div>
                 <div class="form-group col-xs-6">
                   <label for="exampleInputPassword1">Tanggal</label>
