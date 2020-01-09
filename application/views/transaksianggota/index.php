@@ -30,7 +30,10 @@
                     <th>Nama</th>
                     <th>Nomor Nasabah</th>
                     <th>NIK</th>
+                    <th>Alamat</th>
                     <th>Desa</th>
+                    <th>RW</th>
+                    <th>RT</th>
                     <th>Transaksi</th>
                     <th>Post/Unpost</th>
                   </tr>
@@ -45,7 +48,10 @@
                     <td><?php echo $nasabah[$i]['nama']?></td>
                     <td style='text-align: center'><?php echo $nasabah[$i]['nomor_koperasi']?></td>
                     <td style='text-align: center'><?php echo $nasabah[$i]['nik']?></td>
+                    <td><?php echo $nasabah[$i]['alamat']?></td>
                     <td><?php echo $nasabah[$i]['kelurahan']?></td>
+                    <td><?php echo $nasabah[$i]['rw']?></td>
+                    <td><?php echo $nasabah[$i]['rt']?></td>
                     <td style='text-align: center'><a class="btn btn-danger" href="<?php echo site_url("transaksianggotacon/pinjaman/".$nasabah[$i]['id']); ?>"><i class="fa fa-money"></i></a></td>
                     <?php
                       if($nasabah[$i]['total_unpost'] == '0' 

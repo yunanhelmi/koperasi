@@ -41,6 +41,9 @@
                     <th>Nomor Nasabah</th>
                     <th>NIK</th>
                     <th>Alamat</th>
+                    <th>Desa</th>
+                    <th>RW</th>
+                    <th>RT</th>
                     <th>View</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -57,6 +60,9 @@
                     <td style='text-align: center'><?php echo $nasabah[$i]['nomor_koperasi']?></td>
                     <td style='text-align: center'><?php echo $nasabah[$i]['nik']?></td>
                     <td><?php echo $nasabah[$i]['alamat']?></td>
+                    <td><?php echo $nasabah[$i]['kelurahan']?></td>
+                    <td><?php echo $nasabah[$i]['rw']?></td>
+                    <td><?php echo $nasabah[$i]['rt']?></td>
                     <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("nasabahcon/view_nasabah/".$nasabah[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                     <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("nasabahcon/edit_nasabah/".$nasabah[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                     <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmation('<?php echo $nasabah[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
