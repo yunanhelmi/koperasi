@@ -39,12 +39,14 @@ class LaporanRincianJasaModel extends CI_Model {
 									pinjaman.waktu as tanggal_pinjaman,
 									pinjaman.id_nasabah,
 									pinjaman.id as id_pinjaman,
-									ds.jumlah_jasa
+									ds.jumlah_jasa,
+									ds.jumlah_denda
 								FROM 
 									(
 										SELECT 
 											id_pinjaman,
-											SUM(jasa) as jumlah_jasa
+											SUM(jasa) as jumlah_jasa,
+											SUM(denda) as jumlah_denda
 										FROM 
 											detail_angsuran
 										WHERE 
