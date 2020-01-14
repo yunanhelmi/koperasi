@@ -200,7 +200,7 @@ class LaporanRincianPiutangCon extends CI_Controller {
         $thin['borders']['allborders']['style']=PHPExcel_Style_Border::BORDER_THIN ;
         $sheet  ->getStyle ( "A".$border_start.":G".$border_end )->applyFromArray ($thin);
 
-        $filename = "Laporan Piutang_".$tgl_dari1."_".$tgl_sampai1.".xlsx";
+        $filename = "Laporan Rincian Piutang_".$tgl_dari1."_".$tgl_sampai1.".xlsx";
 
         header ( 'Content-Type: application/vnd.ms-excel' );
         header ( 'Content-Disposition: attachment;filename="'.$filename.'"' );
