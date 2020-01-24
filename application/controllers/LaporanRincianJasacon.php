@@ -170,23 +170,21 @@ class LaporanRincianJasaCon extends CI_Controller {
         $no = 1;
         $total_jasa = 0;
         for($a = 0; $a < sizeof($data); $a++) {
-            if($data[$a]['jumlah_jasa'] != 0) {
-                $jumlah_jasa = $data[$a]['jumlah_jasa'] + $data[$a]['jumlah_denda'];
-                $sheet->setCellValue("A".$i, $no);
-                $sheet->setCellValue("B".$i, $data[$a]['nama']);
-                $sheet->setCellValue("C".$i, $data[$a]['nomor_koperasi']);
-                $sheet->setCellValue("D".$i, $data[$a]['alamat']);
-                $sheet->setCellValue("E".$i, $data[$a]['kelurahan']);
-                $sheet->setCellValue("F".$i, $data[$a]['dusun']);
-                $sheet->setCellValue("G".$i, $data[$a]['rw']);
-                $sheet->setCellValue("H".$i, $data[$a]['rt']);
-                $sheet->setCellValue("I".$i, $jumlah_jasa);
-                $total_jasa += $jumlah_jasa;
-                $sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
-                $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                $i++;
-                $no++;
-            }
+            $jumlah_jasa = $data[$a]['jumlah_jasa'] + $data[$a]['jumlah_denda'];
+            $sheet->setCellValue("A".$i, $no);
+            $sheet->setCellValue("B".$i, $data[$a]['nama']);
+            $sheet->setCellValue("C".$i, $data[$a]['nomor_koperasi']);
+            $sheet->setCellValue("D".$i, $data[$a]['alamat']);
+            $sheet->setCellValue("E".$i, $data[$a]['kelurahan']);
+            $sheet->setCellValue("F".$i, $data[$a]['dusun']);
+            $sheet->setCellValue("G".$i, $data[$a]['rw']);
+            $sheet->setCellValue("H".$i, $data[$a]['rt']);
+            $sheet->setCellValue("I".$i, $jumlah_jasa);
+            $total_jasa += $jumlah_jasa;
+            $sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
+            $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+            $i++;
+            $no++;
         }
 
         $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "TOTAL JASA");
