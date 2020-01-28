@@ -70,6 +70,8 @@ class LaporanRincianJasaModel extends CI_Model {
 		$a = $query->result_array();
 		return $a;
 	}
+
+	
 }
 
 ?>
