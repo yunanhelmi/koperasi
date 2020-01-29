@@ -9,6 +9,7 @@ class LaporanSimpananPokokModel extends CI_Model {
 		$query = $this->db->query("
 								SELECT
 									nasabah.nama, 
+									nasabah.nomor_koperasi, 
 									nasabah.alamat, 
 									nasabah.kelurahan, 
 									nasabah.dusun, 
@@ -42,6 +43,7 @@ class LaporanSimpananPokokModel extends CI_Model {
 		$query = $this->db->query("
 								SELECT
 									nasabah.nama, 
+									nasabah.nomor_koperasi, 
 									nasabah.alamat, 
 									nasabah.kelurahan, 
 									nasabah.dusun, 

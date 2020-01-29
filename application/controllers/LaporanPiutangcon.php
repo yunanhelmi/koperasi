@@ -357,18 +357,19 @@ class LaporanPiutangCon extends CI_Controller {
         $border_start = $i;
         $sheet->setCellValue("A".$i, "NO");
         $sheet->setCellValue("B".$i, "NAMA");
-        $sheet->setCellValue("C".$i, "ALAMAT");
-        $sheet->setCellValue("D".$i, "DESA");
-        $sheet->setCellValue("E".$i, "DUSUN");
-        $sheet->setCellValue("F".$i, "RW");
-        $sheet->setCellValue("G".$i, "RT");
-        $sheet->setCellValue("H".$i, "JAMINAN");
-        $sheet->setCellValue("I".$i, "TGL PINJAM");
-        $sheet->setCellValue("J".$i, "SLD X");
-        $sheet->setCellValue("K".$i, "SISA PINJAMAN");
-        $sheet->setCellValue("L".$i, "KETERANGAN");
-        $sheet->getStyle("A".$i.":L".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":L".$i)->getFont()->setBold(true);
+        $sheet->setCellValue("C".$i, "NO NASABAH");
+        $sheet->setCellValue("D".$i, "ALAMAT");
+        $sheet->setCellValue("E".$i, "DESA");
+        $sheet->setCellValue("F".$i, "DUSUN");
+        $sheet->setCellValue("G".$i, "RW");
+        $sheet->setCellValue("H".$i, "RT");
+        $sheet->setCellValue("I".$i, "JAMINAN");
+        $sheet->setCellValue("J".$i, "TGL PINJAM");
+        $sheet->setCellValue("K".$i, "SLD X");
+        $sheet->setCellValue("L".$i, "SISA PINJAMAN");
+        $sheet->setCellValue("M".$i, "KETERANGAN");
+        $sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":M".$i)->getFont()->setBold(true);
         $i++;
 
         $no = 1;
@@ -379,23 +380,24 @@ class LaporanPiutangCon extends CI_Controller {
             if($saldo != 0) {
                 $sheet->setCellValue("A".$i, $no);
                 $sheet->setCellValue("B".$i, $data[$a]['nama']);
-                $sheet->setCellValue("C".$i, $data[$a]['alamat']);
-                $sheet->setCellValue("D".$i, $data[$a]['kelurahan']);
-                $sheet->setCellValue("E".$i, $data[$a]['dusun']);
-                $sheet->setCellValue("F".$i, $data[$a]['rw']);
-                $sheet->setCellValue("G".$i, $data[$a]['rt']);
-                $sheet->setCellValue("H".$i, $data[$a]['jaminan']);
-                $sheet->setCellValue("I".$i, $data[$a]['tanggal_pinjaman']);
+                $sheet->setCellValue("C".$i, $data[$a]['nomor_koperasi']);
+                $sheet->setCellValue("D".$i, $data[$a]['alamat']);
+                $sheet->setCellValue("E".$i, $data[$a]['kelurahan']);
+                $sheet->setCellValue("F".$i, $data[$a]['dusun']);
+                $sheet->setCellValue("G".$i, $data[$a]['rw']);
+                $sheet->setCellValue("H".$i, $data[$a]['rt']);
+                $sheet->setCellValue("I".$i, $data[$a]['jaminan']);
+                $sheet->setCellValue("J".$i, $data[$a]['tanggal_pinjaman']);
                 /* Get SLD X (Sisa Angsuran Kurang Berapa Kali) */
                 if($data[$a]['jenis_pinjaman'] == 'Musiman') {
                     $sisa_kali_angsuran = 1;
                 } else if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
                     $sisa_kali_angsuran = $data[$a]['jumlah_angsuran'] - $data[$a]['jumlah_angsuran_detail'];
                 }
-                $sheet->setCellValue("J".$i, $sisa_kali_angsuran);
+                $sheet->setCellValue("K".$i, $sisa_kali_angsuran);
                 /* End Of Get SLD X (Sisa Angsuran Kurang Berapa Kali) */
-                $sheet->setCellValue("K".$i, $saldo);
-                $sheet->getStyle("K".$i)->getNumberFormat()->setFormatCode('#,##0');
+                $sheet->setCellValue("L".$i, $saldo);
+                $sheet->getStyle("L".$i)->getNumberFormat()->setFormatCode('#,##0');
                 $total_sisa += $saldo;
 
                 /* Get Indikator Pinjaman */
@@ -406,23 +408,23 @@ class LaporanPiutangCon extends CI_Controller {
 
                     // GET Diff Today and Jatuh Tempo
                     if($today < $jatuh_tempo) {
-                        $sheet->setCellValue("L".$i, "Hijau");
-                        $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
+                        $sheet->setCellValue("M".$i, "Hijau");
+                        $sheet->getStyle('M'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
                     } else {
                         $diff = $today->diff($jatuh_tempo);
                         $interval = ($diff->format('%y') * 12) + $diff->format('%m');
                         if($interval < 3) {
-                            $sheet->setCellValue("L".$i, "Hijau");
-                            $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
+                            $sheet->setCellValue("M".$i, "Hijau");
+                            $sheet->getStyle('M'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
                         } else if ($interval >= 3 && $interval < 6) {
-                            $sheet->setCellValue("L".$i, "Kuning");
-                            $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFFF00');
+                            $sheet->setCellValue("M".$i, "Kuning");
+                            $sheet->getStyle('M'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFFF00');
                         } else if ($interval >= 6 && $interval < 9) {
-                            $sheet->setCellValue("L".$i, "Merah 1");
-                            $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFC0CB');
+                            $sheet->setCellValue("M".$i, "Merah 1");
+                            $sheet->getStyle('M'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFC0CB');
                         } else if ($interval >= 9) {
-                            $sheet->setCellValue("L".$i, "Merah 2");
-                            $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000');
+                            $sheet->setCellValue("M".$i, "Merah 2");
+                            $sheet->getStyle('M'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000');
                         }
                     }
                 } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
@@ -432,54 +434,54 @@ class LaporanPiutangCon extends CI_Controller {
 
                     // GET Diff Today and Jatuh Tempo
                     if($today < $jatuh_tempo) {
-                        $sheet->setCellValue("L".$i, "Hijau");
-                        $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
+                        $sheet->setCellValue("M".$i, "Hijau");
+                        $sheet->getStyle('M'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
                     } else {
                         $diff = $today->diff($jatuh_tempo);
                         $interval = ($diff->format('%y') * 12) + $diff->format('%m');
                         if($interval < 3) {
-                            $sheet->setCellValue("L".$i, "Hijau");
-                            $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
+                            $sheet->setCellValue("M".$i, "Hijau");
+                            $sheet->getStyle('M'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
                         } else if ($interval >= 3 && $interval < 6) {
-                            $sheet->setCellValue("L".$i, "Kuning");
-                            $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFFF00');
+                            $sheet->setCellValue("M".$i, "Kuning");
+                            $sheet->getStyle('M'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFFF00');
                         } else if ($interval >= 6 && $interval < 9) {
-                            $sheet->setCellValue("L".$i, "Merah 1");
-                            $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFC0CB');
+                            $sheet->setCellValue("M".$i, "Merah 1");
+                            $sheet->getStyle('M'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FFC0CB');
                         } else if ($interval >= 9) {
-                            $sheet->setCellValue("L".$i, "Merah 2");
-                            $sheet->getStyle('L'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000');
+                            $sheet->setCellValue("M".$i, "Merah 2");
+                            $sheet->getStyle('M'.$i)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000');
                         }
                     }
                 }
-                $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                $sheet->getStyle("L".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                $sheet->getStyle("A".$i.":L".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                $sheet->getStyle("M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                 $i++;
                 $no++;    
             }            
         }
 
-        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "TOTAL PIUTANG");
-        $sheet->setCellValue("K".$i, $total_sisa);
-        $sheet->getStyle("K".$i)->getNumberFormat()->setFormatCode('#,##0');
-        $sheet->getStyle("A".$i.":L".$i)->getFont()->setBold(true);
-        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells("A".$i.":K".$i)->setCellValue("A".$i, "TOTAL PIUTANG");
+        $sheet->setCellValue("L".$i, $total_sisa);
+        $sheet->getStyle("L".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":M".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":K".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $i++;
-        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "TOTAL PIUTANG (NERACA)");
-        $sheet->setCellValue("K".$i, $piutang_neraca);
-        $sheet->getStyle("K".$i)->getNumberFormat()->setFormatCode('#,##0');
-        $sheet->getStyle("A".$i.":L".$i)->getFont()->setBold(true);
-        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells("A".$i.":K".$i)->setCellValue("A".$i, "TOTAL PIUTANG (NERACA)");
+        $sheet->setCellValue("L".$i, $piutang_neraca);
+        $sheet->getStyle("L".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":M".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":K".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $i++;
-        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "SELISIH");
-        $sheet->setCellValue("K".$i, $total_sisa - $piutang_neraca);
-        $sheet->getStyle("K".$i)->getNumberFormat()->setFormatCode('#,##0');
-        $sheet->getStyle("A".$i.":L".$i)->getFont()->setBold(true);
-        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells("A".$i.":K".$i)->setCellValue("A".$i, "SELISIH");
+        $sheet->setCellValue("L".$i, $total_sisa - $piutang_neraca);
+        $sheet->getStyle("L".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":M".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":K".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $border_end = $i;
 
-        foreach(range('A','L') as $columnID) {
+        foreach(range('A','M') as $columnID) {
             $sheet->getColumnDimension($columnID)->setAutoSize(true);
         }
 
@@ -487,7 +489,7 @@ class LaporanPiutangCon extends CI_Controller {
         $thin['borders']=array();
         $thin['borders']['allborders']=array();
         $thin['borders']['allborders']['style']=PHPExcel_Style_Border::BORDER_THIN ;
-        $sheet  ->getStyle ( "A".$border_start.":L".$border_end )->applyFromArray ($thin);
+        $sheet  ->getStyle ( "A".$border_start.":M".$border_end )->applyFromArray ($thin);
 
         $filename = "Laporan Piutang_".$tanggal1.".xlsx";
 

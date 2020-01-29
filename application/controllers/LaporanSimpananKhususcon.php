@@ -86,35 +86,36 @@ class LaporanSimpananKhususCon extends CI_Controller {
         $sheet = $file->getActiveSheet ();
         $i = 2;
 
-        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYYAH");
-        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(14)->setBold(true);
+        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYYAH");
+        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setSize(14)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "LAPORAN DAFTAR SIMPANAN KHUSUS ".$tanggal1);
-        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(12)->setBold(true);
+        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "LAPORAN DAFTAR SIMPANAN KHUSUS ".$tanggal1);
+        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setSize(12)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYYAH");
-        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(10)->setBold(true);
+        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYYAH");
+        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setSize(10)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "NGRASEH DANDER BOJONEGORO  TELP (0353) 886039       BH : 8181/BH/II/95");
-        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(10)->setBold(true);
+        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "NGRASEH DANDER BOJONEGORO  TELP (0353) 886039       BH : 8181/BH/II/95");
+        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setSize(10)->setBold(true);
         $i += 2;
 
         $border_start = $i;
         $sheet->setCellValue("A".$i, "NO");
         $sheet->setCellValue("B".$i, "NAMA");
-        $sheet->setCellValue("C".$i, "ALAMAT");
-        $sheet->setCellValue("D".$i, "DESA");
-        $sheet->setCellValue("E".$i, "DUSUN");
-        $sheet->setCellValue("F".$i, "RW");
-        $sheet->setCellValue("G".$i, "RT");
-        $sheet->setCellValue("H".$i, "TANGGAL");
-        $sheet->setCellValue("I".$i, "JUMLAH SIMPANAN");
-        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":I".$i)->getFont()->setBold(true);
+        $sheet->setCellValue("C".$i, "NO NASABAH");
+        $sheet->setCellValue("D".$i, "ALAMAT");
+        $sheet->setCellValue("E".$i, "DESA");
+        $sheet->setCellValue("F".$i, "DUSUN");
+        $sheet->setCellValue("G".$i, "RW");
+        $sheet->setCellValue("H".$i, "RT");
+        $sheet->setCellValue("I".$i, "TANGGAL");
+        $sheet->setCellValue("J".$i, "JUMLAH SIMPANAN");
+        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
         $i++;
 
         $no 	= 1;
@@ -125,42 +126,43 @@ class LaporanSimpananKhususCon extends CI_Controller {
         	if($simpanan != 0) {
         		$sheet->setCellValue("A".$i, $no);
 	        	$sheet->setCellValue("B".$i, $data[$a]['nama']);
-	        	$sheet->setCellValue("C".$i, $data[$a]['alamat']);
-	        	$sheet->setCellValue("D".$i, $data[$a]['kelurahan']);
-	        	$sheet->setCellValue("E".$i, $data[$a]['dusun']);
-	        	$sheet->setCellValue("F".$i, $data[$a]['rw']);
-	        	$sheet->setCellValue("G".$i, $data[$a]['rt']);
+                $sheet->setCellValue("C".$i, $data[$a]['nomor_koperasi']);
+	        	$sheet->setCellValue("D".$i, $data[$a]['alamat']);
+	        	$sheet->setCellValue("E".$i, $data[$a]['kelurahan']);
+	        	$sheet->setCellValue("F".$i, $data[$a]['dusun']);
+	        	$sheet->setCellValue("G".$i, $data[$a]['rw']);
+	        	$sheet->setCellValue("H".$i, $data[$a]['rt']);
 	        	$waktu = $this->tanggal_indo($data[$a]['waktu']);
-	        	$sheet->setCellValue("H".$i, $waktu);
-	        	$sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-	        	$sheet->setCellValue("I".$i, $simpanan);
+	        	$sheet->setCellValue("I".$i, $waktu);
+	        	$sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	        	$sheet->setCellValue("J".$i, $simpanan);
 	        	$total += $simpanan;
-	        	$sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
+	        	$sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
 	        	$no++;
         		$i++;	
         	}
         }
-        $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "TOTAL");
-        $sheet->setCellValue("I".$i, $total);
-        $sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
-        $sheet->getStyle("A".$i.":I".$i)->getFont()->setBold(true);
-        $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "TOTAL");
+        $sheet->setCellValue("J".$i, $total);
+        $sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $i++;
-        $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "TOTAL (NERACA)");
-        $sheet->setCellValue("I".$i, $total_neraca);
-        $sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
-        $sheet->getStyle("A".$i.":I".$i)->getFont()->setBold(true);
-        $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "TOTAL (NERACA)");
+        $sheet->setCellValue("J".$i, $total_neraca);
+        $sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $i++;
-        $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "SELISIH");
-        $sheet->setCellValue("I".$i, $total - $total_neraca);
-        $sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
-        $sheet->getStyle("A".$i.":I".$i)->getFont()->setBold(true);
-        $sheet->getStyle("A".$i.":H".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "SELISIH");
+        $sheet->setCellValue("J".$i, $total - $total_neraca);
+        $sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $border_end = $i;
 
-        foreach(range('A','I') as $columnID) {
+        foreach(range('A','J') as $columnID) {
             $sheet->getColumnDimension($columnID)->setAutoSize(true);
         }
 
@@ -168,7 +170,7 @@ class LaporanSimpananKhususCon extends CI_Controller {
         $thin['borders']=array();
         $thin['borders']['allborders']=array();
         $thin['borders']['allborders']['style']=PHPExcel_Style_Border::BORDER_THIN ;
-        $sheet  ->getStyle ( "A".$border_start.":I".$border_end )->applyFromArray ($thin);
+        $sheet  ->getStyle ( "A".$border_start.":J".$border_end )->applyFromArray ($thin);
 
         $filename = "Laporan Daftar Simpanan Khusus_".$tanggal1.".xlsx";
 
