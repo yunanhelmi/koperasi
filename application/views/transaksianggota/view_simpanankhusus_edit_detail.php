@@ -1,4 +1,4 @@
-<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+f<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.3.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/highcharts.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/exporting.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/data.js" type="text/javascript"></script>
@@ -371,6 +371,10 @@ function rupiah($angka){
                           </div>
                           <div id="label_jumlah" class="alert-danger"></div>
                         </div>
+                        <div class="form-group col-xs-6">
+                          <label for="exampleInputPassword1">Keterangan</label>
+                          <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="">
+                        </div>
                       </div>
                       <div class="box-footer">
                         <div class="col-xs-3">
@@ -418,6 +422,10 @@ function rupiah($angka){
                             <input type="text" class="form-control" value="<?php echo $edit_detail_simpanankhusus->jumlah?>" id="edit_jumlah" name="edit_jumlah" placeholder="0">
                           </div>
                           <div id="label_edit_jumlah" class="alert-danger"></div>
+                        </div>
+                        <div class="form-group col-xs-6">
+                          <label for="exampleInputPassword1">Keterangan</label>
+                          <input type="text" class="form-control" value="<?php echo $edit_detail_simpanankhusus->keterangan?>" id="edit_keterangan" name="edit_keterangan">
                         </div>
                       </div>
                       <div class="box-footer">
@@ -467,6 +475,7 @@ function rupiah($angka){
                           <tr>
                             <th>No.</th>
                             <th>Tanggal</th>
+                            <th>Jenis</th>
                             <th>Keterangan</th>
                             <th>Debet</th>
                             <th>Kredit</th>
@@ -498,6 +507,7 @@ function rupiah($angka){
                                 $total_debet += $detail_simpanankhusus[$i]['jumlah'];
                             ?>
                             <td style='text-align: left'>Setoran Bulan <?php echo $bulan_tahun;?></td>
+                            <td style='text-align: left'><?php echo $detail_simpanankhusus[$i]['keterangan'];?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format($detail_simpanankhusus[$i]['jumlah'],2,',','.');?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
                             <?php
@@ -505,6 +515,7 @@ function rupiah($angka){
                                 $total_kredit += $detail_simpanankhusus[$i]['jumlah'];
                             ?>
                             <td style='text-align: left'>Tarikan</td>
+                            <td style='text-align: left'><?php echo $detail_simpanankhusus[$i]['keterangan'];?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format($detail_simpanankhusus[$i]['jumlah'],2,',','.');?></td>
                             <?php

@@ -1834,6 +1834,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$input['jenis']				= $this->input->post('jenis');
 		$input['bulan_tahun']		= $this->input->post('bulan_tahun');
 		$input['jumlah']			= $this->input->post('jumlah');
+		$input['keterangan']		= $this->input->post('keterangan');
 		$this->detailsimpanankhususmodel->inputData($input);
 
 		$id_simpanankhusus = $this->input->post('id_simpanankhusus');
@@ -1907,6 +1908,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$update['jenis'] 				= $this->input->post('edit_jenis');
 		$update['bulan_tahun'] 			= $this->input->post('edit_bulan_tahun');
 		$update['jumlah'] 				= $this->input->post('edit_jumlah');
+		$update['keterangan'] 			= $this->input->post('edit_keterangan');
 		$this->detailsimpanankhususmodel->updateData($id_detail_simpanankhusus, $update);
 
 		$id_simpanankhusus = $this->input->post('edit_id_simpanankhusus');
@@ -3462,6 +3464,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$input['jenis']						= $this->input->post('jenis');
 		$input['bulan_tahun']				= $this->input->post('bulan_tahun');
 		$input['jumlah']					= $this->input->post('jumlah');
+		$input['keterangan']				= $this->input->post('keterangan');
 		$this->detailsimpananpihakketigamodel->inputData($input);
 
 		$id_simpananpihakketiga = $this->input->post('id_simpananpihakketiga');
@@ -3535,6 +3538,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$update['jenis'] 					= $this->input->post('edit_jenis');
 		$update['bulan_tahun'] 				= $this->input->post('edit_bulan_tahun');
 		$update['jumlah'] 					= $this->input->post('edit_jumlah');
+		$update['keterangan'] 				= $this->input->post('edit_keterangan');
 		$this->detailsimpananpihakketigamodel->updateData($id_detail_simpananpihakketiga, $update);
 
 		$id_simpananpihakketiga = $this->input->post('edit_id_simpananpihakketiga');

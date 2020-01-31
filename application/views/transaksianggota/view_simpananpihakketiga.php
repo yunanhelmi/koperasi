@@ -552,6 +552,10 @@ function rupiah($angka){
                           <div id="label_jumlah" class="alert-danger"></div>
                         </div>
                       </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Keterangan</label>
+                        <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="">
+                      </div>
                       <div class="box-footer">
                         <div class="col-xs-3">
                           <button type="submit" class="btn btn-primary">Simpan</button>
@@ -602,6 +606,7 @@ function rupiah($angka){
                           <tr>
                             <th>No.</th>
                             <th>Tanggal</th>
+                            <th>Jenis</th>
                             <th>Keterangan</th>
                             <th>Debet</th>
                             <th>Kredit</th>
@@ -633,6 +638,7 @@ function rupiah($angka){
                                 $total_debet += $detail_simpananpihakketiga[$i]['jumlah'];
                             ?>
                             <td style='text-align: left'>Setoran Bulan <?php echo $bulan_tahun;?></td>
+                            <td style='text-align: left'><?php echo $detail_simpananpihakketiga[$i]['keterangan'];?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format($detail_simpananpihakketiga[$i]['jumlah'],2,',','.');?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
                             <?php
@@ -640,6 +646,7 @@ function rupiah($angka){
                                 $total_kredit += $detail_simpananpihakketiga[$i]['jumlah'];
                             ?>
                             <td style='text-align: left'>Tarikan</td>
+                            <td style='text-align: left'><?php echo $detail_simpananpihakketiga[$i]['keterangan'];?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format($detail_simpananpihakketiga[$i]['jumlah'],2,',','.');?></td>
                             <?php
