@@ -74,9 +74,20 @@ class LaporanSimpanan3thCon extends CI_Controller {
         $tgl        	= strtotime($tanggal1);
         $tanggal    	= date("Y-m-d",$tgl);
 
-        //print_r($tanggal);
-
         $data = $this->laporansimpanan3thmodel->get_data_simpanan3th($id_master, $tanggal);
+
+        // Total Simpanan Dana Sosial pada neraca
+        if($tanggal < '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_sampai_kode_akun($tanggal, $simpanan3th_master->kode_debet_pencairan_simp);
+        } else if($tanggal >= '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun('2019-01-01', $tanggal, $simpanan3th_master->kode_debet_pencairan_simp);
+        }
+
+        if($transaksi != NULL) {
+            $total_neraca = $transaksi[0]['jumlah_kredit'] - $transaksi[0]['jumlah_debet'];
+        } else {
+            $total_neraca = 0;
+        }
 
 		/*echo "<pre>";
 		var_dump($data);
@@ -153,6 +164,18 @@ class LaporanSimpanan3thCon extends CI_Controller {
 
         $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "TOTAL");
         $sheet->setCellValue("J".$i, $total);
+        $sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "TOTAL (NERACA)");
+        $sheet->setCellValue("J".$i, $total_neraca);
+        $sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "SELISIH");
+        $sheet->setCellValue("J".$i, $total - $total_neraca);
         $sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
         $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
         $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);

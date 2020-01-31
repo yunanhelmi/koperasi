@@ -27,6 +27,32 @@ class TransaksiModel extends CI_Model {
 		return $a;
 	}
 
+	function get_data_by_kode_debet_sampai($sampai, $kode_debet) {
+		$query = $this->db->query("SELECT 
+										SUM(jumlah) as jumlah 
+									FROM 
+										`transaksi` 
+									WHERE 
+										tanggal <= '$sampai' 
+										AND kode_debet = '$kode_debet' 
+									");
+		$a = $query->result_array();
+		return $a;	
+	}
+
+	function get_data_by_kode_kredit_sampai($sampai, $kode_kredit) {
+		$query = $this->db->query("SELECT 
+										SUM(jumlah) as jumlah 
+									FROM 
+										`transaksi` 
+									WHERE 
+										tanggal <= '$sampai' 
+										AND kode_kredit = '$kode_kredit' 
+									");
+		$a = $query->result_array();
+		return $a;	
+	}
+
 	function inputData($data) {
 		$this->db->insert("transaksi",$data);
 	}

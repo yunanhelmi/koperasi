@@ -11,6 +11,7 @@ class LaporanSimpananDanaSosialIstimewaCon extends CI_Controller {
 		$this->load->model('mappingkodeakunmodel');
 		$this->load->model('kodeakunmodel');
 		$this->load->model('transaksiakuntansimodel');
+        $this->load->model('transaksimodel');
 		$this->load->model('simpanandanasosialmodel');
 		$this->load->model('detailsimpanandanasosialmodel');
 		$this->load->model('laporansimpanandanasosialmodel');
@@ -74,10 +75,14 @@ class LaporanSimpananDanaSosialIstimewaCon extends CI_Controller {
         }
 
         if($transaksi != NULL) {
-            $total_neraca = $transaksi[0]['jumlah_kredit'] - $transaksi[0]['jumlah_debet'];    
+            $total_neraca = $transaksi[0]['jumlah_kredit'] - $transaksi[0]['jumlah_debet'];
         } else {
             $total_neraca = 0;
         }
+
+        $transaksi_lain_debet = $this->transaksimodel->get_data_by_kode_debet_sampai($tanggal, '207');
+        $transaksi_lain_kredit = $this->transaksimodel->get_data_by_kode_kredit_sampai($tanggal, '207');
+        $pencairan = $transaksi_lain_debet[0]['jumlah'] - $transaksi_lain_kredit[0]['jumlah'];
         
 
         $file = new PHPExcel ();
@@ -163,6 +168,18 @@ class LaporanSimpananDanaSosialIstimewaCon extends CI_Controller {
         $i++;
         $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "SELISIH");
         $sheet->setCellValue("J".$i, $total - $total_neraca);
+        $sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "PENCAIRAN");
+        $sheet->setCellValue("J".$i, $pencairan);
+        $sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "SELISIH");
+        $sheet->setCellValue("J".$i, ($total - $total_neraca) - $pencairan);
         $sheet->getStyle("J".$i)->getNumberFormat()->setFormatCode('#,##0');
         $sheet->getStyle("A".$i.":J".$i)->getFont()->setBold(true);
         $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
