@@ -73,6 +73,32 @@ class CekLaporanRincianJasamodel extends CI_Model {
 		$a = $query->result_array();
 		return $a;	
 	}
+
+	function getPiutang() {
+		$query = $this->db->query("
+									SELECT
+										pinjaman.*,
+										ds.total_angsuran_detail,
+										ds.total_pinjaman_detail
+									FROM 
+										(
+											SELECT 
+												id_pinjaman,
+												SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran_detail,
+												SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman_detail
+											FROM 
+												detail_angsuran
+											GROUP BY 
+												id_pinjaman
+										) as ds
+									LEFT JOIN
+										pinjaman
+									ON
+										ds.id_pinjaman = pinjaman.id
+								");
+		$a = $query->result_array();
+		return $a;	
+	}
 }
 
 ?>

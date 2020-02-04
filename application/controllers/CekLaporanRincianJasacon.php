@@ -11,6 +11,8 @@ class CekLaporanRincianJasacon extends CI_Controller {
 		$this->load->model('mappingkodeakunmodel');
 		$this->load->model('kodeakunmodel');
 		$this->load->model('ceklaporanrincianjasamodel');
+		$this->load->model('pinjamanmodel');
+		$this->load->model('detailangsuranmodel');
 	}
 
 	function cek($dari, $sampai) {
@@ -60,6 +62,31 @@ class CekLaporanRincianJasacon extends CI_Controller {
 		echo "<pre>";
 		var_dump($pendapatan_jasa);
 		echo "</pre>";
+	}
+
+	function cekPiutang() {
+		$data = $this->ceklaporanrincianjasamodel->getPiutang();
+
+		for($i = 0; $i < sizeof($data); $i++) {
+			$sisa_angsuran = $data[$i]['total_pinjaman_detail'] - $data[$i]['total_angsuran_detail'];
+			if($sisa_angsuran != $data[$i]['sisa_angsuran']) {
+				echo "<pre>";
+				var_dump($data[$i]);
+				echo "</pre>";
+			}
+		}
+	}
+
+	function perbaikiPiutang() {
+		$data = $this->ceklaporanrincianjasamodel->getPiutang();
+
+		for($i = 0; $i < sizeof($data); $i++) {
+			$sisa_angsuran = $data[$i]['total_pinjaman_detail'] - $data[$i]['total_angsuran_detail'];
+			if($sisa_angsuran != $data[$i]['sisa_angsuran']) {
+				$id_pinjaman = $data[$i]['id'];
+				$this->pinjamanmodel->update_sisa_angsuran($id_pinjaman, $sisa_angsuran);
+			}
+		}
 	}
 }
 
