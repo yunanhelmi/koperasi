@@ -301,6 +301,7 @@ function rupiah($angka){
                   <tbody>
                     <?php
                       $no = 1;
+                      $total_simpananpokok = 0;
                       for($i = 0; $i < sizeof($simpananpokok); $i++) {
                     ?>
                     <tr>
@@ -313,6 +314,7 @@ function rupiah($angka){
                       <td><?php echo rupiah($simpananpokok[$i]['jumlah'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpananpokok/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <?php 
+                      $total_simpananpokok += $simpananpokok[$i]['jumlah'];
                       if($simpananpokok[$i]['status_post'] == 1) {
                       ?>
                       <td></td>
@@ -329,6 +331,10 @@ function rupiah($angka){
                       ?>
                     </tr>
                     <?php $no++;}?>
+                    <tr>
+                      <td colspan="6"><strong>Total</strong></td>
+                      <td><strong><?php echo rupiah($total_simpananpokok)?></strong></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -357,6 +363,7 @@ function rupiah($angka){
                   <tbody>
                     <?php
                       $no = 1;
+                      $total_simpananwajib = 0;
                       for($i = 0; $i < sizeof($simpananwajib); $i++) {
                     ?>
                     <tr>
@@ -371,7 +378,15 @@ function rupiah($angka){
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpananpokok/".$simpananwajib[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationSimpananwajib('<?php echo $simpananwajib[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                     </tr>
-                    <?php $no++;}?>
+                    <?php 
+                        $no++;
+                        $total_simpananwajib += $simpananwajib[$i]['total'];
+                      }
+                    ?>
+                    <tr>
+                      <td colspan="5"><strong>Total</strong></td>
+                      <td><strong><?php echo rupiah($total_simpananwajib)?></strong></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -400,6 +415,7 @@ function rupiah($angka){
                   <tbody>
                     <?php
                       $no = 1;
+                      $total_simpanankhusus = 0;
                       for($i = 0; $i < sizeof($simpanankhusus); $i++) {
                     ?>
                     <tr>
@@ -414,7 +430,15 @@ function rupiah($angka){
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpananpokok/".$simpanankhusus[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationSimpanankhusus('<?php echo $simpanankhusus[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                     </tr>
-                    <?php $no++;}?>
+                    <?php 
+                        $no++;
+                        $total_simpanankhusus += $simpanankhusus[$i]['total'];
+                      }
+                    ?>
+                    <tr>
+                      <td colspan="5"><strong>Total</strong></td>
+                      <td><strong><?php echo rupiah($total_simpanankhusus)?></strong></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -443,6 +467,7 @@ function rupiah($angka){
                   <tbody>
                     <?php
                       $no = 1;
+                      $total_simpanandanasosial = 0;
                       for($i = 0; $i < sizeof($simpanandanasosial); $i++) {
                     ?>
                     <tr>
@@ -457,7 +482,15 @@ function rupiah($angka){
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpanandanasosial/".$simpanandanasosial[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationSimpanandanasosial('<?php echo $simpanandanasosial[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                     </tr>
-                    <?php $no++;}?>
+                    <?php 
+                        $no++;
+                        $total_simpanandanasosial += $simpanandanasosial[$i]['total']; 
+                      }
+                    ?>
+                    <tr>
+                      <td colspan="5"><strong>Total</strong></td>
+                      <td><strong><?php echo rupiah($total_simpanandanasosial)?></strong></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -486,6 +519,7 @@ function rupiah($angka){
                   <tbody>
                     <?php
                       $no = 1;
+                      $total_simpanankanzun = 0;
                       for($i = 0; $i < sizeof($simpanankanzun); $i++) {
                     ?>
                     <tr>
@@ -500,7 +534,15 @@ function rupiah($angka){
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpanankanzun/".$simpanankanzun[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationSimpanankanzun('<?php echo $simpanankanzun[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                     </tr>
-                    <?php $no++;}?>
+                    <?php 
+                        $no++;
+                        $total_simpanankanzun += $simpanan3th[$i]['total'];
+                      }
+                    ?>
+                    <tr>
+                      <td colspan="5"><strong>Total</strong></td>
+                      <td><strong><?php echo rupiah($total_simpanankanzun)?></strong></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -576,6 +618,7 @@ function rupiah($angka){
                   <tbody>
                     <?php
                       $no = 1;
+                      $total_simpananpihakketiga = 0;
                       for($i = 0; $i < sizeof($simpananpihakketiga); $i++) {
                     ?>
                     <tr>
@@ -590,7 +633,15 @@ function rupiah($angka){
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpananpihakketiga/".$simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationSimpananpihakketiga('<?php echo $simpananpihakketiga[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                     </tr>
-                    <?php $no++;}?>
+                    <?php 
+                        $no++;
+                        $total_simpananpihakketiga += $simpananpihakketiga[$i]['total'];
+                      }
+                    ?>
+                    <tr>
+                      <td colspan="5"><strong>Total</strong></td>
+                      <td><strong><?php echo rupiah($total_simpananpihakketiga) ?></strong></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
