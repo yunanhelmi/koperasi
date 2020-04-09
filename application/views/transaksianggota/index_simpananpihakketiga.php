@@ -256,6 +256,7 @@ function rupiah($angka){
                   <tbody>
                     <?php
                       $no = 1;
+                      $total_simpananpokok = 0;
                       for($i = 0; $i < sizeof($simpananpokok); $i++) {
                     ?>
                     <tr>
@@ -269,6 +270,11 @@ function rupiah($angka){
                       <td><?php echo rupiah($simpananpokok[$i]['jumlah'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpananpokok/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <?php 
+                      if($simpananpokok[$i]['jenis'] == 'Setoran') {
+                        $total_simpananpokok += $simpananpokok[$i]['jumlah'];
+                      } else if($simpananpokok[$i]['jenis'] == 'Tarikan') {
+                        $total_simpananpokok -= $simpananpokok[$i]['jumlah'];
+                      }
                       if($simpananpokok[$i]['status_post'] == 1) {
                       ?>
                       <td></td>
@@ -285,6 +291,10 @@ function rupiah($angka){
                       ?>
                     </tr>
                     <?php $no++;}?>
+                    <tr>
+                      <td colspan="6"><strong>Total</strong></td>
+                      <td><strong><?php echo rupiah($total_simpananpokok)?></strong></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
