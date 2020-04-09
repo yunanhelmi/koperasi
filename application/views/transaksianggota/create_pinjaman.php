@@ -322,7 +322,11 @@ function rupiah($angka){
                       <td><?php echo rupiah($simpananpokok[$i]['jumlah'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_simpananpokok/".$simpananpokok[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <?php 
-                      $total_simpananpokok += $simpananpokok[$i]['jumlah'];
+                      if($simpananpokok[$i]['jenis'] == 'Setoran') {
+                        $total_simpananpokok += $simpananpokok[$i]['jumlah'];
+                      } else if($simpananpokok[$i]['jenis'] == 'Tarikan') {
+                        $total_simpananpokok -= $simpananpokok[$i]['jumlah'];
+                      }
                       if($simpananpokok[$i]['status_post'] == 1) {
                       ?>
                       <td></td>
@@ -824,93 +828,7 @@ function rupiah($angka){
     return res1;
   }
 
-  $(function () {
-    $('#pinjaman_table').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  })
-
-  $(function () {
-    $('#simpananpokok_table').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  })
-
-  $(function () {
-    $('#simpananwajib_table').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  })
-
-  $(function () {
-    $('#simpanankhusus_table').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  })
-
-  $(function () {
-    $('#simpanandanasosial_table').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  })
-
-  $(function () {
-    $('#simpanankanzun_table').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  })
-
-  $(function () {
-    $('#simpanan3th_table').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  })
-
-  $(function () {
-    $('#simpananpihakketiga_table').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  })
+  
   </script>
 
   <script>
