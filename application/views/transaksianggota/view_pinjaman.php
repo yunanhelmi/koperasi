@@ -714,7 +714,7 @@ function rupiah($angka){
                     </tr>
                     <?php 
                         $no++;
-                        $total_simpanankanzun += $simpanan3th[$i]['total'];
+                        $total_simpanankanzun += $simpanankanzun[$i]['total'];
                       }
                     ?>
                     <tr>

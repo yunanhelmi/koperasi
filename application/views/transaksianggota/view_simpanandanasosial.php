@@ -199,7 +199,7 @@ function rupiah($angka){
                       <th>Jaminan</th>
                       <th>Jatuh Tempo</th>
                       <th>Jumlah Pinjaman</th>
-                      <th>Sisa Angsuran</th>
+                      <th>Sisa Pinjaman</th>
                       <th>Jumlah Angsuran</th>
                       <th>View</th>
                       <th>Edit</th>
@@ -645,7 +645,7 @@ function rupiah($angka){
                     </tr>
                     <?php 
                         $no++;
-                        $total_simpanankanzun += $simpanan3th[$i]['total'];
+                        $total_simpanankanzun += $simpanankanzun[$i]['total'];
                       }
                     ?>
                     <tr>
