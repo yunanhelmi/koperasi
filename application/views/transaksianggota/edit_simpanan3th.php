@@ -189,7 +189,7 @@ function rupiah($angka){
                       <th>Jaminan</th>
                       <th>Jatuh Tempo</th>
                       <th>Jumlah Pinjaman</th>
-                      <th>Sisa Angsuran</th>
+                      <th>Sisa Pinjaman</th>
                       <th>Jumlah Angsuran</th>
                       <th>View</th>
                       <th>Edit</th>
@@ -457,7 +457,15 @@ function rupiah($angka){
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_simpanankanzun/".$simpanankanzun[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationSimpanankanzun('<?php echo $simpanankanzun[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                     </tr>
-                    <?php $no++;}?>
+                    <?php 
+                        $no++;
+                        $total_simpanankanzun += $simpanankanzun[$i]['total'];
+                      }
+                    ?>
+                    <tr>
+                      <td colspan="5"><strong>Total</strong></td>
+                      <td><strong><?php echo rupiah($total_simpanankanzun)?></strong></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>

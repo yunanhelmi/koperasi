@@ -198,7 +198,7 @@ function rupiah($angka){
                       <th>Jaminan</th>
                       <th>Jatuh Tempo</th>
                       <th>Jumlah Pinjaman</th>
-                      <th>Sisa Angsuran</th>
+                      <th>Sisa Pinjaman</th>
                       <th>Jumlah Angsuran</th>
                       <th>View</th>
                       <th>Edit</th>
@@ -516,7 +516,7 @@ function rupiah($angka){
                   <tbody>
                     <?php
                       $no = 1;
-                      $total_simpananpihakketiga = 0;
+                      $total_simpanankanzun = 0;
                       for($i = 0; $i < sizeof($simpanankanzun); $i++) {
                     ?>
                     <tr>
@@ -533,7 +533,7 @@ function rupiah($angka){
                     </tr>
                     <?php 
                         $no++;
-                        $total_simpananpihakketiga += $simpananpihakketiga[$i]['total'];
+                        $total_simpanankanzun += $simpanankanzun[$i]['total'];
                       }
                     ?>
                   </tbody>
