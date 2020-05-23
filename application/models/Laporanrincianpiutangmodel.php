@@ -65,14 +65,20 @@ class LaporanRincianPiutangModel extends CI_Model {
 	function get_data($sampai) {
 		$query = $this->db->query("
 								SELECT 
-									id_pinjaman as id_pinjaman_detail,
-									COUNT(IF(jenis = 'Angsuran', 1, NULL)) as jumlah_angsuran,
-									COUNT(IF(jenis = 'Pinjaman', 1, NULL)) as jumlah_pinjaman,
-									SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran,
-									SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman,
-									MAX(waktu) as waktu_terakhir_angsuran
+									pinjaman.nama_nasabah,
+									pinjaman.nomor_nasabah,
+									detail_angsuran.id_pinjaman as id_pinjaman_detail,
+									COUNT(IF(detail_angsuran.jenis = 'Angsuran', 1, NULL)) as jumlah_angsuran,
+									COUNT(IF(detail_angsuran.jenis = 'Pinjaman', 1, NULL)) as jumlah_pinjaman,
+									SUM(IF(detail_angsuran.jenis = 'Angsuran', angsuran, 0)) as total_angsuran,
+									SUM(IF(detail_angsuran.jenis = 'Pinjaman', total, 0)) as total_pinjaman,
+									MAX(detail_angsuran.waktu) as waktu_terakhir_angsuran
 								FROM 
 									detail_angsuran
+								LEFT JOIN
+									pinjaman
+								ON 
+									detail_angsuran.id_pinjaman = pinjaman.id
 								WHERE 
 									detail_angsuran.waktu <= '$sampai'
 									AND detail_angsuran.status_post = '1'

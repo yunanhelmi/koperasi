@@ -110,9 +110,9 @@ class LaporanRincianPiutangCon extends CI_Controller {
             redirect("usercon/login", "refresh");
         }
 
-        $tgl_dari1  = $this->input->post('dari');
+        /*$tgl_dari1  = $this->input->post('dari');
         $tgl_dari   = strtotime($tgl_dari1);
-        $dari       = date("Y-m-d",$tgl_dari);
+        $dari       = date("Y-m-d",$tgl_dari);*/
 
         $tgl_sampai1    = $this->input->post('sampai');
         $tgl_sampai     = strtotime($tgl_sampai1);
@@ -132,33 +132,39 @@ class LaporanRincianPiutangCon extends CI_Controller {
         $sheet = $file->getActiveSheet ();
         $i = 2;
 
-        $sheet->mergeCells("A".$i.":M".$i)->setCellValue("A".$i, "KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYYAH");
-        $sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":M".$i)->getFont()->setSize(14)->setBold(true);
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, 'ATAS BERKAT RAHMAT ALLAH YANG MAHA KUASA');
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(14)->setBold(true);
+        $i += 2;
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, 'KOPERASI SMA NEGERI 1 BOJONEGORO');
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(14)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":M".$i)->setCellValue("A".$i, "LAPORAN RINCIAN PIUTANG ".$tgl_dari1." - ".$tgl_sampai1);
-        $sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":M".$i)->getFont()->setSize(12)->setBold(true);
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, 'PENDIDIK UTAMA ADIL SEJAHTERA SYARIAH');
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(14)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":M".$i)->setCellValue("A".$i, "KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYYAH");
-        $sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":M".$i)->getFont()->setSize(10)->setBold(true);
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, 'KOSMAN "PUAS" SYARIAH');
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(14)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":M".$i)->setCellValue("A".$i, "NGRASEH DANDER BOJONEGORO  TELP (0353) 886039       BH : 8181/BH/II/95");
-        $sheet->getStyle("A".$i.":M".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":M".$i)->getFont()->setSize(10)->setBold(true);
+        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "LAPORAN RINCIAN PIUTANG ".$tgl_sampai1);
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(12)->setBold(true);
         $i += 2;
 
         $border_start = $i;
         $sheet->setCellValue("A".$i, "NO");
         $sheet->setCellValue("B".$i, "ID PINJAMAN");
-        $sheet->setCellValue("C".$i, "JUMLAH PINJAMAN DETAIL");
-        $sheet->setCellValue("D".$i, "JUMLAH ANGSURAN DETAIL");
-        $sheet->setCellValue("E".$i, "TOTAL PINJAMAN DETAIL");
-        $sheet->setCellValue("F".$i, "TOTAL ANGSURAN DETAIL");
-        $sheet->setCellValue("G".$i, "SALDO");
-        $sheet->getStyle("A".$i.":G".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":G".$i)->getFont()->setBold(true);
+        $sheet->setCellValue("C".$i, "NAMA NASABAH");
+        $sheet->setCellValue("D".$i, "NOMOR NASABAH");
+        $sheet->setCellValue("E".$i, "JUMLAH PINJAMAN DETAIL");
+        $sheet->setCellValue("F".$i, "JUMLAH ANGSURAN DETAIL");
+        $sheet->setCellValue("G".$i, "TOTAL PINJAMAN DETAIL");
+        $sheet->setCellValue("H".$i, "TOTAL ANGSURAN DETAIL");
+        $sheet->setCellValue("I".$i, "SALDO");
+        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":I".$i)->getFont()->setBold(true);
         $i++;
 
         $no = 1;
@@ -168,29 +174,31 @@ class LaporanRincianPiutangCon extends CI_Controller {
             if($saldo != 0) {
                 $sheet->setCellValue("A".$i, $no);
                 $sheet->setCellValue("B".$i, $data[$a]['id_pinjaman_detail']);
-                $sheet->setCellValue("C".$i, $data[$a]['jumlah_pinjaman']);
-                $sheet->setCellValue("D".$i, $data[$a]['jumlah_angsuran']);
-                $sheet->setCellValue("E".$i, $data[$a]['total_pinjaman']);
-                $sheet->setCellValue("F".$i, $data[$a]['total_angsuran']);
+                $sheet->setCellValue("C".$i, $data[$a]['nama_nasabah']);
+                $sheet->setCellValue("D".$i, $data[$a]['nomor_nasabah']);
+                $sheet->setCellValue("E".$i, $data[$a]['jumlah_pinjaman']);
+                $sheet->setCellValue("F".$i, $data[$a]['jumlah_angsuran']);
+                $sheet->setCellValue("G".$i, $data[$a]['total_pinjaman']);
+                $sheet->setCellValue("H".$i, $data[$a]['total_angsuran']);
                 $total_sisa += $saldo;
-                $sheet->setCellValue("G".$i, $saldo);
-                $sheet->getStyle("E".$i.":G".$i)->getNumberFormat()->setFormatCode('#,##0');
-                $sheet->getStyle("A".$i.":D".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                $sheet->setCellValue("I".$i, $saldo);
+                $sheet->getStyle("G".$i.":I".$i)->getNumberFormat()->setFormatCode('#,##0');
+                $sheet->getStyle("A".$i.":F".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                 $i++;
                 $no++;    
             }
             
         }
 
-        $sheet->mergeCells("A".$i.":F".$i)->setCellValue("A".$i, "TOTAL PIUTANG");
-        $sheet->setCellValue("G".$i, $total_sisa);
-        $sheet->getStyle("g".$i)->getNumberFormat()->setFormatCode('#,##0');
-        $sheet->getStyle("A".$i.":G".$i)->getFont()->setBold(true);
-        $sheet->getStyle("A".$i.":D".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells("A".$i.":H".$i)->setCellValue("A".$i, "TOTAL PIUTANG");
+        $sheet->setCellValue("I".$i, $total_sisa);
+        $sheet->getStyle("I".$i)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("A".$i.":I".$i)->getFont()->setBold(true);
+        $sheet->getStyle("A".$i.":F".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $border_end = $i;
 
-        foreach(range('A','G') as $columnID) {
+        foreach(range('A','I') as $columnID) {
             $sheet->getColumnDimension($columnID)->setAutoSize(true);
         }
 
@@ -198,9 +206,9 @@ class LaporanRincianPiutangCon extends CI_Controller {
         $thin['borders']=array();
         $thin['borders']['allborders']=array();
         $thin['borders']['allborders']['style']=PHPExcel_Style_Border::BORDER_THIN ;
-        $sheet  ->getStyle ( "A".$border_start.":G".$border_end )->applyFromArray ($thin);
+        $sheet  ->getStyle ( "A".$border_start.":I".$border_end )->applyFromArray ($thin);
 
-        $filename = "Laporan Rincian Piutang_".$tgl_dari1."_".$tgl_sampai1.".xlsx";
+        $filename = "Laporan Rincian Piutang_".$tgl_sampai1.".xlsx";
 
         header ( 'Content-Type: application/vnd.ms-excel' );
         header ( 'Content-Disposition: attachment;filename="'.$filename.'"' );

@@ -27,7 +27,7 @@
     				<legend style="text-align:center;">LAPORAN RINCIAN PIUTANG</legend>
     				<form action="<?php echo base_url();?>index.php/laporanrincianpiutangcon/excel_coba" method="post" enctype="multipart/form-data" role="form">
 						<div class="box-body">
-							<div class="form-group col-xs-3">
+							<!--<div class="form-group col-xs-3">
 								<label for="exampleInputPassword1">Dari</label>
 								<div class="input-group date">
 									<div class="input-group-addon">
@@ -35,9 +35,9 @@
 									</div>
 									<input type="text" class="form-control pull-right" name="dari" id="dari" value="" data-date-format="dd-mm-yyyy">
 								</div>
-							</div>
+							</div>-->
 							<div class="form-group col-xs-3">
-								<label for="exampleInputPassword1">Sampai</label>
+								<label for="exampleInputPassword1">Per Tanggal</label>
 								<div class="input-group date">
 									<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
