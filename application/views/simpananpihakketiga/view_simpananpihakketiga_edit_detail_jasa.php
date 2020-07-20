@@ -81,6 +81,7 @@
                 		</div>
 					</div>
 				</div>
+
 				<div class="box box-danger" id="div_tambah_detail_simpananpihakketiga" style="display:none">
 					<legend style="text-align:center;">TAMBAH DETAIL SIMPANAN PIHAK KETIGA</legend>
 					<form action="<?php echo base_url();?>index.php/simpananpihakketigacon/insert_detail_simpananpihakketiga" method="post" enctype="multipart/form-data" role="form">
@@ -110,46 +111,6 @@
 							</div>
 						</div>
 					</form>
-				</div>
-				<div class="box box-danger">
-					<legend style="text-align:center;">DETAIL SIMPANAN PIHAK KETIGA</legend>
-					<div class="box-body">
-						<div class="form-group col-xs-6">
-			        		<button onclick="tambahDetailSimpananPihakKetiga()" type="submit" class="btn btn-success">Tambah Detail Simpanan Pihak Ketiga</button>
-			            </div>
-			            <div class="form-group col-xs-12">
-			        		<br>
-			            </div>
-			            <table id="detail_simpananpihakketiga_table" class="table table-bordered table-hover"  width="100%">
-			            	<thead>
-                				<tr>
-				                    <th>No.</th>
-				                    <th>Tanggal</th>
-				                    <th>Jumlah</th>
-				                    <th>Edit</th>
-				                    <th>Delete</th>
-                    			</tr>
-                			</thead>
-                			<tbody>
-                    			<?php
-				                    $no = 1;
-				                    for($i = 0; $i < sizeof($detail_simpananpihakketiga); $i++) {
-                  				?>
-                    			<tr>
-				                    <td style='text-align: center'><?php echo $no."."?></td>
-				                    <?php 
-										$date = strtotime( $detail_simpananpihakketiga[$i]['waktu'] );
-										$tanggal = date( 'd F Y', $date );
-									?>
-				                    <td><?php echo $tanggal;?></td>
-				                    <td><?php echo "Rp " . number_format($detail_simpananpihakketiga[$i]['jumlah'],2,',','.');?></td>
-				                    <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("simpananpihakketigacon/edit_detail_simpananpihakketiga/".$simpananpihakketiga->id."/".$detail_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
-				                    <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmation('<?php echo $simpananpihakketiga->id?>','<?php echo $detail_simpananpihakketiga[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
-                    			</tr>
-                  				<?php $no++;}?>
-                			</tbody>
-			            </table>
-					</div>
 				</div>
 
 				<div class="box box-danger" id="div_tambah_detail_jasa_simpananpihakketiga" style="display:none">
@@ -194,90 +155,180 @@
 		            </div>
 		          </form>
 		        </div>
+
+		        <div class="box box-danger" id="div_edit_detail_simpananpihakketiga">
+					<legend style="text-align:center;">EDIT DETAIL JASA SIMPANAN PIHAK KETIGA</legend>
+					<form action="<?php echo base_url();?>index.php/transaksianggotacon/update_detail_jasa_simpananpihakketiga" method="post" enctype="multipart/form-data" role="form">
+						<div class="box-body">
+							<div class="form-group col-xs-6">
+								<label for="exampleInputPassword1">Tanggal</label>
+								<div class="input-group date">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<?php 
+										$tgl = strtotime($edit_detail_jasa_simpananpihakketiga->waktu);
+									?>
+									<input type="text" class="form-control pull-right" name="edit_jasa_waktu" id="edit_jasa_waktu" value="<?php echo date("d-m-Y", $tgl);?>" data-date-format="dd-mm-yyyy">
+                    				<input type="hidden" class="form-control" value="<?php echo $edit_detail_jasa_simpananpihakketiga->id?>" id="edit_jasa_id" name="edit_jasa_id">
+                    				<input type="hidden" class="form-control" value="<?php echo $edit_detail_jasa_simpananpihakketiga->id_simpananpihakketiga?>" id="edit_jasa_id_simpananpihakketiga" name="edit_jasa_id_simpananpihakketiga">
+								</div>
+							</div>
+							<div class="form-group col-xs-6">
+	                          <label for="exampleInputPassword1">Jenis</label>
+	                          <select id="edit_jasa_jenis" name="edit_jasa_jenis" class="form-control" style="width: 100%;">
+	                            <option value='Penyesuaian Jasa' <?php echo $edit_detail_jasa_simpananpihakketiga->jenis == 'Penyesuaian Jasa' ? 'selected' : ''?> >Penyesuaian Jasa</option>
+	                            <option value='Pencairan Hutang Jasa' <?php echo $edit_detail_jasa_simpananpihakketiga->jenis == 'Pencairan Hutang Jasa' ? 'selected' : ''?> >Pencairan Hutang Jasa</option>
+	                            <option value='Pembayaran Biaya Jasa' <?php echo $edit_detail_jasa_simpananpihakketiga->jenis == 'Pembayaran Biaya Jasa' ? 'selected' : ''?> >Pembayaran Biaya Jasa</option>
+	                          </select>
+	                        </div>
+	                        <div class="form-group col-xs-6">
+	                          <label for="exampleInputPassword1">Bulan-Tahun</label>
+	                          <input type="month" class="form-control" value="<?php echo $edit_detail_jasa_simpananpihakketiga->bulan_tahun?>" id="edit_jasa_bulan_tahun" name="edit_jasa_bulan_tahun" placeholder="">
+	                        </div>
+							<div class="form-group col-xs-6">
+								<label for="exampleInputPassword1">Jumlah</label>
+								<div class="input-group margin-bottom-sm">
+									<span class="input-group-addon">Rp</span>
+									<input type="text" class="form-control" value="<?php echo $edit_detail_jasa_simpananpihakketiga->jumlah?>" id="edit_jasa_jumlah" name="edit_jasa_jumlah" placeholder="0">
+								</div>
+								<div id="label_edit_jasa_jumlah" class="alert-danger"></div>
+							</div>
+						</div>
+						<div class="box-footer">
+							<div class="col-xs-3">
+								<button type="submit" class="btn btn-primary">Update</button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+
+				<div class="box box-danger">
+					<legend style="text-align:center;">DETAIL SIMPANAN PIHAK KETIGA</legend>
+					<div class="box-body">
+						<div class="form-group col-xs-6">
+			        		<button onclick="tambahDetailSimpananPihakKetiga()" type="submit" class="btn btn-success">Tambah Detail Simpanan Pihak Ketiga</button>
+			            </div>
+			            <div class="form-group col-xs-12">
+			        		<br>
+			            </div>
+			            <table id="detail_simpananpihakketiga_table" class="table table-bordered table-hover"  width="100%">
+			            	<thead>
+                				<tr>
+				                    <th>No.</th>
+				                    <th>Tanggal</th>
+				                    <th>Jumlah</th>
+				                    <th>Edit</th>
+				                    <th>Delete</th>
+                    			</tr>
+                			</thead>
+                			<tbody>
+                    			<?php
+				                    $no = 1;
+				                    for($i = 0; $i < sizeof($detail_simpananpihakketiga); $i++) {
+                  				?>
+                    			<tr>
+				                    <td style='text-align: center'><?php echo $no."."?></td>
+				                    <?php 
+										$date = strtotime( $detail_simpananpihakketiga[$i]['waktu'] );
+										$tanggal = date( 'd F Y', $date );
+									?>
+				                    <td><?php echo $tanggal;?></td>
+				                    <td><?php echo "Rp " . number_format($detail_simpananpihakketiga[$i]['jumlah'],2,',','.');?></td>
+				                    <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("simpananpihakketigacon/edit_detail_simpananpihakketiga/".$simpananpihakketiga->id."/".$detail_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+				                    <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmation('<?php echo $simpananpihakketiga->id?>','<?php echo $detail_simpananpihakketiga[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                    			</tr>
+                  				<?php $no++;}?>
+                			</tbody>
+			            </table>
+					</div>
+				</div>
+
 				<div class="box box-danger">
 		          <legend style="text-align:center;">DETAIL JASA SIMPANAN PIHAK KETIGA</legend>
 		          <div class="box-body">
 		            <div class="form-group col-xs-6">
-						<button onclick="tambahDetailJasaSimpananPihakKetiga()" type="submit" class="btn btn-success">Tambah Detail Jasa Simpanan Pihak Ketiga</button>
-						</div>
-						<div class="form-group col-xs-12">
-						<br>
-	                </div>
-					<table id="detail_jasa_simpananpihakketiga_table" class="table table-bordered table-hover"  width="100%">
-						<thead>
-						  <tr>
-						    <th>No.</th>
-						    <th>Tanggal</th>
-						    <th>Keterangan</th>
-						    <th>Debet</th>
-						    <th>Kredit</th>
-						    <th>Saldo</th>
-						    <th>Edit</th>
-						    <th>Delete</th>
-						    <th>Post</th>
-						  </tr>
-						</thead>
-						<tbody>
-						  <?php
-						    $no = 1;
-						    $total_debet = 0;
-						    $total_kredit = 0;
-						    $sisa_simpanan = array();
-						    for($i = 0; $i < sizeof($detail_jasa_simpananpihakketiga); $i++) {
-						  ?>
-						  <tr>
-						    <td style='text-align: center'><?php echo $no."."?></td>
-						    <?php 
-						      $date = strtotime( $detail_jasa_simpananpihakketiga[$i]['waktu'] );
-						      $tanggal = date( 'd F Y', $date );
-						      $bln_thn = strtotime( $detail_jasa_simpananpihakketiga[$i]['bulan_tahun'] );
-						      $bulan_tahun = date( 'M-Y', $bln_thn );
-						    ?>
-						    <td><?php echo $tanggal;?></td>
-						    <?php
-						      if($detail_jasa_simpananpihakketiga[$i]['jenis'] == 'Penyesuaian Jasa') {
-						        $total_debet += $detail_jasa_simpananpihakketiga[$i]['jumlah'];
-						    ?>
-						    <td style='text-align: left'><?php echo $detail_jasa_simpananpihakketiga[$i]['jenis']?> Bulan <?php echo $bulan_tahun;?></td>
-						    <td style='text-align: right'><?php echo "Rp " . number_format($detail_jasa_simpananpihakketiga[$i]['jumlah'],2,',','.');?></td>
-						    <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
-						    <?php
-						      } else {
-						        $total_kredit += $detail_jasa_simpananpihakketiga[$i]['jumlah'];
-						    ?>
-						    <td style='text-align: left'><?php echo $detail_jasa_simpananpihakketiga[$i]['jenis']?></td>
-						    <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
-						    <td style='text-align: right'><?php echo "Rp " . number_format($detail_jasa_simpananpihakketiga[$i]['jumlah'],2,',','.');?></td>
-						    <?php
-						      }
-						      $sisa_simpanan[$i] = $total_debet - $total_kredit;
-						    ?>
-						    <td style='text-align: right'><?php echo "Rp " . number_format($sisa_simpanan[$i],2,',','.');?></td>
-						    
-						    <?php 
-						    if($detail_jasa_simpananpihakketiga[$i]['status_post'] == 1) {
-						    ?>
-						    <td></td>
-						    <td></td>
-						    <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/jasa_simpananpihakketiga_unpost_akuntansi/".$simpananpihakketiga->id."/".$detail_jasa_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-times"></i></a></td>
-						    <?php
-						    } else {
-						    ?>
-						    <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_detail_jasa_simpananpihakketiga/".$simpananpihakketiga->id."/".$detail_jasa_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
-						    <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationJasa('<?php echo $simpananpihakketiga->id?>','<?php echo $detail_jasa_simpananpihakketiga[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
-						    <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/jasa_simpananpihakketiga_post_akuntansi/".$simpananpihakketiga->id."/".$detail_jasa_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-upload"></i></a></td>
-						    <?php
-						    }
-						    ?>
-						  </tr>
-						  <?php $no++;}?>
-						  <tr>
-						    <td colspan='3'><strong>TOTAL</strong></td>
-						    <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_debet,2,',','.');?></strong></td>
-						    <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_kredit,2,',','.');?></strong></td>
-						  </tr>
-						</tbody>
-					</table>
+		                  <button onclick="tambahDetailJasaSimpananPihakKetiga()" type="submit" class="btn btn-success">Tambah Detail Jasa Simpanan Pihak Ketiga</button>
+		                  </div>
+		                  <div class="form-group col-xs-12">
+		                  <br>
+		                  </div>
+		                  <table id="detail_jasa_simpananpihakketiga_table" class="table table-bordered table-hover"  width="100%">
+		                <thead>
+		                  <tr>
+		                    <th>No.</th>
+		                    <th>Tanggal</th>
+		                    <th>Keterangan</th>
+		                    <th>Debet</th>
+		                    <th>Kredit</th>
+		                    <th>Saldo</th>
+		                    <th>Edit</th>
+		                    <th>Delete</th>
+		                    <th>Post</th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+		                  <?php
+		                    $no = 1;
+		                    $total_debet = 0;
+		                    $total_kredit = 0;
+		                    $sisa_simpanan = array();
+		                    for($i = 0; $i < sizeof($detail_jasa_simpananpihakketiga); $i++) {
+		                  ?>
+		                  <tr>
+		                    <td style='text-align: center'><?php echo $no."."?></td>
+		                    <?php 
+		                      $date = strtotime( $detail_jasa_simpananpihakketiga[$i]['waktu'] );
+		                      $tanggal = date( 'd F Y', $date );
+		                      $bln_thn = strtotime( $detail_jasa_simpananpihakketiga[$i]['bulan_tahun'] );
+		                      $bulan_tahun = date( 'M-Y', $bln_thn );
+		                    ?>
+		                    <td><?php echo $tanggal;?></td>
+		                    <?php
+		                      if($detail_jasa_simpananpihakketiga[$i]['jenis'] == 'Penyesuaian Jasa') {
+		                        $total_debet += $detail_jasa_simpananpihakketiga[$i]['jumlah'];
+		                    ?>
+		                    <td style='text-align: left'><?php echo $detail_jasa_simpananpihakketiga[$i]['jenis']?> Bulan <?php echo $bulan_tahun;?></td>
+		                    <td style='text-align: right'><?php echo "Rp " . number_format($detail_jasa_simpananpihakketiga[$i]['jumlah'],2,',','.');?></td>
+		                    <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
+		                    <?php
+		                      } else {
+		                        $total_kredit += $detail_jasa_simpananpihakketiga[$i]['jumlah'];
+		                    ?>
+		                    <td style='text-align: left'><?php echo $detail_jasa_simpananpihakketiga[$i]['jenis']?></td>
+		                    <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
+		                    <td style='text-align: right'><?php echo "Rp " . number_format($detail_jasa_simpananpihakketiga[$i]['jumlah'],2,',','.');?></td>
+		                    <?php
+		                      }
+		                      $sisa_simpanan[$i] = $total_debet - $total_kredit;
+		                    ?>
+		                    <td style='text-align: right'><?php echo "Rp " . number_format($sisa_simpanan[$i],2,',','.');?></td>
+		                    
+		                    <?php 
+		                    if($detail_jasa_simpananpihakketiga[$i]['status_post'] == 1) {
+		                    ?>
+		                    <td></td>
+		                    <td></td>
+		                    <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/jasa_simpananpihakketiga_unpost_akuntansi/".$simpananpihakketiga->id."/".$detail_jasa_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-times"></i></a></td>
+		                    <?php
+		                    } else {
+		                    ?>
+		                    <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_detail_jasa_simpananpihakketiga/".$simpananpihakketiga->id."/".$detail_jasa_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+		                    <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationJasa('<?php echo $simpananpihakketiga->id?>','<?php echo $detail_jasa_simpananpihakketiga[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+		                    <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/jasa_simpananpihakketiga_post_akuntansi/".$simpananpihakketiga->id."/".$detail_jasa_simpananpihakketiga[$i]['id']); ?>"><i class="fa fa-upload"></i></a></td>
+		                    <?php
+		                    }
+		                    ?>
+		                  </tr>
+		                  <?php $no++;}?>
+		                  <tr>
+		                    <td colspan='3'><strong>TOTAL</strong></td>
+		                    <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_debet,2,',','.');?></strong></td>
+		                    <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_kredit,2,',','.');?></strong></td>
+		                  </tr>
+		                </tbody>
+		              </table>
 		          </div>
 		        </div>
 			</div>
@@ -343,6 +394,16 @@ function label_jasa_jumlah() {
     $("#label_jasa_jumlah").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(jasa_jumlah)));
 }
 
+function label_edit_jumlah() {
+    var edit_jumlah = $('#edit_jumlah').val();
+    $("#label_edit_jumlah").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(edit_jumlah)));
+}
+
+function label_edit_jasa_jumlah() {
+    var edit_jasa_jumlah = $('#edit_jasa_jumlah').val();
+    $("#label_edit_jasa_jumlah").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(edit_jasa_jumlah)));
+}
+
 function getConfirmation(id_simpananpihakketiga, id_detail_simpananpihakketiga){
     var retVal = confirm("Apakah anda yakin akan menghapus data tersebut? Jika dihapus, maka total simpanan pihak ketiga yang bersangkutan akan disesuaikan.");
     var controller = 'simpananpihakketigacon';
@@ -363,10 +424,12 @@ function getConfirmationJasa(id_simpanan3th, id_detail_jasa_simpananpihakketiga)
 }
 
 function tambahDetailSimpananPihakKetiga() {
+	document.getElementById("div_edit_detail_simpananpihakketiga").style.display = "none";
 	document.getElementById("div_tambah_detail_simpananpihakketiga").style.display = "block";
 }
 
 function tambahDetailJasaSimpananPihakKetiga() {
+	document.getElementById("div_edit_detail_jasa_simpananpihakketiga").style.display = "none";
 	document.getElementById("div_tambah_detail_jasa_simpananpihakketiga").style.display = "block";
 }
 
@@ -381,35 +444,35 @@ $(function () {
     })
 })
 
-$(function () {
-    $('#detail_jasa_simpananpihakketiga_table').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-})
-
 $(document).ready(function(){
 	$('.select2').select2();
 
     $('#waktu').datepicker({}).on('changeDate', function(ev){});
+    $('#edit_waktu').datepicker({}).on('changeDate', function(ev){});
 
     $('#jasa_waktu').datepicker({}).on('changeDate', function(ev){});
+    $('#edit_jasa_waktu').datepicker({}).on('changeDate', function(ev){});
 
     label_jumlah();
+    label_edit_jumlah();
 
     label_jasa_jumlah();
+    label_edit_jasa_jumlah();
 
     $('#jumlah').keyup(function() {
         label_jumlah();
     });
 
+    $('#edit_jumlah').keyup(function() {
+        label_edit_jumlah();
+    });
+
     $('#jasa_jumlah').keyup(function() {
         label_jasa_jumlah();
     });
+
+    $('#edit_jasa_jumlah').keyup(function() {
+        label_edit_jasa_jumlah();
+    });
 });
 </script>
-

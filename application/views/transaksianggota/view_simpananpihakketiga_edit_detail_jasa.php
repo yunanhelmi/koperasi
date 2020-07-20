@@ -669,6 +669,52 @@ function rupiah($angka){
                       </div>
                     </form>
                   </div>
+                  <div class="box box-danger" id="div_edit_detail_jasa_simpananpihakketiga">
+                    <legend style="text-align:center;">EDIT DETAIL JASA SIMPANAN PIHAK KETIGA</legend>
+                    <form action="<?php echo base_url();?>index.php/transaksianggotacon/update_detail_jasa_simpananpihakketiga" method="post" enctype="multipart/form-data" role="form">
+                      <div class="box-body">
+                        <div class="form-group col-xs-6">
+                          <label for="exampleInputPassword1">Tanggal</label>
+                          <div class="input-group date">
+                            <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                            <?php 
+                              $tgl = strtotime($edit_detail_jasa_simpananpihakketiga->waktu);
+                            ?>
+                            <input type="text" class="form-control pull-right" name="edit_jasa_waktu" id="edit_jasa_waktu" value="<?php echo date("d-m-Y", $tgl);?>" data-date-format="dd-mm-yyyy">
+                            <input type="hidden" class="form-control" value="<?php echo $edit_detail_jasa_simpananpihakketiga->id?>" id="edit_jasa_id" name="edit_jasa_id">
+                            <input type="hidden" class="form-control" value="<?php echo $edit_detail_jasa_simpananpihakketiga->id_simpananpihakketiga?>" id="edit_jasa_id_simpananpihakketiga" name="edit_jasa_id_simpananpihakketiga">
+                          </div>
+                        </div>
+                        <div class="form-group col-xs-6">
+                          <label for="exampleInputPassword1">Jenis</label>
+                          <select id="edit_jasa_jenis" name="edit_jasa_jenis" class="form-control" style="width: 100%;">
+                            <option value='Penyesuaian Jasa' <?php echo $edit_detail_jasa_simpananpihakketiga->jenis == 'Penyesuaian Jasa' ? 'selected' : ''?> >Penyesuaian Jasa</option>
+                            <option value='Pencairan Hutang Jasa' <?php echo $edit_detail_jasa_simpananpihakketiga->jenis == 'Pencairan Hutang Jasa' ? 'selected' : ''?> >Pencairan Hutang Jasa</option>
+                            <option value='Pembayaran Biaya Jasa' <?php echo $edit_detail_jasa_simpananpihakketiga->jenis == 'Pembayaran Biaya Jasa' ? 'selected' : ''?> >Pembayaran Biaya Jasa</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-xs-6">
+                          <label for="exampleInputPassword1">Bulan-Tahun</label>
+                          <input type="month" class="form-control" value="<?php echo $edit_detail_jasa_simpananpihakketiga->bulan_tahun?>" id="edit_jasa_bulan_tahun" name="edit_jasa_bulan_tahun" placeholder="">
+                        </div>
+                        <div class="form-group col-xs-6">
+                          <label for="exampleInputPassword1">Jumlah</label>
+                          <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon">Rp</span>
+                            <input type="text" class="form-control" value="<?php echo $edit_detail_jasa_simpananpihakketiga->jumlah?>" id="edit_jasa_jumlah" name="edit_jasa_jumlah" placeholder="0">
+                          </div>
+                          <div id="label_edit_jumlah" class="alert-danger"></div>
+                        </div>
+                      </div>
+                      <div class="box-footer">
+                        <div class="col-xs-3">
+                          <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                   <div class="box box-danger">
                     <legend style="text-align:center;">DETAIL SIMPANAN PIHAK KETIGA</legend>
                     <div class="box-body">
@@ -1017,12 +1063,12 @@ function rupiah($angka){
     }
   }
 
-  function getConfirmationJasa(id_simpananpihakketiga, id_detail_jasa_simpananpihakketiga){
+  function getConfirmationJasa(id_simpanan3th, id_detail_jasa_simpananpihakketiga){
     var retVal = confirm("Apakah anda yakin akan menghapus data tersebut?");
     var controller = 'transaksianggotacon';
     var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
     if( retVal == true ){
-      window.location.href= base_url + controller + '/delete_detail_jasa_simpananpihakketiga/' + id_simpananpihakketiga + '/' + id_detail_jasa_simpananpihakketiga;
+      window.location.href= base_url + controller + '/delete_detail_jasa_simpananpihakketiga/' + id_simpanan3th + '/' + id_detail_jasa_simpanan3th;
     }
   }
 
@@ -1068,18 +1114,7 @@ function rupiah($angka){
       }
     }
 
-    function getConfirmationDeleteDetailJasaSimpananpihakketiga(id_simpananpihakketiga, id_detail_jasa_simpananpihakketiga){
-      var retVal = confirm("Apakah anda yakin akan menghapus data tersebut?");
-      var controller = 'transaksianggotacon';
-      var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
-      if( retVal == true ){
-        window.location.href= base_url + controller + '/delete_detail_jasa_simpananpihakketiga/' + id_simpananpihakketiga + '/' + id_detail_jasa_simpananpihakketiga;
-        //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
-      }
-    }
-
     function tambahDetailSimpananPihakKetiga() {
-      document.getElementById("div_tambah_detail_jasa_simpananpihakketiga").style.display = "none";
       document.getElementById("div_tambah_detail_simpananpihakketiga").style.display = "block";
     }
 
@@ -1088,7 +1123,6 @@ function rupiah($angka){
     }
 
     function tambahDetailJasaSimpananPihakKetiga() {
-      document.getElementById("div_tambah_detail_simpananpihakketiga").style.display = "none";
       document.getElementById("div_tambah_detail_jasa_simpananpihakketiga").style.display = "block";
     }
 
@@ -1096,10 +1130,12 @@ function rupiah($angka){
       $('#waktu').datepicker({}).on('changeDate', function(ev){});
 
       $('#jasa_waktu').datepicker({}).on('changeDate', function(ev){});
+      $('#edit_jasa_waktu').datepicker({}).on('changeDate', function(ev){});
 
       label_jumlah();
 
       label_jasa_jumlah();
+      label_edit_jasa_jumlah();
 
       $('#jumlah').keyup(function() {
           console.log('jumlah');
@@ -1109,5 +1145,9 @@ function rupiah($angka){
       $('#jasa_jumlah').keyup(function() {
           label_jasa_jumlah();
       });
+
+      $('#edit_jasa_jumlah').keyup(function() {
+        label_edit_jasa_jumlah();
+    });
     });
   </script>

@@ -31,6 +31,10 @@ class SimpananpihakketigaModel extends CI_Model {
 		$this->db->query("UPDATE `simpananpihakketiga` SET total = '$total' WHERE id = '$id'");
 	}
 
+	function update_jasa_total($id, $jasa_total) {
+		$this->db->query("UPDATE `simpananpihakketiga` SET jasa_total = '$jasa_total' WHERE id = '$id'");
+	}
+
 	function get_data_laporan($dari, $sampai) {
 		$query = $this->db->query("
 									SELECT 
