@@ -3599,6 +3599,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$input['jenis']						= $this->input->post('jasa_jenis');
 		$input['bulan_tahun']				= $this->input->post('jasa_bulan_tahun');
 		$input['jumlah']					= $this->input->post('jasa_jumlah');
+		$input['jumlah']					= $this->input->post('jasa_jumlah');
 		$this->detailjasasimpananpihakketigamodel->inputData($input);
 
 		$id_simpananpihakketiga = $this->input->post('jasa_id_simpananpihakketiga');
