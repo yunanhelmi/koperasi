@@ -2120,6 +2120,7 @@ class TransaksianggotaCon extends CI_Controller {
 				$update['jenis'] 						= $data['post_detail_simpanankhusus']->jenis;
 				$update['bulan_tahun'] 					= $data['post_detail_simpanankhusus']->bulan_tahun;
 				$update['jumlah'] 						= $data['post_detail_simpanankhusus']->jumlah;
+				$update['keterangan']					= $data['post_detail_simpanankhusus']->keterangan;
 				$update['status_post'] 					= 1;
 				$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
 				$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
@@ -2152,6 +2153,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$update['jenis'] 						= $data['post_detail_simpanankhusus']->jenis;
 		$update['bulan_tahun'] 					= $data['post_detail_simpanankhusus']->bulan_tahun;
 		$update['jumlah'] 						= $data['post_detail_simpanankhusus']->jumlah;
+		$update['keterangan']					= $data['post_detail_simpanankhusus']->keterangan;
 		$update['status_post'] 					= 0;
 		$update['id_debet_transaksi_akuntansi']	= 0;
 		$update['id_kredit_transaksi_akuntansi']= 0;
@@ -3802,6 +3804,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$update['jenis'] 						= $data['post_detail_simpananpihakketiga']->jenis;
 			$update['bulan_tahun'] 					= $data['post_detail_simpananpihakketiga']->bulan_tahun;
 			$update['jumlah'] 						= $data['post_detail_simpananpihakketiga']->jumlah;
+			$update['keterangan'] 					= $data['post_detail_simpananpihakketiga']->keterangan;
 			$update['status_post'] 					= 1;
 			$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
 			$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];
@@ -3832,6 +3835,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$update['jenis'] 						= $data['post_detail_simpananpihakketiga']->jenis;
 		$update['bulan_tahun'] 					= $data['post_detail_simpananpihakketiga']->bulan_tahun;
 		$update['jumlah'] 						= $data['post_detail_simpananpihakketiga']->jumlah;
+		$update['keterangan']					= $data['post_detail_simpananpihakketiga']->keterangan;
 		$update['status_post'] 					= 0;
 		$update['id_debet_transaksi_akuntansi']	= 0;
 		$update['id_kredit_transaksi_akuntansi']= 0;
@@ -3955,6 +3959,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$update['jenis'] 						= $data['post_detail_jasa_simpananpihakketiga']->jenis;
 			$update['bulan_tahun'] 					= $data['post_detail_jasa_simpananpihakketiga']->bulan_tahun;
 			$update['jumlah'] 						= $data['post_detail_jasa_simpananpihakketiga']->jumlah;
+			$update['keterangan']					= $data['post_detail_jasa_simpananpihakketiga']->keterangan;
 			$update['status_post'] 					= 1;
 			$update['id_debet_transaksi_akuntansi']	= $data_debet['id'];
 			$update['id_kredit_transaksi_akuntansi']= $data_kredit['id'];

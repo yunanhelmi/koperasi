@@ -713,7 +713,7 @@ function rupiah($angka){
                         </div>
                         <div class="form-group col-xs-6">
                           <label for="exampleInputPassword1">Keterangan</label>
-                          <input type="text" class="form-control" id="jasa_keterangan" name="jasa_keterangan" value="<?php echo $edit_detail_jasa_simpananpihakketiga->keterangan?>">
+                          <input type="text" class="form-control" id="edit_jasa_keterangan" name="edit_jasa_keterangan" value="<?php echo $edit_detail_jasa_simpananpihakketiga->keterangan?>">
                         </div>
                       </div>
                       <div class="box-footer">
