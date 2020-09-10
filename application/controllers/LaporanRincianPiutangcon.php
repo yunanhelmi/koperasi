@@ -132,25 +132,22 @@ class LaporanRincianPiutangCon extends CI_Controller {
         $sheet = $file->getActiveSheet ();
         $i = 2;
 
-        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, 'ATAS BERKAT RAHMAT ALLAH YANG MAHA KUASA');
-        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(14)->setBold(true);
-        $i += 2;
-        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, 'KOPERASI SMA NEGERI 1 BOJONEGORO');
-        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(14)->setBold(true);
-        $i++;
-        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, 'PENDIDIK UTAMA ADIL SEJAHTERA SYARIAH');
-        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(14)->setBold(true);
-        $i++;
-        $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, 'KOSMAN "PUAS" SYARIAH');
-        $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(14)->setBold(true);
+        
+        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYYAH");
+        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setSize(14)->setBold(true);
         $i++;
         $sheet->mergeCells("A".$i.":I".$i)->setCellValue("A".$i, "LAPORAN RINCIAN PIUTANG ".$tgl_sampai1);
         $sheet->getStyle("A".$i.":I".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":I".$i)->getFont()->setSize(12)->setBold(true);
+        $i++;
+        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYYAH");
+        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setSize(10)->setBold(true);
+        $i++;
+        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "NGRASEH DANDER BOJONEGORO  TELP (0353) 886039       BH : 8181/BH/II/95");
+        $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("A".$i.":J".$i)->getFont()->setSize(10)->setBold(true);
         $i += 2;
 
         $border_start = $i;
