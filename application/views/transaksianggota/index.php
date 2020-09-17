@@ -31,6 +31,7 @@
                     <th>Nomor Nasabah</th>
                     <th>NIK</th>
                     <th>Alamat</th>
+                    <th>Dusun</th>
                     <th>Desa</th>
                     <th>RW</th>
                     <th>RT</th>
@@ -49,6 +50,7 @@
                     <td style='text-align: center'><?php echo $nasabah[$i]['nomor_koperasi']?></td>
                     <td style='text-align: center'><?php echo $nasabah[$i]['nik']?></td>
                     <td><?php echo $nasabah[$i]['alamat']?></td>
+                    <td><?php echo $nasabah[$i]['dusun']?></td>
                     <td><?php echo $nasabah[$i]['kelurahan']?></td>
                     <td><?php echo $nasabah[$i]['rw']?></td>
                     <td><?php echo $nasabah[$i]['rt']?></td>
