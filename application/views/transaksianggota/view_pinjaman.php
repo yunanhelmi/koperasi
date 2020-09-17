@@ -322,6 +322,10 @@ function rupiah($angka){
                         <label for="exampleInputPassword1">Total Angsuran Per Bulan</label>
                         <p><?php echo "Rp " . number_format($pinjaman->total_angsuran_perbulan,2,',','.');?></p>
                       </div>
+                      <div class="form-group col-xs-3">
+                        <label for="exampleInputPassword1">Keterangan</label>
+                        <p><?php echo $pinjaman->keterangan;?></p>
+                      </div>
                     </div>
 
                     <div class="box-body">

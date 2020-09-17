@@ -661,6 +661,10 @@ function rupiah($angka){
                           </div>
                           <div id="label_jasa_jumlah" class="alert-danger"></div>
                         </div>
+                        <div class="form-group col-xs-6">
+                          <label for="exampleInputPassword1">Keterangan</label>
+                          <input type="text" class="form-control" id="jasa_keterangan" name="jasa_keterangan" placeholder="">
+                        </div>
                       </div>
                       <div class="box-footer">
                         <div class="col-xs-3">
@@ -799,6 +803,7 @@ function rupiah($angka){
                           <tr>
                             <th>No.</th>
                             <th>Tanggal</th>
+                            <th>Jenis</th>
                             <th>Keterangan</th>
                             <th>Debet</th>
                             <th>Kredit</th>
@@ -830,6 +835,7 @@ function rupiah($angka){
                                 $total_debet += $detail_jasa_simpananpihakketiga[$i]['jumlah'];
                             ?>
                             <td style='text-align: left'><?php echo $detail_jasa_simpananpihakketiga[$i]['jenis']?> Bulan <?php echo $bulan_tahun;?></td>
+                            <td style='text-align: left'><?php echo $detail_jasa_simpananpihakketiga[$i]['keterangan']?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format($detail_jasa_simpananpihakketiga[$i]['jumlah'],2,',','.');?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
                             <?php
@@ -837,6 +843,7 @@ function rupiah($angka){
                                 $total_kredit += $detail_jasa_simpananpihakketiga[$i]['jumlah'];
                             ?>
                             <td style='text-align: left'><?php echo $detail_jasa_simpananpihakketiga[$i]['jenis']?></td>
+                            <td style='text-align: left'><?php echo $detail_jasa_simpananpihakketiga[$i]['keterangan']?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format($detail_jasa_simpananpihakketiga[$i]['jumlah'],2,',','.');?></td>
                             <?php
@@ -863,7 +870,7 @@ function rupiah($angka){
                           </tr>
                           <?php $no++;}?>
                           <tr>
-                            <td colspan='3'><strong>TOTAL</strong></td>
+                            <td colspan='4'><strong>TOTAL</strong></td>
                             <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_debet,2,',','.');?></strong></td>
                             <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_kredit,2,',','.');?></strong></td>
                           </tr>

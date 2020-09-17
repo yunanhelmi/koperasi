@@ -255,6 +255,10 @@ function rupiah($angka){
                     </div>
                     <div id="label_total_angsuran_perbulan" class="alert-danger"></div> 
                   </div>
+                  <div class="form-group col-xs-6">
+                    <label for="exampleInputPassword1">Keterangan</label>
+                    <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan" value="<?php echo $pinjaman->keterangan?>">
+                  </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
