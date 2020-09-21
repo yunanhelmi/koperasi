@@ -1240,7 +1240,7 @@ function rupiah($angka){
         var controller = 'transaksianggotacon';
         var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
         if( retVal == true ){
-          window.location.href= base_url + controller + '/delete_detail_angsuran/' + id_pinjaman + '/' + id_detail_angsuran;
+          window.location.href= base_url + '/' + controller + '/delete_detail_angsuran/' + id_pinjaman + '/' + id_detail_angsuran;
           //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
         }
       }
