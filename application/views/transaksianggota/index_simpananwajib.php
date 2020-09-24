@@ -679,7 +679,7 @@ function rupiah($angka){
     var controller = 'transaksianggotacon';
     var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
     if( retVal == true ){
-      window.location.href= base_url + controller + '/delete_pinjaman/' + id;
+      window.location.href= base_url + '/' + controller + '/delete_pinjaman/' + id;
       //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
     }
   }
@@ -689,7 +689,7 @@ function rupiah($angka){
     var controller = 'transaksianggotacon';
     var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
     if( retVal == true ){
-      window.location.href= base_url + controller + '/delete_simpananpokok/' + id;
+      window.location.href= base_url + '/' + controller + '/delete_simpananpokok/' + id;
       //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
     }
   }
@@ -699,7 +699,7 @@ function rupiah($angka){
     var controller = 'transaksianggotacon';
     var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
     if( retVal == true ){
-      window.location.href= base_url + controller + '/delete_simpananwajib/' + id;
+      window.location.href= base_url + '/' + controller + '/delete_simpananwajib/' + id;
       //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
     }
   }
@@ -709,7 +709,7 @@ function rupiah($angka){
     var controller = 'transaksianggotacon';
     var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
     if( retVal == true ){
-      window.location.href= base_url + controller + '/delete_simpanankhusus/' + id;
+      window.location.href= base_url + '/' + controller + '/delete_simpanankhusus/' + id;
       //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
     }
   }
@@ -719,7 +719,7 @@ function rupiah($angka){
     var controller = 'transaksianggotacon';
     var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
     if( retVal == true ){
-      window.location.href= base_url + controller + '/delete_simpanandanasosial/' + id;
+      window.location.href= base_url + '/' + controller + '/delete_simpanandanasosial/' + id;
       //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
     }
   }
@@ -729,7 +729,7 @@ function rupiah($angka){
     var controller = 'transaksianggotacon';
     var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
     if( retVal == true ){
-      window.location.href= base_url + controller + '/delete_simpanankanzun/' + id;
+      window.location.href= base_url + '/' + controller + '/delete_simpanankanzun/' + id;
       //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
     }
   }
@@ -739,7 +739,7 @@ function rupiah($angka){
     var controller = 'transaksianggotacon';
     var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
     if( retVal == true ){
-      window.location.href= base_url + controller + '/delete_simpanan3th/' + id;
+      window.location.href= base_url + '/' + controller + '/delete_simpanan3th/' + id;
       //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
     }
   }
@@ -749,7 +749,7 @@ function rupiah($angka){
     var controller = 'transaksianggotacon';
     var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
     if( retVal == true ){
-      window.location.href= base_url + controller + '/delete_simpananpihakketiga/' + id;
+      window.location.href= base_url + '/' + controller + '/delete_simpananpihakketiga/' + id;
       //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
     }
   }
