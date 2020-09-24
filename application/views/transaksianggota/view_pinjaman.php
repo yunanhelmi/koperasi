@@ -251,6 +251,10 @@ function rupiah($angka){
                         </div>
                         <div id="label_total" class="alert-danger"></div>
                       </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Keterangan</label>
+                        <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="">
+                      </div>
                     </div>
                     <div class="box-footer">
                         <div class="col-xs-3">
@@ -337,6 +341,7 @@ function rupiah($angka){
                           <tr>
                             <th>No.</th>
                             <th>Waktu</th>
+                            <th>Jenis</th>
                             <th>Keterangan</th>
                             <th>Debet</th>
                             <th>Kredit</th>
@@ -377,6 +382,7 @@ function rupiah($angka){
                             <?php
                               }
                             ?>
+                            <td><?php echo $detail_angsuran[$i]['keterangan']?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['total'],2,',','.');?></td>
                             <?php $total_kredit += $detail_angsuran[$i]['total'];?>
@@ -394,6 +400,7 @@ function rupiah($angka){
                             <?php
                               }
                             ?>
+                            <td><?php echo $detail_angsuran[$i]['keterangan']?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['angsuran'],2,',','.');?></td>
                             <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
                             <?php $total_debet += $detail_angsuran[$i]['angsuran'];?>
@@ -425,7 +432,7 @@ function rupiah($angka){
                           </tr>
                           <?php $no++;}?>
                           <tr>
-                            <td colspan='3'><strong>TOTAL</strong></td>
+                            <td colspan='4'><strong>TOTAL</strong></td>
                             <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_debet,2,',','.');?></strong></td>
                             <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_kredit,2,',','.');?></strong></td>
                             <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_jasa,2,',','.');?></strong></td>

@@ -309,6 +309,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$input['jasa'] 			= $this->input->post('jasa');
 		$input['denda'] 		= $this->input->post('denda');
 		$input['total'] 		= $this->input->post('total');
+		$input['keterangan']	= $this->input->post('keterangan');
 		$this->detailangsuranmodel->inputData($input);
 
 		$id_pinjaman = $this->input->post('id_pinjaman');
@@ -527,6 +528,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$input['jasa'] 			= $this->input->post('edit_jasa');
 		$input['denda'] 		= $this->input->post('edit_denda');
 		$input['total'] 		= $this->input->post('edit_total');
+		$input['keterangan']	= $this->input->post('edit_keterangan');
 
 		$this->detailangsuranmodel->updateData($id_detail_angsuran, $input);
 
