@@ -26,14 +26,14 @@ class UserModel extends CI_Model {
 		if($this->input->post('status') == NULL || $this->input->post('status') == '') {
 			$data=array(
 				'username'=>$this->input->post('username'),
-				'password'=>$this->input->post('password'),
+				'password'=>md5($this->input->post('password')),
 				'status'=>'administrator',
 				'email'=>$this->input->post('email')
 			);
 		} else {
 			$data=array(
 				'username'=>$this->input->post('username'),
-				'password'=>$this->input->post('password'),
+				'password'=>md5($this->input->post('password')),
 				'status'=>$this->input->post('status'),
 				'email'=>$this->input->post('email')
 			);

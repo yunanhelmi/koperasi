@@ -56,7 +56,7 @@ class UserCon extends CI_Controller {
 	function checklogin()
 	{
 		$username = $this->input->post('username');
-		$password = $this->input->post('password');
+		$password = md5($this->input->post('password'));
 		
 		$result = $this->usermodel->login($username, $password);
 			
@@ -151,7 +151,7 @@ class UserCon extends CI_Controller {
 		$user['username'] = $this->input->post('username');
 		$user['email'] = $this->input->post('email');
 		$user['status'] = $this->input->post('status');
-		$user['password'] = $this->input->post('password');
+		$user['password'] = md5($this->input->post('password'));
 
 		$this->form_validation->set_rules('username','Username','strip_tags|required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
@@ -233,7 +233,7 @@ class UserCon extends CI_Controller {
 		$user['username'] = $this->input->post('username');
 		$user['email'] = $this->input->post('email');
 		$user['status'] = $this->input->post('status');
-		$user['password'] = $this->input->post('password');
+		$user['password'] = md5($this->input->post('password'));
 
 		$this->form_validation->set_rules('username','Username','strip_tags|required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
