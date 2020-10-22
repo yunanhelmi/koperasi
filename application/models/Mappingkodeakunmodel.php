@@ -1,6 +1,6 @@
 <?php
 
-class MappingKodeAkunModel extends CI_Model {
+class MappingkodeakunModel extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}
