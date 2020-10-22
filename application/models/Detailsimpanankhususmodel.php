@@ -1,6 +1,6 @@
 <?php
 
-class DetailSimpanankhususModel extends CI_Model {
+class DetailsimpanankhususModel extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}
