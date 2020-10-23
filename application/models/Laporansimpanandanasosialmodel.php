@@ -1,6 +1,6 @@
 <?php
 
-class LaporanSimpananDanaSosialModel extends CI_Model {
+class LaporansimpanandanasosialModel extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}

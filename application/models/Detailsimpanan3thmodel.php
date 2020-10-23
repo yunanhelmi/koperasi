@@ -1,6 +1,6 @@
 <?php
 
-class DetailSimpanan3thModel extends CI_Model {
+class Detailsimpanan3thModel extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}

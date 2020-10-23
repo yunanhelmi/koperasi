@@ -1,6 +1,6 @@
 <?php
 
-class KodeAkunModel extends CI_Model {
+class KodeakunModel extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}

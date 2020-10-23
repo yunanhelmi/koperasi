@@ -1,6 +1,6 @@
 <?php
 
-class DetailSimpanankanzunModel extends CI_Model {
+class DetailsimpanankanzunModel extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}
