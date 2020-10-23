@@ -2,7 +2,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class LaporanPiutangCon extends CI_Controller {
+class LaporanpiutangCon extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 
