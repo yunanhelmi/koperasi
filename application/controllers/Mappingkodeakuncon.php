@@ -2,7 +2,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class MappingKodeAkunCon extends CI_Controller {
+class MappingkodeakunCon extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 
