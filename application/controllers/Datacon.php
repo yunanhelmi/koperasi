@@ -16,7 +16,7 @@ class DataCon extends CI_Controller {
 	}
 	
 	function agen_pso() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -103,7 +103,7 @@ class DataCon extends CI_Controller {
 	}
 	
 	function agen_npso() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -189,7 +189,7 @@ class DataCon extends CI_Controller {
 	}
 	
 	function pangkalan() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

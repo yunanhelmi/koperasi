@@ -20,7 +20,7 @@ class LaporankeuanganCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -34,7 +34,7 @@ class LaporankeuanganCon extends CI_Controller {
 	}	
 
 	function view($dari, $sampai) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -137,7 +137,7 @@ class LaporankeuanganCon extends CI_Controller {
 	}
 
 	function excel() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

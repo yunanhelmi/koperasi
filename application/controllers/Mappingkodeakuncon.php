@@ -19,7 +19,7 @@ class MappingkodeakunCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -32,7 +32,7 @@ class MappingkodeakunCon extends CI_Controller {
 	}
 
 	function create_mapping_kode_akun() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -55,7 +55,7 @@ class MappingkodeakunCon extends CI_Controller {
 	}
 
 	function insert_mapping_kode_akun() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -71,7 +71,7 @@ class MappingkodeakunCon extends CI_Controller {
 	}
 
 	function edit_mapping_kode_akun($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -95,7 +95,7 @@ class MappingkodeakunCon extends CI_Controller {
 	}
 
 	function update_mapping_kode_akun() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -110,7 +110,7 @@ class MappingkodeakunCon extends CI_Controller {
 	}
 
 	function delete_mapping_kode_akun($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

@@ -21,7 +21,7 @@ class TransaksiCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -34,7 +34,7 @@ class TransaksiCon extends CI_Controller {
 	}
 
 	function create_transaksi() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -56,7 +56,7 @@ class TransaksiCon extends CI_Controller {
 	}
 
 	function insert_transaksi() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -77,7 +77,7 @@ class TransaksiCon extends CI_Controller {
 	}
 
 	function edit_transaksi($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -101,7 +101,7 @@ class TransaksiCon extends CI_Controller {
 	}
 
 	function update_transaksi() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -122,7 +122,7 @@ class TransaksiCon extends CI_Controller {
 	}
 
 	function delete_transaksi($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -132,7 +132,7 @@ class TransaksiCon extends CI_Controller {
 	}
 
 	function post_akuntansi($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -184,7 +184,7 @@ class TransaksiCon extends CI_Controller {
 	}
 
 	function unpost_akuntansi($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

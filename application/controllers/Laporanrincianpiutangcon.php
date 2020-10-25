@@ -91,7 +91,7 @@ class LaporanrincianpiutangCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -105,7 +105,7 @@ class LaporanrincianpiutangCon extends CI_Controller {
 	}
 
     function excel_coba() {
-        $session_data = $this->session->userdata('logged_in');
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
         if($session_data == NULL) {
             redirect("usercon/login", "refresh");
         }
@@ -216,7 +216,7 @@ class LaporanrincianpiutangCon extends CI_Controller {
     }
 
     function excel_coba1() {
-        $session_data = $this->session->userdata('logged_in');
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
         if($session_data == NULL) {
             redirect("usercon/login", "refresh");
         }
@@ -394,7 +394,7 @@ class LaporanrincianpiutangCon extends CI_Controller {
     }
 
 	function excel() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

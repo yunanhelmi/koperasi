@@ -17,7 +17,7 @@ class SimpananwajibCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -31,7 +31,7 @@ class SimpananwajibCon extends CI_Controller {
 	}
 
 	function create_simpananwajib() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -50,7 +50,7 @@ class SimpananwajibCon extends CI_Controller {
 	}
 
 	function insert_simpananwajib() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -69,7 +69,7 @@ class SimpananwajibCon extends CI_Controller {
 	}
 
 	function edit_simpananwajib($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -83,7 +83,7 @@ class SimpananwajibCon extends CI_Controller {
 	}
 
 	function update_simpananwajib() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -104,7 +104,7 @@ class SimpananwajibCon extends CI_Controller {
 	}
 
 	function view_simpananwajib($id_simpananwajib) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -121,7 +121,7 @@ class SimpananwajibCon extends CI_Controller {
 	}
 
 	function delete_simpananwajib($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -132,7 +132,7 @@ class SimpananwajibCon extends CI_Controller {
 	}
 
 	function insert_detail_simpananwajib() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -164,7 +164,7 @@ class SimpananwajibCon extends CI_Controller {
 	}
 
 	function edit_detail_simpananwajib($id_simpananwajib, $id_detail_simpananwajib) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -195,7 +195,7 @@ class SimpananwajibCon extends CI_Controller {
 	}
 
 	function update_detail_simpananwajib() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -226,7 +226,7 @@ class SimpananwajibCon extends CI_Controller {
 	}
 
 	function delete_detail_simpananwajib($id_simpananwajib, $id_detail_simpananwajib) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

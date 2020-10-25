@@ -18,7 +18,7 @@ class Simpanan3thmasterCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -32,7 +32,7 @@ class Simpanan3thmasterCon extends CI_Controller {
 	}
 
 	function create_simpanan3thmaster() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -55,7 +55,7 @@ class Simpanan3thmasterCon extends CI_Controller {
 	}
 
 	function insert_simpanan3thmaster() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -79,7 +79,7 @@ class Simpanan3thmasterCon extends CI_Controller {
 	}
 
 	function edit_simpanan3thmaster($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -103,7 +103,7 @@ class Simpanan3thmasterCon extends CI_Controller {
 	}
 
 	function update_simpanan3thmaster() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -127,7 +127,7 @@ class Simpanan3thmasterCon extends CI_Controller {
 	}
 
 	function view_simpanan3thmaster($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -142,7 +142,7 @@ class Simpanan3thmasterCon extends CI_Controller {
 	}
 	
 	function delete_simpanan3thmaster($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -152,7 +152,7 @@ class Simpanan3thmasterCon extends CI_Controller {
 	}
 
 	function transaksi_simpanan3thmaster($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

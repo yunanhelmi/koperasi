@@ -11,7 +11,7 @@ class UserCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -24,10 +24,10 @@ class UserCon extends CI_Controller {
 	}
 	
 	function login() {
-		if($this->session->userdata('logged_in')) {
+		if($this->session->userdata('mubasyirin_logged_in')) {
 			redirect("transaksianggotacon", "refresh");
 		} else {
-			$session_data = $this->session->userdata('logged_in');
+			$session_data = $this->session->userdata('mubasyirin_logged_in');
 			$data['username'] = $session_data['username'];
 			$data['status'] = $session_data['status'];
 			$this->load->view('/site/login');
@@ -36,14 +36,14 @@ class UserCon extends CI_Controller {
 	
 	function veriflogin()
 	{
-		if($this->session->userdata('logged_in')) {
+		if($this->session->userdata('mubasyirin_logged_in')) {
 			redirect('nasabahcon', 'refresh');
 		} else {
 			$this->form_validation->set_rules('username','Username','strip_tags|required|xss_clean');
 			$this->form_validation->set_rules('password','Password','strip_tags|required|xss_clean|callback_checklogin');
 			
 			if($this->form_validation->run() == FALSE) {
-				$session_data = $this->session->userdata('logged_in');
+				$session_data = $this->session->userdata('mubasyirin_logged_in');
 				$data['username'] = $session_data['username'];
 				$data['status'] = $session_data['status'];
 				$this->load->view('/site/login');
@@ -67,7 +67,7 @@ class UserCon extends CI_Controller {
 				'username'=>$row->username,
 				'status'=>$row->status
 				);
-				$this->session->set_userdata('logged_in', $session_array);
+				$this->session->set_userdata('mubasyirin_logged_in', $session_array);
 			}
 			return TRUE;
 		} else {
@@ -77,10 +77,10 @@ class UserCon extends CI_Controller {
 	}
 	
 	function register() {
-		if($this->session->userdata('logged_in')) {
+		if($this->session->userdata('mubasyirin_logged_in')) {
 			redirect('homecon/index', 'refresh');
 		} else {
-			$session_data = $this->session->userdata('logged_in');
+			$session_data = $this->session->userdata('mubasyirin_logged_in');
 			$data['username'] = $session_data['username'];
 			$data['status'] = $session_data['status'];
 			$this->load->view('/site/register');
@@ -121,13 +121,13 @@ class UserCon extends CI_Controller {
 	}
 	
 	function logout() {
-		$this->session->unset_userdata('logged_in');
+		$this->session->unset_userdata('mubasyirin_logged_in');
 		session_destroy();
 		redirect('usercon/login', 'refresh');
 	}
 
 	function create_user() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -139,7 +139,7 @@ class UserCon extends CI_Controller {
 	}
 
 	function do_insert() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -178,7 +178,7 @@ class UserCon extends CI_Controller {
 	}
 
 	function insert_user() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -190,7 +190,7 @@ class UserCon extends CI_Controller {
 	}
 
 	function view_user($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -204,7 +204,7 @@ class UserCon extends CI_Controller {
 	}
 
 	function edit_user($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -220,7 +220,7 @@ class UserCon extends CI_Controller {
 	}
 
 	function do_update() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -257,7 +257,7 @@ class UserCon extends CI_Controller {
 	}
 
 	function delete_user($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

@@ -17,7 +17,7 @@ class SimpanankhususCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -31,7 +31,7 @@ class SimpanankhususCon extends CI_Controller {
 	}
 
 	function create_simpanankhusus() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -50,7 +50,7 @@ class SimpanankhususCon extends CI_Controller {
 	}
 
 	function insert_simpanankhusus() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -69,7 +69,7 @@ class SimpanankhususCon extends CI_Controller {
 	}
 
 	function edit_simpanankhusus($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -83,7 +83,7 @@ class SimpanankhususCon extends CI_Controller {
 	}
 
 	function update_simpanankhusus() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -104,7 +104,7 @@ class SimpanankhususCon extends CI_Controller {
 	}
 
 	function view_simpanankhusus($id_simpanankhusus) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -121,7 +121,7 @@ class SimpanankhususCon extends CI_Controller {
 	}
 
 	function delete_simpanankhusus($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -132,7 +132,7 @@ class SimpanankhususCon extends CI_Controller {
 	}
 
 	function insert_detail_simpanankhusus() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -162,7 +162,7 @@ class SimpanankhususCon extends CI_Controller {
 	}
 
 	function edit_detail_simpanankhusus($id_simpanankhusus, $id_detail_simpanankhusus) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -193,7 +193,7 @@ class SimpanankhususCon extends CI_Controller {
 	}
 
 	function update_detail_simpanankhusus() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -222,7 +222,7 @@ class SimpanankhususCon extends CI_Controller {
 	}
 
 	function delete_detail_simpanankhusus($id_simpanankhusus, $id_detail_simpanankhusus) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

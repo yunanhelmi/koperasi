@@ -17,7 +17,7 @@ class Pinjamancon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -34,7 +34,7 @@ class Pinjamancon extends CI_Controller {
 	}
 
 	function create_pinjaman() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -47,7 +47,7 @@ class Pinjamancon extends CI_Controller {
 	}
 
 	function insert_pinjaman() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -76,7 +76,7 @@ class Pinjamancon extends CI_Controller {
 	}
 
 	function edit_pinjaman($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -91,7 +91,7 @@ class Pinjamancon extends CI_Controller {
 	}
 
 	function update_pinjaman() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -118,7 +118,7 @@ class Pinjamancon extends CI_Controller {
 	}
 
 	function view_pinjaman($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -135,7 +135,7 @@ class Pinjamancon extends CI_Controller {
 	}
 
 	function delete_pinjaman($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -152,7 +152,7 @@ class Pinjamancon extends CI_Controller {
 	}
 
 	function insert_detail_angsuran() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -214,7 +214,7 @@ class Pinjamancon extends CI_Controller {
 	}
 
 	function edit_detail_angsuran($id_pinjaman, $id_detail_angsuran) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -276,7 +276,7 @@ class Pinjamancon extends CI_Controller {
 	}
 
 	function update_detail_angsuran() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -340,7 +340,7 @@ class Pinjamancon extends CI_Controller {
 	}
 
 	function delete_detail_angsuran($id_pinjaman, $id_detail_angsuran) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

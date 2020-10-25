@@ -1,4 +1,4 @@
-<?php
+s<?php
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -19,7 +19,7 @@ class TransaksiakuntansiCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -51,7 +51,7 @@ class TransaksiakuntansiCon extends CI_Controller {
 	}
 
 	function create_transaksi_akuntansi() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -73,7 +73,7 @@ class TransaksiakuntansiCon extends CI_Controller {
 	}
 
 	function insert_transaksi_akuntansi() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -99,7 +99,7 @@ class TransaksiakuntansiCon extends CI_Controller {
 	}
 
 	function edit_transaksi_akuntansi($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -123,7 +123,7 @@ class TransaksiakuntansiCon extends CI_Controller {
 	}
 
 	function update_transaksi_akuntansi() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -158,7 +158,7 @@ class TransaksiakuntansiCon extends CI_Controller {
 	}
 
 	function view_transaksi_akuntansi($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -172,7 +172,7 @@ class TransaksiakuntansiCon extends CI_Controller {
 	}
 
 	function delete_transaksi_akuntansi($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

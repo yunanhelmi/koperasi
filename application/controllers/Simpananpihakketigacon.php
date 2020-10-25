@@ -17,7 +17,7 @@ class SimpananpihakketigaCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -31,7 +31,7 @@ class SimpananpihakketigaCon extends CI_Controller {
 	}
 
 	function create_simpananpihakketiga() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -50,7 +50,7 @@ class SimpananpihakketigaCon extends CI_Controller {
 	}
 
 	function insert_simpananpihakketiga() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -76,7 +76,7 @@ class SimpananpihakketigaCon extends CI_Controller {
 	}
 
 	function edit_simpananpihakketiga($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -90,7 +90,7 @@ class SimpananpihakketigaCon extends CI_Controller {
 	}
 
 	function update_simpananpihakketiga() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -116,7 +116,7 @@ class SimpananpihakketigaCon extends CI_Controller {
 	}
 
 	function view_simpananpihakketiga($id_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -133,7 +133,7 @@ class SimpananpihakketigaCon extends CI_Controller {
 	}
 
 	function delete_simpananpihakketiga($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -144,7 +144,7 @@ class SimpananpihakketigaCon extends CI_Controller {
 	}
 
 	function insert_detail_simpananpihakketiga() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -168,7 +168,7 @@ class SimpananpihakketigaCon extends CI_Controller {
 	}
 
 	function edit_detail_simpananpihakketiga($id_simpananpihakketiga, $id_detail_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -191,7 +191,7 @@ class SimpananpihakketigaCon extends CI_Controller {
 	}
 
 	function update_detail_simpananpihakketiga() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -215,7 +215,7 @@ class SimpananpihakketigaCon extends CI_Controller {
 	}
 
 	function delete_detail_simpananpihakketiga($id_simpananpihakketiga, $id_detail_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

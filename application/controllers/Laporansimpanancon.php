@@ -31,7 +31,7 @@ class LaporansimpananCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -46,7 +46,7 @@ class LaporansimpananCon extends CI_Controller {
 	}
 
 	function excel_simpananpokok() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -155,7 +155,7 @@ class LaporansimpananCon extends CI_Controller {
 	}
 
 	function excel_simpananwajib() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -265,7 +265,7 @@ class LaporansimpananCon extends CI_Controller {
 	}
 
     function excel_simpanankhusus() {
-        $session_data = $this->session->userdata('logged_in');
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
         if($session_data == NULL) {
             redirect("usercon/login", "refresh");
         }
@@ -375,7 +375,7 @@ class LaporansimpananCon extends CI_Controller {
     }
 
     function excel_simpanandanasosial() {
-        $session_data = $this->session->userdata('logged_in');
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
         if($session_data == NULL) {
             redirect("usercon/login", "refresh");
         }
@@ -485,7 +485,7 @@ class LaporansimpananCon extends CI_Controller {
     }
 
     function excel_simpanankanzun() {
-        $session_data = $this->session->userdata('logged_in');
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
         if($session_data == NULL) {
             redirect("usercon/login", "refresh");
         }
@@ -595,7 +595,7 @@ class LaporansimpananCon extends CI_Controller {
     }
 
     function excel_simpananpihakketiga() {
-        $session_data = $this->session->userdata('logged_in');
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
         if($session_data == NULL) {
             redirect("usercon/login", "refresh");
         }
@@ -705,7 +705,7 @@ class LaporansimpananCon extends CI_Controller {
     }
 
     function excel_simpanan3th() {
-        $session_data = $this->session->userdata('logged_in');
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
         if($session_data == NULL) {
             redirect("usercon/login", "refresh");
         }

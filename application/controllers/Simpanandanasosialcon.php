@@ -17,7 +17,7 @@ class SimpanandanasosialCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -31,7 +31,7 @@ class SimpanandanasosialCon extends CI_Controller {
 	}
 
 	function create_simpanandanasosial() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -50,7 +50,7 @@ class SimpanandanasosialCon extends CI_Controller {
 	}
 
 	function insert_simpanandanasosial() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -69,7 +69,7 @@ class SimpanandanasosialCon extends CI_Controller {
 	}
 
 	function edit_simpanandanasosial($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -83,7 +83,7 @@ class SimpanandanasosialCon extends CI_Controller {
 	}
 
 	function update_simpanandanasosial() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -104,7 +104,7 @@ class SimpanandanasosialCon extends CI_Controller {
 	}
 
 	function view_simpanandanasosial($id_simpanandanasosial) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -121,7 +121,7 @@ class SimpanandanasosialCon extends CI_Controller {
 	}
 
 	function delete_simpanandanasosial($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -132,7 +132,7 @@ class SimpanandanasosialCon extends CI_Controller {
 	}
 
 	function insert_detail_simpanandanasosial() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -163,7 +163,7 @@ class SimpanandanasosialCon extends CI_Controller {
 	}
 
 	function edit_detail_simpanandanasosial($id_simpanandanasosial, $id_detail_simpanandanasosial) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -194,7 +194,7 @@ class SimpanandanasosialCon extends CI_Controller {
 	}
 
 	function update_detail_simpanandanasosial() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -224,7 +224,7 @@ class SimpanandanasosialCon extends CI_Controller {
 	}
 
 	function delete_detail_simpanandanasosial($id_simpanandanasosial, $id_detail_simpanandanasosial) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

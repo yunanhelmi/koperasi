@@ -22,7 +22,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -36,7 +36,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function create_simpanan3th($id_master) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -67,7 +67,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function insert_simpanan3th() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -89,7 +89,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function edit_simpanan3th($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -116,7 +116,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function update_simpanan3th() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -140,7 +140,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function view_simpanan3th($id_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -160,7 +160,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function delete_simpanan3th($id) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -174,7 +174,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function insert_detail_simpanan3th() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -206,7 +206,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function edit_detail_simpanan3th($id_simpanan3th, $id_detail_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -240,7 +240,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function update_detail_simpanan3th() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -271,7 +271,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function delete_detail_simpanan3th($id_simpanan3th, $id_detail_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -295,7 +295,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function post_akuntansi($id_simpanan3th, $id_detail_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -388,7 +388,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function unpost_akuntansi($id_simpanan3th, $id_detail_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -420,7 +420,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function insert_detail_jasa_simpanan3th() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -452,7 +452,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function edit_detail_jasa_simpanan3th($id_simpanan3th, $id_detail_jasa_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -486,7 +486,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function update_detail_jasa_simpanan3th() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -517,7 +517,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function delete_detail_jasa_simpanan3th($id_simpanan3th, $id_detail_jasa_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -541,7 +541,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function jasa_simpanan3th_post_akuntansi($id_simpanan3th, $id_detail_jasa_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -665,7 +665,7 @@ class Simpanan3thCon extends CI_Controller {
 	}
 
 	function jasa_simpanan3th_unpost_akuntansi($id_simpanan3th, $id_detail_jasa_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}

@@ -86,7 +86,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function index() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -108,7 +108,7 @@ class TransaksianggotaCon extends CI_Controller {
 
 	/*** Transaksi Pinjaman ***/
 	function pinjaman($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -130,7 +130,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function create_pinjaman($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -151,7 +151,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_pinjaman($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -191,7 +191,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_pinjaman($id_pinjaman) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -217,7 +217,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_pinjaman() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -250,7 +250,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_pinjaman($id_pinjaman) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -266,7 +266,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function view_pinjaman($id_pinjaman) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -292,7 +292,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_detail_angsuran($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -440,7 +440,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_detail_angsuran($id_pinjaman, $id_detail_angsuran) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -510,7 +510,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_detail_angsuran() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -584,7 +584,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_detail_angsuran($id_pinjaman, $id_detail_angsuran) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -714,7 +714,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function angsuran_post_akuntansi($id_pinjaman, $id_detail_angsuran) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -898,7 +898,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function angsuran_unpost_akuntansi($id_pinjaman, $id_detail_angsuran) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -942,7 +942,7 @@ class TransaksianggotaCon extends CI_Controller {
 
 	/*** Transaksi Simpanan Pokok ***/
 	function simpananpokok($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -964,7 +964,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function create_simpananpokok($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -985,7 +985,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_simpananpokok($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1007,7 +1007,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_simpananpokok($id_simpananpokok) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1030,7 +1030,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_simpananpokok() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1054,7 +1054,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function view_simpananpokok($id_simpananpokok) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1078,7 +1078,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_simpananpokok($id_simpananpokok) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1091,7 +1091,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function simpananpokok_post_akuntansi($id_simpananpokok) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1222,7 +1222,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function simpananpokok_unpost_akuntansi($id_simpananpokok) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1256,7 +1256,7 @@ class TransaksianggotaCon extends CI_Controller {
 
 	/*** Transaksi Simpanan Wajib ***/
 	function simpananwajib($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1278,7 +1278,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function create_simpananwajib($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1300,7 +1300,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_simpananwajib($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1321,7 +1321,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_simpananwajib($id_simpananwajib) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1346,7 +1346,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_simpananwajib() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1369,7 +1369,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_simpananwajib($id_simpananwajib) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1384,7 +1384,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function view_simpananwajib($id_simpananwajib) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1409,7 +1409,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_detail_simpananwajib() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1442,7 +1442,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_detail_simpananwajib($id_simpananwajib, $id_detail_simpananwajib) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1481,7 +1481,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_detail_simpananwajib() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1513,7 +1513,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_detail_simpananwajib($id_simpananwajib, $id_detail_simpananwajib) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1537,7 +1537,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function simpananwajib_post_akuntansi($id_simpananwajib, $id_detail_simpananwajib) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1641,7 +1641,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function simpananwajib_unpost_akuntansi($id_simpananwajib, $id_detail_simpananwajib) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1673,7 +1673,7 @@ class TransaksianggotaCon extends CI_Controller {
 
 	/*** Transaksi Simpanan Khusus ***/
 	function simpanankhusus($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1695,7 +1695,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function create_simpanankhusus($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1716,7 +1716,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_simpanankhusus($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1737,7 +1737,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_simpanankhusus($id_simpanankhusus) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1762,7 +1762,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_simpanankhusus() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1785,7 +1785,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_simpanankhusus($id_simpanankhusus) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1800,7 +1800,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function view_simpanankhusus($id_simpanankhusus) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1825,7 +1825,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_detail_simpanankhusus() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1859,7 +1859,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_detail_simpanankhusus($id_simpanankhusus, $id_detail_simpanankhusus) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1898,7 +1898,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_detail_simpanankhusus() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1931,7 +1931,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_detail_simpanankhusus($id_simpanankhusus, $id_detail_simpanankhusus) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -1955,7 +1955,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function simpanankhusus_post_akuntansi($id_simpanankhusus, $id_detail_simpanankhusus) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2134,7 +2134,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function simpanankhusus_unpost_akuntansi($id_simpanankhusus, $id_detail_simpanankhusus) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2167,7 +2167,7 @@ class TransaksianggotaCon extends CI_Controller {
 
 	/*** Transaksi Simpanan Dana Sosial ***/
 	function simpanandanasosial($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2189,7 +2189,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function create_simpanandanasosial($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2210,7 +2210,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_simpanandanasosial($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2231,7 +2231,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_simpanandanasosial($id_simpanandanasosial) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2256,7 +2256,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_simpanandanasosial() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2279,7 +2279,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_simpanandanasosial($id_simpanandanasosial) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2294,7 +2294,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function view_simpanandanasosial($id_simpanandanasosial) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2319,7 +2319,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_detail_simpanandanasosial() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2352,7 +2352,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_detail_simpanandanasosial($id_simpanandanasosial, $id_detail_simpanandanasosial) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2391,7 +2391,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_detail_simpanandanasosial() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2423,7 +2423,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_detail_simpanandanasosial($id_simpanandanasosial, $id_detail_simpanandanasosial) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2447,7 +2447,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function simpanandanasosial_post_akuntansi($id_simpanandanasosial, $id_detail_simpanandanasosial) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2575,7 +2575,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function simpanandanasosial_unpost_akuntansi($id_simpanandanasosial, $id_detail_simpanandanasosial) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2607,7 +2607,7 @@ class TransaksianggotaCon extends CI_Controller {
 
 	/*** Transaksi Simpanan Kanzun ***/
 	function simpanankanzun($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2629,7 +2629,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function create_simpanankanzun($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2650,7 +2650,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_simpanankanzun($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2671,7 +2671,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_simpanankanzun($id_simpanankanzun) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2696,7 +2696,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_simpanankanzun() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2719,7 +2719,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_simpanankanzun($id_simpanankanzun) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2734,7 +2734,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function view_simpanankanzun($id_simpanankanzun) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2759,7 +2759,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_detail_simpanankanzun() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2792,7 +2792,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_detail_simpanankanzun($id_simpanankanzun, $id_detail_simpanankanzun) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2831,7 +2831,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_detail_simpanankanzun() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2863,7 +2863,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_detail_simpanankanzun($id_simpanankanzun, $id_detail_simpanankanzun) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2887,7 +2887,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function simpanankanzun_post_akuntansi($id_simpanankanzun, $id_detail_simpanankanzun) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -2991,7 +2991,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function simpanankanzun_unpost_akuntansi($id_simpanankanzun, $id_detail_simpanankanzun) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3023,7 +3023,7 @@ class TransaksianggotaCon extends CI_Controller {
 
 	/*** Transaksi Simpanan 3 Th ***/
 	function simpanan3th($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3045,7 +3045,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function create_simpanan3th($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3066,7 +3066,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_simpanan3th($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3087,7 +3087,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_simpanan3th($id_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3112,7 +3112,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_simpanan3th() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3135,7 +3135,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_simpanan3th($id_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3150,7 +3150,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function view_simpanan3th($id_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3175,7 +3175,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_detail_simpanan3th() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3208,7 +3208,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_detail_simpanan3th($id_simpanan3th, $id_detail_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3247,7 +3247,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_detail_simpanan3th() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3279,7 +3279,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_detail_simpanan3th($id_simpanan3th, $id_detail_simpanan3th) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3305,7 +3305,7 @@ class TransaksianggotaCon extends CI_Controller {
 
 	/*** Transaksi Simpanan 3 Th ***/
 	function simpananpihakketiga($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3327,7 +3327,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function create_simpananpihakketiga($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3348,7 +3348,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_simpananpihakketiga($id_nasabah) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3369,7 +3369,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_simpananpihakketiga($id_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3394,7 +3394,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_simpananpihakketiga() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3417,7 +3417,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_simpananpihakketiga($id_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3432,7 +3432,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function view_simpananpihakketiga($id_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3458,7 +3458,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_detail_simpananpihakketiga() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3492,7 +3492,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_detail_simpananpihakketiga($id_simpananpihakketiga, $id_detail_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3532,7 +3532,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_detail_simpananpihakketiga() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3565,7 +3565,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_detail_simpananpihakketiga($id_simpananpihakketiga, $id_detail_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3589,7 +3589,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function insert_detail_jasa_simpananpihakketiga() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3623,7 +3623,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function edit_detail_jasa_simpananpihakketiga($id_simpananpihakketiga, $id_detail_jasa_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3663,7 +3663,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function update_detail_jasa_simpananpihakketiga() {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3700,7 +3700,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function delete_detail_jasa_simpananpihakketiga($id_simpananpihakketiga, $id_detail_jasa_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3724,7 +3724,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function simpananpihakketiga_post_akuntansi($id_simpananpihakketiga, $id_detail_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3816,7 +3816,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function simpananpihakketiga_unpost_akuntansi($id_simpananpihakketiga, $id_detail_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3847,7 +3847,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function jasa_simpananpihakketiga_post_akuntansi($id_simpananpihakketiga, $id_detail_jasa_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
@@ -3971,7 +3971,7 @@ class TransaksianggotaCon extends CI_Controller {
 	}
 
 	function jasa_simpananpihakketiga_unpost_akuntansi($id_simpananpihakketiga, $id_detail_jasa_simpananpihakketiga) {
-		$session_data = $this->session->userdata('logged_in');
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
