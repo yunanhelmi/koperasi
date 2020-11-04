@@ -87,7 +87,7 @@
       var controller = 'simpanan3thmastercon';
       var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
       if( retVal == true ){
-        window.location.href= base_url + controller + '/delete_simpanan3thmaster/' + id;
+        window.location.href= base_url + '/' + controller + '/delete_simpanan3thmaster/' + id;
       }
     }
 

@@ -153,7 +153,7 @@ function rupiah($angka){
       var controller = 'transaksiakuntansicon';
       var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
       if( retVal == true ){
-        window.location.href= base_url + controller + '/delete_transaksi_akuntansi/' + id;
+        window.location.href= base_url + '/' + controller + '/delete_transaksi_akuntansi/' + id;
       }
     }
 
