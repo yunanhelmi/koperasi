@@ -54,6 +54,34 @@ class LaporansimpananwajibCon extends CI_Controller {
 		$this->load->view('/layouts/footer', $data);	
 	}
 
+    function html() {
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
+        if($session_data == NULL) {
+            redirect("usercon/login", "refresh");
+        }
+
+        $tanggal1   = $this->input->post('tanggal');
+        $tgl        = strtotime($tanggal1);
+        $tanggal    = date("Y-m-d",$tgl);
+
+        $simpananwajib = $this->laporansimpananwajibmodel->get_data($tanggal);
+
+        // Total Simpanan Wajib pada neraca
+        if($tanggal < '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_sampai_kode_akun($tanggal, '302');
+        } else if($tanggal >= '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun('2019-01-01', $tanggal, '302');
+        }
+        $total_neraca = $transaksi[0]['jumlah_kredit'] - $transaksi[0]['jumlah_debet'];
+
+        $data['tanggal'] = $tanggal;
+        $data['data'] = $simpananwajib;
+        $data['total_neraca'] = $total_neraca;
+
+        $this->load->view('/hasil_laporan/simpananwajib', $data);
+    }
+
+    // Yang dipake
 	function excel() {
 		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {

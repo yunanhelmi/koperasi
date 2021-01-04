@@ -104,6 +104,36 @@ class LaporanrincianjasaCon extends CI_Controller {
 		$this->load->view('/layouts/footer', $data);	
 	}
 
+    function html() {
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
+        if($session_data == NULL) {
+            redirect("usercon/login", "refresh");
+        }
+
+        $tgl_dari1      = $this->input->post('dari');
+        $tgl_dari       = strtotime($tgl_dari1);
+        $dari           = date("Y-m-d",$tgl_dari);
+
+        $tgl_sampai1    = $this->input->post('sampai');
+        $tgl_sampai     = strtotime($tgl_sampai1);
+        $sampai         = date("Y-m-d",$tgl_sampai);
+
+        $data_rincian = $this->laporanrincianjasamodel->get_data1($dari, $sampai); 
+
+        // Total transaksi pendapatan
+        $transaksi_pendapatan   = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun($dari, $sampai, '401');
+        $total_neraca = $transaksi_pendapatan[0]['jumlah_kredit'] - $transaksi_pendapatan[0]['jumlah_debet'];
+
+        $data['tgl_dari']               = $dari;
+        $data['tgl_sampai']             = $sampai;
+        $data['data']                   = $data_rincian;
+        $data['transaksi_pendapatan']   = $transaksi_pendapatan;
+        $data['total_neraca']           = $total_neraca;
+
+        $this->load->view('/hasil_laporan/rincian_jasa', $data);
+    }
+
+    // Yang dicoba
 	function excel_coba() {
         $session_data = $this->session->userdata('mubasyirin_logged_in');
         if($session_data == NULL) {

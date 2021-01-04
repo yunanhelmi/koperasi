@@ -25,7 +25,7 @@
     		<div class="col-md-12 pull-left">
     			<div class="box box-danger">
     				<legend style="text-align:center;">LAPORAN DAFTAR SIMPANAN WAJIB</legend>
-    				<form action="<?php echo base_url();?>index.php/laporansimpananwajibcon/excel" method="post" enctype="multipart/form-data" role="form">
+    				<form action="<?php echo base_url();?>index.php/laporansimpananwajibcon/html" method="post" enctype="multipart/form-data" role="form" target="_blank">
 						<div class="box-body">
 							<div class="form-group col-xs-3">
 								<label for="exampleInputPassword1">Per Tanggal</label>
@@ -45,7 +45,7 @@
 							</div>-->
 							<div class="col-xs-3">
 				            	<div class="form-group pull-left">
-									<button type="submit" class="btn btn-success" name="excel"><i class="fa fa-file-excel-o"></i> Download Excel</button>
+									<button type="submit" class="btn btn-success" name="excel"><i class="fa fa-eye"></i> Tampilkan</button>
 								</div>
 							</div>
 						</div>  
