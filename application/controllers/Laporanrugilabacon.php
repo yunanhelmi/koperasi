@@ -98,6 +98,114 @@ class LaporanrugilabaCon extends CI_Controller {
 		echo "</pre>";
 	}
 
+	function html() {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		$tgl_dari1 	= $this->input->post('dari');
+		$tgl_dari 	= strtotime($tgl_dari1);
+		$dari 		= date("Y-m-d",$tgl_dari);
+
+		$tgl_sampai1	= $this->input->post('sampai');
+		$tgl_sampai 	= strtotime($tgl_sampai1);
+		$sampai 		= date("Y-m-d",$tgl_sampai);
+
+		$transaksi_aset 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '1');
+		$transaksi_hutang 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '2');
+		$transaksi_modal 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '3');
+		$transaksi_pendapatan 	= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '4');
+		$transaksi_beban 		= $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_first_char($dari, $sampai, '5');
+
+		$kode_aset 			= $this->kodeakunmodel->get_kode_akun_by_first_char('1');
+		$kode_hutang 		= $this->kodeakunmodel->get_kode_akun_by_first_char('2');
+		$kode_modal 		= $this->kodeakunmodel->get_kode_akun_by_first_char('3');
+		$kode_pendapatan 	= $this->kodeakunmodel->get_kode_akun_by_first_char('4');
+		$kode_beban 		= $this->kodeakunmodel->get_kode_akun_by_first_char('5');
+
+		$total_aset = 0;
+		for($i = 0; $i < sizeof($kode_aset); $i++) {
+			for($a = 0; $a < sizeof($transaksi_aset); $a++) {
+				if($kode_aset[$i]['kode_akun'] == $transaksi_aset[$a]['kode_akun']) {
+					$kode_aset[$i]['debet'] 	= $transaksi_aset[$a]['jumlah_debet'];
+					$kode_aset[$i]['kredit'] 	= $transaksi_aset[$a]['jumlah_kredit'];
+					if($kode_aset[$i]['kode_akun'] == '105') {
+						$kode_aset[$i]['selisih']	= $transaksi_aset[$a]['jumlah_kredit'] - $transaksi_aset[$a]['jumlah_debet'];
+						$total_aset 				-= $kode_aset[$i]['selisih'];
+					} else {
+						$kode_aset[$i]['selisih']	= $transaksi_aset[$a]['jumlah_debet'] - $transaksi_aset[$a]['jumlah_kredit'];
+						$total_aset 				+= $kode_aset[$i]['selisih'];
+					}
+				}
+			}
+		}
+
+		$total_hutang = 0;
+		for($i = 0; $i < sizeof($kode_hutang); $i++) {
+			for($a = 0; $a < sizeof($transaksi_hutang); $a++) {
+				if($kode_hutang[$i]['kode_akun'] == $transaksi_hutang[$a]['kode_akun']) {
+					$kode_hutang[$i]['debet'] 	= $transaksi_hutang[$a]['jumlah_debet'];
+					$kode_hutang[$i]['kredit'] 	= $transaksi_hutang[$a]['jumlah_kredit'];
+					$kode_hutang[$i]['selisih']	= $transaksi_hutang[$a]['jumlah_kredit'] - $transaksi_hutang[$a]['jumlah_debet'];
+					$total_hutang 				+= $kode_hutang[$i]['selisih'];
+				}
+			}
+		}
+
+		$total_modal = 0;
+		for($i = 0; $i < sizeof($kode_modal); $i++) {
+			for($a = 0; $a < sizeof($transaksi_modal); $a++) {
+				if($kode_modal[$i]['kode_akun'] == $transaksi_modal[$a]['kode_akun']) {
+					$kode_modal[$i]['debet'] 	= $transaksi_modal[$a]['jumlah_debet'];
+					$kode_modal[$i]['kredit'] 	= $transaksi_modal[$a]['jumlah_kredit'];
+					$kode_modal[$i]['selisih']	= $transaksi_modal[$a]['jumlah_kredit'] - $transaksi_modal[$a]['jumlah_debet'];
+					$total_modal 				+= $kode_modal[$i]['selisih'];
+				}
+			}
+		}
+
+		$total_pendapatan = 0;
+		for($i = 0; $i < sizeof($kode_pendapatan); $i++) {
+			for($a = 0; $a < sizeof($transaksi_pendapatan); $a++) {
+				if($kode_pendapatan[$i]['kode_akun'] == $transaksi_pendapatan[$a]['kode_akun']) {
+					$kode_pendapatan[$i]['debet'] 	= $transaksi_pendapatan[$a]['jumlah_debet'];
+					$kode_pendapatan[$i]['kredit'] 	= $transaksi_pendapatan[$a]['jumlah_kredit'];
+					$kode_pendapatan[$i]['selisih']	= $transaksi_pendapatan[$a]['jumlah_kredit'] - $transaksi_pendapatan[$a]['jumlah_debet'];
+					$total_pendapatan 				+= $kode_pendapatan[$i]['selisih'];
+				}
+			}
+		}
+
+		$total_beban = 0;
+		for($i = 0; $i < sizeof($kode_beban); $i++) {
+			for($a = 0; $a < sizeof($transaksi_beban); $a++) {
+				if($kode_beban[$i]['kode_akun'] == $transaksi_beban[$a]['kode_akun']) {
+					$kode_beban[$i]['debet'] 	= $transaksi_beban[$a]['jumlah_debet'];
+					$kode_beban[$i]['kredit'] 	= $transaksi_beban[$a]['jumlah_kredit'];
+					$kode_beban[$i]['selisih']	= $transaksi_beban[$a]['jumlah_debet'] - $transaksi_beban[$a]['jumlah_kredit'];
+					$total_beban 				+= $kode_beban[$i]['selisih'];
+				}
+			}
+		}
+
+		$data['dari'] 				= $dari;
+        $data['sampai'] 			= $sampai;
+        $data['kode_aset'] 			= $kode_aset;
+        $data['total_aset'] 		= $total_aset;
+        $data['kode_hutang'] 		= $kode_hutang;
+        $data['total_hutang'] 		= $total_hutang;
+        $data['kode_modal'] 		= $kode_modal;
+        $data['total_modal'] 		= $total_modal;
+        $data['kode_pendapatan'] 	= $kode_pendapatan;
+        $data['total_pendapatan'] 	= $total_pendapatan;
+        $data['kode_beban'] 		= $kode_beban;
+        $data['total_beban'] 		= $total_beban;
+
+        $this->load->view('/hasil_laporan/rugilaba', $data);
+	}
+
+	// Yang dipake
 	function excel() {
 		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {

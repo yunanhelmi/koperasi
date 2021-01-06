@@ -21,15 +21,13 @@
 	$tanggal 	= date("d-m-Y",$tgl);
 ?>
 
-<center>ATAS BERKAT RAHMAT ALLAH YANG MAHA KUASA</center>
-<br>
-<center>KOPERASI SMA NEGERI 1 BOJONEGORO</center>
-<br>
-<center>PENDIDIK UTAMA ADIL SEJAHTERA SYARIAH</center>
-<br>
-<center>KOSMAN "PUAS" SYARIAH</center>
+<center>KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYAH</center>
 <br>
 <center>LAPORAN SIMPANAN WAJIB <?php echo $tanggal ?></center>
+<br>
+<center>KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYAH</center>
+<br>
+<center>NGARES DANDER Bojonegoro TELP (0353) 886039       BH : 8181/BH/II/95</center>
 <br>
 <br>
 
