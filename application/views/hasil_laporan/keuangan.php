@@ -1,6 +1,6 @@
 <?php
 
-function isLeapYear($year) {
+	function isLeapYear($year) {
         return ((($year % 4 === 0) && ($year % 100 !== 0)) || ($year % 400 === 0));
     }
 
@@ -60,7 +60,7 @@ function isLeapYear($year) {
 
 <center>KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYAH</center>
 <br>
-<center>LAPORAN NERACA <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
+<center>LAPORAN KEUANGAN <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
 <br>
 <center>KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYAH</center>
 <br>
@@ -70,13 +70,16 @@ function isLeapYear($year) {
 
 <table border="1" style="width:100%; border-collapse: collapse;">
 	<tr>
+		<th colspan="3"><strong>NERACA</strong></th>
+	</tr>
+	<tr>
 		<th style="width:10%;">NO</th>
 		<th style="width:70%;">AKTIVA</th>
 		<th style="width:20%;">JUMLAH</th>
 	</tr>
 	<tr>
 		<td></td>
-		<td style="text-align: center;">HARTA</td>
+		<td><strong>HARTA</strong></td>
 		<td></td>
 	</tr>
 	<?php
@@ -93,17 +96,14 @@ function isLeapYear($year) {
 	?>
 	<tr>
 		<td></td>
-		<td style="text-align: center">JUMLAH HARTA</td>
-		<td style="text-align: right;"><?php echo number_format($total_aset); ?></td>
-	</tr>
-	<tr>
-		<td></td>
 		<td style="text-align: center"><strong>JUMLAH AKTIVA</strong></td>
 		<td style="text-align: right"><strong><?php echo number_format($total_aset); ?></strong></td>
 	</tr>
-</table>
-<br>
-<table border="1" style="width:100%; border-collapse: collapse;">
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
 	<tr>
 		<th style="width:10%;">NO</th>
 		<th style="width:70%;">PASIVA</th>
@@ -111,7 +111,7 @@ function isLeapYear($year) {
 	</tr>
 	<tr>
 		<td></td>
-		<td style="text-align: center;">HUTANG</td>
+		<td><strong>HUTANG</strong></td>
 		<td></td>
 	</tr>
 	<?php
@@ -128,12 +128,17 @@ function isLeapYear($year) {
 	?>
 	<tr>
 		<td></td>
-		<td style="text-align: center">JUMLAH HUTANG</td>
-		<td style="text-align: right"><?php echo number_format($total_hutang); ?></td>
+		<td style="text-align: center"><strong>JUMLAH HUTANG</strong></td>
+		<td style="text-align: right"><strong><?php echo number_format($total_hutang); ?></strong></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td></td>
-		<td style="text-align: center;">MODAL</td>
+		<td><strong>MODAL</strong></td>
 		<td></td>
 	</tr>
 	<?php
@@ -150,15 +155,106 @@ function isLeapYear($year) {
 	?>
 	<tr>
 		<td></td>
-		<td style="text-align: center">JUMLAH MODAL</td>
-		<td style="text-align: right"><?php echo number_format($total_modal); ?></td>
+		<td style="text-align: center"><strong>JUMLAH MODAL</strong></td>
+		<td style="text-align: right"><strong><?php echo number_format($total_modal); ?></strong></td>
 	</tr>
-	<tr></tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
 	<tr>
 		<td></td>
 		<td style="text-align: center"><strong>JUMLAH PASIVA</strong></td>
-		<?php $jumlah_pasiva = $total_hutang + $total_modal ?>
-		<td style="text-align: right"><strong><?php echo number_format($jumlah_pasiva); ?></strong></td>
+		<?php $pasiva = $total_hutang + $total_modal; ?>
+		<td style="text-align: right"><strong><?php echo number_format($pasiva); ?></strong></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td style="text-align: center"><strong>AKTIVA = PASIVA</strong></td>
+		<?php $selisih = $total_aset - ($total_hutang + $total_modal); ?>
+		<td style="text-align: right"><strong><?php echo number_format($selisih); ?></strong></td>
+	</tr>
+</table>
+<br>
+<table border="1" style="width:100%; border-collapse: collapse;">
+	<tr>
+		<th colspan="3"><strong>PERHITUNGAN HASIL USAHA</strong></th>
+	</tr>
+	<tr>
+		<th style="width:10%;">NO</th>
+		<th style="width:70%;">PENDAPATAN</th>
+		<th style="width:20%;">JUMLAH</th>
+	</tr>
+	<tr>
+		<td></td>
+		<td><strong>PENDAPATAN JASA PINJAM</strong></td>
+		<td></td>
+	</tr>
+	<?php
+		for($i = 0; $i < sizeof($kode_pendapatan); $i++) {
+        	if($kode_pendapatan[$i]['selisih'] != 0) {
+    ?>			<tr>
+    				<td style="text-align: center"><?php echo $kode_pendapatan[$i]['kode_akun']; ?></td>
+	    			<td><?php echo $kode_pendapatan[$i]['nama_akun']; ?></td>
+	    			<td style="text-align: right"><?php echo number_format($kode_pendapatan[$i]['selisih']); ?></td>
+    			</tr>
+    <?php
+        	}
+        }
+	?>
+	<tr>
+		<td></td>
+		<td style="text-align: center"><strong>JUMLAH PENDAPATAN</strong></td>
+		<td style="text-align: right"><strong><?php echo number_format($total_pendapatan); ?></strong></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<th style="width:10%;">NO</th>
+		<th style="width:70%;">BEBAN</th>
+		<th style="width:20%;">JUMLAH</th>
+	</tr>
+	<tr>
+		<td></td>
+		<td><strong>BIAYA</strong></td>
+		<td></td>
+	</tr>
+	<?php
+		for($i = 0; $i < sizeof($kode_beban); $i++) {
+        	if($kode_beban[$i]['selisih'] != 0) {
+    ?>			<tr>
+    				<td style="text-align: center"><?php echo $kode_beban[$i]['kode_akun']; ?></td>
+	    			<td><?php echo $kode_beban[$i]['nama_akun']; ?></td>
+	    			<td style="text-align: right"><?php echo number_format($kode_beban[$i]['selisih']); ?></td>
+    			</tr>
+    <?php
+        	}
+        }
+	?>
+	<tr>
+		<td></td>
+		<td style="text-align: center"><strong>JUMLAH BEBAN</strong></td>
+		<td style="text-align: right"><strong><?php echo number_format($total_beban); ?></strong></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td style="text-align: center"><strong>HASIL SHU BERJALAN</strong></td>
+		<?php $shu_berjalan = $total_pendapatan - $total_beban; ?>
+		<td style="text-align: right"><strong><?php echo number_format($shu_berjalan); ?></strong></td>
 	</tr>
 </table>
 <br>
@@ -192,22 +288,5 @@ function isLeapYear($year) {
 		<td style="width: 20%; text-align: center"><strong>Drs. SUPRAPTO</strong></td>
 		<td style="width: 60%; text-align: center"></td>
 		<td style="width: 20%; text-align: center"><strong>DWI AGUNG, M.Pd.</strong></td>
-	</tr>
-</table>
-<br>
-<br>
-<br>
-<table style="width: 100%">
-	<tr>
-		<td style="width: 40%"><strong>RENTABILITAS (%) : SHU / MODAL SENDIRI  X 100 %</strong></td>
-		<td style="width: 60%"><strong><?php echo $rentabilitas ?></strong></td>
-	</tr>
-	<tr>
-		<td style="width: 40%"><strong>LIKUIDITAS  : HARTA LANCAR / HUTANG LANCAR</strong></td>
-		<td style="width: 60%"><strong><?php echo $likuiditas ?></strong></td>
-	</tr>
-	<tr>
-		<td style="width: 40%"><strong>SOLVABILITAS  : TOTAL AKTIVA / TOTAL HUTANG</strong></td>
-		<td style="width: 60%"><strong><?php echo $solvabilitas ?></strong></td>
 	</tr>
 </table>

@@ -60,7 +60,7 @@
 
 <center>KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYAH</center>
 <br>
-<center>LAPORAN NERACA <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
+<center>LAPORAN RUGI LABA <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
 <br>
 <center>KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYAH</center>
 <br>
@@ -144,3 +144,35 @@
 	</tr>
 </table>
 <br>
+<table style="width:100%;">
+	<tr>
+		<td style="width: 20%; text-align: center"></td>
+		<td style="width: 60%; text-align: center"></td>
+		<td style="width: 20%; text-align: center"><strong>Bojonegoro, <?php echo date("d-m-Y") ?></strong></td>
+	</tr>
+	<tr>
+		<td style="width: 20%; text-align: center"><strong>Ketua,</strong></td>
+		<td style="width: 60%; text-align: center"></td>
+		<td style="width: 20%; text-align: center"><strong>Bendahara,</strong></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td style="width: 20%; text-align: center"><strong>Drs. SUPRAPTO</strong></td>
+		<td style="width: 60%; text-align: center"></td>
+		<td style="width: 20%; text-align: center"><strong>DWI AGUNG, M.Pd.</strong></td>
+	</tr>
+</table>
