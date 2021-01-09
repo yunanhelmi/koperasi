@@ -33,6 +33,43 @@ class LaporanaruskasCon extends CI_Controller {
 		$this->load->view('/layouts/footer', $data);
 	}
 
+    function html() {
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
+        if($session_data == NULL) {
+            redirect("usercon/login", "refresh");
+        }
+
+        $tgl_dari1  = $this->input->post('dari');
+        $tgl_dari   = strtotime($tgl_dari1);
+        $dari       = date("Y-m-d",$tgl_dari);
+
+        $tgl_sampai1    = $this->input->post('sampai');
+        $tgl_sampai     = strtotime($tgl_sampai1);
+        $sampai         = date("Y-m-d",$tgl_sampai);
+
+        if($dari < '2019-01-01' && $sampai < '2019-01-01') {
+            $data_kas_prev = $this->transaksiakuntansimodel->get_jumlah_by_prev_sampai_kode_akun($sampai, '101');
+            $data_kas = $this->transaksiakuntansimodel->showdata_by_dari_sampai_kode_akun($dari, $sampai, '101');
+        } else if($dari >= '2019-01-01' && $sampai >= '2019-01-01') {
+            $data_kas_prev = $this->transaksiakuntansimodel->get_jumlah_by_dari_prev_sampai_kode_akun('2019-01-01', $dari, '101');
+            $data_kas = $this->transaksiakuntansimodel->showdata_by_dari_sampai_kode_akun($dari, $sampai, '101');
+        }
+
+        if($data_kas_prev != NULL) {
+            $saldo_awal = $data_kas_prev[0]['jumlah_debet'] - $data_kas_prev[0]['jumlah_kredit'];   
+        } else {
+            $saldo_awal = 0;
+        }
+
+        $data['tgl_dari'] = $dari;
+        $data['tgl_sampai'] = $sampai;
+        $data['saldo_awal'] = $saldo_awal;
+        $data['data_kas'] = $data_kas;
+
+        $this->load->view('/hasil_laporan/aruskas', $data);
+    }
+
+    // Yang dipake
 	function excel() {
 		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
