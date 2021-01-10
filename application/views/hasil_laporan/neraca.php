@@ -85,7 +85,7 @@ function isLeapYear($year) {
     ?>			<tr>
     				<td style="text-align: center"><?php echo $kode_aset[$i]['kode_akun']; ?></td>
 	    			<td><?php echo $kode_aset[$i]['nama_akun']; ?></td>
-	    			<td style="text-align: right"><?php echo number_format($kode_aset[$i]['selisih']); ?></td>
+	    			<td style="text-align: right"><?php echo $kode_aset[$i]['selisih']; ?></td>
     			</tr>
     <?php
         	}
@@ -94,12 +94,12 @@ function isLeapYear($year) {
 	<tr>
 		<td></td>
 		<td style="text-align: center">JUMLAH HARTA</td>
-		<td style="text-align: right;"><?php echo number_format($total_aset); ?></td>
+		<td style="text-align: right;"><?php echo $total_aset; ?></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td style="text-align: center"><strong>JUMLAH AKTIVA</strong></td>
-		<td style="text-align: right"><strong><?php echo number_format($total_aset); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $total_aset; ?></strong></td>
 	</tr>
 </table>
 <br>
@@ -120,7 +120,7 @@ function isLeapYear($year) {
     ?>			<tr>
     				<td style="text-align: center"><?php echo $kode_hutang[$i]['kode_akun']; ?></td>
 	    			<td><?php echo $kode_hutang[$i]['nama_akun']; ?></td>
-	    			<td style="text-align: right"><?php echo number_format($kode_hutang[$i]['selisih']); ?></td>
+	    			<td style="text-align: right"><?php echo $kode_hutang[$i]['selisih']; ?></td>
     			</tr>
     <?php
         	}
@@ -129,7 +129,7 @@ function isLeapYear($year) {
 	<tr>
 		<td></td>
 		<td style="text-align: center">JUMLAH HUTANG</td>
-		<td style="text-align: right"><?php echo number_format($total_hutang); ?></td>
+		<td style="text-align: right"><?php echo $total_hutang; ?></td>
 	</tr>
 	<tr>
 		<td></td>
@@ -142,7 +142,7 @@ function isLeapYear($year) {
     ?>			<tr>
     				<td style="text-align: center"><?php echo $kode_modal[$i]['kode_akun']; ?></td>
 	    			<td><?php echo $kode_modal[$i]['nama_akun']; ?></td>
-	    			<td style="text-align: right"><?php echo number_format($kode_modal[$i]['selisih']); ?></td>
+	    			<td style="text-align: right"><?php echo $kode_modal[$i]['selisih']; ?></td>
     			</tr>
     <?php
         	}
@@ -151,14 +151,14 @@ function isLeapYear($year) {
 	<tr>
 		<td></td>
 		<td style="text-align: center">JUMLAH MODAL</td>
-		<td style="text-align: right"><?php echo number_format($total_modal); ?></td>
+		<td style="text-align: right"><?php echo $total_modal; ?></td>
 	</tr>
 	<tr></tr>
 	<tr>
 		<td></td>
 		<td style="text-align: center"><strong>JUMLAH PASIVA</strong></td>
 		<?php $jumlah_pasiva = $total_hutang + $total_modal ?>
-		<td style="text-align: right"><strong><?php echo number_format($jumlah_pasiva); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $jumlah_pasiva; ?></strong></td>
 	</tr>
 </table>
 <br>

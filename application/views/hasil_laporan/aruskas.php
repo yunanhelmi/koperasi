@@ -37,7 +37,7 @@
   	<td>SALDO AWAL</td>
   	<td style="text-align: right;"></td>
   	<td style="text-align: right;"></td>
-  	<td style="text-align: right;"><?php echo number_format($saldo_awal) ?></td>
+  	<td style="text-align: right;"><?php echo $saldo_awal ?></td>
   </tr>
   <?php
   	$no++;
@@ -51,12 +51,12 @@
 	?>
   	<td style="text-align: center;"><?php echo $tanggal ?></td>
   	<td><?php echo $data_kas[$i]['keterangan'] ?></td>
-  	<td style="text-align: right;"><?php echo number_format($data_kas[$i]['debet']) ?></td>
+  	<td style="text-align: right;"><?php echo $data_kas[$i]['debet'] ?></td>
   	<?php $total_debet += $data_kas[$i]['debet']; ?>
-  	<td style="text-align: right;"><?php echo number_format($data_kas[$i]['kredit']) ?></td>
+  	<td style="text-align: right;"><?php echo $data_kas[$i]['kredit'] ?></td>
   	<?php $total_kredit += $data_kas[$i]['kredit']; ?>
   	<?php $saldo += ($data_kas[$i]['debet'] - $data_kas[$i]['kredit']); ?>
-  	<td style="text-align: right;"><?php echo number_format($saldo) ?></td>
+  	<td style="text-align: right;"><?php echo $saldo ?></td>
   	<?php $no++; ?>
   </tr>
   <?php
@@ -68,6 +68,6 @@
   	<td><strong>SALDO AKHIR</strong></td>
   	<td style="text-align: right;"></td>
   	<td style="text-align: right;"></td>
-  	<td style="text-align: right;"><strong><?php echo number_format($saldo) ?></strong></td>
+  	<td style="text-align: right;"><strong><?php echo $saldo ?></strong></td>
   </tr>
 </table>

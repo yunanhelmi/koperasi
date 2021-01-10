@@ -85,7 +85,7 @@
     ?>			<tr>
     				<td style="text-align: center"><?php echo $kode_beban[$i]['kode_akun']; ?></td>
 	    			<td><?php echo $kode_beban[$i]['nama_akun']; ?></td>
-	    			<td style="text-align: right"><?php echo number_format($kode_beban[$i]['selisih']); ?></td>
+	    			<td style="text-align: right"><?php echo $kode_beban[$i]['selisih']; ?></td>
     			</tr>
     <?php
         	}
@@ -94,12 +94,12 @@
 	<tr>
 		<td></td>
 		<td style="text-align: center">JUMLAH BIAYA</td>
-		<td style="text-align: right;"><?php echo number_format($total_beban); ?></td>
+		<td style="text-align: right;"><?php echo $total_beban; ?></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td style="text-align: center"><strong>JUMLAH BEBAN</strong></td>
-		<td style="text-align: right"><strong><?php echo number_format($total_beban); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $total_beban; ?></strong></td>
 	</tr>
 </table>
 <br>
@@ -120,7 +120,7 @@
     ?>			<tr>
     				<td style="text-align: center"><?php echo $kode_pendapatan[$i]['kode_akun']; ?></td>
 	    			<td><?php echo $kode_pendapatan[$i]['nama_akun']; ?></td>
-	    			<td style="text-align: right"><?php echo number_format($kode_pendapatan[$i]['selisih']); ?></td>
+	    			<td style="text-align: right"><?php echo $kode_pendapatan[$i]['selisih']; ?></td>
     			</tr>
     <?php
         	}
@@ -129,18 +129,18 @@
 	<tr>
 		<td></td>
 		<td style="text-align: center">JUMLAH PENDAPATAN</td>
-		<td style="text-align: right"><?php echo number_format($total_pendapatan); ?></td>
+		<td style="text-align: right"><?php echo $total_pendapatan; ?></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td style="text-align: center"><strong>JUMLAH PENDAPATAN</strong></td>
-		<td style="text-align: right"><strong><?php echo number_format($total_pendapatan); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $total_pendapatan; ?></strong></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td style="text-align: center"><strong>SHU = PENDAPATAN - BIAYA</strong></td>
 		<?php $shu = $total_pendapatan - $total_beban; ?>
-		<td style="text-align: right"><strong><?php echo number_format($shu); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $shu; ?></strong></td>
 	</tr>
 </table>
 <br>

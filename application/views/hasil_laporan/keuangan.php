@@ -88,7 +88,7 @@
     ?>			<tr>
     				<td style="text-align: center"><?php echo $kode_aset[$i]['kode_akun']; ?></td>
 	    			<td><?php echo $kode_aset[$i]['nama_akun']; ?></td>
-	    			<td style="text-align: right"><?php echo number_format($kode_aset[$i]['selisih']); ?></td>
+	    			<td style="text-align: right"><?php echo $kode_aset[$i]['selisih']; ?></td>
     			</tr>
     <?php
         	}
@@ -97,7 +97,7 @@
 	<tr>
 		<td></td>
 		<td style="text-align: center"><strong>JUMLAH AKTIVA</strong></td>
-		<td style="text-align: right"><strong><?php echo number_format($total_aset); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $total_aset; ?></strong></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
@@ -120,7 +120,7 @@
     ?>			<tr>
     				<td style="text-align: center"><?php echo $kode_hutang[$i]['kode_akun']; ?></td>
 	    			<td><?php echo $kode_hutang[$i]['nama_akun']; ?></td>
-	    			<td style="text-align: right"><?php echo number_format($kode_hutang[$i]['selisih']); ?></td>
+	    			<td style="text-align: right"><?php echo $kode_hutang[$i]['selisih']; ?></td>
     			</tr>
     <?php
         	}
@@ -129,7 +129,7 @@
 	<tr>
 		<td></td>
 		<td style="text-align: center"><strong>JUMLAH HUTANG</strong></td>
-		<td style="text-align: right"><strong><?php echo number_format($total_hutang); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $total_hutang; ?></strong></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
@@ -147,7 +147,7 @@
     ?>			<tr>
     				<td style="text-align: center"><?php echo $kode_modal[$i]['kode_akun']; ?></td>
 	    			<td><?php echo $kode_modal[$i]['nama_akun']; ?></td>
-	    			<td style="text-align: right"><?php echo number_format($kode_modal[$i]['selisih']); ?></td>
+	    			<td style="text-align: right"><?php echo $kode_modal[$i]['selisih']; ?></td>
     			</tr>
     <?php
         	}
@@ -156,7 +156,7 @@
 	<tr>
 		<td></td>
 		<td style="text-align: center"><strong>JUMLAH MODAL</strong></td>
-		<td style="text-align: right"><strong><?php echo number_format($total_modal); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $total_modal; ?></strong></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
@@ -167,7 +167,7 @@
 		<td></td>
 		<td style="text-align: center"><strong>JUMLAH PASIVA</strong></td>
 		<?php $pasiva = $total_hutang + $total_modal; ?>
-		<td style="text-align: right"><strong><?php echo number_format($pasiva); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $pasiva; ?></strong></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
@@ -178,7 +178,7 @@
 		<td></td>
 		<td style="text-align: center"><strong>AKTIVA = PASIVA</strong></td>
 		<?php $selisih = $total_aset - ($total_hutang + $total_modal); ?>
-		<td style="text-align: right"><strong><?php echo number_format($selisih); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $selisih; ?></strong></td>
 	</tr>
 </table>
 <br>
@@ -202,7 +202,7 @@
     ?>			<tr>
     				<td style="text-align: center"><?php echo $kode_pendapatan[$i]['kode_akun']; ?></td>
 	    			<td><?php echo $kode_pendapatan[$i]['nama_akun']; ?></td>
-	    			<td style="text-align: right"><?php echo number_format($kode_pendapatan[$i]['selisih']); ?></td>
+	    			<td style="text-align: right"><?php echo $kode_pendapatan[$i]['selisih']; ?></td>
     			</tr>
     <?php
         	}
@@ -211,7 +211,7 @@
 	<tr>
 		<td></td>
 		<td style="text-align: center"><strong>JUMLAH PENDAPATAN</strong></td>
-		<td style="text-align: right"><strong><?php echo number_format($total_pendapatan); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $total_pendapatan; ?></strong></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
@@ -234,7 +234,7 @@
     ?>			<tr>
     				<td style="text-align: center"><?php echo $kode_beban[$i]['kode_akun']; ?></td>
 	    			<td><?php echo $kode_beban[$i]['nama_akun']; ?></td>
-	    			<td style="text-align: right"><?php echo number_format($kode_beban[$i]['selisih']); ?></td>
+	    			<td style="text-align: right"><?php echo $kode_beban[$i]['selisih']; ?></td>
     			</tr>
     <?php
         	}
@@ -243,7 +243,7 @@
 	<tr>
 		<td></td>
 		<td style="text-align: center"><strong>JUMLAH BEBAN</strong></td>
-		<td style="text-align: right"><strong><?php echo number_format($total_beban); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $total_beban; ?></strong></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
@@ -254,7 +254,7 @@
 		<td></td>
 		<td style="text-align: center"><strong>HASIL SHU BERJALAN</strong></td>
 		<?php $shu_berjalan = $total_pendapatan - $total_beban; ?>
-		<td style="text-align: right"><strong><?php echo number_format($shu_berjalan); ?></strong></td>
+		<td style="text-align: right"><strong><?php echo $shu_berjalan; ?></strong></td>
 	</tr>
 </table>
 <br>
