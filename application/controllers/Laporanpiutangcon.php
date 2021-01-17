@@ -294,6 +294,34 @@ class LaporanpiutangCon extends CI_Controller {
         return;
 	}
 
+    function html() {
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
+        if($session_data == NULL) {
+            redirect("usercon/login", "refresh");
+        }
+
+        $tanggal1   = $this->input->post('tanggal');
+        $tgl        = strtotime($tanggal1);
+        $tanggal    = date("Y-m-d",$tgl);
+
+        $data_piutang = $this->laporanpiutangmodel->get_data($tanggal); 
+
+        // Total Piutang pada neraca
+        if($tanggal < '2019-01-01') {
+            $transaksi_piutang    = $this->transaksiakuntansimodel->get_jumlah_by_sampai_kode_akun($tanggal, '103');
+        } else if($tanggal >= '2019-01-01') {
+            $transaksi_piutang    = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun('2019-01-01', $tanggal, '103');
+        }
+        $piutang_neraca = $transaksi_piutang[0]['jumlah_debet'] - $transaksi_piutang[0]['jumlah_kredit'];
+
+        $data['data'] = $data_piutang;
+        $data['piutang_neraca'] = $piutang_neraca;
+        $data['tanggal'] = $tanggal;
+
+        $this->load->view('/hasil_laporan/piutang', $data);
+    }
+
+    // Yang dipake
     function excel_laporan() {
         $session_data = $this->session->userdata('mubasyirin_logged_in');
         if($session_data == NULL) {
