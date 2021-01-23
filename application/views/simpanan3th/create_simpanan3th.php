@@ -92,7 +92,7 @@
         $( "#id_nasabah" ).change(function() {
           $.ajax({
             type: "POST",
-            url: "<?php echo base_url('simpanan3thcon/pickNasabah') ;?>",
+            url: "<?php echo base_url('index.php/simpanan3thcon/pickNasabah') ;?>",
             data: { id_nasabah: $( "#id_nasabah" ).val() },
             cache: true,
             success:

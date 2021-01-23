@@ -2,7 +2,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Simpanan3thcon extends CI_Controller {
+class Simpanan3thCon extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('usermodel');
