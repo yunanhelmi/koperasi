@@ -12,6 +12,7 @@ class CektotalCon extends CI_Controller {
 		$this->load->model('kodeakunmodel');
 		$this->load->model('ceksimpananwajibmodel');
 		$this->load->model('ceksimpananpensiunmodel');
+		$this->load->model('ceksimpanankhususmodel');
 	}
 
 	function cekTotalSimpananWajib() {
@@ -60,6 +61,31 @@ class CektotalCon extends CI_Controller {
 			if($jumlah != $data[$i]['total']) {
 				$id_simpananpensiun = $data[$i]['id'];
 				$this->ceksimpananpensiunmodel->updateTotal($id_simpananpensiun, $jumlah);
+			}
+		}
+	}
+
+	function cekTotalSimpananKhusus() {
+		$data = $this->ceksimpanankhususmodel->cekTotal();
+
+		for($i = 0; $i < sizeof($data); $i++) {
+			$jumlah = $data[$i]['total_setoran_detail'] - $data[$i]['total_tarikan_detail'];
+			if($jumlah != $data[$i]['total']) {
+				echo "<pre>";
+				var_dump($data[$i]);
+				echo "</pre>";
+			}
+		}
+	}
+
+	function perbaikiTotalSimpananKhusus() {
+		$data = $this->ceksimpanankhususmodel->cekTotal();
+
+		for($i = 0; $i < sizeof($data); $i++) {
+			$jumlah = $data[$i]['total_setoran_detail'] - $data[$i]['total_tarikan_detail'];
+			if($jumlah != $data[$i]['total']) {
+				$id_simpanankhusus = $data[$i]['id'];
+				$this->ceksimpanankhususmodel->updateTotal($id_simpanankhusus, $jumlah);
 			}
 		}
 	}
