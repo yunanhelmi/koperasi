@@ -67,6 +67,7 @@
 	<tr>
 	    <th>NO</th>
 	    <th>NAMA</th>
+	    <th>NOMOR NASABAH</th>
 	    <th>ALAMAT</th>
 	    <th>DESA</th>
 	    <th>DUSUN</th>
@@ -88,6 +89,7 @@
 			<tr>
 	  			<td style="text-align: center;"><?php echo $no ?></td>
 	  			<td><?php echo $data[$a]['nama']; ?></td>
+	  			<td style="text-align: center;"><?php echo $data[$a]['nomor_koperasi']; ?></td>
 	  			<td><?php echo $data[$a]['alamat']; ?></td>
 	  			<td><?php echo $data[$a]['kelurahan']; ?></td>
 	  			<td><?php echo $data[$a]['dusun']; ?></td>
@@ -181,12 +183,12 @@
 	  	}
 	?>
 	<tr>
-		<td colspan="10" style="text-align: center;"><strong>TOTAL PIUTANG</strong></td>
+		<td colspan="11" style="text-align: center;"><strong>TOTAL PIUTANG</strong></td>
 		<td style="text-align: right;"><strong><?php echo $total_sisa ?></strong></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td colspan="10" style="text-align: center;"><strong>TOTAL PIUTANG (NERACA)</strong></td>
+		<td colspan="11" style="text-align: center;"><strong>TOTAL PIUTANG (NERACA)</strong></td>
 		<td style="text-align: right;"><strong><?php echo $piutang_neraca ?></strong></td>
 		<td></td>
 	</tr>
@@ -194,7 +196,7 @@
 		$selisih = $total_sisa - $piutang_neraca;
 	?>
 	<tr>
-		<td colspan="10" style="text-align: center;"><strong>SELISIH</strong></td>
+		<td colspan="11" style="text-align: center;"><strong>SELISIH</strong></td>
 		<td style="text-align: right;"><strong><?php echo $selisih ?></strong></td>
 		<td></td>
 	</tr>
