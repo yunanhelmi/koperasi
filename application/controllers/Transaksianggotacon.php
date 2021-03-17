@@ -286,6 +286,19 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 		
+		/*echo "<pre>";
+		var_dump($data['pinjaman']);
+		echo "</pre>";*/
+
+		if($data['pinjaman']->sisa_angsuran > 0) {
+			$tgl_pinjam = new DateTime($data['pinjaman']->waktu);
+			$today = new DateTime(date("Y-m-d"));
+			$lama_hari = $today->diff($tgl_pinjam)->format("%a")." hari";
+		} else {
+			$lama_hari = "LUNAS";
+		}
+		$data['lama_hari'] 			= $lama_hari;
+
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/transaksianggota/view_pinjaman', $data);
 		$this->load->view('/layouts/footer', $data);
@@ -503,6 +516,15 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpananpihakketiga']	= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['username'] 				= $session_data['username'];
 		$data['status'] 				= $session_data['status'];
+
+		if($data['pinjaman']->sisa_angsuran > 0) {
+			$tgl_pinjam = new DateTime($data['pinjaman']->waktu);
+			$today = new DateTime(date("Y-m-d"));
+			$lama_hari = $today->diff($tgl_pinjam)->format("%a")." hari";
+		} else {
+			$lama_hari = "LUNAS";
+		}
+		$data['lama_hari'] 			= $lama_hari;
 		
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/transaksianggota/view_pinjaman_edit_angsuran', $data);

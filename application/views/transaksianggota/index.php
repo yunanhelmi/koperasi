@@ -108,8 +108,31 @@
   </style>
   <script type="text/javascript">
 
-  $(function () {
-    $('#transaksianggota_table').DataTable({
+  </script>
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#transaksianggota_table thead tr').clone(true).appendTo( '#transaksianggota_table thead' );
+    $('#transaksianggota_table thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        if(title == 'Nomor Nasabah') {
+          $(this).html( '<input type="text" placeholder="" />' );  
+        } else {
+          $(this).html( '' );  
+        }
+    
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
+    var table = $('#transaksianggota_table').DataTable({
       'paging'      : true,
       'lengthChange': true,
       'searching'   : true,
@@ -117,8 +140,5 @@
       'info'        : true,
       'autoWidth'   : true
     })
-  })
-  </script>
-  <script type="text/javascript">
-    
+  });
   </script>

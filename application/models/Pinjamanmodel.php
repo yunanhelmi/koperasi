@@ -16,7 +16,11 @@ class PinjamanModel extends CI_Model {
 	}
 
 	function get_pinjaman_by_id($id) {
-		$query = $this->db->query("SELECT * from `pinjaman` WHERE id = '$id'");
+		$query = $this->db->query("
+									SELECT pinjaman.*, nasabah.alamat, nasabah.kota, nasabah.kecamatan, nasabah.kelurahan, nasabah.dusun 
+									FROM `pinjaman`
+									INNER JOIN nasabah ON pinjaman.id_nasabah = nasabah.id 
+									WHERE pinjaman.id = '$id'");
 		$a = $query->row();
 		return $a;
 	}

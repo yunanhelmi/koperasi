@@ -107,8 +107,30 @@
       }
     }
 
-  $(function () {
-    $('#nasabah_table').DataTable({
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#nasabah_table thead tr').clone(true).appendTo( '#nasabah_table thead' );
+    $('#nasabah_table thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        if(title == 'Nomor Nasabah') {
+          $(this).html( '<input type="text" placeholder="" />' );  
+        } else {
+          $(this).html( '' );  
+        }
+    
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
+    var table = $('#nasabah_table').DataTable({
       'paging'      : true,
       'lengthChange': true,
       'searching'   : true,
@@ -116,8 +138,6 @@
       'info'        : true,
       'autoWidth'   : true
     })
-  })
-  </script>
-  <script type="text/javascript">
-    
+
+} );
   </script>

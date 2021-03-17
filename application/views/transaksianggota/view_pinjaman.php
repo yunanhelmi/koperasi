@@ -182,90 +182,6 @@ function rupiah($angka){
                   <?php 
                     $date = strtotime( $pinjaman->waktu );
                   ?>
-                  <div class="box box-danger" id="div_tambah_angsuran" style="display:none">
-                    <legend style="text-align:center;">TAMBAH ANGSURAN</legend>
-                    <form action="<?php echo base_url()."index.php/transaksianggotacon/insert_detail_angsuran/".$nasabah->id;?>" method="post" enctype="multipart/form-data" role="form">
-                    <div class="box-body">
-                      <div class="form-group col-xs-6">
-                        <label for="exampleInputPassword1">Tanggal</label>
-                        <div class="input-group date">
-                          <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                          </div>
-                          <input type="text" class="form-control pull-right" name="waktu" id="waktu" value="" data-date-format="dd-mm-yyyy" required>
-                          <input type="hidden" class="form-control" value="<?php echo $pinjaman->id?>" id="id_pinjaman" name="id_pinjaman">
-                        </div>
-                      </div>
-                      <div class="form-group col-xs-6">
-                        <label for="exampleInputPassword1">Jenis</label>
-                        <select id="jenis" name="jenis" class="form-control" style="width: 100%;">
-                          <option value='Angsuran'>Angsuran</option>
-                          <option value='Pinjaman'>Pinjaman</option>
-                        </select>
-                      </div>
-                      <div class="form-group col-xs-6">
-                        <label for="exampleInputPassword1">Bulan ke-</label>
-                        <?php $max = $max_bulanke_angsuran + 1;?>
-                        <input type="text" class="form-control" value="<?php echo $max?>" id="bulan_ke" name="bulan_ke" placeholder="">
-                      </div>
-                      <div class="form-group col-xs-6">
-                          <label for="exampleInputPassword1">Bulan-Tahun</label>
-                          <input type="month" class="form-control" id="bulan_tahun" name="bulan_tahun" placeholder="">
-                        </div>
-                      <div class="form-group col-xs-6">
-                        <label for="exampleInputPassword1">Angsuran</label>
-                        <div class="input-group margin-bottom-sm">
-                          <span class="input-group-addon">Rp</span>
-                          <?php
-                            if($pinjaman->jenis_pinjaman == "Angsuran") {
-                              $angsuran = $pinjaman->angsuran_perbulan;
-                            } else if($pinjaman->jenis_pinjaman == "Musiman") {
-                              $angsuran = 0;
-                            }
-                          ?>
-                          <input type="text" class="form-control" value="<?php echo $angsuran?>" id="angsuran" name="angsuran" placeholder="0">
-                        </div>
-                        <div id="label_angsuran" class="alert-danger"></div>
-                      </div>
-                      <div class="form-group col-xs-6">
-                        <label for="exampleInputPassword1">Jasa</label>
-                        <div class="input-group margin-bottom-sm">
-                          <span class="input-group-addon">Rp</span>
-                          <input type="text" class="form-control" value="<?php echo $pinjaman->jasa_perbulan?>" id="jasa" name="jasa" placeholder="0">
-                        </div>
-                        <div id="label_jasa" class="alert-danger"></div>
-                      </div>
-                      <div class="form-group col-xs-6">
-                        <label for="exampleInputPassword1">Jasa Tambahan</label>
-                        <div class="input-group margin-bottom-sm">
-                          <span class="input-group-addon">Rp</span>
-                          <input type="text" class="form-control" id="denda" name="denda" placeholder="0">
-                        </div>
-                        <div id="label_denda" class="alert-danger"></div>
-                      </div>
-                      <div class="form-group col-xs-6">
-                        <label for="exampleInputPassword1">Total</label>
-                        <div class="input-group margin-bottom-sm">
-                          <span class="input-group-addon">Rp</span>
-                          <input type="text" class="form-control" id="total" name="total" placeholder="0">
-                        </div>
-                        <div id="label_total" class="alert-danger"></div>
-                      </div>
-                      <div class="form-group col-xs-6">
-                        <label for="exampleInputPassword1">Keterangan</label>
-                        <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="">
-                      </div>
-                    </div>
-                    <div class="box-footer">
-                        <div class="col-xs-3">
-                          <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                        <div class="col-xs-3">
-                          <button type="button" onclick="cancelTambahAngsuran()" class="btn btn-warning">Batal</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
                   <div class="box box-danger">
                     <legend style="text-align:center;">DETAIL ANGSURAN</legend>
 
@@ -275,8 +191,8 @@ function rupiah($angka){
                         <p><?php echo $pinjaman->nama_nasabah;?></p>
                       </div>
                       <div class="form-group col-xs-3">
-                        <label for="exampleInputPassword1">NIK Anggota</label>
-                        <p><?php echo $pinjaman->nik_nasabah;?></p>
+                        <label for="exampleInputPassword1">Alamat</label>
+                        <p><?php echo $pinjaman->kelurahan." ".$pinjaman->dusun;?></p>
                       </div>
                       <div class="form-group col-xs-3">
                         <label for="exampleInputPassword1">Jenis Pinjaman</label>
@@ -329,6 +245,10 @@ function rupiah($angka){
                       <div class="form-group col-xs-3">
                         <label for="exampleInputPassword1">Keterangan</label>
                         <p><?php echo $pinjaman->keterangan;?></p>
+                      </div>
+                      <div class="form-group col-xs-3">
+                        <label for="exampleInputPassword1">Lama Hari</label>
+                        <p><?php echo $lama_hari;?></p>
                       </div>
                     </div>
 
@@ -442,6 +362,90 @@ function rupiah($angka){
                         </tbody>
                       </table>
                     </div>
+                  </div>
+                  <div class="box box-danger" id="div_tambah_angsuran" style="display:none">
+                    <legend style="text-align:center;">TAMBAH ANGSURAN</legend>
+                    <form action="<?php echo base_url()."index.php/transaksianggotacon/insert_detail_angsuran/".$nasabah->id;?>" method="post" enctype="multipart/form-data" role="form">
+                    <div class="box-body">
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Tanggal</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right" name="waktu" id="waktu" value="" data-date-format="dd-mm-yyyy" required>
+                          <input type="hidden" class="form-control" value="<?php echo $pinjaman->id?>" id="id_pinjaman" name="id_pinjaman">
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Jenis</label>
+                        <select id="jenis" name="jenis" class="form-control" style="width: 100%;">
+                          <option value='Angsuran'>Angsuran</option>
+                          <option value='Pinjaman'>Pinjaman</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Bulan ke-</label>
+                        <?php $max = $max_bulanke_angsuran + 1;?>
+                        <input type="text" class="form-control" value="<?php echo $max?>" id="bulan_ke" name="bulan_ke" placeholder="">
+                      </div>
+                      <div class="form-group col-xs-6">
+                          <label for="exampleInputPassword1">Bulan-Tahun</label>
+                          <input type="month" class="form-control" id="bulan_tahun" name="bulan_tahun" placeholder="">
+                        </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Angsuran</label>
+                        <div class="input-group margin-bottom-sm">
+                          <span class="input-group-addon">Rp</span>
+                          <?php
+                            if($pinjaman->jenis_pinjaman == "Angsuran") {
+                              $angsuran = $pinjaman->angsuran_perbulan;
+                            } else if($pinjaman->jenis_pinjaman == "Musiman") {
+                              $angsuran = 0;
+                            }
+                          ?>
+                          <input type="text" class="form-control" value="<?php echo $angsuran?>" id="angsuran" name="angsuran" placeholder="0">
+                        </div>
+                        <div id="label_angsuran" class="alert-danger"></div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Jasa</label>
+                        <div class="input-group margin-bottom-sm">
+                          <span class="input-group-addon">Rp</span>
+                          <input type="text" class="form-control" value="<?php echo $pinjaman->jasa_perbulan?>" id="jasa" name="jasa" placeholder="0">
+                        </div>
+                        <div id="label_jasa" class="alert-danger"></div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Jasa Tambahan</label>
+                        <div class="input-group margin-bottom-sm">
+                          <span class="input-group-addon">Rp</span>
+                          <input type="text" class="form-control" id="denda" name="denda" placeholder="0">
+                        </div>
+                        <div id="label_denda" class="alert-danger"></div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Total</label>
+                        <div class="input-group margin-bottom-sm">
+                          <span class="input-group-addon">Rp</span>
+                          <input type="text" class="form-control" id="total" name="total" placeholder="0">
+                        </div>
+                        <div id="label_total" class="alert-danger"></div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Keterangan</label>
+                        <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="">
+                      </div>
+                    </div>
+                    <div class="box-footer">
+                        <div class="col-xs-3">
+                          <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                        <div class="col-xs-3">
+                          <button type="button" onclick="cancelTambahAngsuran()" class="btn btn-warning">Batal</button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
