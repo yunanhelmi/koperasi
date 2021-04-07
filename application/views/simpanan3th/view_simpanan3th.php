@@ -390,7 +390,7 @@ function getConfirmation(id_simpanan3th, id_detail_simpanan3th){
     var controller = 'simpanan3thcon';
     var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
     if( retVal == true ){
-      window.location.href= base_url + controller + '/delete_detail_simpanan3th/' + id_simpanan3th + '/' + id_detail_simpanan3th;
+      window.location.href= base_url + '/'  + controller + '/delete_detail_simpanan3th/' + id_simpanan3th + '/' + id_detail_simpanan3th;
       //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
     }
 }
@@ -400,7 +400,7 @@ function getConfirmationJasa(id_simpanan3th, id_detail_jasa_simpanan3th){
     var controller = 'simpanan3thcon';
     var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
     if( retVal == true ){
-      window.location.href= base_url + controller + '/delete_detail_jasa_simpanan3th/' + id_simpanan3th + '/' + id_detail_jasa_simpanan3th;
+      window.location.href= base_url + '/'  + controller + '/delete_detail_jasa_simpanan3th/' + id_simpanan3th + '/' + id_detail_jasa_simpanan3th;
       //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
     }
 }
