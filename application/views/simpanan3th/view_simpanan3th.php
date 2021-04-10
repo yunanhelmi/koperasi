@@ -11,7 +11,7 @@
 			Simpanan 3 Th
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="<?php echo base_url(); ?>index.php/simpanan3thcon"><i class="fa fa-users"></i> Simpanan 3 Th</a></li>
+			<li><a href="<?php echo base_url(); ?>index.php/simpanan3thmastercon"><i class="fa fa-users"></i> Simpanan 3 Th</a></li>
       <li><a href="<?php echo base_url(); ?>index.php/simpanan3thmastercon/transaksi_simpanan3thmaster/<?php echo $simpanan3thmaster->id ?>"><i class="fa fa-credit-card"></i>Transaksi Simpanan 3 Th</a></li>
       <li class="active"><a href="<?php echo base_url(); ?>index.php/simpanan3thcon/view_simpanan3th/<?php echo $simpanan3th->id ?>"><i class="fa fa-eye"></i> Detail Simpanan 3 Th Anggota</a></li>
 		</ol>
