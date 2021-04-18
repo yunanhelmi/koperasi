@@ -11,8 +11,14 @@ class LaporanrincianakunModel extends CI_Model {
 		return $a;
 	}
 
+	function get_jumlah_by_dari_sampai_kode_akun($dari, $sampai, $kode_akun) {
+		$query = $this->db->query(" SELECT kode_akun, nama_akun, SUM(debet) as jumlah_debet, SUM(kredit) as jumlah_kredit from `transaksi_akuntansi` WHERE `tanggal` >= '$dari' AND `tanggal` < '$sampai' AND kode_akun LIKE '$kode_akun' AND keterangan NOT LIKE 'SALDO AWAL' GROUP BY kode_akun ");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function get_transaksi_by_dari_sampai_kode_akun($dari, $sampai, $kode_akun) {
-		$query = $this->db->query(" SELECT kode_akun, nama_akun, tanggal, debet, kredit, keterangan from `transaksi_akuntansi` WHERE `tanggal` >= '$dari' AND `tanggal` <= '$sampai' AND kode_akun LIKE '$kode_akun' ");
+		$query = $this->db->query(" SELECT kode_akun, nama_akun, tanggal, debet, kredit, keterangan from `transaksi_akuntansi` WHERE `tanggal` >= '$dari' AND `tanggal` <= '$sampai' AND kode_akun LIKE '$kode_akun'  ORDER BY tanggal ASC");
 		$a = $query->result_array();
 		return $a;
 	}
@@ -24,7 +30,7 @@ class LaporanrincianakunModel extends CI_Model {
 	}
 
 	function get_transaksi_by_dari_sampai_kode_akun_except_saldo_awal($dari, $sampai, $kode_akun) {
-		$query = $this->db->query(" SELECT kode_akun, nama_akun, tanggal, debet, kredit, keterangan from `transaksi_akuntansi` WHERE `tanggal` >= '$dari' AND `tanggal` <= '$sampai' AND kode_akun LIKE '$kode_akun' AND keterangan NOT LIKE 'SALDO AWAL' ");
+		$query = $this->db->query(" SELECT kode_akun, nama_akun, tanggal, debet, kredit, keterangan from `transaksi_akuntansi` WHERE `tanggal` >= '$dari' AND `tanggal` <= '$sampai' AND kode_akun LIKE '$kode_akun' AND keterangan NOT LIKE 'SALDO AWAL'  ORDER BY tanggal ASC");
 		$a = $query->result_array();
 		return $a;
 	}

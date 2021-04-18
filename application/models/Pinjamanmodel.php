@@ -26,7 +26,7 @@ class PinjamanModel extends CI_Model {
 	}
 
 	function get_pinjaman_by_id_nasabah($id_nasabah) {
-		$query = $this->db->query("SELECT * from `pinjaman` WHERE id_nasabah = '$id_nasabah'");
+		$query = $this->db->query("SELECT * from `pinjaman` WHERE id_nasabah = '$id_nasabah' ORDER BY id DESC");
 		$a = $query->result_array();
 		return $a;
 	}

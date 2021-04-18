@@ -6,15 +6,15 @@
 	$tanggal_sampai	= date("d-m-Y",$tgl);
 ?>
 
-<center>ATAS BERKAT RAHMAT ALLAH YANG MAHA KUASA</center>
+<center>KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYAH</center>
 <br>
-<center>KOPERASI SMA NEGERI 1 BOJONEGORO</center>
+<center>LAPORAN KEUANGAN <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
 <br>
-<center>PENDIDIK UTAMA ADIL SEJAHTERA SYARIAH</center>
+<center>KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYAH</center>
 <br>
-<center>KOSMAN "PUAS" SYARIAH</center>
+<center>NGRASEH DANDER BOJONEGORO TELP (0353) 886039       BH : 8181/BH/II/95</center>
 <br>
-<center>LAPORAN RINCIAN AKUN <?php echo $kode_akun ?> - <?php echo $nama_akun ?> <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
+<center>HISTORI RIWAYAT AKUN <?php echo $kode_akun ?> - <?php echo $nama_akun ?> <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
 <br>
 <br>
 

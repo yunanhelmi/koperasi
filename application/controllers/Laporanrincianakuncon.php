@@ -27,7 +27,7 @@ class LaporanrincianakunCon extends CI_Controller {
 			redirect("usercon/login", "refresh");
 		}
 
-		$kode_akun = $this->kodeakunmodel->showData();
+		$kode_akun = $this->kodeakunmodel->showDataExcept('305');
 		$temp = '';
 		foreach ($kode_akun as $kode) {
 			$temp = $temp.'{"stateCode": "'.$kode["nama_akun"].'", "stateDisplay": "'.$kode["kode_akun"].'", "stateName": "'.$kode["kode_akun"].' | '.$kode["nama_akun"].'"},';
@@ -63,6 +63,7 @@ class LaporanrincianakunCon extends CI_Controller {
 		$nama_akun = $this->input->post('nama_akun');
 		$prefix = substr($kode_akun, 0, 1);
 
+		$transaksi_mid = NULL;
 		if($prefix == '1' || $prefix == '2' || $prefix == '3') {
 			if($dari < '2019-01-01' && $sampai < '2019-01-01') {
 				$transaksi_prev	= $this->laporanrincianakunmodel->get_jumlah_by_sampai_kode_akun($dari, $kode_akun);
@@ -74,8 +75,8 @@ class LaporanrincianakunCon extends CI_Controller {
 				$transaksi 		= $this->laporanrincianakunmodel->get_transaksi_by_dari_sampai_kode_akun_except_saldo_awal($dari, $sampai, $kode_akun);
 			} else if($dari > '2019-01-01' && $sampai >= '2019-01-01') {
 				$transaksi_prev	= $this->laporanrincianakunmodel->get_saldo_awal_by_sampai_kode_akun($sampai, $kode_akun);
-
-				$transaksi 		= $this->laporanrincianakunmodel->get_transaksi_by_dari_sampai_kode_akun_except_saldo_awal('2019-01-01', $sampai, $kode_akun);
+				$transaksi_mid  = $this->laporanrincianakunmodel->get_jumlah_by_dari_sampai_kode_akun('2019-01-01', $dari, $kode_akun);
+				$transaksi 		= $this->laporanrincianakunmodel->get_transaksi_by_dari_sampai_kode_akun_except_saldo_awal($dari, $sampai, $kode_akun);
 			}
 		} else {
 			$transaksi_prev = array();
@@ -83,19 +84,32 @@ class LaporanrincianakunCon extends CI_Controller {
 		}
 
 		/*echo "<pre>";
-        var_dump($transaksi_prev);
+        var_dump($transaksi_mid);
         echo "</pre>";*/
 
 		$saldo_awal = 0;
 		if($prefix == '1') {
 			if($kode_akun == '105') {
 				$saldo_awal += ($transaksi_prev[0]['jumlah_kredit'] - $transaksi_prev[0]['jumlah_debet']);
+				if($transaksi_mid != NULL) {
+					$saldo_awal += ($transaksi_mid[0]['jumlah_kredit'] - $transaksi_mid[0]['jumlah_debet']);
+				}
 			} else {
 				$saldo_awal += ($transaksi_prev[0]['jumlah_debet'] - $transaksi_prev[0]['jumlah_kredit']);
+				if($transaksi_mid != NULL) {
+					$saldo_awal += ($transaksi_mid[0]['jumlah_debet'] - $transaksi_mid[0]['jumlah_kredit']);
+				}
 			}
 		} else if($prefix == '2' || $prefix == '3') {
 			$saldo_awal += ($transaksi_prev[0]['jumlah_kredit'] - $transaksi_prev[0]['jumlah_debet']);
+			if($transaksi_mid != NULL) {
+				$saldo_awal += ($transaksi_mid[0]['jumlah_kredit'] - $transaksi_mid[0]['jumlah_debet']);
+			}
 		}
+
+		/*echo "<pre>";
+        var_dump($transaksi);
+        echo "</pre>"; */
 
 		$data['dari'] 				= $dari;
         $data['sampai'] 			= $sampai;

@@ -39,6 +39,12 @@ class KodeakunModel extends CI_Model {
 		return $a;
 	}
 
+	function showDataExcept($except) {
+		$query = $this->db->query("SELECT * from `kode_akun` WHERE `kode_akun` != '$except' ORDER BY `kode_akun`");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function inputData($data) {
 		$this->db->insert("kode_akun",$data);
 	}

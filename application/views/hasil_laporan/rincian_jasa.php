@@ -80,7 +80,7 @@
 <br>
 <center>KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYAH</center>
 <br>
-<center>NGRASEH DANDER Bojonegoro TELP (0353) 886039       BH : 8181/BH/II/95</center>
+<center>NGRASEH DANDER BOJONEGORO TELP (0353) 886039       BH : 8181/BH/II/95</center>
 <br>
 <br>
 

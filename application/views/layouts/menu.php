@@ -205,7 +205,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="<?php echo base_url(); ?>index.php/laporankeuangancon/index"><i class="fa fa-money"></i>Keuangan</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporanaruskascon/index"><i class="fa fa-money"></i>Arus Kas</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporanarusbankcon/index"><i class="fa fa-money"></i>Arus Bank</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/laporanrincianakuncon/index"><i class="fa fa-money"></i>Rincian Akun</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporanrincianakuncon/index"><i class="fa fa-money"></i>Histori Riwayat Akun</a></li>
             <!--<li><a href="<?php echo base_url(); ?>index.php/saldoawaltahuncon/index"><i class="fa fa-upload"></i>Post Saldo Awal Tahun</a></li>-->
           </ul>
         </li>

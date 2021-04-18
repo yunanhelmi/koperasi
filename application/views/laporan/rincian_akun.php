@@ -24,7 +24,7 @@
     	<div class="row">
     		<div class="col-md-12 pull-left">
     			<div class="box box-danger">
-    				<legend style="text-align:center;">LAPORAN RINCIAN AKUN</legend>
+    				<legend style="text-align:center;">HISTORI RIWAYAT AKUN</legend>
     				<form action="<?php echo base_url();?>index.php/laporanrincianakuncon/html" method="post" enctype="multipart/form-data" role="form" target="_blank">
 						<div class="box-body">
 							<div class="form-group col-xs-3">
