@@ -10,6 +10,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$this->load->model('nasabahmodel');
 		$this->load->model('pinjamanmodel');
 		$this->load->model('detailangsuranmodel');
+		$this->load->model('detailjaminanmodel');
 		$this->load->model('simpananpokokmodel');
 		$this->load->model('simpananwajibmodel');
 		$this->load->model('detailsimpananwajibmodel');
@@ -273,6 +274,7 @@ class TransaksianggotaCon extends CI_Controller {
 
 		$data['pinjaman'] 			= $this->pinjamanmodel->get_pinjaman_by_id($id_pinjaman);
 		$data['detail_angsuran'] 	= $this->detailangsuranmodel->get_detail_angsuran_by_id_pinjaman($id_pinjaman);
+		$data['detail_jaminan'] 	= $this->detailjaminanmodel->get_detail_jaminan_by_id_pinjaman($id_pinjaman);
 		$data['max_bulanke_angsuran'] = $this->detailangsuranmodel->get_max_bulanke($id_pinjaman);
 		$id_nasabah					= $data['pinjaman']->id_nasabah;
 		$data['nasabah'] 			= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
@@ -287,7 +289,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['status'] 			= $session_data['status'];
 		
 		/*echo "<pre>";
-		var_dump($data['pinjaman']);
+		var_dump($data['detail_jaminan']);
 		echo "</pre>";*/
 
 		if($data['pinjaman']->sisa_angsuran > 0) {
@@ -302,6 +304,107 @@ class TransaksianggotaCon extends CI_Controller {
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/transaksianggota/view_pinjaman', $data);
 		$this->load->view('/layouts/footer', $data);
+	}
+
+	function insert_detail_jaminan($id_nasabah){
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		// Insert Detail Jaminan ke dalam table detail_jaminan
+		$input['waktu'] 		= date("Y-m-d");
+		$input['id_pinjaman'] 	= $this->input->post('id_pinjaman');
+		$input['jenis_jaminan'] = $this->input->post('jenis_jaminan');
+		$input['nama_pemilik'] 	= $this->input->post('nama_pemilik');
+		$input['no_sertifikat'] = $this->input->post('no_sertifikat');
+		$input['luas'] 			= $this->input->post('luas');
+		$input['jenis_tanah'] 	= $this->input->post('jenis_tanah');
+		$input['lokasi_tanah'] 	= $this->input->post('lokasi_tanah');
+		$input['merek'] 		= $this->input->post('merek');
+		$input['jenis'] 		= $this->input->post('jenis');
+		$input['tahun']			= $this->input->post('tahun');
+		$input['atas_nama']		= $this->input->post('atas_nama');
+		$input['no_pol']		= $this->input->post('no_pol');
+		$this->detailjaminanmodel->inputData($input);
+
+		$id_pinjaman = $this->input->post('id_pinjaman');
+		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
+	}
+
+	function edit_detail_jaminan($id_pinjaman, $id_detail_jaminan) {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		$data['pinjaman'] 				= $this->pinjamanmodel->get_pinjaman_by_id($id_pinjaman);
+		$data['max_bulanke_angsuran'] = $this->detailangsuranmodel->get_max_bulanke($id_pinjaman);
+		$id_nasabah						= $data['pinjaman']->id_nasabah;
+		$data['detail_angsuran'] 		= $this->detailangsuranmodel->get_detail_angsuran_by_id_pinjaman($id_pinjaman);
+		$data['detail_jaminan'] 		= $this->detailjaminanmodel->get_detail_jaminan_by_id_pinjaman($id_pinjaman);
+		$data['edit_detail_jaminan'] 	= $this->detailjaminanmodel->get_detail_jaminan_by_id($id_detail_jaminan);
+		$data['nasabah'] 				= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
+		$data['simpananpokok'] 			= $this->simpananpokokmodel->get_simpananpokok_by_id_nasabah($id_nasabah);
+		$data['simpananwajib'] 			= $this->simpananwajibmodel->get_simpananwajib_by_id_nasabah($id_nasabah);
+		$data['simpanankhusus'] 		= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
+		$data['simpanandanasosial'] 	= $this->simpanandanasosialmodel->get_simpanandanasosial_by_id_nasabah($id_nasabah);
+		$data['simpanankanzun'] 		= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
+		$data['simpanan3th'] 			= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
+		$data['simpananpihakketiga']	= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
+		$data['username'] 				= $session_data['username'];
+		$data['status'] 				= $session_data['status'];
+
+		if($data['pinjaman']->sisa_angsuran > 0) {
+			$tgl_pinjam = new DateTime($data['pinjaman']->waktu);
+			$today = new DateTime(date("Y-m-d"));
+			$lama_hari = $today->diff($tgl_pinjam)->format("%a")." hari";
+		} else {
+			$lama_hari = "LUNAS";
+		}
+		$data['lama_hari'] 			= $lama_hari;
+		
+		$this->load->view('/layouts/menu', $data);
+		$this->load->view('/transaksianggota/view_pinjaman_edit_jaminan', $data);
+		$this->load->view('/layouts/footer', $data);
+	}
+
+	function update_detail_jaminan() {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		//Update Detail Jaminan ke dalam table detail_jaminan
+		$id_detail_jaminan 		= $this->input->post('edit_id');
+		$input['waktu'] 		= date("Y-m-d");
+		$input['id_pinjaman'] 	= $this->input->post('edit_id_pinjaman');
+		$input['jenis_jaminan'] = $this->input->post('edit_jenis_jaminan');
+		$input['nama_pemilik'] 	= $this->input->post('edit_nama_pemilik');
+		$input['no_sertifikat'] = $this->input->post('edit_no_sertifikat');
+		$input['luas'] 			= $this->input->post('edit_luas');
+		$input['jenis_tanah'] 	= $this->input->post('edit_jenis_tanah');
+		$input['lokasi_tanah'] 	= $this->input->post('edit_lokasi_tanah');
+		$input['merek'] 		= $this->input->post('edit_edit_merek');
+		$input['jenis'] 		= $this->input->post('edit_jenis');
+		$input['tahun']			= $this->input->post('edit_tahun');
+		$input['atas_nama']		= $this->input->post('edit_atas_nama');
+		$input['no_pol']		= $this->input->post('edit_no_pol');
+
+		$this->detailjaminanmodel->updateData($id_detail_jaminan, $input);
+
+		$id_pinjaman = $this->input->post('edit_id_pinjaman');
+
+		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
+	}
+
+	function delete_detail_jaminan($id_pinjaman, $id_detail_jaminan) {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+		$this->detailjaminanmodel->deleteData($id_detail_jaminan);
+		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
 	}
 
 	function insert_detail_angsuran($id_nasabah) {
@@ -505,6 +608,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['max_bulanke_angsuran'] = $this->detailangsuranmodel->get_max_bulanke($id_pinjaman);
 		$id_nasabah						= $data['pinjaman']->id_nasabah;
 		$data['detail_angsuran'] 		= $this->detailangsuranmodel->get_detail_angsuran_by_id_pinjaman($id_pinjaman);
+		$data['detail_jaminan'] 		= $this->detailjaminanmodel->get_detail_jaminan_by_id_pinjaman($id_pinjaman);
 		$data['edit_detail_angsuran'] 	= $this->detailangsuranmodel->get_detail_angsuran_by_id($id_detail_angsuran);
 		$data['nasabah'] 				= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
 		$data['simpananpokok'] 			= $this->simpananpokokmodel->get_simpananpokok_by_id_nasabah($id_nasabah);
