@@ -274,7 +274,7 @@ function rupiah($angka){
                           ?> 
                                 <tr>
                                   <td><?php echo $no ?></td>
-                                  <td style="word-wrap: break-word; text-align: left;"><?php echo 'Nama Pemilik: '.$detail_jaminan[$i]['nama_pemilik'].' No. Sertifikat: '.$detail_jaminan[$i]['no_sertifikat'].' Luas(m2): '.$detail_jaminan[$i]['luas'].' Jenis Tanah: '.$detail_jaminan[$i]['jenis_tanah'].' Lokasi Tanah: '.$detail_jaminan[$i]['lokasi_tanah'] ?></td>
+                                  <td style="word-wrap: break-word; text-align: left;"><?php echo strtoupper($detail_jaminan[$i]['jenis_jaminan']).'. Nama Pemilik: '.$detail_jaminan[$i]['nama_pemilik'].' No. Sertifikat: '.$detail_jaminan[$i]['no_sertifikat'].' Luas(m2): '.$detail_jaminan[$i]['luas'].' Jenis Tanah: '.$detail_jaminan[$i]['jenis_tanah'].' Lokasi Tanah: '.$detail_jaminan[$i]['lokasi_tanah'] ?></td>
                                   <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_detail_jaminan/".$pinjaman->id."/".$detail_jaminan[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                                   <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationDeleteJaminan('<?php echo $pinjaman->id?>','<?php echo $detail_jaminan[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                                 </tr>
@@ -284,7 +284,7 @@ function rupiah($angka){
                           ?>
                                 <tr>
                                   <td><?php echo $no ?></td>
-                                  <td style="word-wrap: break-word; text-align: left;"><?php echo 'Atas Nama: '.$detail_jaminan[$i]['atas_nama'].' No. Polisi: '.$detail_jaminan[$i]['no_pol'].' Merek: '.$detail_jaminan[$i]['merek'].' Jenis: '.$detail_jaminan[$i]['jenis'].' Tahun: '.$detail_jaminan[$i]['tahun'] ?></td>
+                                  <td style="word-wrap: break-word; text-align: left;"><?php echo strtoupper($detail_jaminan[$i]['jenis_jaminan']).'. Atas Nama: '.$detail_jaminan[$i]['atas_nama'].' No. Polisi: '.$detail_jaminan[$i]['no_pol'].' Merek: '.$detail_jaminan[$i]['merek'].' Jenis: '.$detail_jaminan[$i]['jenis'].' Tahun: '.$detail_jaminan[$i]['tahun'] ?></td>
                                   <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_detail_jaminan/".$pinjaman->id."/".$detail_jaminan[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                                   <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationDeleteJaminan('<?php echo $pinjaman->id?>','<?php echo $detail_jaminan[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                                 </tr>
@@ -350,7 +350,11 @@ function rupiah($angka){
                       </div>
                       <div class="form-group col-xs-6" id="div_merek" style="display:none">
                         <label for="exampleInputPassword1">Merek</label>
-                        <input type="text" class="form-control" id="merek" name="merek" placeholder="">
+                        <select id="merek" name="merek" class="form-control" style="width: 100%;">
+                          <option value='HONDA'>HONDA</option>
+                          <option value='YAMAHA'>YAMAHA</option>
+                          <option value='SUZUKI'>SUZUKI</option>
+                        </select>
                       </div>
                       <div class="form-group col-xs-6" id="div_jenis" style="display:none">
                         <label for="exampleInputPassword1">Jenis</label>

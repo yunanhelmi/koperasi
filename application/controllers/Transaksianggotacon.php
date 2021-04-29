@@ -313,6 +313,7 @@ class TransaksianggotaCon extends CI_Controller {
 		}
 
 		// Insert Detail Jaminan ke dalam table detail_jaminan
+		$input['id'] 			= $this->detailjaminanmodel->getNewId();
 		$input['waktu'] 		= date("Y-m-d");
 		$input['id_pinjaman'] 	= $this->input->post('id_pinjaman');
 		$input['jenis_jaminan'] = $this->input->post('jenis_jaminan');
@@ -385,7 +386,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$input['luas'] 			= $this->input->post('edit_luas');
 		$input['jenis_tanah'] 	= $this->input->post('edit_jenis_tanah');
 		$input['lokasi_tanah'] 	= $this->input->post('edit_lokasi_tanah');
-		$input['merek'] 		= $this->input->post('edit_edit_merek');
+		$input['merek'] 		= $this->input->post('edit_merek');
 		$input['jenis'] 		= $this->input->post('edit_jenis');
 		$input['tahun']			= $this->input->post('edit_tahun');
 		$input['atas_nama']		= $this->input->post('edit_atas_nama');
