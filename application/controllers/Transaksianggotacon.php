@@ -296,10 +296,12 @@ class TransaksianggotaCon extends CI_Controller {
 			$tgl_pinjam = new DateTime($data['pinjaman']->waktu);
 			$today = new DateTime(date("Y-m-d"));
 			$lama_hari = $today->diff($tgl_pinjam)->format("%a")." hari";
+			$lama_hari_long = $tgl_pinjam->diff($today);
 		} else {
 			$lama_hari = "LUNAS";
 		}
 		$data['lama_hari'] 			= $lama_hari;
+		$data['lama_hari_long']		= $lama_hari_long;
 
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/transaksianggota/view_pinjaman', $data);
@@ -360,10 +362,12 @@ class TransaksianggotaCon extends CI_Controller {
 			$tgl_pinjam = new DateTime($data['pinjaman']->waktu);
 			$today = new DateTime(date("Y-m-d"));
 			$lama_hari = $today->diff($tgl_pinjam)->format("%a")." hari";
+			$lama_hari_long = $tgl_pinjam->diff($today);
 		} else {
 			$lama_hari = "LUNAS";
 		}
 		$data['lama_hari'] 			= $lama_hari;
+		$data['lama_hari_long']		= $lama_hari_long;
 		
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/transaksianggota/view_pinjaman_edit_jaminan', $data);
@@ -626,10 +630,12 @@ class TransaksianggotaCon extends CI_Controller {
 			$tgl_pinjam = new DateTime($data['pinjaman']->waktu);
 			$today = new DateTime(date("Y-m-d"));
 			$lama_hari = $today->diff($tgl_pinjam)->format("%a")." hari";
+			$lama_hari_long = $tgl_pinjam->diff($today);
 		} else {
 			$lama_hari = "LUNAS";
 		}
 		$data['lama_hari'] 			= $lama_hari;
+		$data['lama_hari_long']		= $lama_hari_long;
 		
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/transaksianggota/view_pinjaman_edit_angsuran', $data);
