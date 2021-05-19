@@ -49,7 +49,7 @@
         return $date->format('Y-m-d');
     }
 
-  	$tgl 		= strtotime($tanggal);
+  	$tgl 		= strtotime($tanggal_laporan);
 	$tanggal 	= date("d-m-Y",$tgl);
 ?>
 
@@ -73,10 +73,13 @@
 	    <th>DUSUN</th>
 	    <th>RW</th>
 	    <th>RT</th>
+	    <th>JENIS PINJAMAN</th>
 	    <th>JAMINAN</th>
 	    <th>TGL PINJAM</th>
 	    <th>SLD X</th>
 	    <th>SISA PINJAMAN</th>
+	    <th>LAMA PINJAM</th>
+	    <th>LAMA JATUH TEMPO</th>
 	    <th>KETERANGAN</th>
 	</tr>
 	<?php
@@ -95,6 +98,7 @@
 	  			<td><?php echo $data[$a]['dusun']; ?></td>
 	  			<td><?php echo $data[$a]['rw']; ?></td>
 	  			<td><?php echo $data[$a]['rt']; ?></td>
+	  			<td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
 	  			<td><?php echo $data[$a]['jaminan']; ?></td>
 	  			<?php 
 				  	$tgl 		= strtotime($data[$a]['tanggal_pinjaman']);
@@ -114,65 +118,97 @@
 			  		$total_sisa += $saldo;
 			  		if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
 	                    // GET Today and Jatuh Tempo
-	                    $today = new DateTime(date("Y-m-d"));
-	                    $jatuh_tempo = new DateTime(addMonths($data[$a]['tanggal_pinjaman'], $data[$a]['jumlah_angsuran_detail'] + 1));
+	                    /*$today = new DateTime(date("Y-m-d"));
+	                    $jatuh_tempo = new DateTime(addMonths($data[$a]['tanggal_pinjaman'], $data[$a]['jumlah_angsuran_detail'] + 1));*/
+	                    $today = strtotime($tanggal_laporan);
+	                    $today = date('Y-m-d', $today);
+	                    $today = new DateTime($today);
+	                    $tgl_akhir_bayar = strtotime($data[$a]['waktu_terakhir_angsuran']);
+	                    $tgl_akhir_bayar = date('Y-m-d', $tgl_akhir_bayar);
+	                    $tgl_akhir_bayar = new DateTime($tgl_akhir_bayar);
 
-	                    // GET Diff Today and Jatuh Tempo
-	                    if($today < $jatuh_tempo) {
-	            ?>
-	            		<td style="background-color: green; text-align: center;">Hijau</td>
-	            <?php
+	                    if($today < $tgl_akhir_bayar) {
+	                    	$diff = 0;
+	                    	$lama_jatuh_tempo = 0;
 	                    } else {
-	                    	$diff = $today->diff($jatuh_tempo);
-	                        $interval = ($diff->format('%y') * 12) + $diff->format('%m');
-	                        if($interval < 3) {
+	                    	$diff = $today->diff($tgl_akhir_bayar)->format("%a");
+	                    	if($diff <= 30) {
+	                    		$lama_jatuh_tempo = 0;
+	                    	} else {
+	                    		$lama_jatuh_tempo = $diff - 30;
+	                    	}
+	                    }
 	            ?>
-	            				<td style="background-color: green; text-align: center;">Hijau</td>
+	            		<td style="text-align: center;"><?php echo $diff." hari" ?></td>
+	            		<td style="text-align: center;"><?php echo $lama_jatuh_tempo." hari" ?></td>
 	            <?php
-	                        } else if ($interval >= 3 && $interval < 6) {
+	                    if($diff <= 30) {
 	            ?>
-	            				<td style="background-color: yellow; text-align: center;">Kuning</td>
+	            			<td style="background-color: green; text-align: center;">Hijau</td>
 	            <?php
-	                        } else if ($interval >= 6 && $interval < 9) {
+	                    } else if ($diff > 30 && $diff <= 150) {
 	            ?>
-	            				<td style="background-color: pink; text-align: center;">Merah 1</td>
+	            			<td style="background-color: yellow; text-align: center;">Kuning</td>
 	            <?php
-	                        } else if ($interval >= 9) {
+	                    } else if ($diff > 150 && $diff <= 365) {
 	            ?>
-	            				<td style="background-color: red; text-align: center;">Merah 2</td>
+	            			<td style="background-color: orange; text-align: center;">Orange</td>
 	            <?php
-	                        }
+	                    } else if ($diff > 365 && $diff <= 730) {
+	            ?>
+	            			<td style="background-color: pink; text-align: center;">Pink</td>
+	            <?php
+	                    } else if ($diff > 730) {
+	            ?>
+	            			<td style="background-color: red; text-align: center;">Merah</td>
+	            <?php
 	                    }
 	                } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
 	                	// GET Today and Jatuh Tempo
-	                    $today = new DateTime(date("Y-m-d"));
-	                    $jatuh_tempo = new DateTime(addMonths($data[$a]['tanggal_pinjaman'], 4));
+	                    //$today = new DateTime(date("Y-m-d"));
+	                    $today = strtotime($tanggal_laporan);
+	                    $today = date('Y-m-d', $today);
+	                    $today = new DateTime($today);
+	                    //$jatuh_tempo = new DateTime(addMonths($data[$a]['tanggal_pinjaman'], 4));
+	                    $tanggal_pinjaman = strtotime($data[$a]['tanggal_pinjaman']);
+	                    $tanggal_pinjaman = date('Y-m-d', $tanggal_pinjaman);
+	                    $tanggal_pinjaman = new DateTime($tanggal_pinjaman);
 
-	                    // GET Diff Today and Jatuh Tempo
-	                    if($today < $jatuh_tempo) {
-	            ?>
-	            				<td style="background-color: green; text-align: center;">Hijau</td>
-	            <?php
+	                    if($today < $tanggal_pinjaman) {
+	                    	$diff = 0;
+	                    	$lama_jatuh_tempo = 0;
 	                    } else {
-	                        $diff = $today->diff($jatuh_tempo);
-	                        $interval = ($diff->format('%y') * 12) + $diff->format('%m');
-	                        if($interval < 3) {
+	                    	$diff = $today->diff($tanggal_pinjaman)->format("%a");
+	                    	if($diff <= 120) {
+	                    		$lama_jatuh_tempo = 0;
+	                    	} else {
+	                    		$lama_jatuh_tempo = $diff - 120;
+	                    	}
+	                    }
 	            ?>
-	            				<td style="background-color: green; text-align: center;">Hijau</td>
+	            		<td style="text-align: center;"><?php echo $diff." hari" ?></td>
+	            		<td style="text-align: center;"><?php echo $lama_jatuh_tempo." hari" ?></td>
 	            <?php
-	                        } else if ($interval >= 3 && $interval < 6) {
+	                    if($diff <= 120) {
 	            ?>
-	            				<td style="background-color: yellow; text-align: center;">Kuning</td>
+	            			<td style="background-color: green; text-align: center;">Hijau</td>
 	            <?php
-	                        } else if ($interval >= 6 && $interval < 9) {
+	                    } else if ($diff > 120 && $diff <= 150) {
 	            ?>
-	            				<td style="background-color: pink; text-align: center;">Merah 1</td>
+	            			<td style="background-color: yellow; text-align: center;">Kuning</td>
 	            <?php
-	                        } else if ($interval >= 9) {
+	                    } else if ($diff > 150 && $diff <= 365) {
 	            ?>
-	            				<td style="background-color: red; text-align: center;">Merah 2</td>
+	            			<td style="background-color: orange; text-align: center;">Orange</td>
 	            <?php
-	                        }
+	            		} else if ($diff > 365 && $diff <= 730) {
+	            ?>
+	            			<td style="background-color: pink; text-align: center;">Pink</td>		
+	            <?php
+	                    } else if ($diff > 730) {
+	            ?>
+	            			<td style="background-color: red; text-align: center;">Merah</td>
+	            <?php
 	                    }
 	                }
 			  	?>

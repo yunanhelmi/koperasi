@@ -316,7 +316,7 @@ class LaporanpiutangCon extends CI_Controller {
 
         $data['data'] = $data_piutang;
         $data['piutang_neraca'] = $piutang_neraca;
-        $data['tanggal'] = $tanggal;
+        $data['tanggal_laporan'] = $tanggal;
 
         $this->load->view('/hasil_laporan/piutang', $data);
     }
