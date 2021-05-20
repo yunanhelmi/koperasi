@@ -299,6 +299,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$lama_hari_long = $tgl_pinjam->diff($today);
 		} else {
 			$lama_hari = "LUNAS";
+			$lama_hari_long = "LUNAS";
 		}
 		$data['lama_hari'] 			= $lama_hari;
 		$data['lama_hari_long']		= $lama_hari_long;
