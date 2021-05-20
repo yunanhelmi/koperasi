@@ -249,7 +249,7 @@ function rupiah($angka){
                         <div class="form-group col-xs-3">
                           <label for="exampleInputPassword1">Lama Hari</label>
                         <?php
-                          if(isset($lama_hari_long)) {
+                          if($lama_hari_long != "LUNAS") {
                         ?>
                           <p><?php echo $lama_hari." (".$lama_hari_long->y." Tahun ".$lama_hari_long->m." Bulan ".$lama_hari_long->d." Hari)";?></p>
                         <?php
