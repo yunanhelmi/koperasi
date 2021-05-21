@@ -104,6 +104,28 @@ class LaporanrincianpiutangCon extends CI_Controller {
 		$this->load->view('/layouts/footer', $data);	
 	}
 
+    function html() {
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
+        if($session_data == NULL) {
+            redirect("usercon/login", "refresh");
+        }
+
+        $tgl_sampai1    = $this->input->post('sampai');
+        $tgl_sampai     = strtotime($tgl_sampai1);
+        $sampai         = date("Y-m-d",$tgl_sampai);
+
+        $data_rincian = $this->laporanrincianpiutangmodel->get_data($sampai); 
+
+        $data['tgl_sampai'] = $sampai;
+        $data['data']   = $data_rincian;
+
+        /*echo "<pre>";
+        var_dump($data);
+        echo "</pre>";*/
+        $this->load->view('/hasil_laporan/rincian_piutang', $data);
+    }
+
+    // Yang dipake
     function excel_coba() {
         $session_data = $this->session->userdata('mubasyirin_logged_in');
         if($session_data == NULL) {
