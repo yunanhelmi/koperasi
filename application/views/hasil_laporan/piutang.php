@@ -193,11 +193,11 @@
 	            ?>
 	            			<td style="background-color: green; text-align: center;">Hijau</td>
 	            <?php
-	                    } else if ($diff > 120 && $diff <= 150) {
+	                    } else if ($diff > 120 && $diff <= 240) {
 	            ?>
 	            			<td style="background-color: yellow; text-align: center;">Kuning</td>
 	            <?php
-	                    } else if ($diff > 150 && $diff <= 365) {
+	                    } else if ($diff > 240 && $diff <= 365) {
 	            ?>
 	            			<td style="background-color: orange; text-align: center;">Orange</td>
 	            <?php
