@@ -141,12 +141,11 @@ class SurattagihanCon extends CI_Controller {
         $tanggal    = date("Y-m-d",$tgl);
 
         $data = $this->surattagihanmodel->get_data_surat_tagihan($tanggal, $id_pinjaman);
-        $sisa_pinjaman = $data[0]['total_pinjaman_detail'] - $data[0]['total_angsuran_detail'];
 
         $today = strtotime($tanggal);
         $today = date('Y-m-d', $today);
         $today = new DateTime($today);
-        $tgl_akhir_bayar = strtotime($data[0]['waktu_terakhir_angsuran']);
+        $tgl_akhir_bayar = strtotime($data[0]['tanggal_pinjaman']);
         $tgl_akhir_bayar = date('Y-m-d', $tgl_akhir_bayar);
         $tgl_akhir_bayar = new DateTime($tgl_akhir_bayar);
         $diff = $today->diff($tgl_akhir_bayar)->format("%a");
@@ -154,8 +153,10 @@ class SurattagihanCon extends CI_Controller {
         $lama_hari = $diff." hari";
         if($diff_months > ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail'])) {
             $jasa_pinjaman = $data[0]['jasa_perbulan'] * ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail']);
+            $sisa_pinjaman = $data[0]['total_pinjaman_detail'] - $data[0]['total_angsuran_detail'];
         } else {
             $jasa_pinjaman = $data[0]['jasa_perbulan'] * $diff_months;
+            $sisa_pinjaman = $data[0]['angsuran_perbulan'] * $diff_months;
         }
         $total = $sisa_pinjaman + $jasa_pinjaman;
 
