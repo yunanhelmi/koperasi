@@ -47,7 +47,7 @@
 			            <div class="box-footer">
 							<div class="col-xs-3">
 				            	<div class="form-group pull-left">
-									<button type="submit" class="btn btn-success" name="excel"><i class="fa fa-file-excel-o"></i> Download Excel</button>
+									<button type="submit" class="btn btn-success" name="excel"><i class="fa fa-eye"></i> Tampilkan</button>
 								</div>
 							</div>
 						</div>  
