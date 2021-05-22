@@ -231,11 +231,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="<?php echo base_url(); ?>index.php/laporanhariancon/index"><i class="fa fa-list-ul"></i>Harian</a></li>
           </ul>
         </li>
-        <!--<li>
+        <li>
           <a href="<?php echo base_url(); ?>index.php/surattagihancon">
             <i class="fa fa-envelope"></i> <span>Surat Tagihan</span>
           </a>
-        </li>-->
+        </li>
         <li>
           <a href="<?php echo base_url(); ?>index.php/usercon">
             <i class="fa fa-user-circle-o"></i> <span>User</span>

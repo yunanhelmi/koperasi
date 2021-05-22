@@ -115,8 +115,7 @@ function view_laporan() {
 }
 
 $(document).ready(function() {
-	$('#dari').datepicker({}).on('changeDate', function(ev){});
-	$('#sampai').datepicker({}).on('changeDate', function(ev){});
+	$('#tanggal').datepicker({}).on('changeDate', function(ev){});
 });
 
 </script>

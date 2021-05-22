@@ -128,7 +128,7 @@ class SurattagihanCon extends CI_Controller {
         $data['data'] 		= $data_surat_tagihan;
         $data['tanggal'] 	= $tanggal;
 
-        $this->load->view('/hasil_laporan/surat_tagihan', $data);
+        $this->load->view('/surat_tagihan/hasil_surat_tagihan', $data);
     }
 
     function cetak_surat_angsuran($tanggal, $id_pinjaman) {
@@ -141,8 +141,33 @@ class SurattagihanCon extends CI_Controller {
         $tanggal    = date("Y-m-d",$tgl);
 
         $data = $this->surattagihanmodel->get_data_surat_tagihan($tanggal, $id_pinjaman);
+        $sisa_pinjaman = $data[0]['total_pinjaman_detail'] - $data[0]['total_angsuran_detail'];
+
+        $today = strtotime($tanggal);
+        $today = date('Y-m-d', $today);
+        $today = new DateTime($today);
+        $tgl_akhir_bayar = strtotime($data[0]['waktu_terakhir_angsuran']);
+        $tgl_akhir_bayar = date('Y-m-d', $tgl_akhir_bayar);
+        $tgl_akhir_bayar = new DateTime($tgl_akhir_bayar);
+        $diff = $today->diff($tgl_akhir_bayar)->format("%a");
+        $diff_months = ($today->diff($tgl_akhir_bayar)->format('%y') * 12) + $today->diff($tgl_akhir_bayar)->format('%m');
+        $lama_hari = $diff." hari";
+        if($diff_months > ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail'])) {
+            $jasa_pinjaman = $data[0]['jasa_perbulan'] * ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail']);
+        } else {
+            $jasa_pinjaman = $data[0]['jasa_perbulan'] * $diff_months;
+        }
+        $total = $sisa_pinjaman + $jasa_pinjaman;
+
+        /*echo "<pre>";
+        var_dump($data);
+        echo "</pre>";*/
 
         $data['data'] = $data;
+        $data['sisa_pinjaman']  = $sisa_pinjaman;
+        $data['jasa_pinjaman']  = $jasa_pinjaman;
+        $data['total']              = $total;
+        $data['lama_hari']      = $lama_hari;
         $data['tanggal'] = $tanggal;
 
         $pdf = $this->load->view('/surat_tagihan/surat_angsuran', $data, true);
@@ -159,10 +184,32 @@ class SurattagihanCon extends CI_Controller {
         $tgl        = strtotime($tanggal);
         $tanggal    = date("Y-m-d",$tgl);
 
-        $data = $this->surattagihanmodel->get_data_surat_tagihan($tanggal, $id_pinjaman); 
+        $data = $this->surattagihanmodel->get_data_surat_tagihan($tanggal, $id_pinjaman);
+        $sisa_pinjaman = $data[0]['total_pinjaman_detail'] - $data[0]['total_angsuran_detail'];
+        
+        $today = strtotime($tanggal);
+        $today = date('Y-m-d', $today);
+        $today = new DateTime($today);
+        $tanggal_pinjaman = strtotime($data[0]['tanggal_pinjaman']);
+        $tanggal_pinjaman = date('Y-m-d', $tanggal_pinjaman);
+        $tanggal_pinjaman = new DateTime($tanggal_pinjaman);
+        $diff = $today->diff($tanggal_pinjaman)->format("%a");
+        $jasa_pinjaman = ($sisa_pinjaman * 36 * $diff) / 36000;
+        $lama_hari = $diff." hari";
+        $biaya_administrasi = ($lama_hari * $sisa_pinjaman) / 12000;
+        $total = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
 
-        $data['data'] = $data;
-        $data['tanggal'] = $tanggal;
+        /*echo "<pre>";
+        var_dump($tanggal);
+        echo "</pre>";*/
+
+        $data['data']           = $data;
+        $data['sisa_pinjaman']  = $sisa_pinjaman;
+        $data['jasa_pinjaman']  = $jasa_pinjaman;
+        $data['lama_hari']      = $lama_hari;
+        $data['biaya_administrasi']      = $biaya_administrasi;
+        $data['total']              = $total;
+        $data['tanggal']        = $tanggal;
 
         $pdf = $this->load->view('/surat_tagihan/surat_musiman', $data, true);
 
