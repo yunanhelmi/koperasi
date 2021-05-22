@@ -33,6 +33,7 @@
                   <label for="exampleInputPassword1">Status</label>
                   <select name="status" class="form-control" style="width: 100%;">
                     <option value='Administrator' <?php echo $user->status == 'Administrator' ? 'selected' : ''?> >Administrator</option>
+                    <option value='Operator' <?php echo $user->status == 'Operator' ? 'selected' : ''?> >Operator</option>
                     <option value='User' <?php echo $user->status == 'User' ? 'selected' : ''?> >User</option>
                   </select>
                 </div>

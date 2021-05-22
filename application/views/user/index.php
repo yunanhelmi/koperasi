@@ -33,6 +33,7 @@
                   <tr>
                     <th>No.</th>
                     <th>Username</th>
+                    <th>Role</th>
                     <th>Email</th>
                     <th>View</th>
                     <th>Edit</th>
@@ -47,6 +48,7 @@
                   <tr>
                     <td style='text-align: center'><?php echo $no."."?></td>
                     <td><?php echo $user[$i]['username']?></td>
+                    <td><?php echo $user[$i]['status']?></td>
                     <td><?php echo $user[$i]['email']?></td>
                     <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("usercon/view_user/".$user[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                     <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("usercon/edit_user/".$user[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>

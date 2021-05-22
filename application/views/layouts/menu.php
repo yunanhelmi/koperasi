@@ -85,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<ul class="nav navbar-nav">
 			<li class="dropdown user user-menu">
 				<a class="dropdown-toggle" data-toggle="dropdown">
-				  <span class="hidden-xs">Hello, <?php echo $username?></span>
+				  <span class="hidden-xs">Hello, <?php echo $username." [".$status."]"?></span>
 				</a>
 			</li>
 		</ul>
@@ -100,11 +100,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
-		    <!--<li>
-          <a href="<?php echo base_url(); ?>index.php/homecon">
-            <i class="fa fa-home"></i> <span>Home</span>
-          </a>
-        </li>-->
+        <?php
+        if($status == 'Administrator') {
+        ?>
         <li>
           <a href="<?php echo base_url(); ?>index.php/nasabahcon">
             <i class="fa fa-users"></i> <span>Anggota</span>
@@ -243,7 +241,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <i class="fa fa-user-circle-o"></i> <span>User</span>
           </a>
         </li>
-		    <li>
+        <?php
+        } else if($status == 'Operator') {
+        ?>
+        <li class="treeview">
+          <a href="<?php echo base_url()."assets/"; ?>#">
+            <i class="fa fa-usd"></i> <span>Transaksi</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url(); ?>index.php/transaksianggotacon"><i class="fa fa-money"></i>Anggota</a></li>
+          </ul>
+        </li>
+        <?php
+        }
+        ?>
+        <li>
           <a href="<?php echo base_url(''); ?>index.php/usercon/logout">
             <i class="fa fa-sign-out"></i> <span>Logout</span>
           </a>
