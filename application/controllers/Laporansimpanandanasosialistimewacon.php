@@ -55,6 +55,44 @@ class LaporansimpanandanasosialistimewaCon extends CI_Controller {
 		$this->load->view('/layouts/footer', $data);	
 	}
 
+    function html() {
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
+        if($session_data == NULL) {
+            redirect("usercon/login", "refresh");
+        }
+
+        $tanggal1   = $this->input->post('tanggal');
+        $tgl        = strtotime($tanggal1);
+        $tanggal    = date("Y-m-d",$tgl);
+
+        $simpanandansosistimewa = $this->laporansimpanandanasosialmodel->get_data_dansos_istimewa($tanggal);
+
+        // Total Simpanan Dana Sosial pada neraca
+        if($tanggal < '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_sampai_kode_akun($tanggal, '207');
+        } else if($tanggal >= '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun('2019-01-01', $tanggal, '207');
+        }
+
+        if($transaksi != NULL) {
+            $total_neraca = $transaksi[0]['jumlah_kredit'] - $transaksi[0]['jumlah_debet'];
+        } else {
+            $total_neraca = 0;
+        }
+
+        $transaksi_lain_debet = $this->transaksimodel->get_data_by_kode_debet_sampai($tanggal, '207');
+        $transaksi_lain_kredit = $this->transaksimodel->get_data_by_kode_kredit_sampai($tanggal, '207');
+        $pencairan = $transaksi_lain_debet[0]['jumlah'] - $transaksi_lain_kredit[0]['jumlah'];
+
+        $data['tanggal'] = $tanggal;
+        $data['data'] = $simpanandansosistimewa;
+        $data['total_neraca'] = $total_neraca;
+        $data['pencairan'] = $pencairan;
+
+        $this->load->view('/hasil_laporan/simpanandansosistimewa', $data);
+    }
+
+    // Yang dipake
 	function excel() {
         $session_data = $this->session->userdata('mubasyirin_logged_in');
         if($session_data == NULL) {
@@ -101,7 +139,7 @@ class LaporansimpanandanasosialistimewaCon extends CI_Controller {
         $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":J".$i)->getFont()->setSize(14)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "LAPORAN DAFTAR SIMPANAN DANSOS ANGGOTA ".$tanggal1);
+        $sheet->mergeCells("A".$i.":J".$i)->setCellValue("A".$i, "LAPORAN DAFTAR SIMPANAN DANSOS ANGGOTA ISTIMEWA ".$tanggal1);
         $sheet->getStyle("A".$i.":J".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":J".$i)->getFont()->setSize(12)->setBold(true);
         $i++;

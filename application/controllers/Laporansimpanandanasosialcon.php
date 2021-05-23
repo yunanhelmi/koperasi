@@ -55,6 +55,39 @@ class LaporansimpanandanasosialCon extends CI_Controller {
 		$this->load->view('/layouts/footer', $data);	
 	}
 
+    function html() {
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
+        if($session_data == NULL) {
+            redirect("usercon/login", "refresh");
+        }
+
+        $tanggal1   = $this->input->post('tanggal');
+        $tgl        = strtotime($tanggal1);
+        $tanggal    = date("Y-m-d",$tgl);
+
+        $simpanandanasosial = $this->laporansimpanandanasosialmodel->get_data_dansos($tanggal);
+
+        // Total Simpanan Dana Sosial pada neraca
+        if($tanggal < '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_sampai_kode_akun($tanggal, '206');
+        } else if($tanggal >= '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun('2019-01-01', $tanggal, '206');
+        }
+        $total_neraca = $transaksi[0]['jumlah_kredit'] - $transaksi[0]['jumlah_debet'];
+
+        $transaksi_lain_debet = $this->transaksimodel->get_data_by_kode_debet_sampai($tanggal, '206');
+        $transaksi_lain_kredit = $this->transaksimodel->get_data_by_kode_kredit_sampai($tanggal, '206');
+        $pencairan = $transaksi_lain_debet[0]['jumlah'] - $transaksi_lain_kredit[0]['jumlah'];
+
+        $data['tanggal'] = $tanggal;
+        $data['data'] = $simpanandanasosial;
+        $data['total_neraca'] = $total_neraca;
+        $data['pencairan'] = $pencairan;
+
+        $this->load->view('/hasil_laporan/simpanandansos', $data);
+    }
+
+    // Yang dipake
 	function excel() {
 		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
