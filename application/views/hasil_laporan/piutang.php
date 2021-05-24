@@ -71,8 +71,8 @@
 	    <th>ALAMAT</th>
 	    <th>DESA</th>
 	    <th>DUSUN</th>
-	    <th>RW</th>
 	    <th>RT</th>
+	    <th>RW</th>
 	    <th>JENIS PINJAMAN</th>
 	    <th>JAMINAN</th>
 	    <th>TGL PINJAM</th>
@@ -96,8 +96,8 @@
 	  			<td><?php echo $data[$a]['alamat']; ?></td>
 	  			<td><?php echo $data[$a]['kelurahan']; ?></td>
 	  			<td><?php echo $data[$a]['dusun']; ?></td>
-	  			<td><?php echo $data[$a]['rw']; ?></td>
 	  			<td><?php echo $data[$a]['rt']; ?></td>
+	  			<td><?php echo $data[$a]['rw']; ?></td>
 	  			<td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
 	  			<td><?php echo $data[$a]['jaminan']; ?></td>
 	  			<?php 

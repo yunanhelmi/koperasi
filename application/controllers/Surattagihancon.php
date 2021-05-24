@@ -141,39 +141,78 @@ class SurattagihanCon extends CI_Controller {
         $tanggal    = date("Y-m-d",$tgl);
 
         $data = $this->surattagihanmodel->get_data_surat_tagihan($tanggal, $id_pinjaman);
+        $angsuran_perbulan = $data[0]['jumlah_pinjaman'] / $data[0]['jumlah_angsuran'];
+        $jasa_perbulan = $data[0]['jumlah_pinjaman'] * 0.02;
 
-        $today = strtotime($tanggal);
-        $today = date('Y-m-d', $today);
+        $today = date('Y-m-d', strtotime($tanggal));
         $today = new DateTime($today);
-        $tgl_akhir_bayar = strtotime($data[0]['tanggal_pinjaman']);
-        $tgl_akhir_bayar = date('Y-m-d', $tgl_akhir_bayar);
+
+        $tanggal_pinjaman = date('Y-m-d', strtotime($data[0]['tanggal_pinjaman']));
+        $tanggal_pinjaman = new DateTime($tanggal_pinjaman);
+
+        $tgl_akhir_bayar = date('Y-m-d', strtotime($data[0]['waktu_terakhir_angsuran']));
+        $tgl_terakhir_bayar = date('d-m-Y', strtotime($data[0]['waktu_terakhir_angsuran']));
         $tgl_akhir_bayar = new DateTime($tgl_akhir_bayar);
-        $diff = $today->diff($tgl_akhir_bayar)->format("%a");
-        $diff_months = ($today->diff($tgl_akhir_bayar)->format('%y') * 12) + $today->diff($tgl_akhir_bayar)->format('%m');
-        $lama_hari = $diff." hari";
-        if($diff_months > ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail'])) {
-            $jasa_pinjaman = $data[0]['jasa_perbulan'] * ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail']);
+
+        $jatuh_tempo = date('Y-m-d', strtotime($data[0]['waktu_terakhir_angsuran'].' + 30 days'));
+        $tgl_jatuh_tempo = date('d-m-Y', strtotime($data[0]['waktu_terakhir_angsuran'].' + 30 days'));
+        $jatuh_tempo = new DateTime($jatuh_tempo);
+
+        $lama_pinjam = $today->diff($tgl_akhir_bayar)->format("%a");
+        $lama_pinjam_long = $today->diff($tgl_akhir_bayar);
+        $lama_pinjam_long = $lama_pinjam_long->y." Tahun ".$lama_pinjam_long->m." Bulan ".$lama_pinjam_long->d." Hari";
+
+        $lama_terakhir_bayar = $today->diff($tgl_akhir_bayar)->format("%a");
+        $lama_terakhir_bayar_long = $today->diff($tgl_akhir_bayar);
+        $lama_terakhir_bayar_long = $lama_terakhir_bayar_long->y." Tahun ".$lama_terakhir_bayar_long->m." Bulan ".$lama_terakhir_bayar_long->d." Hari";
+        
+        $lama_jatuh_tempo = $today->diff($jatuh_tempo)->format("%a");
+        $lama_jatuh_tempo_long = $today->diff($jatuh_tempo);
+        $lama_jatuh_tempo_long = $lama_jatuh_tempo_long->y." Tahun ".$lama_jatuh_tempo_long->m." Bulan ".$lama_jatuh_tempo_long->d." Hari";
+
+        $lama_pinjam_bulan = ($today->diff($jatuh_tempo)->format('%y') * 12) + $today->diff($jatuh_tempo)->format('%m');
+        if($lama_pinjam_bulan > ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail'])) {
+            $jasa_pinjaman = $jasa_perbulan * ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail']);
             $sisa_pinjaman = $data[0]['total_pinjaman_detail'] - $data[0]['total_angsuran_detail'];
         } else {
-            $jasa_pinjaman = $data[0]['jasa_perbulan'] * $diff_months;
-            $sisa_pinjaman = $data[0]['angsuran_perbulan'] * $diff_months;
+            $jasa_pinjaman = $jasa_perbulan * $lama_pinjam_bulan;
+            $sisa_pinjaman = $angsuran_perbulan * $lama_pinjam_bulan;
         }
         $total = $sisa_pinjaman + $jasa_pinjaman;
 
+        if ($lama_pinjam > 30 && $lama_pinjam <= 150) {
+            $res['status'] = 'kuning';
+        } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
+            $res['status'] = 'orange';
+        } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
+            $res['status'] = 'pink';
+        }  else if ($lama_pinjam > 730) {
+            $res['status'] = 'merah';
+        }
+
+        if($res['status'] == 'merah') {
+            $jasa_pinjaman = ($sisa_pinjaman * 36 * $lama_jatuh_tempo) / 36000;
+        }
+
         /*echo "<pre>";
-        var_dump($data);
+        var_dump($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail']);
         echo "</pre>";*/
 
-        $data['data'] = $data;
-        $data['sisa_pinjaman']  = $sisa_pinjaman;
-        $data['jasa_pinjaman']  = $jasa_pinjaman;
-        $data['total']              = $total;
-        $data['lama_hari']      = $lama_hari;
-        $data['tanggal'] = $tanggal;
+        $res['data']                   = $data;
+        $res['sisa_pinjaman']          = $sisa_pinjaman;
+        $res['jasa_pinjaman']          = $jasa_pinjaman;
+        $res['lama_pinjam']            = $lama_pinjam." Hari";
+        $res['lama_pinjam_long']       = $lama_pinjam_long;
+        $res['lama_jatuh_tempo']       = $lama_jatuh_tempo." Hari";
+        $res['lama_jatuh_tempo_long']  = $lama_jatuh_tempo_long;
+        $res['total']                  = $total;
+        $res['tanggal']                = $tanggal;
 
-        $pdf = $this->load->view('/surat_tagihan/surat_angsuran', $data, true);
+        $pdf = $this->load->view('/surat_tagihan/surat_angsuran', $res, true);
 
-        $this->pdfgenerator->generate($pdf,'surat_angsuran');
+        $filename = "Surat Tagihan_".$data[0]['nomor_koperasi'];
+
+        $this->pdfgenerator->generate($pdf,$filename);
     }
 
     function cetak_surat_musiman($tanggal, $id_pinjaman) {
@@ -188,33 +227,63 @@ class SurattagihanCon extends CI_Controller {
         $data = $this->surattagihanmodel->get_data_surat_tagihan($tanggal, $id_pinjaman);
         $sisa_pinjaman = $data[0]['total_pinjaman_detail'] - $data[0]['total_angsuran_detail'];
         
-        $today = strtotime($tanggal);
-        $today = date('Y-m-d', $today);
+        $today = date('Y-m-d', strtotime($tanggal));
         $today = new DateTime($today);
-        $tanggal_pinjaman = strtotime($data[0]['tanggal_pinjaman']);
-        $tanggal_pinjaman = date('Y-m-d', $tanggal_pinjaman);
+
+        $tanggal_pinjaman = date('Y-m-d', strtotime($data[0]['tanggal_pinjaman']));
         $tanggal_pinjaman = new DateTime($tanggal_pinjaman);
-        $diff = $today->diff($tanggal_pinjaman)->format("%a");
-        $jasa_pinjaman = ($sisa_pinjaman * 36 * $diff) / 36000;
-        $lama_hari = $diff." hari";
-        $biaya_administrasi = ($lama_hari * $sisa_pinjaman) / 12000;
+
+        $tgl_akhir_bayar = date('Y-m-d', strtotime($data[0]['waktu_terakhir_angsuran']));
+        $tgl_terakhir_bayar = date('d-m-Y', strtotime($data[0]['waktu_terakhir_angsuran']));
+        $tgl_akhir_bayar = new DateTime($tgl_akhir_bayar);
+
+        $jatuh_tempo = date('Y-m-d', strtotime($data[0]['tanggal_pinjaman'].' + 120 days'));
+        $tgl_jatuh_tempo = date('d-m-Y', strtotime($data[0]['tanggal_pinjaman'].' + 120 days'));
+        $jatuh_tempo = new DateTime($jatuh_tempo);
+
+        $lama_pinjam = $today->diff($tanggal_pinjaman)->format("%a");
+        $lama_pinjam_long = $today->diff($tanggal_pinjaman);
+        $lama_pinjam_long = $lama_pinjam_long->y." Tahun ".$lama_pinjam_long->m." Bulan ".$lama_pinjam_long->d." Hari";
+        
+        $lama_jatuh_tempo = $today->diff($jatuh_tempo)->format("%a");
+        $lama_jatuh_tempo_long = $today->diff($jatuh_tempo);
+        $lama_jatuh_tempo_long = $lama_jatuh_tempo_long->y." Tahun ".$lama_jatuh_tempo_long->m." Bulan ".$lama_jatuh_tempo_long->d." Hari";
+
+        $jasa_pinjaman = ($sisa_pinjaman * 36 * $lama_jatuh_tempo) / 36000;
+        $biaya_administrasi = ($lama_jatuh_tempo * $sisa_pinjaman) / 12000;
         $total = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
+
+        if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
+            $res['status'] = 'kuning';
+        } else if ($lama_pinjam > 240 && $lama_pinjam <= 365) {
+            $res['status'] = 'orange';
+        } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
+            $res['status'] = 'pink';
+        }  else if ($lama_pinjam > 730) {
+            $res['status'] = 'merah';
+        }
 
         /*echo "<pre>";
         var_dump($tanggal);
         echo "</pre>";*/
 
-        $data['data']           = $data;
-        $data['sisa_pinjaman']  = $sisa_pinjaman;
-        $data['jasa_pinjaman']  = $jasa_pinjaman;
-        $data['lama_hari']      = $lama_hari;
-        $data['biaya_administrasi']      = $biaya_administrasi;
-        $data['total']              = $total;
-        $data['tanggal']        = $tanggal;
+        $res['data']                   = $data;
+        $res['sisa_pinjaman']          = $sisa_pinjaman;
+        $res['jasa_pinjaman']          = $jasa_pinjaman;
+        $res['lama_pinjam']            = $lama_pinjam." Hari";
+        $res['lama_pinjam_long']       = $lama_pinjam_long;
+        $res['lama_jatuh_tempo']       = $lama_jatuh_tempo." Hari";
+        $res['lama_jatuh_tempo_long']  = $lama_jatuh_tempo_long;
+        $res['biaya_administrasi']     = $biaya_administrasi;
+        $res['total']                  = $total;
+        $res['tanggal']                = $tanggal;
 
-        $pdf = $this->load->view('/surat_tagihan/surat_musiman', $data, true);
+        $pdf = $this->load->view('/surat_tagihan/surat_musiman', $res, true);
 
-        $this->pdfgenerator->generate($pdf,'surat_musiman');
+        $filename = "Surat Tagihan_".$data[0]['nomor_koperasi'];
+
+        $this->pdfgenerator->generate($pdf,$filename);
+        //$this->load->view('/surat_tagihan/surat_musiman', $res);
     } 
 }
 

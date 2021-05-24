@@ -79,18 +79,22 @@
         padding-top: -30px;
         text-align: center;
         line-height: 1px;
+        margin-left: 40px;
+        margin-right: 20px;
     }
     #halaman {
         font-size: 16px;
-        margin-left: 40px;
+        margin-left: 50px;
+        padding-top: -10px;
     }
     p.dalil {
         text-align: center;
         line-height: 18px;
         font-style: italic;
+        font-size: 15px;
     }
     #table_header {
-        line-height: 15px;   
+        line-height: 16px;   
     }
     #table_header tr td:nth-child(1) {
         width: 100px;
@@ -103,10 +107,10 @@
     }
     p.header_content {
         margin-top: 20px;
-        line-height: 20px;
+        line-height: 19px;
     }
     p.body_content {
-        line-height: 30px;
+        line-height: 25px;
         text-indent: 3em;
     }
 </style>
@@ -127,16 +131,16 @@
     mengembalikannya, maka Allah akan membuatnya <strong>BANGKRUT</strong> (Al Hadits)
 </p>
 <div id="halaman">
-
     <p class="header_content">
-        Nomor<d style="padding-left:3em;" >: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ MM / Srt Tagihan. / II / <?php echo date("Y") ?></d><br/>
+        Nomor<d style="padding-left:3em;" >: <?php echo $data[0]['nomor_koperasi'] ?> / MM / Srt Tagihan. / II / <?php echo date("Y") ?></d><br/>
         Lampiran<d style="padding-left:2em;" >: -</d><br/>
-        Perihal<d style="padding-left:3em;" >: Tagihan Pinjaman</d>
+        Perihal<d style="padding-left:3em;" >: <?php echo $status == 'kuning' ? 'Angsuran Pinjaman' : 'Tagihan Pinjaman' ?></d>
     </p>
     <p class="header_content">
+        <br>
         Kepada<br/>
         Yth. Bpk / Ibu <strong><?php echo $data[0]['nama'] ?></strong><br/>
-        Di <?php echo $data[0]['rt'] == "" ? '' : 'RT '.$data[0]['rt'] ?> <?php echo $data[0]['rw'] == "" ? '' : 'RW '.$data[0]['rw'] ?> <?php echo $data[0]['dusun'] ?> <?php echo $data[0]['kelurahan'] ?>
+        Di <strong><?php echo $data[0]['rt'] == "" ? '' : 'RT '.$data[0]['rt'] ?> <?php echo $data[0]['rw'] == "" ? '' : 'RW '.$data[0]['rw'] ?> <?php echo $data[0]['dusun'] ?> <?php echo $data[0]['kelurahan'] ?></strong>
     </p>
     <br>
     <p>Assalamu'alaikum Wr. Wb.</p>
@@ -145,23 +149,42 @@
         pada koperasi kami tanggal <strong><?php echo $tanggal_pinjaman ?></strong> sampai bulan ini telah melampaui jatuh tempo, dengan<br/>
         rincian sebagai berikut:<br/>
         Pokok Pinjaman<d style="padding-left:3em;" >: Rp. <?php echo number_format($sisa_pinjaman,0,",",".") ?> (<?php echo $data[0]['jaminan'] ?>)</d><br/>
-        Jasa Pinjaman<d style="padding-left:4em;" >: Rp. <?php echo number_format($jasa_pinjaman,0,",",".") ?> (<?php echo $lama_hari ?> / <?php echo $tanggal_laporan ?>)</d><br/>
-        Administrasi&nbsp;<d style="padding-left:4em;" > : <u>Rp. <?php echo number_format($biaya_administrasi,0,",",".") ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></d><br/>
+        Jasa Pinjaman<d style="padding-left:4em;" >: Rp. <?php echo number_format($jasa_pinjaman,0,",",".") ?> (<?php echo $lama_jatuh_tempo." - ".$lama_jatuh_tempo_long  ?> / <?php echo $tanggal_laporan ?>)</d><br/>
+        Administrasi&nbsp;<d style="padding-left:4em;" > : <u>Rp. <?php echo number_format($biaya_administrasi,0,",",".") ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></d><br/>
         Total<d style="padding-left:7em;" > &nbsp;: <strong>Rp. <?php echo number_format($total,0,",",".") ?></d></strong><br/>
         Untuk itu dimohon dengan hormat kepada Bapak / Ibu untuk segera datang ke kantor palayanan<br/>
         kami Timur Pasar Ngumpak Dalem, pada :<br/>
         HARI : Senin - Jum'at JAM KERJA : Pagi (08.00 - 12.00) dan Sore (15.30 - 17.00)<br/>
         Untuk:<br/>
-        <d style="padding-left:1em;" >1. Melunasi Pinjaman, jika tidak bisa</d><br/>
-        <d style="padding-left:1em;" >2. Mengangsur pinjaman,</d><br/>
-        <d style="padding-left:1em;" >3. Bermusyawarah di kantor untuk kelanjutan meskipun belum mempunyai uang</d><br/>
-        <d style="padding-left:3em;" >Atas perhatian Bapak / Ibu sebelumnya kami sampaikan terima kasih.</d>
+        <?php 
+            if($status == 'kuning') {
+        ?>
+                <d style="padding-left:1em;" >1. Membayar angsuran pinjaman</d><br/>
+                <d style="padding-left:1em;" >2. Bermusyawarah di kantor untuk kelanjutan meskipun belum mempunyai uang</d><br/>
+                <d style="padding-left:3em;" >Atas perhatian Bapak / Ibu sebelumnya kami sampaikan terima kasih.</d><br/>
+        <?php
+            } else {
+        ?>
+                <d style="padding-left:1em;" >1. Melunasi Pinjaman, jika tidak bisa</d><br/>
+                <d style="padding-left:1em;" >2. Mengangsur pinjaman,</d><br/>
+                <d style="padding-left:1em;" >3. Bermusyawarah di kantor untuk kelanjutan meskipun belum mempunyai uang</d><br/>
+                <d style="padding-left:3em;" >Atas perhatian Bapak / Ibu sebelumnya kami sampaikan terima kasih.</d><br/>
+        <?php
+            }
+        ?>
     </p>
     <p>Wassalamu'alaikum Wr. Wb.</p>
     <br>
     <p class="header_content">
         Bojonegoro, <?php echo tanggal_indo($tanggal) ?><br/>
-        Ketua<br/><br/><br/><br/><br/>
+        Ketua<br/>
+        <?php
+        $path = base_url()."assets/image/ttd_drs_suprapto.png";
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        ?>
+        <img src="<?php echo $base64 ?>"><br/>
         <u>Drs. SUPRAPTO</u>
     </p>
 </div>

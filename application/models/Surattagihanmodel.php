@@ -54,8 +54,9 @@ class SurattagihanModel extends CI_Model {
 								ON 
 									pinjaman.id_nasabah = nasabah.id
 								WHERE
-									pinjaman.jenis_pinjaman = '$jenis_pinjaman' 
-									
+									pinjaman.jenis_pinjaman = '$jenis_pinjaman'
+								ORDER BY 
+									nasabah.kelurahan
 								");
 		$a = $query->result_array();
 		return $a;
