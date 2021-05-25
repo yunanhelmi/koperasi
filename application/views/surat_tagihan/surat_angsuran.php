@@ -152,7 +152,7 @@
         pada koperasi kami tanggal <strong><?php echo $tanggal_pinjaman ?></strong> sampai bulan ini telah melampaui jatuh tempo, dengan<br/>
         rincian sebagai berikut:<br/>
         Pokok Pinjaman<d style="padding-left:3em;" >: Rp. <?php echo number_format($sisa_pinjaman,0,",",".") ?> (<?php echo $data[0]['jaminan'] ?>)</d><br/>
-        Jasa Pinjaman<d style="padding-left:4em;" >: <u>Rp. <?php echo number_format($jasa_pinjaman,0,",",".") ?> (<?php echo $lama_jatuh_tempo." - ".$lama_jatuh_tempo_long ?> / <?php echo $tanggal_laporan ?>)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></d><br/>
+        Jasa Pinjaman<d style="padding-left:4em;" >: <u>Rp. <?php echo number_format($jasa_pinjaman,0,",",".") ?> (<?php echo $lama_pinjam." - ".$lama_pinjam_long ?> / <?php echo $tanggal_laporan ?>)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></d><br/>
         Total<d style="padding-left:7em;" > &nbsp;: <strong>Rp. <?php echo number_format($total,0,",",".") ?></d></strong><br/>
         Untuk itu dimohon dengan hormat kepada Bapak / Ibu untuk segera datang ke kantor palayanan<br/>
         kami Timur Pasar Ngumpak Dalem, pada :<br/>

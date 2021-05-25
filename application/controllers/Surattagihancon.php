@@ -170,7 +170,7 @@ class SurattagihanCon extends CI_Controller {
         $lama_jatuh_tempo_long = $today->diff($jatuh_tempo);
         $lama_jatuh_tempo_long = $lama_jatuh_tempo_long->y." Tahun ".$lama_jatuh_tempo_long->m." Bulan ".$lama_jatuh_tempo_long->d." Hari";
 
-        $lama_pinjam_bulan = ($today->diff($jatuh_tempo)->format('%y') * 12) + $today->diff($jatuh_tempo)->format('%m');
+        $lama_pinjam_bulan = ($today->diff($tgl_akhir_bayar)->format('%y') * 12) + $today->diff($tgl_akhir_bayar)->format('%m');
         if($lama_pinjam_bulan > ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail'])) {
             $jasa_pinjaman = $jasa_perbulan * ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail']);
             $sisa_pinjaman = $data[0]['total_pinjaman_detail'] - $data[0]['total_angsuran_detail'];
@@ -241,16 +241,16 @@ class SurattagihanCon extends CI_Controller {
         $tgl_jatuh_tempo = date('d-m-Y', strtotime($data[0]['tanggal_pinjaman'].' + 120 days'));
         $jatuh_tempo = new DateTime($jatuh_tempo);
 
-        $lama_pinjam = $today->diff($tanggal_pinjaman)->format("%a");
-        $lama_pinjam_long = $today->diff($tanggal_pinjaman);
+        $lama_pinjam = $today->diff($tgl_akhir_bayar)->format("%a");
+        $lama_pinjam_long = $today->diff($tgl_akhir_bayar);
         $lama_pinjam_long = $lama_pinjam_long->y." Tahun ".$lama_pinjam_long->m." Bulan ".$lama_pinjam_long->d." Hari";
         
         $lama_jatuh_tempo = $today->diff($jatuh_tempo)->format("%a");
         $lama_jatuh_tempo_long = $today->diff($jatuh_tempo);
         $lama_jatuh_tempo_long = $lama_jatuh_tempo_long->y." Tahun ".$lama_jatuh_tempo_long->m." Bulan ".$lama_jatuh_tempo_long->d." Hari";
 
-        $jasa_pinjaman = ($sisa_pinjaman * 36 * $lama_jatuh_tempo) / 36000;
-        $biaya_administrasi = ($lama_jatuh_tempo * $sisa_pinjaman) / 12000;
+        $jasa_pinjaman = ($sisa_pinjaman * 36 * $lama_pinjam) / 36000;
+        $biaya_administrasi = ($lama_pinjam * $sisa_pinjaman) / 12000;
         $total = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
 
         if ($lama_pinjam > 120 && $lama_pinjam <= 240) {

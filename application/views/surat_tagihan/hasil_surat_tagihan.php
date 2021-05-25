@@ -85,7 +85,7 @@
 	    <th>TGL JATUH TEMPO</th>
 	    <th>SLD X</th>
 	    <th>SISA PINJAMAN</th>
-	    <th>LAMA PINJAM</th>
+	    <th>LAMA TERAKHIR BAYAR</th>
 	    <th>LAMA JATUH TEMPO</th>
 	    <th>KETERANGAN</th>
 	    <th>CETAK</th>
