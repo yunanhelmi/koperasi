@@ -181,7 +181,8 @@
         Bojonegoro, <?php echo tanggal_indo($tanggal) ?><br/>
         Ketua<br/>
         <?php
-        $path = base_url()."assets/image/ttd_drs_suprapto.png";
+        //$path = base_url()."assets/image/ttd_drs_suprapto.png";
+        $path = "./assets/image/ttd_drs_suprapto.png";
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
