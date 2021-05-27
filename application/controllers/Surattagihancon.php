@@ -264,7 +264,7 @@ class SurattagihanCon extends CI_Controller {
         }
 
         /*echo "<pre>";
-        var_dump($tanggal);
+        var_dump($data);
         echo "</pre>";*/
 
         $res['data']                   = $data;
