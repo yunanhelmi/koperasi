@@ -127,6 +127,7 @@ class SurattagihanCon extends CI_Controller {
 
         $data['data'] 		= $data_surat_tagihan;
         $data['tanggal'] 	= $tanggal;
+        $data['jenis_pinjaman']    = $jenis_pinjaman;
 
         $this->load->view('/surat_tagihan/hasil_surat_tagihan', $data);
     }

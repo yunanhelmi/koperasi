@@ -85,7 +85,7 @@
 	    <th>TGL JATUH TEMPO</th>
 	    <th>SLD X</th>
 	    <th>SISA PINJAMAN</th>
-	    <th>LAMA TERAKHIR BAYAR</th>
+	    <th><?php echo $jenis_pinjaman == 'Angsuran' ? 'LAMA TERAKHIR BAYAR' : 'LAMA PINJAM' ?></th>
 	    <th>LAMA JATUH TEMPO</th>
 	    <th>KETERANGAN</th>
 	    <th>CETAK</th>
