@@ -119,6 +119,26 @@
     p.rupiah {
         text-align: right;
     }
+    #table_rincian {
+        padding-left: -3px;
+    }
+    #table_rincian tr td:nth-child(1) {
+        width: 150px;
+    }
+    #table_rincian tr td:nth-child(2) {
+        width: 10px;
+    }
+    #table_rincian tr td:nth-child(3) {
+        width: 10px;
+    }
+    #table_rincian tr td:nth-child(4) {
+        width: 90px;
+        text-align: right;
+    }
+    #table_rincian tr td:nth-child(5) {
+        width: 300px;
+        text-align: left;
+    }
 </style>
 
 <div id="kop_surat">
@@ -155,6 +175,60 @@
         pada koperasi kami tanggal <strong><?php echo $tanggal_pinjaman ?></strong> sampai bulan ini telah melampaui jatuh tempo, dengan<br/>
         rincian sebagai berikut:<br/>
     </p>
+    <table id="table_rincian">
+        <tr>
+            <td>Pokok Pinjaman</td>
+            <td>:</td>
+            <td>Rp. </td>
+            <td><?php echo number_format($sisa_pinjaman,0,",",".") ?></td>
+            <td>(<?php echo $data[0]['jaminan'] ?>)</td>
+        </tr>
+        <?php 
+            if($status == 'kuning') {
+        ?>
+        <tr>
+            <td>Jasa Pinjaman</td>
+            <td>:</td>
+            <td style="border-bottom: 1px solid black;">Rp. </td>
+            <td style="border-bottom: 1px solid black;"><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
+            <td style="border-bottom: 1px solid black;">(<?php echo $lama_akhir_bayar." - ".$lama_akhir_bayar_long  ?> / <?php echo $tanggal_laporan ?>)</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td>:</td>
+            <td>Rp. </td>
+            <td><?php echo number_format($total,0,",",".") ?></td>
+            <td></td>
+        </tr>
+        <?php
+            } else {
+        ?>
+        <tr>
+            <td>Jasa Pinjaman</td>
+            <td>:</td>
+            <td>Rp. </td>
+            <td><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
+            <td>(<?php echo $lama_akhir_bayar." - ".$lama_akhir_bayar_long  ?> / <?php echo $tanggal_laporan ?>)</td>
+        </tr>
+        <tr>
+            <td>Administrasi (<?php echo $kali_administrasi ?>x)</td>
+            <td>:</td>
+            <td style="border-bottom: 1px solid black;">Rp. </td>
+            <td style="border-bottom: 1px solid black;"><?php echo number_format($biaya_administrasi,0,",",".") ?></td>
+            <td style="border-bottom: 1px solid black;"></td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td>:</td>
+            <td>Rp. </td>
+            <td><?php echo number_format($total,0,",",".") ?></td>
+            <td></td>
+        </tr>
+        <?php
+            }
+        ?>
+    </table>
+    <!--
         Pokok Pinjaman<d style="padding-left:3em;" >: Rp. <?php echo number_format($sisa_pinjaman,0,",",".") ?> (<?php echo $data[0]['jaminan'] ?>)</d><br/>
         <?php 
             if($status == 'kuning') {
@@ -170,6 +244,7 @@
         <?php
             }
         ?>
+    -->
     <p class="body_content">
         Untuk itu dimohon dengan hormat kepada Bapak / Ibu untuk segera datang ke kantor palayanan<br/>
         kami Timur Pasar Ngumpak Dalem, pada :<br/>
