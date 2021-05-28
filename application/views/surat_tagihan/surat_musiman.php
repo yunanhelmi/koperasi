@@ -147,11 +147,13 @@
     <p class="body_content">
         Dengan ini kami memberitahukan bahwa pinjaman Bapak / Ibu, yang pernah dilakukan<br/>
         pada koperasi kami tanggal <strong><?php echo $tanggal_pinjaman ?></strong> sampai bulan ini telah melampaui jatuh tempo, dengan<br/>
-        rincian sebagai berikut:<br/>
+        rincian sebagai berikut:
+    </p>
         Pokok Pinjaman<d style="padding-left:3em;" >: Rp. <?php echo number_format($sisa_pinjaman,0,",",".") ?> (<?php echo $data[0]['jaminan'] ?>)</d><br/>
         Jasa Pinjaman<d style="padding-left:4em;" >: Rp. <?php echo number_format($jasa_pinjaman,0,",",".") ?> (<?php echo $lama_pinjam." - ".$lama_pinjam_long  ?> / <?php echo $tanggal_laporan ?>)</d><br/>
-        Administrasi&nbsp;<d style="padding-left:4em;" > : <u>Rp. <?php echo number_format($biaya_administrasi,0,",",".") ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></d><br/>
+        Administrasi (<?php echo $kali_administrasi ?>x)&nbsp;<d style="padding-left:2em;" > : <u>Rp. <?php echo number_format($biaya_administrasi,0,",",".") ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></d><br/>
         Total<d style="padding-left:7em;" > &nbsp;: <strong>Rp. <?php echo number_format($total,0,",",".") ?></d></strong><br/>
+    <p class="body_content">
         Untuk itu dimohon dengan hormat kepada Bapak / Ibu untuk segera datang ke kantor palayanan<br/>
         kami Timur Pasar Ngumpak Dalem, pada :<br/>
         HARI : Senin - Jum'at JAM KERJA : Pagi (08.00 - 12.00) dan Sore (15.30 - 17.00)<br/>

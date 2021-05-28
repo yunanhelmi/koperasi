@@ -207,8 +207,8 @@
                     	$lama_jatuh_tempo = 0;
                     	$lama_jatuh_tempo_long = '0 Tahun 0 Bulan 0 Hari';
                     } else {
-                    	$lama_pinjam = $today->diff($tgl_akhir_bayar)->format("%a");
-                    	$lama_pinjam_long = $today->diff($tgl_akhir_bayar);
+                    	$lama_pinjam = $today->diff($tanggal_pinjaman)->format("%a");
+                    	$lama_pinjam_long = $today->diff($tanggal_pinjaman);
                     	$lama_pinjam_long = " (".$lama_pinjam_long->y." Tahun ".$lama_pinjam_long->m." Bulan ".$lama_pinjam_long->d." Hari)";
                     	if($lama_pinjam <= 120) {
                     		$lama_jatuh_tempo = 0;
