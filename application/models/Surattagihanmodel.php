@@ -22,6 +22,7 @@ class SurattagihanModel extends CI_Model {
 									pinjaman.id_nasabah,
 									pinjaman.jatuh_tempo,
 									pinjaman.jumlah_angsuran,
+									pinjaman.jumlah_pinjaman,
 									pinjaman.angsuran_perbulan,
 									ds.jumlah_angsuran_detail,
 									ds.jumlah_pinjaman_detail,
@@ -32,7 +33,7 @@ class SurattagihanModel extends CI_Model {
 									(
 										SELECT 
 											id_pinjaman,
-											COUNT(IF(jenis = 'Angsuran', 1, NULL)) as jumlah_angsuran_detail,
+											COUNT(CASE WHEN jenis = 'Angsuran' AND angsuran > 0 THEN 1 END) as jumlah_angsuran_detail,
 											COUNT(IF(jenis = 'Pinjaman', 1, NULL)) as jumlah_pinjaman_detail,
 											SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran_detail,
 											SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman_detail,
@@ -91,7 +92,7 @@ class SurattagihanModel extends CI_Model {
 									(
 										SELECT 
 											id_pinjaman,
-											COUNT(IF(jenis = 'Angsuran', 1, NULL)) as jumlah_angsuran_detail,
+											COUNT(CASE WHEN jenis = 'Angsuran' AND angsuran > 0 THEN 1 END) as jumlah_angsuran_detail,
 											COUNT(IF(jenis = 'Pinjaman', 1, NULL)) as jumlah_pinjaman_detail,
 											SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran_detail,
 											SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman_detail,

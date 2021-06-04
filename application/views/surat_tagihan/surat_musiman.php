@@ -182,7 +182,7 @@
             <td>:</td>
             <td>Rp. </td>
             <td><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
-            <td>(<?php echo $lama_pinjam." - ".$lama_pinjam_long  ?> / <?php echo $tanggal_laporan ?>)</td>
+            <td>(<?php echo $lama_pinjam." - ".$lama_pinjam_bulan_hari  ?> / <?php echo $tanggal_laporan ?>)</td>
         </tr>
         <tr>
             <td>Administrasi (<?php echo $kali_administrasi ?>x)</td>

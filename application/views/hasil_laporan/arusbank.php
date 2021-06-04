@@ -1,5 +1,23 @@
 <?php 
-  	$tgl 			= strtotime($tgl_dari);
+  function tanggal_indo($tanggal) {
+    $bulan = array (1 =>   'Januari',
+          'Februari',
+          'Maret',
+          'April',
+          'Mei',
+          'Juni',
+          'Juli',
+          'Agustus',
+          'September',
+          'Oktober',
+          'November',
+          'Desember'
+        );
+    $split = explode('-', $tanggal);
+    return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+  }
+
+  $tgl 			= strtotime($tgl_dari);
 	$tanggal_dari 	= date("d-m-Y",$tgl);
 
 	$tgl 			= strtotime($tgl_sampai);
@@ -12,7 +30,7 @@
 <br>
 <center>KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYAH</center>
 <br>
-<center>NGRASEH DANDER BOJONEGORO TELP (0353) 886039       BH : 8181/BH/II/95</center>
+<center>TIMUR PASAR NGUMPAKDALEM, DANDER BOJONEGORO TELP 081335044439       BH : 8181/BH/II/95</center>
 <br>
 <br>
 
@@ -33,7 +51,7 @@
   ?>
   <tr>
   	<td style="text-align: center;"><?php echo $no ?></td>
-  	<td style="text-align: center;"><?php echo $tanggal_dari ?></td>
+  	<td style="text-align: center;"><?php echo tanggal_indo($tanggal_dari) ?></td>
   	<td>SALDO AWAL</td>
   	<td style="text-align: right;"></td>
   	<td style="text-align: right;"></td>
@@ -49,7 +67,7 @@
   	$tgl 		= strtotime($data_bank[$i]['tanggal']);
 	$tanggal 	= date("d-m-Y",$tgl);
 	?>
-  	<td style="text-align: center;"><?php echo $tanggal ?></td>
+  	<td style="text-align: center;"><?php echo tanggal_indo($tanggal) ?></td>
   	<td><?php echo $data_bank[$i]['keterangan'] ?></td>
   	<td style="text-align: right;"><?php echo $data_bank[$i]['debet'] ?></td>
   	<?php $total_debet += $data_bank[$i]['debet']; ?>
@@ -64,7 +82,7 @@
   ?>
   <tr>
   	<td style="text-align: center;"><strong><?php echo $no ?></strong></td>
-  	<td style="text-align: center;"><strong><?php echo $tanggal_sampai ?></strong></td>
+  	<td style="text-align: center;"><strong><?php echo tanggal_indo($tanggal_sampai) ?></strong></td>
   	<td><strong>SALDO AKHIR</strong></td>
   	<td style="text-align: right;"></td>
   	<td style="text-align: right;"></td>

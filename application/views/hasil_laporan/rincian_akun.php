@@ -12,7 +12,7 @@
 <br>
 <center>KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYAH</center>
 <br>
-<center>NGRASEH DANDER BOJONEGORO TELP (0353) 886039       BH : 8181/BH/II/95</center>
+<center>TIMUR PASAR NGUMPAKDALEM, DANDER BOJONEGORO TELP 081335044439       BH : 8181/BH/II/95</center>
 <br>
 <center>HISTORI RIWAYAT AKUN <?php echo $kode_akun ?> - <?php echo $nama_akun ?> <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
 <br>

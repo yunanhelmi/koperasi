@@ -76,7 +76,7 @@
 
 <center>KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYAH</center>
 <br>
-<center>LAPORAN RINCIAN JASA <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
+<center>LAPORAN RINCIAN JASA SIMPANAN PIHAK KETIGA<?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
 <br>
 <center>KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYAH</center>
 <br>
@@ -100,7 +100,7 @@
         $no = 1;
         $total_jasa = 0;
         for($a = 0; $a < sizeof($data); $a++) {
-            $jumlah_jasa = $data[$a]['jumlah_jasa'] + $data[$a]['jumlah_denda'];
+            $jumlah_jasa = $data[$a]['total_penyesuaian_jasa'] + $data[$a]['total_pencairan_hutang_jasa'];
             $total_jasa += $jumlah_jasa;
     ?>
             <tr>

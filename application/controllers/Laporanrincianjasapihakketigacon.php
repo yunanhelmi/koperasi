@@ -119,8 +119,12 @@ class LaporanrincianjasapihakketigaCon extends CI_Controller {
         $data_rincian = $this->laporanrincianjasapihakketigamodel->get_data($dari, $sampai); 
 
         // Total transaksi pendapatan
-        $transaksi_pendapatan   = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun($dari, $sampai, '401');
+        $transaksi_pendapatan   = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun($dari, $sampai, '228');
         $total_neraca = $transaksi_pendapatan[0]['jumlah_kredit'] - $transaksi_pendapatan[0]['jumlah_debet'];
+
+        echo "<pre>";
+        var_dump($data_rincian);
+        echo "</pre>";
 
         $data['tgl_dari']               = $dari;
         $data['tgl_sampai']             = $sampai;
@@ -128,7 +132,7 @@ class LaporanrincianjasapihakketigaCon extends CI_Controller {
         $data['transaksi_pendapatan']   = $transaksi_pendapatan;
         $data['total_neraca']           = $total_neraca;
 
-        $this->load->view('/hasil_laporan/rincian_jasa', $data);
+        //$this->load->view('/hasil_laporan/rincian_jasa_pihakketiga', $data);
 	}
 }
 

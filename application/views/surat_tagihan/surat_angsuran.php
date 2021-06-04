@@ -191,7 +191,7 @@
             <td>:</td>
             <td style="border-bottom: 1px solid black;">Rp. </td>
             <td style="border-bottom: 1px solid black;"><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
-            <td style="border-bottom: 1px solid black;">(<?php echo $lama_akhir_bayar." - ".$lama_akhir_bayar_long  ?> / <?php echo $tanggal_laporan ?>)</td>
+            <td style="border-bottom: 1px solid black;">(<?php echo $lama_akhir_bayar." - ".$lama_akhir_bayar_bulan_hari  ?> / <?php echo $tanggal_laporan ?>)</td>
         </tr>
         <tr>
             <td>Total</td>
@@ -208,7 +208,7 @@
             <td>:</td>
             <td>Rp. </td>
             <td><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
-            <td>(<?php echo $lama_akhir_bayar." - ".$lama_akhir_bayar_long  ?> / <?php echo $tanggal_laporan ?>)</td>
+            <td>(<?php echo $lama_akhir_bayar." - ".$lama_akhir_bayar_bulan_hari  ?> / <?php echo $tanggal_laporan ?>)</td>
         </tr>
         <tr>
             <td>Administrasi (<?php echo $kali_administrasi ?>x)</td>
