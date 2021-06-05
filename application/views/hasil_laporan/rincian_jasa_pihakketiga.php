@@ -100,8 +100,9 @@
         $no = 1;
         $total_jasa = 0;
         for($a = 0; $a < sizeof($data); $a++) {
-            $jumlah_jasa = $data[$a]['total_penyesuaian_jasa'] + $data[$a]['total_pencairan_hutang_jasa'];
-            $total_jasa += $jumlah_jasa;
+            //$jumlah_jasa = $data[$a]['total_penyesuaian_jasa'] - $data[$a]['total_pencairan_hutang_jasa'];
+            //$total_jasa += $jumlah_jasa;
+            $total_jasa += $data[$a]['total_penyesuaian_jasa']
     ?>
             <tr>
                 <td style="text-align: center;"><?php echo $no ?></td>
@@ -112,7 +113,7 @@
                 <td style="text-align: center;"><?php echo $data[$a]['dusun'] ?></td>
                 <td style="text-align: center;"><?php echo $data[$a]['rw'] ?></td>
                 <td style="text-align: center;"><?php echo $data[$a]['rt'] ?></td>
-                <td style="text-align: right;"><?php echo $jumlah_jasa ?></td>
+                <td style="text-align: right;"><?php echo $data[$a]['total_penyesuaian_jasa'] ?></td>
             </tr>
     <?php
         $no++;

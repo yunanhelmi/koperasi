@@ -24,14 +24,14 @@ class LaporanrincianjasapihakketigaModel extends CI_Model {
 									(
 										SELECT 
 											id_simpananpihakketiga,
-											SUM(IF(jenis = 'Penyesuaian Jasa', jumlah, jumlah)) as total_penyesuaian_jasa,
-											SUM(IF(jenis = 'Pencairan Hutang Jasa', jumlah, jumlah)) as total_pencairan_hutang_jasa
+											SUM(IF(jenis = 'Penyesuaian Jasa', jumlah, 0)) as total_penyesuaian_jasa,
+											SUM(IF(jenis = 'Pencairan Hutang Jasa', jumlah, 0)) as total_pencairan_hutang_jasa
 										FROM 
-											detail_simpananpihakketiga
+											detail_jasa_simpananpihakketiga
 										WHERE 
-											detail_simpananpihakketiga.waktu >= '$dari'
-											AND detail_simpananpihakketiga.waktu <= '$sampai'
-											AND detail_simpananpihakketiga.status_post = '1'
+											detail_jasa_simpananpihakketiga.waktu >= '$dari'
+											AND detail_jasa_simpananpihakketiga.waktu <= '$sampai'
+											AND detail_jasa_simpananpihakketiga.status_post = '1'
 										GROUP BY 
 											id_simpananpihakketiga
 									) as ds
