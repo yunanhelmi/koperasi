@@ -219,6 +219,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="<?php echo base_url(); ?>index.php/laporanrincianpiutangcon/index"><i class="fa fa-list-ul"></i>Rincian Piutang</a>
             <li><a href="<?php echo base_url(); ?>index.php/laporanrincianjasacon/index"><i class="fa fa-list-ul"></i>Rincian Jasa</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporanrincianjasapihakketigacon/index"><i class="fa fa-list-ul"></i>Rincian Jasa Pihak Ketiga</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporanrincianjasasimpanan3thcon/index"><i class="fa fa-list-ul"></i>Rincian Jasa Simpanan 3 Th</a></li>
             <!--<li><a href="<?php echo base_url(); ?>index.php/laporansimpanancon/index"><i class="fa fa-book"></i>Simpanan</a></li>-->
             <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpokokcon/index"><i class="fa fa-list-ul"></i>Simpanan Pokok</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporansimpananpokokistimewacon/index"><i class="fa fa-list-ul"></i>Simpanan Pokok Istimewa</a></li>

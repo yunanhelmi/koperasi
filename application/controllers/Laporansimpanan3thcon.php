@@ -57,6 +57,45 @@ class Laporansimpanan3thCon extends CI_Controller {
 		return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
 	}
 
+    function html() {
+        $session_data = $this->session->userdata('mubasyirin_logged_in');
+        if($session_data == NULL) {
+            redirect("usercon/login", "refresh");
+        }
+
+        $id_master      = $this->input->post('id_master');
+        $simpanan3th_master = $this->simpanan3thmastermodel->get_simpanan3thmaster_by_id($id_master);
+        $title = $simpanan3th_master->nama;
+        /*echo "<pre>";
+        var_dump($simpanan3th_master);
+        echo "</pre>";*/
+
+        $tanggal1       = $this->input->post('tanggal');
+        $tgl            = strtotime($tanggal1);
+        $tanggal        = date("Y-m-d",$tgl);
+
+        $simpanan3th = $this->laporansimpanan3thmodel->get_data_simpanan3th($id_master, $tanggal);
+
+        // Total Simpanan Dana Sosial pada neraca
+        if($tanggal < '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_sampai_kode_akun($tanggal, $simpanan3th_master->kode_debet_pencairan_simp);
+        } else if($tanggal >= '2019-01-01') {
+            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun('2019-01-01', $tanggal, $simpanan3th_master->kode_debet_pencairan_simp);
+        }
+
+        if($transaksi != NULL) {
+            $total_neraca = $transaksi[0]['jumlah_kredit'] - $transaksi[0]['jumlah_debet'];
+        } else {
+            $total_neraca = 0;
+        }
+
+        $data['tanggal']        = $tanggal;
+        $data['data']           = $simpanan3th;
+        $data['total_neraca']   = $total_neraca;
+
+        $this->load->view('/hasil_laporan/simpanan3th', $data);
+    }
+
 	function excel() {
 		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
