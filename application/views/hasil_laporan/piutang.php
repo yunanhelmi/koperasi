@@ -68,7 +68,7 @@
 	}
 
   	$tgl 		= strtotime($tanggal_laporan);
-	$tanggal 	= date("d-m-Y",$tgl);
+	$tanggal_title 	= date("d-m-Y",$tgl);
 ?>
 
 <!--
@@ -260,7 +260,7 @@
 
 <center>KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYAH</center>
 <br>
-<center>DAFTAR SURAT TAGIHAN <?php echo $tanggal ?></center>
+<center>LAPORAN PIUTANG ANGGOTA <?php echo $tanggal_title ?></center>
 <br>
 <center>KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYAH</center>
 <br>
@@ -512,4 +512,22 @@
 	  		}
 	  	}
 	?>
+	<tr>
+		<td colspan="14" style="text-align: center;"><strong>TOTAL PIUTANG</strong></td>
+		<td style="text-align: right;"><strong><?php echo $total_sisa ?></strong></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="14" style="text-align: center;"><strong>TOTAL PIUTANG (NERACA)</strong></td>
+		<td style="text-align: right;"><strong><?php echo $piutang_neraca ?></strong></td>
+		<td></td>
+	</tr>
+	<?php
+		$selisih = $total_sisa - $piutang_neraca;
+	?>
+	<tr>
+		<td colspan="14" style="text-align: center;"><strong>SELISIH</strong></td>
+		<td style="text-align: right;"><strong><?php echo $selisih ?></strong></td>
+		<td></td>
+	</tr>
 </table>
