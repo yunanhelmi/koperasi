@@ -76,6 +76,7 @@
 
         $sisa_kali_angsuran = $data[$a]['jumlah_angsuran'] - $data[$a]['jumlah_angsuran_detail'];
 	    $tanggal_pinjaman = date('Y-m-d', strtotime($data[$a]['tanggal_pinjaman']));
+        $tgl_pinjaman = date('d-m-Y', strtotime($data[$a]['tanggal_pinjaman']));
 		$tanggal_pinjaman = new DateTime($tanggal_pinjaman);
 	    
 	    $tgl_akhir_bayar = date('Y-m-d', strtotime($data[$a]['waktu_terakhir_angsuran']));
@@ -132,7 +133,8 @@
     		}
             $data[$a]['sisa_kali_angsuran'] 			= $sisa_kali_angsuran;
             $data[$a]['today'] 							= $tanggal_laporan;
-            $data[$a]['tgl_terakhir_bayar'] 			= $tgl_terakhir_bayar;
+            $data[$a]['tgl_pinjaman'] 			        = $tgl_pinjaman;
+            $data[$a]['tgl_terakhir_bayar']             = $tgl_terakhir_bayar;
             $data[$a]['tgl_jatuh_tempo'] 				= $tgl_jatuh_tempo;
             $data[$a]['saldo'] 							= $saldo;
             $data[$a]['lama_pinjam'] 					= $lama_pinjam;
@@ -188,6 +190,7 @@
             }
             $data[$a]['sisa_kali_angsuran'] 			= $sisa_kali_angsuran;
             $data[$a]['today'] 							= $tanggal_laporan;
+            $data[$a]['tgl_pinjaman']                   = $tgl_pinjaman;
             $data[$a]['tgl_terakhir_bayar'] 			= $tgl_terakhir_bayar;
             $data[$a]['tgl_jatuh_tempo'] 				= $tgl_jatuh_tempo;
             $data[$a]['saldo'] 							= $saldo;
@@ -277,7 +280,7 @@
 		  			<td><?php echo $data[$a]['rw']; ?></td>
 		  			<td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
 		  			<td><?php echo $data[$a]['jaminan']; ?></td>
-				  	<td style="text-align: center;"><?php echo $data[$a]['tanggal_pinjaman']; ?></td>
+				  	<td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
 				  	<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>
 				  	<td style="text-align: center;"><?php echo $data[$a]['tgl_jatuh_tempo']; ?></td>
 				  	<td style="text-align: center;"><?php echo $data[$a]['sisa_kali_angsuran']; ?></td>
