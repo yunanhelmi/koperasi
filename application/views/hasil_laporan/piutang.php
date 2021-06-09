@@ -488,7 +488,7 @@
 		            ?>
 		            			<td style="background-color: green; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
 		  			<?php
-		            		} else if ($data[$a]['keterangan_level'] == 0) {
+		            		} else if ($data[$a]['keterangan_level'] == 1) {
 		            ?>
 		            			<td style="background-color: yellow; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
 		            <?php
