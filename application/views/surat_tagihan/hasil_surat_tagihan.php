@@ -277,7 +277,7 @@
 		  			<td><?php echo $data[$a]['rw']; ?></td>
 		  			<td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
 		  			<td><?php echo $data[$a]['jaminan']; ?></td>
-				  	<td style="text-align: center;"><?php echo $data[$a]['today']; ?></td>
+				  	<td style="text-align: center;"><?php echo $data[$a]['tanggal_pinjaman']; ?></td>
 				  	<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>
 				  	<td style="text-align: center;"><?php echo $data[$a]['tgl_jatuh_tempo']; ?></td>
 				  	<td style="text-align: center;"><?php echo $data[$a]['sisa_kali_angsuran']; ?></td>

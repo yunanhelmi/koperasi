@@ -451,7 +451,6 @@
 	    <th>TGL JATUH TEMPO</th>
 	    <th>SLD X</th>
 	    <th>SISA PINJAMAN</th>
-	    <th>JASA PINJAMAN</th>
 	    <th>LAMA TERAKHIR BAYAR / LAMA PINJAM</th>
 	    <th>LAMA JATUH TEMPO</th>
 	    <th>KETERANGAN</th>
@@ -475,12 +474,11 @@
 		  			<td><?php echo $data[$a]['rw']; ?></td>
 		  			<td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
 		  			<td><?php echo $data[$a]['jaminan']; ?></td>
-				  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['today']); ?></td>
+				  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tanggal_pinjaman']); ?></td>
 				  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_terakhir_bayar']); ?></td>
 				  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_jatuh_tempo']); ?></td>
 				  	<td style="text-align: center;"><?php $data[$a]['sisa_kali_angsuran']; ?></td>
 		  			<td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
-		  			<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>
 		  			<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam']." hari"." ".$data[$a]['lama_pinjam_bulan_hari'] ?></td>
 		    		<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>
 		  			<?php
