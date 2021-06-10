@@ -318,16 +318,16 @@
             $data[$a]['keterangan'] = 'Hijau';
     		$data[$a]['keterangan_level'] = 0;
     		if ($lama_pinjam > 30 && $lama_pinjam <= 150) {
-    			$data[$a]['keterangan'] = 'Kuning';
+    			$data[$a]['keterangan'] = 'Kuning 1';
     			$data[$a]['keterangan_level'] = 1;
             } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
-    			$data[$a]['keterangan'] = 'Orange';
+    			$data[$a]['keterangan'] = 'Kuning 2';
     			$data[$a]['keterangan_level'] = 2;
             } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
-    			$data[$a]['keterangan'] = 'Pink';
+    			$data[$a]['keterangan'] = 'Merah 1';
     			$data[$a]['keterangan_level'] = 3;
             } else if ($lama_pinjam > 730) {
-    			$data[$a]['keterangan'] = 'Merah';
+    			$data[$a]['keterangan'] = 'Merah 2';
     			$data[$a]['keterangan_level'] = 4;
     		}
             $data[$a]['sisa_kali_angsuran'] 			= $sisa_kali_angsuran;
@@ -374,16 +374,16 @@
             $data[$a]['keterangan'] = 'Hijau';
     		$data[$a]['keterangan_level'] = 0;
        		if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
-        		$data[$a]['keterangan'] = 'Kuning';
+        		$data[$a]['keterangan'] = 'Kuning 1';
     			$data[$a]['keterangan_level'] = 1;
             } else if ($lama_pinjam > 240 && $lama_pinjam <= 365) {
-        		$data[$a]['keterangan'] = 'Orange';
+        		$data[$a]['keterangan'] = 'Kuning 2';
     			$data[$a]['keterangan_level'] = 2;
             } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
-        		$data[$a]['keterangan'] = 'Pink';
+        		$data[$a]['keterangan'] = 'Merah 1';
     			$data[$a]['keterangan_level'] = 3;
         	} else if ($lama_pinjam > 730) {
-        		$data[$a]['keterangan'] = 'Merah';
+        		$data[$a]['keterangan'] = 'Merah 2';
     			$data[$a]['keterangan_level'] = 4;
             }
             $data[$a]['sisa_kali_angsuran'] 			= $sisa_kali_angsuran;
@@ -412,7 +412,7 @@
 		$kali_administrasi = $bulan_pinjam / 4;
         $kali_administrasi = (int)$kali_administrasi;
 
-        if($data[$a]['keterangan'] == "kuning") {
+        if($data[$a]['keterangan_level'] == 1) {
             $jasa_pinjaman = ($sisa_pinjaman * $bulan_pinjam * 2) / 100;
             $biaya_administrasi = 0;
         } else {
@@ -421,12 +421,12 @@
         }
         $total_tagihan = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
 
-        $data[$a]['angsuran_perbulan'] 	= $angsuran_perbulan;
-        $data[$a]['sisa_pinjaman'] 		= $sisa_pinjaman;
+        $data[$a]['angsuran_perbulan'] 	= (int)$angsuran_perbulan;
+        $data[$a]['sisa_pinjaman'] 		= (int)$sisa_pinjaman;
         $data[$a]['kali_administrasi'] 	= $kali_administrasi;
-        $data[$a]['jasa_pinjaman'] 		= $jasa_pinjaman;
-        $data[$a]['biaya_administrasi'] = $biaya_administrasi;
-        $data[$a]['total_tagihan'] 		= $total_tagihan;
+        $data[$a]['jasa_pinjaman'] 		= (int)$jasa_pinjaman;
+        $data[$a]['biaya_administrasi'] = (int)$biaya_administrasi;
+        $data[$a]['total_tagihan'] 		= (int)$total_tagihan;
 	}
 	foreach ($data as $key => $row) {
 	    $level[$key]  = $row['keterangan_level'];
@@ -448,11 +448,12 @@
 	    <th>JAMINAN</th>
 	    <th>TGL PINJAM</th>
 	    <th>TGL TERAKHIR BAYAR</th>
-	    <th>TGL JATUH TEMPO</th>
-	    <th>SLD X</th>
+	    <!--<th>TGL JATUH TEMPO</th>-->
+	    <!--<th>SLD X</th>-->
 	    <th>SISA PINJAMAN</th>
+	    <th>JASA YG HARUS DIBAYAR</th>
 	    <th>LAMA TERAKHIR BAYAR / LAMA PINJAM</th>
-	    <th>LAMA JATUH TEMPO</th>
+	    <!--<th>LAMA JATUH TEMPO</th>-->
 	    <th>KETERANGAN</th>
 	</tr>
 
@@ -476,11 +477,12 @@
 		  			<td><?php echo $data[$a]['jaminan']; ?></td>
 				  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tanggal_pinjaman']); ?></td>
 				  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_terakhir_bayar']); ?></td>
-				  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_jatuh_tempo']); ?></td>
-				  	<td style="text-align: center;"><?php $data[$a]['sisa_kali_angsuran']; ?></td>
+				  	<!--<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_jatuh_tempo']); ?></td>-->
+				  	<!--<td style="text-align: center;"><?php $data[$a]['sisa_kali_angsuran']; ?></td>-->
 		  			<td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
-		  			<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam']." hari"." ".$data[$a]['lama_pinjam_bulan_hari'] ?></td>
-		    		<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>
+		  			<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>
+		  			<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>
+		    		<!--<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>-->
 		  			<?php
 		            		if ($data[$a]['keterangan_level'] == 0) {
 		            ?>

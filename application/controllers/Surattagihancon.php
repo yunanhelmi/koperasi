@@ -213,8 +213,8 @@ class SurattagihanCon extends CI_Controller {
         $total = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
 
         $res['data']                        = $data;
-        $res['sisa_pinjaman']               = $sisa_pinjaman;
-        $res['jasa_pinjaman']               = $jasa_pinjaman;
+        $res['sisa_pinjaman']               = (int)$sisa_pinjaman;
+        $res['jasa_pinjaman']               = (int)$jasa_pinjaman;
         $res['lama_pinjam']                 = $lama_pinjam." Hari";
         $res['lama_pinjam_long']            = $lama_pinjam_long;
         $res['bulan_pinjam']                = $bulan_pinjam;
@@ -306,8 +306,8 @@ class SurattagihanCon extends CI_Controller {
         }
 
         $res['data']                        = $data;
-        $res['sisa_pinjaman']               = $sisa_pinjaman;
-        $res['jasa_pinjaman']               = $jasa_pinjaman;
+        $res['sisa_pinjaman']               = (int)$sisa_pinjaman;
+        $res['jasa_pinjaman']               = (int)$jasa_pinjaman;
         $res['lama_pinjam']                 = $lama_pinjam." Hari";
         $res['lama_pinjam_long']            = $lama_pinjam_long;
         $res['bulan_pinjam']                = $bulan_pinjam;
