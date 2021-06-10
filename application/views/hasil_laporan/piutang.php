@@ -460,9 +460,11 @@
 	<?php
 	  	$no = 1;
 	  	$total_sisa = 0;
+	  	$total_jasa = 0;
 	  	for($a = 0; $a < sizeof($data); $a++) {
 	  		if($data[$a]['saldo'] != 0) {
 	  			$total_sisa += $data[$a]['saldo'];
+	  			$total_jasa += $data[$a]['jasa_pinjaman'];
 	?>
 				<tr>
 					<td style="text-align: center;"><?php echo $no ?></td>
@@ -513,21 +515,24 @@
 	  	}
 	?>
 	<tr>
-		<td colspan="14" style="text-align: center;"><strong>TOTAL PIUTANG</strong></td>
+		<td colspan="12" style="text-align: center;"><strong>TOTAL PIUTANG</strong></td>
 		<td style="text-align: right;"><strong><?php echo $total_sisa ?></strong></td>
-		<td></td>
+		<td style="text-align: right;"><strong><?php echo $total_jasa ?></strong></td>
+		<td colspan="2"></td>
 	</tr>
 	<tr>
-		<td colspan="14" style="text-align: center;"><strong>TOTAL PIUTANG (NERACA)</strong></td>
+		<td colspan="12" style="text-align: center;"><strong>TOTAL PIUTANG (NERACA)</strong></td>
 		<td style="text-align: right;"><strong><?php echo $piutang_neraca ?></strong></td>
 		<td></td>
+		<td colspan="2"></td>
 	</tr>
 	<?php
 		$selisih = $total_sisa - $piutang_neraca;
 	?>
 	<tr>
-		<td colspan="14" style="text-align: center;"><strong>SELISIH</strong></td>
+		<td colspan="12" style="text-align: center;"><strong>SELISIH</strong></td>
 		<td style="text-align: right;"><strong><?php echo $selisih ?></strong></td>
 		<td></td>
+		<td colspan="2"></td>
 	</tr>
 </table>
