@@ -47,6 +47,19 @@ class NasabahModel extends CI_Model {
 		return $a;
 	}
 
+	function get_data_desa() {
+		$query = $this->db->query("
+								SELECT
+									DISTINCT(kelurahan)
+								FROM 
+									nasabah
+								ORDER BY 
+									kelurahan
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function getDataPostUnpostPinjaman() {
 		$query = $this->db->query("
 									SELECT

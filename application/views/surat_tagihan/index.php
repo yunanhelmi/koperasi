@@ -36,13 +36,28 @@
 									<input type="text" class="form-control pull-right" name="tanggal" id="tanggal" value="" data-date-format="dd-mm-yyyy">
 								</div>
 							</div>
-							<div class="form-group col-xs-3" id="div_jenis_tanah">
+							<div class="form-group col-xs-3" id="div_desa">
+		                        <label for="exampleInputPassword1">Desa</label>
+		                        <select id="desa" name="desa" class="form-control" style="width: 100%;">
+									<option value='all'>- SEMUA -</option>
+									<?php
+										if($desa != NULL) {
+											for($i = 0; $i < sizeof($desa); $i++) {
+									?>
+											<option value=<?php echo $desa[$i]['kelurahan'] ?> > <?php echo $desa[$i]['kelurahan'] ?> </option>
+									<?php
+											}
+										}
+									?>
+		                        </select>
+		                    </div>
+							<!--<div class="form-group col-xs-3" id="div_jenis_tanah">
 		                        <label for="exampleInputPassword1">Jenis Pinjaman</label>
 		                        <select id="jenis_pinjaman" name="jenis_pinjaman" class="form-control" style="width: 100%;">
 									<option value='Angsuran'>Angsuran</option>
 									<option value='Musiman'>Musiman</option>
 		                        </select>
-		                    </div>
+		                    </div>-->
 			            </div>
 			            <div class="box-footer">
 							<div class="col-xs-3">

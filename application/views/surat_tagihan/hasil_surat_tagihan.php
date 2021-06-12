@@ -256,7 +256,7 @@
 	    <!--<th>SLD X</th>-->
 	    <th>SISA PINJAMAN</th>
 	    <th>JASA PINJAMAN</th>
-	    <th><?php echo $jenis_pinjaman == 'Angsuran' ? 'LAMA TERAKHIR BAYAR' : 'LAMA PINJAM' ?></th>
+	    <th>LAMA TERAKHIR BAYAR / LAMA PINJAM</th>
 	    <!--<th>LAMA JATUH TEMPO</th>-->
 	    <th>KETERANGAN</th>
 	</tr>

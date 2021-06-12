@@ -100,11 +100,15 @@ class SurattagihanCon extends CI_Controller {
 		
 		$data['username'] 	= $session_data['username'];
 		$data['status'] 	= $session_data['status'];
-		$data['nasabah'] 	= $this->nasabahmodel->showData();
+		$data['desa'] 	    = $this->nasabahmodel->get_data_desa();
+
+        /*echo "<pre>";
+        var_dump($data['desa']);
+        echo "</pre>";*/
 		
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/surat_tagihan/index', $data);
-		$this->load->view('/layouts/footer', $data);	
+		$this->load->view('/layouts/footer', $data);
 	}
 
 	function html() {
@@ -117,9 +121,16 @@ class SurattagihanCon extends CI_Controller {
         $tgl        = strtotime($tanggal1);
         $tanggal    = date("Y-m-d",$tgl);
 
-        $jenis_pinjaman   = $this->input->post('jenis_pinjaman');
+        //$jenis_pinjaman   = $this->input->post('jenis_pinjaman');
+        $desa = $this->input->post('desa');
 
-        $data_surat_tagihan = $this->surattagihanmodel->get_data($tanggal, $jenis_pinjaman); 
+        if($desa == 'all') {
+            $data_surat_tagihan = $this->surattagihanmodel->get_data_all($tanggal); 
+        } else {
+            $data_surat_tagihan = $this->surattagihanmodel->get_data_by_kelurahan($tanggal, $desa); 
+        }
+
+        //$data_surat_tagihan = $this->surattagihanmodel->get_data_by_jenis_pinjaman($tanggal, $jenis_pinjaman); 
 
         /*echo "<pre>";
         var_dump($data_surat_tagihan);
@@ -127,7 +138,7 @@ class SurattagihanCon extends CI_Controller {
 
         $data['data'] 		= $data_surat_tagihan;
         $data['tanggal'] 	= $tanggal;
-        $data['jenis_pinjaman']    = $jenis_pinjaman;
+        //$data['jenis_pinjaman']    = $jenis_pinjaman;
 
         $this->load->view('/surat_tagihan/hasil_surat_tagihan', $data);
     }
