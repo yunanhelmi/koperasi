@@ -159,9 +159,9 @@
 <div id="halaman">
 
     <p class="header_content">
-        Nomor<d style="padding-left:3em;" >: <?php echo $data[0]['nomor_koperasi'] ?> / MM / Srt Tagihan. / II / <?php echo date("Y") ?></d><br/>
+        Nomor<d style="padding-left:3em;" >: <?php echo $data[0]['nomor_koperasi'] ?> / MM / <?php echo $level == 1 ? 'Srt Pemberitahuan.' : 'Srt Tagihan.' ?> / <?php echo $keterangan ?> / <?php echo date("Y") ?></d><br/>
         Lampiran<d style="padding-left:2em;" >: -</d><br/>
-        Perihal<d style="padding-left:3em;" >: <?php echo $status == 'kuning' ? 'Angsuran Pinjaman' : 'Tagihan Pinjaman' ?></d>
+        Perihal<d style="padding-left:3em;" >: <?php echo $level == 1 ? 'Angsuran Pinjaman' : 'Tagihan Pinjaman' ?></d>
     </p>
     <p class="header_content">
         Kepada<br/>
@@ -184,7 +184,7 @@
             <td>(<?php echo $data[0]['jaminan'] ?>)</td>
         </tr>
         <?php 
-            if($status == 'kuning') {
+            if($level== 1) {
         ?>
         <tr>
             <td>Jasa Pinjaman</td>
@@ -231,7 +231,7 @@
     <!--
         Pokok Pinjaman<d style="padding-left:3em;" >: Rp. <?php echo number_format($sisa_pinjaman,0,",",".") ?> (<?php echo $data[0]['jaminan'] ?>)</d><br/>
         <?php 
-            if($status == 'kuning') {
+            if($level == 1) {
         ?>
             Jasa Pinjaman<d style="padding-left:4em;" >: <u>Rp. <?php echo number_format($jasa_pinjaman,0,",",".") ?> (<?php echo $lama_akhir_bayar." - ".$lama_akhir_bayar_long ?> / <?php echo $tanggal_laporan ?>)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></d><br/>
             Total<d style="padding-left:7em;" > &nbsp;: <strong>Rp. <?php echo number_format($total,0,",",".") ?></d></strong><br/>
@@ -251,7 +251,7 @@
         HARI : Senin - Jum'at JAM KERJA : Pagi (08.00 - 12.00) dan Sore (15.30 - 17.00)<br/>
         Untuk:<br/>
         <?php 
-            if($status == 'kuning') {
+            if($level == 1) {
         ?>
                 <d style="padding-left:1em;" >1. Membayar angsuran pinjaman</d><br/>
                 <d style="padding-left:1em;" >2. Bermusyawarah di kantor untuk kelanjutan meskipun belum mempunyai uang</d><br/>

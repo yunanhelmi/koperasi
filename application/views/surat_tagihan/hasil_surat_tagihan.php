@@ -101,9 +101,9 @@
             } else {
             	$lama_pinjam = $today->diff($tgl_akhir_bayar)->format("%a");
             	$lama_pinjam_raw = $today->diff($tgl_akhir_bayar);
-            	$lama_pinjam_long = " (".$lama_pinjam_raw->y." Tahun ".$lama_pinjam_raw->m." Bulan ".$lama_pinjam_raw->d." Hari)";
+            	$lama_pinjam_long = $lama_pinjam_raw->y." Tahun ".$lama_pinjam_raw->m." Bulan ".$lama_pinjam_raw->d." Hari";
             	$bulan_pinjam = (($lama_pinjam_raw->format('%y') * 12) + $lama_pinjam_raw->format('%m'));
-            	$lama_pinjam_bulan_hari = " (".$bulan_pinjam." Bulan ".$lama_pinjam_raw->d." Hari)";
+            	$lama_pinjam_bulan_hari = $bulan_pinjam." Bulan ".$lama_pinjam_raw->d." Hari";
             	if($lama_pinjam <= 30) {
             		$lama_jatuh_tempo = 0;
             		$lama_jatuh_tempo_long = '0 Tahun 0 Bulan 0 Hari';
@@ -111,9 +111,9 @@
             	} else {
             		$lama_jatuh_tempo = $today->diff($jatuh_tempo)->format("%a");
             		$lama_jatuh_tempo_raw = $today->diff($jatuh_tempo);
-            		$lama_jatuh_tempo_long = " (".$lama_jatuh_tempo_raw->y." Tahun ".$lama_jatuh_tempo_raw->m." Bulan ".$lama_jatuh_tempo_raw->d." Hari)";
+            		$lama_jatuh_tempo_long = $lama_jatuh_tempo_raw->y." Tahun ".$lama_jatuh_tempo_raw->m." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
             		$bulan_jatuh_tempo = (($lama_jatuh_tempo_raw->format('%y') * 12) + $lama_jatuh_tempo_raw->format('%m'));
-            		$lama_jatuh_tempo_bulan_hari = " (".$bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari)";
+            		$lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
             	}
             }
             $data[$a]['keterangan'] = 'Hijau';
@@ -158,9 +158,9 @@
             } else {
             	$lama_pinjam = $today->diff($tanggal_pinjaman)->format("%a");
             	$lama_pinjam_raw = $today->diff($tanggal_pinjaman);
-            	$lama_pinjam_long = " (".$lama_pinjam_raw->y." Tahun ".$lama_pinjam_raw->m." Bulan ".$lama_pinjam_raw->d." Hari)";
+            	$lama_pinjam_long = $lama_pinjam_raw->y." Tahun ".$lama_pinjam_raw->m." Bulan ".$lama_pinjam_raw->d." Hari";
             	$bulan_pinjam = (($lama_pinjam_raw->format('%y') * 12) + $lama_pinjam_raw->format('%m'));
-            	$lama_pinjam_bulan_hari = " (".$bulan_pinjam." Bulan ".$lama_pinjam_raw->d." Hari)";
+            	$lama_pinjam_bulan_hari = $bulan_pinjam." Bulan ".$lama_pinjam_raw->d." Hari";
             	if($lama_pinjam <= 120) {
             		$lama_jatuh_tempo = 0;
             		$lama_jatuh_tempo_long = '0 Tahun 0 Bulan 0 Hari';
@@ -168,9 +168,9 @@
             	} else {
             		$lama_jatuh_tempo = $today->diff($jatuh_tempo)->format("%a");
             		$lama_jatuh_tempo_raw = $today->diff($jatuh_tempo);
-            		$lama_jatuh_tempo_long = " (".$lama_jatuh_tempo_raw->y." Tahun ".$lama_jatuh_tempo_raw->m." Bulan ".$lama_jatuh_tempo_raw->d." Hari)";
+            		$lama_jatuh_tempo_long = $lama_jatuh_tempo_raw->y." Tahun ".$lama_jatuh_tempo_raw->m." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
             		$bulan_jatuh_tempo = (($lama_jatuh_tempo_raw->format('%y') * 12) + $lama_jatuh_tempo_raw->format('%m'));
-            		$lama_jatuh_tempo_bulan_hari = " (".$bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari)";
+            		$lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
             	}
             }
             $data[$a]['keterangan'] = 'Hijau';
@@ -216,7 +216,11 @@
         $kali_administrasi = (int)$kali_administrasi;
 
         if($data[$a]['keterangan_level'] == 1) {
-            $jasa_pinjaman = ($sisa_pinjaman * $bulan_pinjam * 2) / 100;
+            if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
+                $jasa_pinjaman = ($data[$a]['total_pinjaman_detail'] * $bulan_pinjam * 2) / 100;    
+            } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
+                $jasa_pinjaman = ($sisa_pinjaman * $bulan_pinjam * 2) / 100;
+            }            
             $biaya_administrasi = 0;
         } else {
             $jasa_pinjaman = ($sisa_pinjaman * $bulan_pinjam * 3) / 100;

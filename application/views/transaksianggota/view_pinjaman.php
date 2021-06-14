@@ -1185,6 +1185,14 @@ function rupiah($angka){
         label_total();
       }
 
+      function hitung_angsuran() {
+        if($('#jenis').val() == 'Angsuran') {
+
+        } else if($('#jenis').val() == 'Pinjaman') {
+          var tgl_pinjam = '<?php echo $pinjaman->waktu ?>'
+        }
+      }
+
       function getConfirmationDeleteJaminan(id_pinjaman, id_detail_jaminan){
         var retVal = confirm("Apakah anda yakin akan menghapus data tersebut ?");
         var controller = 'transaksianggotacon';

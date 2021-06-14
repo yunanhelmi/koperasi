@@ -195,13 +195,17 @@ class SurattagihanCon extends CI_Controller {
 
 
         if ($lama_pinjam > 30 && $lama_pinjam <= 150) {
-            $res['status'] = 'kuning';
+            $res['level'] = 1;
+            $res['keterangan'] = 'K1';
         } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
-            $res['status'] = 'orange';
+            $res['level'] = 2;
+            $res['keterangan'] = 'K2';
         } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
-            $res['status'] = 'pink';
+            $res['level'] = 3;
+            $res['keterangan'] = 'M1';
         }  else if ($lama_pinjam > 730) {
-            $res['status'] = 'merah';
+            $res['level'] = 4;
+            $res['keterangan'] = 'M2';
         }
 
         if($bulan_akhir_bayar > ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail'])) {
@@ -213,8 +217,8 @@ class SurattagihanCon extends CI_Controller {
         $kali_administrasi = $bulan_akhir_bayar / 4;
         $kali_administrasi = (int)$kali_administrasi;
 
-        if($res['status'] == "kuning") {
-            $jasa_pinjaman = ($sisa_pinjaman * $bulan_akhir_bayar * 2) / 100;
+        if($res['level'] == 1) {
+            $jasa_pinjaman = ($data[0]['total_pinjaman_detail'] * $bulan_akhir_bayar * 2) / 100;
             $biaya_administrasi = 0;
         } else {
             $jasa_pinjaman = ($sisa_pinjaman * $bulan_akhir_bayar * 3) / 100;
@@ -307,13 +311,17 @@ class SurattagihanCon extends CI_Controller {
         $total = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
 
         if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
-            $res['status'] = 'kuning';
+            $res['level'] = 1;
+            $res['keterangan'] = 'K1';
         } else if ($lama_pinjam > 240 && $lama_pinjam <= 365) {
-            $res['status'] = 'orange';
+            $res['level'] = 2;
+            $res['keterangan'] = 'K2';
         } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
-            $res['status'] = 'pink';
+            $res['level'] = 3;
+            $res['keterangan'] = 'M1';
         }  else if ($lama_pinjam > 730) {
-            $res['status'] = 'merah';
+            $res['level'] = 4;
+            $res['keterangan'] = 'M2';
         }
 
         $res['data']                        = $data;
