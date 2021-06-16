@@ -84,6 +84,13 @@
                   <label for="exampleInputFile">Foto</label>
                   <input type="file" accept=".jpg, .jpeg, .png" name="filefoto">
                 </div>
+                <div class="form-group col-xs-6">
+                  <label for="exampleInputPassword1">Reputasi</label>
+                  <select id="blacklist" name="blacklist" class="form-control">
+                    <option value=0>-</option>
+                    <option value=1>BL</option>
+                  </select>
+                </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">

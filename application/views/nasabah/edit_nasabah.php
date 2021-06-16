@@ -102,6 +102,13 @@
                   <label for="exampleInputFile">Foto</label>
                   <?php echo '<input type="file" accept=".jpg, .jpeg, .png" name="filefoto" value"'.$nasabah->file_foto.'">' ?>
                 </div>
+                <div class="form-group col-xs-6">
+                  <label for="exampleInputPassword1">Reputasi</label>
+                  <select id="blacklist" name="blacklist" class="form-control">
+                    <option value=0 <?php echo $nasabah->blacklist == 0 ? 'selected' : ''?> >-</option>
+                    <option value=1 <?php echo $nasabah->blacklist == 1 ? 'selected' : ''?> >BL</option>
+                  </select>
+                </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">

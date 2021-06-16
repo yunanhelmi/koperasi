@@ -129,9 +129,14 @@
                   </div>
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label">RW</label>
-
                     <div class="col-sm-10">
                       <?php echo '<input type="text" class="form-control" name="rw" id="rw" readonly value="'.$nasabah->rw.'">'; ?>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-2 control-label">Reputasi</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="blacklist" id="blacklist" readonly value=<?php echo $nasabah->blacklist == 0 ? '-' : 'BL' ?> >
                     </div>
                   </div>
                 </form>

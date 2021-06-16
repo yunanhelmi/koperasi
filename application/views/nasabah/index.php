@@ -44,6 +44,7 @@
                     <th>Desa</th>
                     <th>RW</th>
                     <th>RT</th>
+                    <th>Reputasi</th>
                     <th>View</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -63,6 +64,17 @@
                     <td><?php echo $nasabah[$i]['kelurahan']?></td>
                     <td><?php echo $nasabah[$i]['rw']?></td>
                     <td><?php echo $nasabah[$i]['rt']?></td>
+                    <?php
+                      if($nasabah[$i]['blacklist'] == 0) {
+                    ?>
+                      <td style="background-color: green; text-align: center;">-</td>
+                    <?php
+                      } else {
+                    ?>
+                      <td style="background-color: red; text-align: center;">BL</td>
+                    <?php
+                      }
+                    ?>
                     <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("nasabahcon/view_nasabah/".$nasabah[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                     <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("nasabahcon/edit_nasabah/".$nasabah[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                     <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmation('<?php echo $nasabah[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
