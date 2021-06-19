@@ -235,11 +235,23 @@
         $data[$a]['biaya_administrasi'] = (int)$biaya_administrasi;
         $data[$a]['total_tagihan'] 		= (int)$total_tagihan;
 	}
-	foreach ($data as $key => $row) {
-	    $level[$key]  = $row['keterangan_level'];
-	}  
-	array_multisort($level, SORT_ASC, $data);
+    if($data != NULL) {
+        foreach ($data as $key => $row) {
+            $level[$key]  = $row['keterangan_level'];
+        }  
+        array_multisort($level, SORT_ASC, $data);
+    }
 ?>
+
+<!--<div style="text-align: left">
+    <form action="<?php echo base_url();?>index.php/surattagihancon/cetak_multi_page" method="post" enctype="multipart/form-data" role="form" target="_blank">
+        <div class="box-body">
+            <input type="hidden" class="form-control pull-right" name="tanggal" id="tanggal" value="<?php echo $tanggal_ori?>">
+            <input type="hidden" class="form-control pull-right" name="desa" id="desa" value="<?php echo $id_desa?>">
+            <button type="submit" class="btn btn-success" name="excel"><i class="fa fa-print"></i> Print All</button>
+        </div>
+    </form>
+</div>-->
 
 <table border="1" style="width:100%; border-collapse: collapse;">
 	<tr>

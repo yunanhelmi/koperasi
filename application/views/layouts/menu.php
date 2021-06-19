@@ -233,7 +233,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="<?php echo base_url(); ?>index.php/laporanhariancon/index"><i class="fa fa-list-ul"></i>Harian</a></li>
           </ul>
         </li>
-        <!--<li class="treeview">
+        <li class="treeview">
           <a href="<?php echo base_url()."assets/"; ?>#">
             <i class="fa fa-bullhorn"></i> <span>Penagihan</span>
             <span class="pull-right-container">
@@ -244,12 +244,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="<?php echo base_url(); ?>index.php/surattagihancon/index"><i class="fa fa-envelope"></i>Surat Tagihan</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/monitoringpiutangcon/index"><i class="fa fa-exclamation-triangle"></i>Monitoring Piutang</a>
           </ul>
-        </li>-->
-        <li>
+        </li>
+        <!--<li>
           <a href="<?php echo base_url(); ?>index.php/surattagihancon">
             <i class="fa fa-envelope"></i> <span>Surat Tagihan</span>
           </a>
-        </li>
+        </li>-->
         <li>
           <a href="<?php echo base_url(); ?>index.php/usercon">
             <i class="fa fa-user-circle-o"></i> <span>User</span>

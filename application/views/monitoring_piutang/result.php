@@ -235,10 +235,12 @@
         $data[$a]['biaya_administrasi'] = (int)$biaya_administrasi;
         $data[$a]['total_tagihan'] 		= (int)$total_tagihan;
 	}
-	foreach ($data as $key => $row) {
-	    $level[$key]  = $row['keterangan_level'];
-	}  
-	array_multisort($level, SORT_ASC, $data);
+	if($data != NULL) {
+        foreach ($data as $key => $row) {
+            $level[$key]  = $row['keterangan_level'];
+        }  
+        array_multisort($level, SORT_ASC, $data);
+    }
 ?>
 
 <table border="1" style="width:100%; border-collapse: collapse;">

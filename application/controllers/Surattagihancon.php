@@ -136,8 +136,10 @@ class SurattagihanCon extends CI_Controller {
         var_dump($data_surat_tagihan);
         echo "</pre>";*/
 
-        $data['data'] 		= $data_surat_tagihan;
-        $data['tanggal'] 	= $tanggal;
+        $data['data'] 		    = $data_surat_tagihan;
+        $data['tanggal'] 	    = $tanggal;
+        $data['tanggal_ori']    = $tanggal1;
+        $data['id_desa']        = $desa;
         //$data['jenis_pinjaman']    = $jenis_pinjaman;
 
         $this->load->view('/surat_tagihan/hasil_surat_tagihan', $data);
@@ -199,18 +201,18 @@ class SurattagihanCon extends CI_Controller {
                 $lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
 
 
-                if ($lama_pinjam > 30 && $lama_pinjam <= 150) {
-                    $print[$a]['level'] = 1;
-                    $print[$a]['keterangan'] = 'K1';
-                } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
-                    $print[$a]['level'] = 2;
-                    $print[$a]['keterangan'] = 'K2';
-                } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
-                    $print[$a]['level'] = 3;
-                    $print[$a]['keterangan'] = 'M1';
-                }  else if ($lama_pinjam > 730) {
-                    $print[$a]['level'] = 4;
-                    $print[$a]['keterangan'] = 'M2';
+                if ($lama_akhir_bayar > 30 && $lama_akhir_bayar <= 150) {
+                    $data[$a]['level'] = 1;
+                    $data[$a]['keterangan'] = 'K1';
+                } else if ($lama_akhir_bayar > 150 && $lama_akhir_bayar <= 365) {
+                    $data[$a]['level'] = 2;
+                    $data[$a]['keterangan'] = 'K2';
+                } else if ($lama_akhir_bayar > 365 && $lama_akhir_bayar <= 730) {
+                    $data[$a]['level'] = 3;
+                    $data[$a]['keterangan'] = 'M1';
+                }  else if ($lama_akhir_bayar > 730) {
+                    $data[$a]['level'] = 4;
+                    $data[$a]['keterangan'] = 'M2';
                 }
 
                 if($bulan_akhir_bayar > ($data[$a]['jumlah_angsuran'] - $data[$a]['jumlah_angsuran_detail'])) {
@@ -222,7 +224,7 @@ class SurattagihanCon extends CI_Controller {
                 $kali_administrasi = $bulan_akhir_bayar / 4;
                 $kali_administrasi = (int)$kali_administrasi;
 
-                if($res['level'] == 1) {
+                if($data['level'] == 1) {
                     $jasa_pinjaman = ($data[$a]['total_pinjaman_detail'] * $bulan_akhir_bayar * 2) / 100;
                     $biaya_administrasi = 0;
                 } else {
@@ -231,31 +233,24 @@ class SurattagihanCon extends CI_Controller {
                 }
                 $total = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
 
-                $print[$a]['nama']                          = $data[$a]['nama'];
-                $print[$a]['nomor_koperasi']                = $data[$a]['nomor_koperasi'];
-                $print[$a]['kelurahan']                     = $data[$a]['kelurahan'];
-                $print[$a]['dusun']                         = $data[$a]['dusun'];
-                $print[$a]['rw']                            = $data[$a]['rw'];
-                $print[$a]['rt']                            = $data[$a]['rt'];
-                $print[$a]['jaminan']                       = $data[$a]['jaminan'];
-                $print[$a]['sisa_pinjaman']                 = (int)$sisa_pinjaman;
-                $print[$a]['jasa_pinjaman']                 = (int)$jasa_pinjaman;
-                $print[$a]['lama_pinjam']                   = $lama_pinjam." Hari";
-                $print[$a]['lama_pinjam_long']              = $lama_pinjam_long;
-                $print[$a]['bulan_pinjam']                  = $bulan_pinjam;
-                $print[$a]['lama_pinjam_bulan_hari']        = $lama_pinjam_bulan_hari;
-                $print[$a]['lama_akhir_bayar']              = $lama_akhir_bayar." Hari";
-                $print[$a]['lama_akhir_bayar_long']         = $lama_akhir_bayar_long;
-                $print[$a]['bulan_akhir_bayar']             = $bulan_akhir_bayar;
-                $print[$a]['lama_akhir_bayar_bulan_hari']   = $lama_akhir_bayar_bulan_hari;
-                $print[$a]['lama_jatuh_tempo']              = $lama_jatuh_tempo." Hari";
-                $print[$a]['lama_jatuh_tempo_long']         = $lama_jatuh_tempo_long;
-                $print[$a]['bulan_jatuh_tempo']             = $bulan_jatuh_tempo;
-                $print[$a]['lama_jatuh_tempo_bulan_hari']   = $lama_jatuh_tempo_bulan_hari;
-                $print[$a]['biaya_administrasi']            = $biaya_administrasi;
-                $print[$a]['kali_administrasi']             = $kali_administrasi;
-                $print[$a]['total']                         = $total;
-                $print[$a]['tanggal']                       = $tanggal;
+                $data[$a]['sisa_pinjaman']                 = (int)$sisa_pinjaman;
+                $data[$a]['jasa_pinjaman']                 = (int)$jasa_pinjaman;
+                $data[$a]['lama_pinjam']                   = $lama_pinjam." Hari";
+                $data[$a]['lama_pinjam_long']              = $lama_pinjam_long;
+                $data[$a]['bulan_pinjam']                  = $bulan_pinjam;
+                $data[$a]['lama_pinjam_bulan_hari']        = $lama_pinjam_bulan_hari;
+                $data[$a]['lama_akhir_bayar']              = $lama_akhir_bayar." Hari";
+                $data[$a]['lama_akhir_bayar_long']         = $lama_akhir_bayar_long;
+                $data[$a]['bulan_akhir_bayar']             = $bulan_akhir_bayar;
+                $data[$a]['lama_akhir_bayar_bulan_hari']   = $lama_akhir_bayar_bulan_hari;
+                $data[$a]['lama_jatuh_tempo']              = $lama_jatuh_tempo." Hari";
+                $data[$a]['lama_jatuh_tempo_long']         = $lama_jatuh_tempo_long;
+                $data[$a]['bulan_jatuh_tempo']             = $bulan_jatuh_tempo;
+                $data[$a]['lama_jatuh_tempo_bulan_hari']   = $lama_jatuh_tempo_bulan_hari;
+                $data[$a]['biaya_administrasi']            = $biaya_administrasi;
+                $data[$a]['kali_administrasi']             = $kali_administrasi;
+                $data[$a]['total']                         = $total;
+                $data[$a]['tanggal']                       = $tanggal;
             } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
                 $today = date('Y-m-d', strtotime($tanggal));
                 $today = new DateTime($today);
@@ -289,7 +284,7 @@ class SurattagihanCon extends CI_Controller {
                 $bulan_jatuh_tempo = (($lama_jatuh_tempo_raw->format('%y') * 12) + $lama_jatuh_tempo_raw->format('%m'));
                 $lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
 
-                
+                $sisa_pinjaman = $data[$a]['total_pinjaman_detail'] - $data[$a]['total_angsuran_detail'];
                 $kali_administrasi = $bulan_pinjam / 4;
                 $kali_administrasi = (int)$kali_administrasi;
                 $jasa_pinjaman = ($sisa_pinjaman * $bulan_pinjam * 3) / 100;
@@ -297,25 +292,48 @@ class SurattagihanCon extends CI_Controller {
                 $total = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
 
                 if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
-                    $print[$a]['level'] = 1;
-                    $print[$a]['keterangan'] = 'K1';
+                    $data[$a]['level'] = 1;
+                    $data[$a]['keterangan'] = 'K1';
                 } else if ($lama_pinjam > 240 && $lama_pinjam <= 365) {
-                    $print[$a]['level'] = 2;
-                    $print[$a]['keterangan'] = 'K2';
+                    $data[$a]['level'] = 2;
+                    $data[$a]['keterangan'] = 'K2';
                 } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
-                    $print[$a]['level'] = 3;
-                    $print[$a]['keterangan'] = 'M1';
+                    $data[$a]['level'] = 3;
+                    $data[$a]['keterangan'] = 'M1';
                 }  else if ($lama_pinjam > 730) {
-                    $print[$a]['level'] = 4;
-                    $print[$a]['keterangan'] = 'M2';
+                    $data[$a]['level'] = 4;
+                    $data[$a]['keterangan'] = 'M2';
                 }
+
+                $data[$a]['sisa_pinjaman']                 = (int)$sisa_pinjaman;
+                $data[$a]['jasa_pinjaman']                 = (int)$jasa_pinjaman;
+                $data[$a]['lama_pinjam']                   = $lama_pinjam." Hari";
+                $data[$a]['lama_pinjam_long']              = $lama_pinjam_long;
+                $data[$a]['bulan_pinjam']                  = $bulan_pinjam;
+                $data[$a]['lama_pinjam_bulan_hari']        = $lama_pinjam_bulan_hari;
+                $data[$a]['lama_akhir_bayar']              = $lama_akhir_bayar." Hari";
+                $data[$a]['lama_akhir_bayar_long']         = $lama_akhir_bayar_long;
+                $data[$a]['bulan_akhir_bayar']             = $bulan_akhir_bayar;
+                $data[$a]['lama_akhir_bayar_bulan_hari']   = $lama_akhir_bayar_bulan_hari;
+                $data[$a]['lama_jatuh_tempo']              = $lama_jatuh_tempo." Hari";
+                $data[$a]['lama_jatuh_tempo_long']         = $lama_jatuh_tempo_long;
+                $data[$a]['bulan_jatuh_tempo']             = $bulan_jatuh_tempo;
+                $data[$a]['lama_jatuh_tempo_bulan_hari']   = $lama_jatuh_tempo_bulan_hari;
+                $data[$a]['biaya_administrasi']            = $biaya_administrasi;
+                $data[$a]['kali_administrasi']             = $kali_administrasi;
+                $data[$a]['total']                         = $total;
+                $data[$a]['tanggal']                       = $tanggal;
             }
         }
 
-        $result['data'] = $print;
+        $result['data'] = $data;
         $result['tanggal'] = $tanggal;
 
-        $this->load->view('/surat_tagihan/hasil_surat_tagihan', $result);   
+        echo "<pre>";
+        var_dump($data);
+        echo "</pre>";
+
+        //$this->load->view('/surat_tagihan/hasil_surat_tagihan', $result);   
     }
 
     function cetak_surat_angsuran($tanggal, $id_pinjaman) {
