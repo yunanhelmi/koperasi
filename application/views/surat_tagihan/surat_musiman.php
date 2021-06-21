@@ -152,7 +152,7 @@
 </p>
 <div id="halaman">
     <p class="header_content">
-        Nomor<d style="padding-left:3em;" >: <?php echo $data[0]['nomor_koperasi'] ?> / MM / <?php echo $level == 1 ? 'Srt Pemberitahuan.' : 'Srt Tagihan.' ?> / <?php echo $keterangan ?> / <?php echo date("Y") ?></d><br/>
+        Nomor<d style="padding-left:3em;" >: <?php echo $data[0]['nomor_koperasi'] ?> / MM / <?php echo $level == 1 ? 'Srt Pemberitahuan.' : 'Srt Tagihan.' ?> / M / <?php echo $keterangan ?> / <?php echo date("Y") ?></d><br/>
         Lampiran<d style="padding-left:2em;" >: -</d><br/>
         Perihal<d style="padding-left:3em;" >: <?php echo $level == 1 ? 'Angsuran Pinjaman' : 'Tagihan Pinjaman' ?></d>
     </p>
@@ -181,21 +181,21 @@
             <td>Jasa Pinjaman</td>
             <td>:</td>
             <td>Rp. </td>
-            <td><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
-            <td>(<?php echo $lama_pinjam." - ".$lama_pinjam_bulan_hari  ?> / <?php echo $tanggal_laporan ?>)</td>
+            <td><?php echo number_format($jasa_pinjaman - $jasa_terbayar,0,",",".") ?></td>
+            <td>(<?php echo $bulan_pinjam - $bulan_jasa ?> Bulan)</td>
         </tr>
         <tr>
             <td>Administrasi (<?php echo $kali_administrasi ?>x)</td>
             <td>:</td>
             <td style="border-bottom: 1px solid black;">Rp. </td>
             <td style="border-bottom: 1px solid black;"><?php echo number_format($biaya_administrasi,0,",",".") ?></td>
-            <td style="border-bottom: 1px solid black;"></td>
+            <td style="border-bottom: 1px solid black;">(<?php echo $lama_pinjam." - ".$lama_pinjam_bulan_hari  ?> / <?php echo $tanggal_laporan ?>)</td>
         </tr>
         <tr>
             <td>Total</td>
             <td>:</td>
             <td>Rp. </td>
-            <td><?php echo number_format($total,0,",",".") ?></td>
+            <td><?php echo number_format($total - $jasa_terbayar,0,",",".") ?></td>
             <td></td>
         </tr>
     </table>
@@ -239,4 +239,6 @@
         <img src="<?php echo $base64 ?>"><br/>
         <u>Drs. SUPRAPTO</u>
     </p>
+    <br>
+    <i><strong>NB: Jika terdapat kesalahan perhitungan dari keterangan yang tercantum di atas, bisa diubah sebagaimana mestinya ketika datang ke kantor pelayanan koperasi.</strong></i>
 </div>

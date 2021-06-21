@@ -407,6 +407,7 @@ class SurattagihanCon extends CI_Controller {
             $sisa_pinjaman = $angsuran_perbulan * $bulan_akhir_bayar;
         }
 
+        $jasa_terbayar = $data[0]['total_jasa_detail'];
         $kali_administrasi = $bulan_akhir_bayar / 4;
         $kali_administrasi = (int)$kali_administrasi;
 
@@ -423,6 +424,8 @@ class SurattagihanCon extends CI_Controller {
         $res['data']                        = $data;
         $res['sisa_pinjaman']               = (int)$sisa_pinjaman;
         $res['jasa_pinjaman']               = (int)$jasa_pinjaman;
+        $res['jasa_terbayar']               = (int)$jasa_terbayar;
+        $res['bulan_jasa']                  = (int)$data[0]['jumlah_jasa_detail'];
         $res['lama_pinjam']                 = $lama_pinjam." Hari";
         $res['lama_pinjam_long']            = $lama_pinjam_long;
         $res['bulan_pinjam']                = $bulan_pinjam;
@@ -496,7 +499,7 @@ class SurattagihanCon extends CI_Controller {
         $bulan_jatuh_tempo = (($lama_jatuh_tempo_raw->format('%y') * 12) + $lama_jatuh_tempo_raw->format('%m'));
         $lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
 
-        
+        $jasa_terbayar = $data[0]['total_jasa_detail'];
         $kali_administrasi = $bulan_pinjam / 4;
         $kali_administrasi = (int)$kali_administrasi;
         $jasa_pinjaman = ($sisa_pinjaman * $bulan_pinjam * 3) / 100;
@@ -520,6 +523,8 @@ class SurattagihanCon extends CI_Controller {
         $res['data']                        = $data;
         $res['sisa_pinjaman']               = (int)$sisa_pinjaman;
         $res['jasa_pinjaman']               = (int)$jasa_pinjaman;
+        $res['jasa_terbayar']               = (int)$jasa_terbayar;
+        $res['bulan_jasa']                  = (int)$data[0]['jumlah_jasa_detail'];
         $res['lama_pinjam']                 = $lama_pinjam." Hari";
         $res['lama_pinjam_long']            = $lama_pinjam_long;
         $res['bulan_pinjam']                = $bulan_pinjam;

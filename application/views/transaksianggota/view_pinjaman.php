@@ -1187,7 +1187,7 @@ function rupiah($angka){
 
       function hitung_angsuran() {
         if($('#jenis').val() == 'Angsuran') {
-
+          
         } else if($('#jenis').val() == 'Pinjaman') {
           var tgl_pinjam = '<?php echo $pinjaman->waktu ?>'
         }
