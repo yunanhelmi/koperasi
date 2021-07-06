@@ -221,6 +221,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url(); ?>index.php/laporanpiutangcon/index"><i class="fa fa-list-ul"></i>Piutang Anggota</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporanglobalpiutangmacetcon/index"><i class="fa fa-list-ul"></i>Global Piutang Macet</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporanrincianpiutangcon/index"><i class="fa fa-list-ul"></i>Rincian Piutang</a>
             <li><a href="<?php echo base_url(); ?>index.php/laporanrincianjasacon/index"><i class="fa fa-list-ul"></i>Rincian Jasa</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporanrincianjasapihakketigacon/index"><i class="fa fa-list-ul"></i>Rincian Jasa Pihak Ketiga</a></li>
