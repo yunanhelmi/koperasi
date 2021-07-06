@@ -243,6 +243,8 @@ class TransaksianggotaCon extends CI_Controller {
 		$update['jasa_perbulan'] 			= $this->input->post('jasa_perbulan');
 		$update['total_angsuran_perbulan'] 	= $this->input->post('total_angsuran_perbulan');
 		$update['keterangan'] 				= $this->input->post('keterangan');
+		$update['uang_kurang'] 				= $this->input->post('uang_kurang');
+		$update['janji'] 					= $this->input->post('janji');
 		$this->pinjamanmodel->updateData($id_pinjaman, $update);
 
 		$id_nasabah = $update['id_nasabah'];

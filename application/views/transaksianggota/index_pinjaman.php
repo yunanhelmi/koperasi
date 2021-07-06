@@ -191,6 +191,7 @@ function rupiah($angka){
                       <th>Jumlah Pinjaman</th>
                       <th>Sisa Pinjaman</th>
                       <th>Jumlah Angsuran</th>
+                      <th>Uang Kurang</th>
                       <th>View</th>
                       <th>Edit</th>
                       <th>Delete</th>
@@ -216,6 +217,7 @@ function rupiah($angka){
                       <td><?php echo rupiah($pinjaman[$i]['jumlah_pinjaman'])?></td>
                       <td><?php echo rupiah($pinjaman[$i]['sisa_angsuran'])?></td>
                       <td><?php echo $pinjaman[$i]['jumlah_angsuran']?></td>
+                      <td><?php echo rupiah($pinjaman[$i]['uang_kurang'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_pinjaman/".$pinjaman[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_pinjaman/".$pinjaman[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationPinjaman('<?php echo $pinjaman[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>

@@ -142,6 +142,10 @@ class SurattagihanCon extends CI_Controller {
         $data['id_desa']        = $desa;
         //$data['jenis_pinjaman']    = $jenis_pinjaman;
 
+        /*echo "<pre>";
+        var_dump($data_surat_tagihan);
+        echo "</pre>";*/
+
         $this->load->view('/surat_tagihan/hasil_surat_tagihan', $data);
     }
 

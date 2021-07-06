@@ -258,6 +258,8 @@
 	    <th>TGL PINJAM</th>
 	    <th>TGL TERAKHIR BAYAR</th>
 	    <th>SISA PINJAMAN</th>
+        <th>POKOK YG TERBAYAR</th>
+        <th>JASA YG TERBAYAR</th>
 	    <th>KETERANGAN</th>
         <th>REPUTASI</th>
 	</tr>
@@ -284,6 +286,8 @@
 				  	<td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
 				  	<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>
 		  			<td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                    <td style="text-align: right;"><?php echo $data[$a]['total_angsuran_detail']; ?></td>
+                    <td style="text-align: right;"><?php echo $data[$a]['total_jasa_detail']; ?></td>
 		  			<?php
                         if($data[$a]['saldo'] > 0) {
 		            		if ($data[$a]['keterangan_level'] == 1) {
@@ -306,7 +310,7 @@
 		            		}
                         } else {
                     ?>
-                            <td style="background-color: green; text-align: center;">LUNAS</td>
+                            <td style="text-align: center;">LUNAS</td>
                     <?php
 
                         }

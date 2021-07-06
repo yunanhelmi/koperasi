@@ -136,7 +136,16 @@
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label">Reputasi</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="blacklist" id="blacklist" readonly value=<?php echo $nasabah->blacklist == 0 ? '-' : 'BL' ?> >
+                      <?php
+                      if($nasabah->blacklist == 0) {
+                        $reputasi_nasabah = '-';
+                      } else if($nasabah->blacklist == 1) {
+                        $reputasi_nasabah = 'BL 1';
+                      } else if($nasabah->blacklist == 2) {
+                        $reputasi_nasabah = 'BL 2';
+                      }
+                      ?>
+                      <input type="text" class="form-control" name="blacklist" id="blacklist" readonly value=<?php echo $reputasi_nasabah ?> >
                     </div>
                   </div>
                 </form>

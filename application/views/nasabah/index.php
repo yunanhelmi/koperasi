@@ -44,7 +44,7 @@
                     <th>Desa</th>
                     <th>RW</th>
                     <th>RT</th>
-                    <th>Reputasi</th>
+                    <th>Reputasi Nasabah</th>
                     <th>View</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -69,9 +69,13 @@
                     ?>
                       <td style="background-color: green; text-align: center;">-</td>
                     <?php
-                      } else {
+                      } else if($nasabah[$i]['blacklist'] == 1) {
                     ?>
-                      <td style="background-color: red; text-align: center;">BL</td>
+                      <td style="background-color: pink; text-align: center;">BL 1</td>
+                    <?php
+                      } else if($nasabah[$i]['blacklist'] == 2) {
+                    ?>
+                      <td style="background-color: red; text-align: center;">BL 2</td>
                     <?php
                       }
                     ?>

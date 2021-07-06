@@ -260,6 +260,14 @@ function rupiah($angka){
                           }
                         ?>
                       </div>
+                      <div class="form-group col-xs-3">
+                        <label for="exampleInputPassword1">Uang Kurang</label>
+                        <p><?php echo "Rp " . number_format($pinjaman->uang_kurang,2,',','.');?></p>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Janji</label>
+                        <p><?php echo $pinjaman->janji;?></p>
+                      </div>
                     </div>
                   </div>  
 
@@ -631,6 +639,15 @@ function rupiah($angka){
                           <input type="text" class="form-control" value="<?php echo $pinjaman->jasa_perbulan?>" id="jasa" name="jasa" placeholder="0">
                         </div>
                         <div id="label_jasa" class="alert-danger"></div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Pengali Jasa Tambahan</label>
+                        <select id="pengali_jasa_tambahan" name="pengali_jasa_tambahan" class="form-control" style="width: 100%;">
+                          <option value='0'>-</option>
+                          <option value='1/3'>10 hari</option>
+                          <option value='1/2'>15 hari</option>
+                          <option value='2/3'>20 hari</option>
+                        </select>
                       </div>
                       <div class="form-group col-xs-6">
                         <label for="exampleInputPassword1">Jasa Tambahan</label>
@@ -1233,6 +1250,27 @@ function rupiah($angka){
         $("#label_total").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(total)));
       }
 
+      function hitung_denda() {
+        var pengali = $('#pengali_jasa_tambahan').val();
+        var jasa = parseInt($('#jasa').val());
+        var jasa_tambahan = 0;
+        console.log(pengali);
+        if(pengali == '0') {
+          jasa_tambahan = 0;
+        } else if(pengali == '1/3') {
+          jasa_tambahan = jasa / 3;
+          jasa_tambahan = parseInt(jasa_tambahan);
+        } else if(pengali == '1/2') {
+          jasa_tambahan = jasa / 2;
+          jasa_tambahan = parseInt(jasa_tambahan);
+        } else if(pengali == '2/3') {
+          jasa_tambahan = (2*jasa) / 3;
+          jasa_tambahan = parseInt(jasa_tambahan);
+        }
+        $('#denda').val(jasa_tambahan);
+        label_denda();
+      }
+
       function hitung_total() {
         if($('#angsuran').val() != "" && $('#angsuran').val() != NaN && $('#angsuran').val() != null) {
           var angsuran = parseInt($('#angsuran').val());
@@ -1318,6 +1356,11 @@ function rupiah($angka){
         });
         $('#jasa').keyup(function() {
           label_jasa();
+          hitung_denda();
+          hitung_total();
+        });
+        $('#pengali_jasa_tambahan').change(function() {
+          hitung_denda();
           hitung_total();
         });
         $('#denda').keyup(function() {

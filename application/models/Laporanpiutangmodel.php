@@ -101,6 +101,7 @@ class LaporanpiutangModel extends CI_Model {
 									pinjaman.jumlah_angsuran,
 									pinjaman.jumlah_pinjaman,
 									pinjaman.angsuran_perbulan,
+									pinjaman.uang_kurang,
 									ds.jumlah_angsuran_detail,
 									ds.jumlah_pinjaman_detail,
 									ds.total_angsuran_detail,

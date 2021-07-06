@@ -27,8 +27,10 @@ class MonitoringpiutangModel extends CI_Model {
 									pinjaman.angsuran_perbulan,
 									ds.jumlah_angsuran_detail,
 									ds.jumlah_pinjaman_detail,
+									ds.jumlah_jasa_detail,
 									ds.total_angsuran_detail,
 									ds.total_pinjaman_detail,
+									ds.total_jasa_detail,
 									ds.waktu_terakhir_angsuran
 								FROM 
 									(
@@ -36,8 +38,10 @@ class MonitoringpiutangModel extends CI_Model {
 											id_pinjaman,
 											COUNT(CASE WHEN jenis = 'Angsuran' AND angsuran > 0 THEN 1 END) as jumlah_angsuran_detail,
 											COUNT(IF(jenis = 'Pinjaman', 1, NULL)) as jumlah_pinjaman_detail,
+											COUNT(CASE WHEN jenis = 'Angsuran' AND jasa > 0 THEN 1 END) as jumlah_jasa_detail,
 											SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran_detail,
 											SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman_detail,
+											SUM(CASE WHEN jenis = 'Angsuran' AND jasa > 0 THEN jasa ELSE 0 END) as total_jasa_detail,
 											MAX(waktu) as waktu_terakhir_angsuran
 										FROM 
 											detail_angsuran
@@ -86,8 +90,10 @@ class MonitoringpiutangModel extends CI_Model {
 									pinjaman.angsuran_perbulan,
 									ds.jumlah_angsuran_detail,
 									ds.jumlah_pinjaman_detail,
+									ds.jumlah_jasa_detail,
 									ds.total_angsuran_detail,
 									ds.total_pinjaman_detail,
+									ds.total_jasa_detail,
 									ds.waktu_terakhir_angsuran
 								FROM 
 									(
@@ -95,8 +101,10 @@ class MonitoringpiutangModel extends CI_Model {
 											id_pinjaman,
 											COUNT(CASE WHEN jenis = 'Angsuran' AND angsuran > 0 THEN 1 END) as jumlah_angsuran_detail,
 											COUNT(IF(jenis = 'Pinjaman', 1, NULL)) as jumlah_pinjaman_detail,
+											COUNT(CASE WHEN jenis = 'Angsuran' AND jasa > 0 THEN 1 END) as jumlah_jasa_detail,
 											SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran_detail,
 											SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman_detail,
+											SUM(CASE WHEN jenis = 'Angsuran' AND jasa > 0 THEN jasa ELSE 0 END) as total_jasa_detail,
 											MAX(waktu) as waktu_terakhir_angsuran
 										FROM 
 											detail_angsuran

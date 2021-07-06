@@ -106,7 +106,8 @@
                   <label for="exampleInputPassword1">Reputasi</label>
                   <select id="blacklist" name="blacklist" class="form-control">
                     <option value=0 <?php echo $nasabah->blacklist == 0 ? 'selected' : ''?> >-</option>
-                    <option value=1 <?php echo $nasabah->blacklist == 1 ? 'selected' : ''?> >BL</option>
+                    <option value=1 <?php echo $nasabah->blacklist == 1 ? 'selected' : ''?> >BL 1</option>
+                    <option value=2 <?php echo $nasabah->blacklist == 2 ? 'selected' : ''?> >BL 2</option>
                   </select>
                 </div>
               </div>

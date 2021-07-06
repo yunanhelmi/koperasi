@@ -108,6 +108,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <i class="fa fa-users"></i> <span>Anggota</span>
           </a>
         </li>
+        <li>
+          <a href="<?php echo base_url(); ?>index.php/petugaslapangancon">
+            <i class="fa fa-handshake-o"></i> <span>Petugas Lapangan</span>
+          </a>
+        </li>
         <li class="treeview">
           <a href="<?php echo base_url()."assets/"; ?>#">
             <i class="fa fa-usd"></i> <span>Transaksi</span>

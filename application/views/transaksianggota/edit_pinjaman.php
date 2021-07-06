@@ -259,6 +259,18 @@ function rupiah($angka){
                     <label for="exampleInputPassword1">Keterangan</label>
                     <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan" value="<?php echo $pinjaman->keterangan?>">
                   </div>
+                  <div class="form-group col-xs-6">
+                    <label for="exampleInputPassword1">Uang Kurang</label>
+                    <div class="input-group margin-bottom-sm">
+                      <span class="input-group-addon">Rp</span>
+                      <input type="text" class="form-control" value="<?php echo $pinjaman->uang_kurang?>" id="uang_kurang" name="uang_kurang" placeholder="0">
+                    </div>
+                    <div id="label_uang_kurang" class="alert-danger"></div> 
+                  </div>
+                  <div class="form-group col-xs-6">
+                    <label for="exampleInputPassword1">Janji</label>
+                    <input type="text" class="form-control" id="janji" name="janji" placeholder="" value="<?php echo $pinjaman->janji?>">
+                  </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
@@ -867,6 +879,11 @@ function rupiah($angka){
         $("#label_total_angsuran_perbulan").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(total_angsuran_perbulan)));
       }
 
+      function label_uang_kurang() {
+        var uang_kurang = $('#uang_kurang').val();
+        $("#label_uang_kurang").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(uang_kurang)));
+      }
+
       function hitung_angsuran_perbulan() {
         //var e = document.getElementById("jenis_pinjaman");
         //if(e.options[e.selectedIndex].value == "Angsuran") {
@@ -968,6 +985,7 @@ function rupiah($angka){
         label_angsuran_perbulan();
         label_jasa_perbulan();
         label_total_angsuran_perbulan();
+        label_uang_kurang();
 
         $('#jenis_pinjaman').change(function() {
           hitung_jasa_perbulan();
@@ -987,6 +1005,10 @@ function rupiah($angka){
 
         $('#waktu').change(function() {
           hitung_jatuh_tempo();
+        });
+
+        $('#uang_kurang').keyup(function() {
+          label_uang_kurang();
         });
 
       });

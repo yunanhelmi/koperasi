@@ -455,8 +455,10 @@
 	    <!--<th>TGL JATUH TEMPO</th>-->
 	    <!--<th>SLD X</th>-->
 	    <th>SISA PINJAMAN</th>
+	    <th>UANG KURANG</th>
 	    <th>JASA YG HARUS DIBAYAR</th>
-	    <th>LAMA TERAKHIR BAYAR / LAMA PINJAM</th>
+	    <th>LAMA PINJAM</th>
+	    <th>LAMA TERAKHIR BAYAR</th>
 	    <!--<th>LAMA JATUH TEMPO</th>-->
 	    <th>KETERANGAN</th>
 	</tr>
@@ -465,10 +467,12 @@
 	  	$no = 1;
 	  	$total_sisa = 0;
 	  	$total_jasa = 0;
+	  	$total_uang_kurang = 0;
 	  	for($a = 0; $a < sizeof($data); $a++) {
 	  		if($data[$a]['saldo'] != 0) {
-	  			$total_sisa += $data[$a]['saldo'];
-	  			$total_jasa += $data[$a]['jasa_pinjaman'];
+	  			$total_sisa 		+= $data[$a]['saldo'];
+	  			$total_jasa 		+= $data[$a]['jasa_pinjaman'];
+	  			$total_uang_kurang 	+= $data[$a]['uang_kurang'];
 	?>
 				<tr>
 					<td style="text-align: center;"><?php echo $no ?></td>
@@ -486,8 +490,21 @@
 				  	<!--<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_jatuh_tempo']); ?></td>-->
 				  	<!--<td style="text-align: center;"><?php $data[$a]['sisa_kali_angsuran']; ?></td>-->
 		  			<td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+		  			<td style="text-align: right;"><?php echo $data[$a]['uang_kurang']; ?></td>
 		  			<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>
+		  			<?php
+		  			if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
+		  			?>
+		  			<td></td>
 		  			<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>
+		  			<?php
+		  			} else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
+		  			?>
+		  			<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>
+		  			<td></td>
+		  			<?php
+		  			}
+		  			?>
 		    		<!--<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>-->
 		  			<?php
 		            		if ($data[$a]['keterangan_level'] == 0) {
@@ -521,12 +538,14 @@
 	<tr>
 		<td colspan="12" style="text-align: center;"><strong>TOTAL PIUTANG</strong></td>
 		<td style="text-align: right;"><strong><?php echo $total_sisa ?></strong></td>
+		<td style="text-align: right;"><strong><?php echo $total_uang_kurang ?></strong></td>
 		<td style="text-align: right;"><strong><?php echo $total_jasa ?></strong></td>
 		<td colspan="2"></td>
 	</tr>
 	<tr>
 		<td colspan="12" style="text-align: center;"><strong>TOTAL PIUTANG (NERACA)</strong></td>
 		<td style="text-align: right;"><strong><?php echo $piutang_neraca ?></strong></td>
+		<td></td>
 		<td></td>
 		<td colspan="2"></td>
 	</tr>
@@ -536,6 +555,7 @@
 	<tr>
 		<td colspan="12" style="text-align: center;"><strong>SELISIH</strong></td>
 		<td style="text-align: right;"><strong><?php echo $selisih ?></strong></td>
+		<td></td>
 		<td></td>
 		<td colspan="2"></td>
 	</tr>

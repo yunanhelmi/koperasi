@@ -259,20 +259,20 @@
 	    <th>NAMA</th>
 	    <th>NOMOR NASABAH</th>
         <th>CETAK</th>
-	    <th>ALAMAT</th>
+	    <!--<th>ALAMAT</th>-->
 	    <th>DESA</th>
-	    <th>DUSUN</th>
-	    <th>RT</th>
-	    <th>RW</th>
+	    <!--<th>DUSUN</th>-->
+	    <!--<th>RT</th>-->
+	    <!--<th>RW</th>-->
 	    <th>JENIS PINJAMAN</th>
 	    <th>JAMINAN</th>
 	    <th>TGL PINJAM</th>
-	    <th>TGL TERAKHIR BAYAR</th>
+	    <!--<th>TGL TERAKHIR BAYAR</th>-->
 	    <!--<th>TGL JATUH TEMPO</th>-->
 	    <!--<th>SLD X</th>-->
 	    <th>SISA PINJAMAN</th>
-	    <th>JASA PINJAMAN</th>
-	    <th>LAMA TERAKHIR BAYAR / LAMA PINJAM</th>
+	    <!--<th>JASA PINJAMAN</th>-->
+	    <!--<th>LAMA TERAKHIR BAYAR / LAMA PINJAM</th>-->
 	    <!--<th>LAMA JATUH TEMPO</th>-->
 	    <th>KETERANGAN</th>
 	</tr>
@@ -281,7 +281,8 @@
 	  	$no = 1;
 	  	$total_sisa = 0;
 	  	for($a = 0; $a < sizeof($data); $a++) {
-	  		if($data[$a]['saldo'] != 0) {
+            $tanggungan_jasa = $data[$a]['jasa_pinjaman'] - $data[$a]['total_jasa_detail'];
+	  		if($data[$a]['saldo'] != 0 || $tanggungan_jasa > 0) {
 	  			$total_sisa += $data[$a]['saldo'];
 	  			if($data[$a]['keterangan_level'] != 0) {
 	?>
@@ -300,20 +301,20 @@
         <?php
                     }
         ?>
-		  			<td><?php echo $data[$a]['alamat']; ?></td>
+		  			<!--<td><?php echo $data[$a]['alamat']; ?></td>-->
 		  			<td><?php echo $data[$a]['kelurahan']; ?></td>
-		  			<td><?php echo $data[$a]['dusun']; ?></td>
-		  			<td><?php echo $data[$a]['rt']; ?></td>
-		  			<td><?php echo $data[$a]['rw']; ?></td>
+		  			<!--<td><?php echo $data[$a]['dusun']; ?></td>-->
+		  			<!--<td><?php echo $data[$a]['rt']; ?></td>-->
+		  			<!--<td><?php echo $data[$a]['rw']; ?></td>-->
 		  			<td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
 		  			<td><?php echo $data[$a]['jaminan']; ?></td>
 				  	<td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
-				  	<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>
+				  	<!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
 				  	<!--<td style="text-align: center;"><?php echo $data[$a]['tgl_jatuh_tempo']; ?></td>-->
 				  	<!--<td style="text-align: center;"><?php echo $data[$a]['sisa_kali_angsuran']; ?></td>-->
 		  			<td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
-		  			<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>
-		  			<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>
+		  			<!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
+		  			<!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
 		    		<!--<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>-->
 		  			<?php
 		            		if ($data[$a]['keterangan_level'] == 1) {

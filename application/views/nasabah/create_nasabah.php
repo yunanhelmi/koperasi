@@ -88,7 +88,8 @@
                   <label for="exampleInputPassword1">Reputasi</label>
                   <select id="blacklist" name="blacklist" class="form-control">
                     <option value=0>-</option>
-                    <option value=1>BL</option>
+                    <option value=1>BL 1</option>
+                    <option value=2>BL 2</option>
                   </select>
                 </div>
               </div>
