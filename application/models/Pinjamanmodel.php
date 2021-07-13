@@ -89,6 +89,65 @@ class PinjamanModel extends CI_Model {
 		return $a;
 	}
 
+	function get_data_penerimaan_surat_by_id_nasabah($id_nasabah) {
+		$query = $this->db->query("
+									SELECT
+										nasabah.nama,
+										nasabah.nomor_koperasi,
+										nasabah.alamat,
+										nasabah.kelurahan,
+										nasabah.dusun,
+										nasabah.rt,
+										nasabah.rw,
+										pinjaman.id as id_pinjaman,
+										pinjaman.jenis_pinjaman,
+										pinjaman.jaminan,
+										pinjaman.waktu as tanggal_pinjaman,
+										pinjaman.id_nasabah,
+										pinjaman.jatuh_tempo,
+										pinjaman.jumlah_angsuran,
+										pinjaman.jumlah_pinjaman,
+										pinjaman.angsuran_perbulan,
+										ds.jumlah_angsuran_detail,
+										ds.jumlah_jasa_detail,
+										ds.jumlah_pinjaman_detail,
+										ds.total_angsuran_detail,
+										ds.total_pinjaman_detail,
+										ds.total_jasa_detail,
+										ds.waktu_terakhir_angsuran
+									FROM 
+										(
+											SELECT 
+												id_pinjaman,
+												COUNT(CASE WHEN jenis = 'Angsuran' AND angsuran > 0 THEN 1 END) as jumlah_angsuran_detail,
+												COUNT(IF(jenis = 'Pinjaman', 1, NULL)) as jumlah_pinjaman_detail,
+												COUNT(CASE WHEN jenis = 'Angsuran' AND jasa > 0 THEN 1 END) as jumlah_jasa_detail,
+												SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran_detail,
+												SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman_detail,
+												SUM(CASE WHEN jenis = 'Angsuran' AND jasa > 0 THEN jasa ELSE 0 END) as total_jasa_detail,
+												MAX(waktu) as waktu_terakhir_angsuran
+											FROM 
+												detail_angsuran
+											GROUP BY 
+												id_pinjaman
+										) as ds
+										LEFT JOIN
+											pinjaman
+										ON
+											ds.id_pinjaman = pinjaman.id
+									LEFT JOIN
+										nasabah 
+									ON 
+										pinjaman.id_nasabah = nasabah.id
+									WHERE
+										pinjaman.id_nasabah = '$id_nasabah'
+									ORDER BY 
+										nasabah.kelurahan
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `pinjaman`");
 		$a = $query->result_array();

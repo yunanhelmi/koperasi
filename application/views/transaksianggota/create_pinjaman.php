@@ -271,6 +271,9 @@ function rupiah($angka){
                   <div class="col-xs-3">
                     <button type="submit" class="btn btn-primary">Simpan</button>
                   </div>
+                  <div class="col-xs-3">
+                    <a class="btn btn-primary btn-warning" href="<?php echo site_url("transaksianggotacon/pinjaman/".$nasabah->id); ?>">Batal</a>
+                  </div>
                 </div>
               </form>
 

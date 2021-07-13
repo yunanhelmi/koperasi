@@ -251,6 +251,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="<?php echo base_url(); ?>index.php/monitoringpiutangcon/index"><i class="fa fa-exclamation-triangle"></i>Monitoring Piutang</a>
           </ul>
         </li>
+        <li>
+          <a href="<?php echo base_url(); ?>index.php/penerimaansuratcon/index">
+            <i class="fa fa-file-text"></i> <span>Daftar Penerimaan Surat</span>
+          </a>
+        </li>
         <!--<li>
           <a href="<?php echo base_url(); ?>index.php/surattagihancon">
             <i class="fa fa-envelope"></i> <span>Surat Tagihan</span>
