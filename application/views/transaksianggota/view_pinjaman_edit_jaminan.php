@@ -357,6 +357,7 @@ function rupiah($angka){
                       <div class="form-group col-xs-6" id="div_jenis_tanah">
                         <label for="exampleInputPassword1">Jenis Tanah</label>
                         <select id="jenis_tanah" name="jenis_tanah" class="form-control" style="width: 100%;">
+                          <option value='perumahan'>Perumahan</option>
                           <option value='pekarangan'>Pekarangan</option>
                           <option value='pertanian'>Pertanian</option>
                           <option value='perkebunan'>Perkebunan</option>
@@ -430,6 +431,7 @@ function rupiah($angka){
                       <div class="form-group col-xs-6" id="div_edit_jenis_tanah">
                         <label for="exampleInputPassword1">Jenis Tanah</label>
                         <select id="edit_jenis_tanah" name="edit_jenis_tanah" class="form-control" style="width: 100%;">
+                          <option value='perumahan' <?php echo $edit_detail_jaminan->jenis_tanah == 'perumahan' ? 'selected' : ''?> >Perumahan</option>
                           <option value='pekarangan' <?php echo $edit_detail_jaminan->jenis_tanah == 'pekarangan' ? 'selected' : ''?> >Pekarangan</option>
                           <option value='pertanian' <?php echo $edit_detail_jaminan->jenis_tanah == 'pertanian' ? 'selected' : ''?> >Pertanian</option>
                           <option value='perkebunan' <?php echo $edit_detail_jaminan->jenis_tanah == 'perkebunan' ? 'selected' : ''?> >Perkebunan</option>

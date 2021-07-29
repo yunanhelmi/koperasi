@@ -357,6 +357,7 @@ function rupiah($angka){
                       <div class="form-group col-xs-6" id="div_jenis_tanah">
                         <label for="exampleInputPassword1">Jenis Tanah</label>
                         <select id="jenis_tanah" name="jenis_tanah" class="form-control" style="width: 100%;">
+                          <option value='perumahan'>Perumahan</option>
                           <option value='pekarangan'>Pekarangan</option>
                           <option value='pertanian'>Pertanian</option>
                           <option value='perkebunan'>Perkebunan</option>
