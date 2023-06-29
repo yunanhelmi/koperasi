@@ -114,7 +114,7 @@ class LaporanarusbankCon extends CI_Controller {
         $sheet = $file->getActiveSheet ();
         $i = 2;
 
-        $sheet->mergeCells("A".$i.":F".$i)->setCellValue("A".$i, "KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYYAH");
+        $sheet->mergeCells("A".$i.":F".$i)->setCellValue("A".$i, "KOPERASI KHOZANAH MAMBAUL MUBASYIRIN");
         $sheet->getStyle("A".$i.":F".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":F".$i)->getFont()->setSize(14)->setBold(true);
         $i++;
@@ -122,11 +122,11 @@ class LaporanarusbankCon extends CI_Controller {
         $sheet->getStyle("A".$i.":F".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":F".$i)->getFont()->setSize(12)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":F".$i)->setCellValue("A".$i, "KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYYAH");
+        $sheet->mergeCells("A".$i.":F".$i)->setCellValue("A".$i, "AHU-0003689.AH.01.39.TAHUN 2022");
         $sheet->getStyle("A".$i.":F".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":F".$i)->getFont()->setSize(10)->setBold(true);
         $i++;
-        $sheet->mergeCells("A".$i.":F".$i)->setCellValue("A".$i, "NGRASEH DANDER BOJONEGORO  TELP (0353) 886039       BH : 8181/BH/II/95");
+        $sheet->mergeCells("A".$i.":F".$i)->setCellValue("A".$i, "Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro");
         $sheet->getStyle("A".$i.":F".$i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle("A".$i.":F".$i)->getFont()->setSize(10)->setBold(true);
         $i += 2;

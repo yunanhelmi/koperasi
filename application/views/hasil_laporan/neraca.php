@@ -58,13 +58,13 @@ function isLeapYear($year) {
 
 ?>
 
-<center>KOPPONTREN MAMBAUL MUBBASYIRIN SHIDDIQIYAH</center>
+<center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center>
 <br>
 <center>LAPORAN NERACA <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
 <br>
-<center>KANTOR PONPES MAJMA'AL BAHRAIN SHIDDIQIYAH</center>
+<center><strong>AHU-0003689.AH.01.39.TAHUN 2022</strong></center>
 <br>
-<center>TIMUR PASAR NGUMPAKDALEM, DANDER BOJONEGORO TELP 081335044439       BH : 8181/BH/II/95</center>
+<center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center>
 <br>
 <br>
 
