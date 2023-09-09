@@ -328,7 +328,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$input['jenis_tanah'] 	= $this->input->post('jenis_tanah');
 		$input['lokasi_tanah'] 	= $this->input->post('lokasi_tanah');
 		$input['merek'] 		= $this->input->post('merek');
-		$input['jenis'] 		= $this->input->post('jenis');
+		$input['jenis'] 		= $this->input->post('jenis_motor');
 		$input['tahun']			= $this->input->post('tahun');
 		$input['atas_nama']		= $this->input->post('atas_nama');
 		$input['no_pol']		= $this->input->post('no_pol');
@@ -395,7 +395,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$input['jenis_tanah'] 	= $this->input->post('edit_jenis_tanah');
 		$input['lokasi_tanah'] 	= $this->input->post('edit_lokasi_tanah');
 		$input['merek'] 		= $this->input->post('edit_merek');
-		$input['jenis'] 		= $this->input->post('edit_jenis');
+		$input['jenis'] 		= $this->input->post('edit_jenis_motor');
 		$input['tahun']			= $this->input->post('edit_tahun');
 		$input['atas_nama']		= $this->input->post('edit_atas_nama');
 		$input['no_pol']		= $this->input->post('edit_no_pol');
@@ -486,7 +486,9 @@ class TransaksianggotaCon extends CI_Controller {
 		}
 
 		/* UPDATE Jatuh Tempo */
-		if($data['pinjaman']->jenis_pinjaman == 'Angsuran') {
+		$tgl_jatuh_tempo = date_create($this->input->post('jatuh_tempo'));
+		$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, date_format($tgl_jatuh_tempo, "Y-m-d"));
+		/*if($data['pinjaman']->jenis_pinjaman == 'Angsuran') {
 			if($input['jenis'] == 'Angsuran') {
 				$wkt_pinjam			= $data['pinjaman']->waktu;
 				$wkt_pinjam			= new DateTime($wkt_pinjam);
@@ -558,7 +560,7 @@ class TransaksianggotaCon extends CI_Controller {
 				
 				$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, $jatuh_tempo->format('Y-m-d'));
 			}
-		}
+		}*/
 		/*END OF UPDATE Jatuh Tempo */
 		
 		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
@@ -604,7 +606,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$this->pinjamanmodel->update_sisa_angsuran($id_pinjaman, $sisa);	
 		}
 
-		//Updte Jasa Perbulan, Total Angsuran Per Bulan ketik Jenis Pinjaman = 'Musiman'
+		//Update Jasa Perbulan, Total Angsuran Per Bulan ketik Jenis Pinjaman = 'Musiman'
 		$update = $this->pinjamanmodel->get_pinjaman_by_id($id_pinjaman);
 		$sisa_angsuran = $update->sisa_angsuran;
 		if($update->jenis_pinjaman == "Musiman") {
@@ -717,6 +719,10 @@ class TransaksianggotaCon extends CI_Controller {
 		if($data['pinjaman']->sisa_angsuran == 0) {
 			$this->pinjamanmodel->update_jaminan($id_pinjaman, "");
 		}
+
+		/* UPDATE Jatuh Tempo */
+		$tgl_jatuh_tempo = date_create($this->input->post('edit_jatuh_tempo'));
+		$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, date_format($tgl_jatuh_tempo, "Y-m-d"));
 
 		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
 	}

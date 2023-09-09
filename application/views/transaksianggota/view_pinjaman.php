@@ -377,7 +377,7 @@ function rupiah($angka){
                       </div>
                       <div class="form-group col-xs-6" id="div_jenis" style="display:none">
                         <label for="exampleInputPassword1">Jenis</label>
-                        <input type="text" class="form-control" id="jenis" name="jenis" placeholder="">
+                        <input type="text" class="form-control" id="jenis_motor" name="jenis_motor" placeholder="">
                       </div>
                       <div class="form-group col-xs-6" id="div_tahun" style="display:none">
                         <label for="exampleInputPassword1">Tahun</label>
@@ -527,6 +527,18 @@ function rupiah($angka){
                           </div>
                           <input type="text" class="form-control pull-right" name="waktu" id="waktu" value="" data-date-format="dd-mm-yyyy" required>
                           <input type="hidden" class="form-control" value="<?php echo $pinjaman->id?>" id="id_pinjaman" name="id_pinjaman">
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Tanggal Jatuh Tempo</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <?php
+                            $jatuh_tempo = date("d-m-Y", strtotime($pinjaman->jatuh_tempo));
+                          ?>
+                          <input type="text" class="form-control pull-right" name="jatuh_tempo" id="jatuh_tempo" value="<?php echo $jatuh_tempo;?>" data-date-format="dd-mm-yyyy" required>
                         </div>
                       </div>
                       <div class="form-group col-xs-6">
@@ -1232,6 +1244,34 @@ function rupiah($angka){
         }
       }
 
+      function hitung_jatuh_tempo() {
+        var jenis_pinjaman = '<?php echo $pinjaman->jenis_pinjaman ?>';
+        var input_waktu = $('#waktu').val();
+        if(jenis_pinjaman == 'Angsuran') {
+          var waktu = new Date( input_waktu.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3") );
+          var tanggal = waktu.setMonth(waktu.getMonth()+1);
+          var temp = new Date(tanggal);
+          var d = temp.getDate();
+          var m = temp.getMonth() + 1;
+          var y = temp.getFullYear();
+          var jatuh_tempo = (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+          $('#jatuh_tempo').val(jatuh_tempo);
+        } else if(jenis_pinjaman == 'Musiman') {
+          if($('#jenis').val() == 'Pinjaman') {
+            var waktu = new Date( input_waktu.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3") );
+            var tanggal = waktu.setMonth(waktu.getMonth()+4);
+            var temp = new Date(tanggal);
+            var d = temp.getDate();
+            var m = temp.getMonth() + 1;
+            var y = temp.getFullYear();
+            var jatuh_tempo = (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            $('#jatuh_tempo').val(jatuh_tempo);
+          } else if($('#jenis').val() == 'Pinjaman') {
+            $('#jatuh_tempo').val('<?php echo date("d-m-Y", strtotime($pinjaman->jenis_pinjaman)) ?>');
+          }
+        }
+      }
+
       function getConfirmationDeleteJaminan(id_pinjaman, id_detail_jaminan){
         var retVal = confirm("Apakah anda yakin akan menghapus data tersebut ?");
         var controller = 'transaksianggotacon';
@@ -1274,7 +1314,12 @@ function rupiah($angka){
       }
 
       $(document).ready(function(){
-        $('#waktu').datepicker({}).on('changeDate', function(ev){});
+        $('#waktu').datepicker({}).on('changeDate', function(ev){
+          hitung_jatuh_tempo();
+        });
+
+        $('#jatuh_tempo').datepicker({}).on('changeDate', function(ev){});
+        
         hitung_total();
         label_angsuran();
         label_jasa();
@@ -1300,6 +1345,11 @@ function rupiah($angka){
         });
         $('#total').keyup(function() {
           label_total();
+        });
+
+        $('#jenis').change(function() {
+          console.log(this.val);
+          hitung_jatuh_tempo();
         });
 
         $('#jenis_jaminan').change(function() {
