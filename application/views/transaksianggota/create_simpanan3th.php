@@ -552,6 +552,58 @@ function rupiah($angka){
               </div>
             </div>
 
+            <div class="tab-pane" id="aset_kekayaan">
+              <div class="box-header" style="text-align:left" >
+                <h3>
+                  <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksianggotacon/create_aset_kekayaan/".$nasabah->id); ?>">Tambahkan Aset Kekayaan</a>
+                </h3>
+              </div> 
+              <div class="box-body">
+                <table id="aset_kekayaan_table" class="table table-bordered table-hover"  width="100%">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Jenis Aset</th>
+                      <th>Keterangan</th>
+                      <th>Link Gambar</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      if($aset_kekayaan != NULL){
+                        $no = 1;
+                        for($i = 0; $i < sizeof($aset_kekayaan); $i++) {
+                    ?>
+                        <tr>
+                          <td><?php echo $no ?></td>
+                          <td><?php echo strtoupper($aset_kekayaan[$i]['jenis_aset']) ?></td>
+                    <?php
+                          if($aset_kekayaan[$i]['jenis_aset'] == 'sertifikat') {
+                    ?> 
+                            <td style="word-wrap: break-word; text-align: left;"><?php echo strtoupper($aset_kekayaan[$i]['jenis_aset']).'. Nama Pemilik: '.$aset_kekayaan[$i]['nama_pemilik'].' No. Sertifikat: '.$aset_kekayaan[$i]['no_sertifikat'].' Luas(m2): '.$aset_kekayaan[$i]['luas'].' Jenis Tanah: '.$aset_kekayaan[$i]['jenis_tanah'].' Lokasi Tanah: '.$aset_kekayaan[$i]['lokasi_tanah'] ?></td>
+                    <?php
+                          } else if($aset_kekayaan[$i]['jenis_aset'] == 'bpkb') {
+                    ?>
+                            <td style="word-wrap: break-word; text-align: left;"><?php echo strtoupper($aset_kekayaan[$i]['jenis_aset']).'. Atas Nama: '.$aset_kekayaan[$i]['atas_nama'].' No. Polisi: '.$aset_kekayaan[$i]['no_pol'].' Merek: '.$aset_kekayaan[$i]['merek'].' Jenis: '.$aset_kekayaan[$i]['jenis_motor'].' Tahun: '.$aset_kekayaan[$i]['tahun'] ?></td>
+                    <?php
+                          }
+                    ?>
+                          <td style='text-align: center'><a href="<?php echo base_url(); ?>files/uploads/aset_kekayaan/<?php echo $aset_kekayaan[$i]['file_img']; ?>" target="_blank">lihat</a></td>
+                          <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_asetkekayaan/".$aset_kekayaan[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+                          <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationAsetkekayaan('<?php echo $aset_kekayaan[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                        </tr>
+                    <?php
+                        }
+                        $no++;
+                      }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
 
           </div>
         </div>
