@@ -171,6 +171,7 @@ function rupiah($angka){
             <li><a href="#simpanan_kanzun" data-toggle="tab">Simpanan Kanzun</a></li>
             <!--<li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>-->
             <li><a href="#simpanan_pihak_ketiga" data-toggle="tab">Simpanan Pihak Ketiga</a></li>
+            <li><a href="#aset_kekayaan" data-toggle="tab">Aset Kekayaan</a></li>
           </ul>
           <div class="tab-content">
             <div class="active tab-pane" id="pinjaman">
@@ -200,7 +201,22 @@ function rupiah($angka){
                       </div>
                       <div class="form-group col-xs-3">
                         <label for="exampleInputPassword1">Jaminan</label>
-                        <p><?php echo $pinjaman->jaminan;?></p>
+                        <?php
+                          $jaminan = json_decode($pinjaman->jaminan);
+                          $test = @json_decode($pinjaman->jaminan);
+                          if ($test)  {
+                            $str_jaminan = '';
+                            for($a = 0; $a < sizeof($jaminan); $a++) {
+                              $str_jaminan .= $jaminan[$a]->keterangan;
+                              $str_jaminan .= '; ';
+                            }
+                            $str_jaminan = substr($str_jaminan, 0, -2);
+                          } else {
+                            $str_jaminan = $pinjaman->jaminan;
+                          }
+                          
+                        ?>
+                        <p><?php echo $str_jaminan;?></p>
                       </div>
                       <div class="form-group col-xs-3">
                         <label for="exampleInputPassword1">Tanggal Pinjaman</label>

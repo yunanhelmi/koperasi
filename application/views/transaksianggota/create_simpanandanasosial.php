@@ -181,6 +181,7 @@ function rupiah($angka){
             <li><a href="#simpanan_kanzun" data-toggle="tab">Simpanan Kanzun</a></li>
             <!--<li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>-->
             <li><a href="#simpanan_pihak_ketiga" data-toggle="tab">Simpanan Pihak Ketiga</a></li>
+            <li><a href="#aset_kekayaan" data-toggle="tab">Aset Kekayaan</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane" id="pinjaman">
@@ -218,7 +219,22 @@ function rupiah($angka){
                       <td><?php echo $pinjaman[$i]['nama_nasabah']?></td>
                       <?php $waktu = strtotime($pinjaman[$i]['waktu'])?>
                       <td><?php echo date("d-m-Y", $waktu)?></td>
-                      <td><?php echo $pinjaman[$i]['jaminan']?></td>
+                      <?php
+                        $jaminan = json_decode($pinjaman[$i]['jaminan']);
+                        $test = @json_decode($pinjaman[$i]['jaminan']);
+                        if ($test)  {
+                          $str_jaminan = '';
+                          for($a = 0; $a < sizeof($jaminan); $a++) {
+                            $str_jaminan .= $jaminan[$a]->keterangan;
+                            $str_jaminan .= '; ';
+                          }
+                          $str_jaminan = substr($str_jaminan, 0, -2);
+                        } else {
+                          $str_jaminan = $pinjaman[$i]['jaminan'];
+                        }
+                        
+                      ?>
+                      <td><?php echo $str_jaminan?></td>
                       <?php $jatuh_tempo = strtotime($pinjaman[$i]['jatuh_tempo'])?>
                       <td><?php echo date("d-m-Y", $jatuh_tempo)?></td>
                       <td><?php echo rupiah($pinjaman[$i]['jumlah_pinjaman'])?></td>

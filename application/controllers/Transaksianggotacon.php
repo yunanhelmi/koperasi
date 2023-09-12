@@ -167,7 +167,22 @@ class TransaksianggotaCon extends CI_Controller {
 		$insert['nama_nasabah'] 			= $this->input->post('nama_nasabah');
 		$insert['nik_nasabah'] 				= $this->input->post('nik_nasabah');
 		$insert['jenis_pinjaman'] 			= $this->input->post('jenis_pinjaman');
-		$insert['jaminan'] 					= $this->input->post('jaminan');
+
+		// set jaminan
+		$input_jaminan = $this->input->post('jaminan');
+		for($i = 0; $i < sizeof($input_jaminan); $i++) {
+			$jaminan = $this->asetkekayaanmodel->get_asetkekayaan_by_id($input_jaminan[$i]);
+			$jaminan_arr[$i]['id'] = $jaminan->id;
+			if($jaminan->jenis_aset == 'sertifikat') {
+				$jaminan_arr[$i]['keterangan'] = strtoupper($jaminan->jenis_aset)." ".$jaminan->nama_pemilik." ".$jaminan->no_sertifikat." ".$jaminan->jenis_tanah." ".$jaminan->luas." ".$jaminan->lokasi_tanah;
+			} else if($jaminan->jenis_aset == 'bpkb') {
+				$jaminan_arr[$i]['keterangan'] = strtoupper($jaminan->jenis_aset)." ".$jaminan->merek." ".$jaminan->jenis_motor." ".$jaminan->tahun." ".$jaminan->atas_nama." ".$jaminan->no_pol;
+			}
+			
+		}
+		$insert['jaminan'] 					= json_encode($jaminan_arr);
+		//End of Set Jaminan
+
 		$date1 								= $this->input->post('waktu');
 		$date 								= strtotime($date1);
 		$insert['waktu'] 					= date("Y-m-d",$date);
@@ -215,6 +230,19 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
+
+		$jaminan = json_decode($data['pinjaman']->jaminan);
+		$test = @json_decode($data['pinjaman']->jaminan);
+		for($i = 0; $i < sizeof($data['aset_kekayaan']); $i++) {
+			$data['aset_kekayaan'][$i]['selected'] = 0;
+			if($test) {
+				for($j = 0; $j < sizeof($jaminan); $j++) {
+					if($data['aset_kekayaan'][$i]['id'] == $jaminan[$j]->id) {
+						$data['aset_kekayaan'][$i]['selected'] = 1;
+					}
+				}	
+			}
+		}
 		
 		$this->load->view('/layouts/menu', $data);
 		$this->load->view('/transaksianggota/edit_pinjaman', $data);
@@ -234,7 +262,21 @@ class TransaksianggotaCon extends CI_Controller {
 		$update['nomor_nasabah'] 			= $this->input->post('nomor_nasabah');
 		$update['nik_nasabah'] 				= $this->input->post('nik_nasabah');
 		$update['jenis_pinjaman'] 			= $this->input->post('jenis_pinjaman');
-		$update['jaminan'] 					= $this->input->post('jaminan');
+		
+		// set jaminan
+		$input_jaminan = $this->input->post('jaminan');
+		for($i = 0; $i < sizeof($input_jaminan); $i++) {
+			$jaminan = $this->asetkekayaanmodel->get_asetkekayaan_by_id($input_jaminan[$i]);
+			$jaminan_arr[$i]['id'] = $jaminan->id;
+			if($jaminan->jenis_aset == 'sertifikat') {
+				$jaminan_arr[$i]['keterangan'] = strtoupper($jaminan->jenis_aset)." ".$jaminan->nama_pemilik." ".$jaminan->no_sertifikat." ".$jaminan->jenis_tanah." ".$jaminan->luas." ".$jaminan->lokasi_tanah;
+			} else if($jaminan->jenis_aset == 'bpkb') {
+				$jaminan_arr[$i]['keterangan'] = strtoupper($jaminan->jenis_aset)." ".$jaminan->merek." ".$jaminan->jenis_motor." ".$jaminan->tahun." ".$jaminan->atas_nama." ".$jaminan->no_pol;
+			}
+		}
+		$update['jaminan'] 					= json_encode($jaminan_arr);
+		//End of Set Jaminan
+
 		$date1 								= $this->input->post('waktu');
 		$date 								= strtotime($date1);
 		$update['waktu'] 					= date("Y-m-d",$date);

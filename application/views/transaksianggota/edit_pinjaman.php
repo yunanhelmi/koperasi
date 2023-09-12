@@ -171,6 +171,7 @@ function rupiah($angka){
             <li><a href="#simpanan_kanzun" data-toggle="tab">Simpanan Kanzun</a></li>
             <!--<li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>-->
             <li><a href="#simpanan_pihak_ketiga" data-toggle="tab">Simpanan Pihak Ketiga</a></li>
+            <li><a href="#aset_kekayaan" data-toggle="tab">Aset Kekayaan</a></li>
           </ul>
           <div class="tab-content">
             <div class="active tab-pane" id="pinjaman">
@@ -200,9 +201,28 @@ function rupiah($angka){
                     <option value='Angsuran' <?php echo $pinjaman->jenis_pinjaman == 'Angsuran' ? 'selected' : ''?> >Angsuran</option>
                     </select>
                   </div>
-                  <div class="form-group col-xs-6">
+                  <!-- <div class="form-group col-xs-6">
                     <label for="exampleInputPassword1">Jaminan</label>
                     <input type="text" class="form-control" id="jaminan" name="jaminan" value="<?php echo $pinjaman->jaminan?>" placeholder="Jaminan">
+                  </div> -->
+                  <div class="form-group col-xs-6">
+                    <label for="exampleInputPassword1">Jaminan</label>
+                    <select id="jaminan" name="jaminan[]" class="form-control select2" multiple="multiple" data-placeholder="Pilih Jaminan"
+                        style="width: 100%;" required="">
+                      <?php 
+                        for($i = 0; $i < sizeof($aset_kekayaan); $i++) {
+                          if($aset_kekayaan[$i]['jenis_aset'] == 'sertifikat') {
+                      ?>
+                            <option value="<?php echo $aset_kekayaan[$i]['id']?>" <?php echo $aset_kekayaan[$i]['selected'] == 1 ? 'selected':'' ?>><?php echo $aset_kekayaan[$i]['jenis_aset']." ".$aset_kekayaan[$i]['nama_pemilik']." ".$aset_kekayaan[$i]['no_sertifikat']." ".$aset_kekayaan[$i]['jenis_tanah']." ".$aset_kekayaan[$i]['luas']." ".$aset_kekayaan[$i]['lokasi_tanah'] ?></option>
+                      <?php
+                          } else if($aset_kekayaan[$i]['jenis_aset'] == 'bpkb') {
+                      ?>
+                            <option value="<?php echo $aset_kekayaan[$i]['id']?>" <?php echo $aset_kekayaan[$i]['selected'] == 1 ? 'selected':'' ?>><?php echo $aset_kekayaan[$i]['jenis_aset']." ".$aset_kekayaan[$i]['merek']." ".$aset_kekayaan[$i]['jenis_motor']." ".$aset_kekayaan[$i]['tahun']." ".$aset_kekayaan[$i]['atas_nama']." ".$aset_kekayaan[$i]['no_pol']?></option>
+                      <?php
+                          }
+                        }
+                      ?>
+                    </select>
                   </div>
                   <div class="form-group col-xs-6">
                     <label for="exampleInputPassword1">Tanggal Pinjaman</label>
@@ -1017,6 +1037,7 @@ function rupiah($angka){
       }
 
       $(document).ready(function(){
+        $('.select2').select2();
         $('#waktu').datepicker({}).on('changeDate', function(ev){});
 
         $( "#id_nasabah" ).change(function() {
