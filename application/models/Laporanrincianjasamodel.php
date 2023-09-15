@@ -71,6 +71,38 @@ class LaporanrincianjasaModel extends CI_Model {
 		return $a;
 	}
 
+	function get_data_by_tanggal_id_nasabah($tanggal, $id_nasabah) {
+		$query = $this->db->query("
+								SELECT
+									pinjaman.*,
+									ds.jumlah_jasa,
+									ds.jumlah_denda
+								FROM 
+									(
+										SELECT 
+											id_pinjaman,
+											SUM(jasa) as jumlah_jasa,
+											SUM(denda) as jumlah_denda
+										FROM 
+											detail_angsuran
+										WHERE 
+											detail_angsuran.jenis = 'Angsuran'
+											AND detail_angsuran.waktu <= '$tanggal'
+											AND detail_angsuran.status_post = '1'
+										GROUP BY 
+											id_pinjaman
+									) as ds
+								LEFT JOIN
+									pinjaman
+								ON
+									ds.id_pinjaman = pinjaman.id
+								WHERE
+									pinjaman.id_nasabah = '$id_nasabah'
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	
 }
 

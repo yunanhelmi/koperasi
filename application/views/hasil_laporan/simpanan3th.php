@@ -23,7 +23,7 @@
 
 <center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center>
 <br>
-<center>LAPORAN SIMPANAN KANZUN <?php echo $tanggal ?></center>
+<center>LAPORAN SIMPANAN SIMPANAN 3 TH <?php echo $tanggal ?></center>
 <br>
 <center><strong>AHU-0003689.AH.01.39.TAHUN 2022</strong></center>
 <br>

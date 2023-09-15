@@ -101,6 +101,41 @@ class SimpanankhususModel extends CI_Model {
 		return $a;
 	}
 
+	function get_data_by_tanggal_id_nasabah($tanggal, $id_nasabah) {
+		$query = $this->db->query("
+									SELECT 
+										simpanankhusus.*,
+										ds.jumlah_setoran_detail,
+										ds.jumlah_tarikan_detail,
+										ds.total_setoran_detail,
+										ds.total_tarikan_detail
+									FROM 
+										(
+											SELECT 
+												id_simpanankhusus,
+												COUNT(IF(jenis = 'Setoran', 1, NULL)) as jumlah_setoran_detail,
+												COUNT(IF(jenis = 'Tarikan', 1, NULL)) as jumlah_tarikan_detail,
+												SUM(IF(jenis = 'Setoran', jumlah, 0)) as total_setoran_detail,
+												SUM(IF(jenis = 'Tarikan', jumlah, 0)) as total_tarikan_detail
+											FROM 
+												detail_simpanankhusus
+											WHERE 
+												detail_simpanankhusus.waktu <= '$tanggal'
+												AND detail_simpanankhusus.status_post = '1'
+											GROUP BY 
+												id_simpanankhusus
+										) as ds
+									LEFT JOIN
+										simpanankhusus
+									ON
+										ds.id_simpanankhusus = simpanankhusus.id
+									WHERE
+										simpanankhusus.id_nasabah = '$id_nasabah'
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpanankhusus`");
 		$a = $query->result_array();

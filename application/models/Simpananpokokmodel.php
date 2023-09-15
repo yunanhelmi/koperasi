@@ -72,6 +72,23 @@ class SimpananpokokModel extends CI_Model {
 		return $a;
 	}
 
+	function get_data_by_tanggal_id_nasabah($tanggal, $id_nasabah) {
+		$query = $this->db->query("
+									SELECT 
+										COUNT(IF(simpananpokok.jenis = 'Setoran', 1, NULL)) as jumlah_setoran,
+										COUNT(IF(simpananpokok.jenis = 'Tarikan', 1, NULL)) as jumlah_tarikan,
+										SUM(IF(simpananpokok.jenis = 'Setoran', simpananpokok.jumlah, 0)) as total_setoran,
+										SUM(IF(simpananpokok.jenis = 'Tarikan', simpananpokok.jumlah, 0)) as total_tarikan
+									FROM 
+										simpananpokok
+									WHERE
+										simpananpokok.id_nasabah = '$id_nasabah'
+										AND simpananpokok.waktu <= '$tanggal'
+								");
+		$a = $query->result_array();
+		return $a;
+	}	
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpananpokok`");
 		$a = $query->result_array();

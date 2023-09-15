@@ -35,6 +35,7 @@
                     <th>Desa</th>
                     <th>RW</th>
                     <th>RT</th>
+                    <th>Reputasi Nasabah</th>
                     <th>Transaksi</th>
                     <th>Post/Unpost</th>
                   </tr>
@@ -54,6 +55,21 @@
                     <td><?php echo $nasabah[$i]['kelurahan']?></td>
                     <td><?php echo $nasabah[$i]['rw']?></td>
                     <td><?php echo $nasabah[$i]['rt']?></td>
+                    <?php
+                      if($nasabah[$i]['blacklist'] == 0) {
+                    ?>
+                      <td style="background-color: green; text-align: center;">-</td>
+                    <?php
+                      } else if($nasabah[$i]['blacklist'] == 1) {
+                    ?>
+                      <td style="background-color: pink; text-align: center;">BL 1</td>
+                    <?php
+                      } else if($nasabah[$i]['blacklist'] == 2) {
+                    ?>
+                      <td style="background-color: red; text-align: center;">BL 2</td>
+                    <?php
+                      }
+                    ?>
                     <td style='text-align: center'><a class="btn btn-danger" href="<?php echo site_url("transaksianggotacon/pinjaman/".$nasabah[$i]['id']); ?>"><i class="fa fa-money"></i></a></td>
                     <?php
                       if($nasabah[$i]['total_unpost'] == '0' 
