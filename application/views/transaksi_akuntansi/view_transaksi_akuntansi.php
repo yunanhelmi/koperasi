@@ -48,6 +48,7 @@
                 <div class="form-group col-xs-6">
                   <label for="exampleInputPassword1">Keterangan</label>
                   <input type="textarea" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan" value="<?php echo $transaksi_akuntansi->keterangan?>" readonly>
+                  <textarea class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan" readonly><?php echo $transaksi_akuntansi->keterangan?></textarea>
                 </div>
                 <div class="form-group col-xs-6">
                   <label for="exampleInputPassword1">Debet</label>

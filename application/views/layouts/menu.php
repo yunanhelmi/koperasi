@@ -238,6 +238,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="<?php echo base_url(); ?>index.php/laporansimpanan3thcon/index"><i class="fa fa-list-ul"></i>Simpanan 3Th</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporanhariancon/index"><i class="fa fa-list-ul"></i>Harian</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/laporanrekapsimpanancon/index"><i class="fa fa-list-ul"></i>Rekap Simpanan</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/laporanjatuhtempocon/index"><i class="fa fa-list-ul"></i>Jatuh Tempo</a></li>
           </ul>
         </li>
         <li class="treeview">

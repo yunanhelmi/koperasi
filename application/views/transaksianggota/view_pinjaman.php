@@ -623,7 +623,8 @@ function rupiah($angka){
                       </div>
                       <div class="form-group col-xs-6">
                         <label for="exampleInputPassword1">Keterangan</label>
-                        <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="">
+                        <!-- <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder=""> -->
+                        <textarea class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan"></textarea>
                       </div>
                     </div>
                     <div class="box-footer">

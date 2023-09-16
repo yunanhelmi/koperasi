@@ -38,7 +38,8 @@
                 </div>
                 <div class="form-group col-xs-6">
                   <label for="exampleInputPassword1">Keterangan</label>
-                  <input type="textarea" class="form-control" id="keterangan" name="keterangan" value="<?php echo $kode_akun->keterangan?>" placeholder="Keterangan">
+                  <!-- <input type="textarea" class="form-control" id="keterangan" name="keterangan" value="<?php echo $kode_akun->keterangan?>" placeholder="Keterangan"> -->
+                  <textarea class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan"><?php echo $kode_akun->keterangan?></textarea>
                 </div>
               </div>
               <!-- /.box-body -->
