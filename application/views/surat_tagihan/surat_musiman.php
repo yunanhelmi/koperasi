@@ -181,8 +181,9 @@
             <td>Jasa Pinjaman</td>
             <td>:</td>
             <td>Rp. </td>
-            <td><?php echo number_format($jasa_pinjaman - $jasa_terbayar,0,",",".") ?></td>
-            <td>(<?php echo $bulan_pinjam - $bulan_jasa ?> Bulan)</td>
+            <td><?php echo number_format($jasa_pinjaman - $jasa_terbayar + $jasa_hari,0,",",".") ?></td>
+            <!-- <td>(<?php echo $bulan_pinjam - $bulan_jasa ?> Bulan)</td> -->
+            <td>(<?php echo $lama_pinjam_bulan_hari ?>)</td>
         </tr>
         <tr>
             <td>Administrasi (<?php echo $kali_administrasi ?>x)</td>
@@ -195,7 +196,7 @@
             <td>Total</td>
             <td>:</td>
             <td>Rp. </td>
-            <td><?php echo number_format($total - $jasa_terbayar,0,",",".") ?></td>
+            <td><?php echo number_format($total - $jasa_terbayar + $jasa_hari,0,",",".") ?></td>
             <td></td>
         </tr>
     </table>

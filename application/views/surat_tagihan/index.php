@@ -51,13 +51,23 @@
 									?>
 		                        </select>
 		                    </div>
-							<!--<div class="form-group col-xs-3" id="div_jenis_tanah">
+		                    <div class="form-group col-xs-3" id="div_status">
+		                        <label for="exampleInputPassword1">Status</label>
+		                        <select id="status" name="status" class="form-control" style="width: 100%;">
+									<option value='all'>- SEMUA -</option>
+									<option value='1' >Kuning 1</option>
+									<option value='2' >Kuning 2</option>
+									<option value='3' >Merah</option>
+		                        </select>
+		                    </div>
+		                    <div class="form-group col-xs-3" id="div_jenis">
 		                        <label for="exampleInputPassword1">Jenis Pinjaman</label>
 		                        <select id="jenis_pinjaman" name="jenis_pinjaman" class="form-control" style="width: 100%;">
-									<option value='Angsuran'>Angsuran</option>
-									<option value='Musiman'>Musiman</option>
+									<option value='all'>- SEMUA -</option>
+									<option value='Angsuran' >Angsuran</option>
+									<option value='Musiman' >Musiman</option>
 		                        </select>
-		                    </div>-->
+		                    </div>
 			            </div>
 			            <div class="box-footer">
 							<div class="col-xs-3">

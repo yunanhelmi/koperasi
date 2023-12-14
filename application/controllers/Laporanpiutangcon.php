@@ -304,6 +304,9 @@ class LaporanpiutangCon extends CI_Controller {
         $tgl        = strtotime($tanggal1);
         $tanggal    = date("Y-m-d",$tgl);
 
+        $status = $this->input->post('status');
+        $jenis_pinjaman = $this->input->post('jenis_pinjaman');
+
         $data_piutang = $this->laporanpiutangmodel->get_data($tanggal); 
 
         // Total Piutang pada neraca
@@ -317,6 +320,8 @@ class LaporanpiutangCon extends CI_Controller {
         $data['data'] = $data_piutang;
         $data['piutang_neraca'] = $piutang_neraca;
         $data['tanggal_laporan'] = $tanggal;
+        $data['status']         = $status;
+        $data['jenis_pinjaman'] = $jenis_pinjaman;
 
         $this->load->view('/hasil_laporan/piutang', $data);
     }

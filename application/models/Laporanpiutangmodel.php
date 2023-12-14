@@ -131,7 +131,7 @@ class LaporanpiutangModel extends CI_Model {
 								LEFT JOIN
 									nasabah 
 								ON 
-									pinjaman.id_nasabah = nasabah.id 
+									pinjaman.id_nasabah = nasabah.id
 									
 								");
 		$a = $query->result_array();

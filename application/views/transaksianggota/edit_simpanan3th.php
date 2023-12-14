@@ -202,7 +202,7 @@ function rupiah($angka){
                       $no = 1;
                       for($i = 0; $i < sizeof($pinjaman); $i++) {
                     ?>
-                    <tr>
+                    <tr <?php echo $pinjaman[$i]['sisa_angsuran'] == 0 ? "style='background-color: #90EE90'" : "" ?>>
                       <td style='text-align: center'><?php echo $no."."?></td>
                       <td><?php echo $pinjaman[$i]['nama_nasabah']?></td>
                       <?php $waktu = strtotime($pinjaman[$i]['waktu'])?>

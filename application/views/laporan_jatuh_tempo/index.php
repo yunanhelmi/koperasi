@@ -57,8 +57,15 @@
 									<option value='all'>- SEMUA -</option>
 									<option value='1' >Kuning 1</option>
 									<option value='2' >Kuning 2</option>
-									<option value='3' >Merah 1</option>
-									<option value='4' >Merah 2</option>
+									<option value='3' >Merah</option>
+		                        </select>
+		                    </div>
+		                    <div class="form-group col-xs-3" id="div_jenis">
+		                        <label for="exampleInputPassword1">Jenis Pinjaman</label>
+		                        <select id="jenis_pinjaman" name="jenis_pinjaman" class="form-control" style="width: 100%;">
+									<option value='all'>- SEMUA -</option>
+									<option value='Angsuran' >Angsuran</option>
+									<option value='Musiman' >Musiman</option>
 		                        </select>
 		                    </div>
 			            </div>

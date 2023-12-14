@@ -529,9 +529,9 @@ class TransaksianggotaCon extends CI_Controller {
 		}
 
 		//Update Jaminan ketika Sisa Pinjaman = 0
-		if($data['pinjaman']->sisa_angsuran == 0) {
+		/*if($data['pinjaman']->sisa_angsuran == 0) {
 			$this->pinjamanmodel->update_jaminan($id_pinjaman, "");
-		}
+		}*/
 
 		/* UPDATE Jatuh Tempo */
 		$tgl_jatuh_tempo = date_create($this->input->post('jatuh_tempo'));
@@ -765,9 +765,9 @@ class TransaksianggotaCon extends CI_Controller {
 		}
 
 		//Update Jaminan ketika Sisa Pinjaman = 0
-		if($data['pinjaman']->sisa_angsuran == 0) {
+		/*if($data['pinjaman']->sisa_angsuran == 0) {
 			$this->pinjamanmodel->update_jaminan($id_pinjaman, "");
-		}
+		}*/
 
 		/* UPDATE Jatuh Tempo */
 		$tgl_jatuh_tempo = date_create($this->input->post('edit_jatuh_tempo'));

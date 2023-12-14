@@ -124,6 +124,7 @@ class LaporanjatuhtempoCon extends CI_Controller {
         //$jenis_pinjaman   = $this->input->post('jenis_pinjaman');
         $desa = $this->input->post('desa');
         $status = $this->input->post('status');
+        $jenis_pinjaman = $this->input->post('jenis_pinjaman');
 
         if($desa == 'all') {
             $data_surat_tagihan = $this->surattagihanmodel->get_data_all($tanggal); 
@@ -141,7 +142,8 @@ class LaporanjatuhtempoCon extends CI_Controller {
         $data['tanggal'] 	    = $tanggal;
         $data['tanggal_ori']    = $tanggal1;
         $data['id_desa']        = $desa;
-        $data['status']        = $status;
+        $data['status']         = $status;
+        $data['jenis_pinjaman'] = $jenis_pinjaman;
         //$data['jenis_pinjaman']    = $jenis_pinjaman;
 
         /*echo "<pre>";

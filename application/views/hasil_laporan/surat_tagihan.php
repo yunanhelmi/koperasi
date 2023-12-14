@@ -142,7 +142,19 @@
 			  			<td><?php echo $data[$a]['rw']; ?></td>
 			  			<td><?php echo $data[$a]['rt']; ?></td>
 			  			<td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
-			  			<td><?php echo $data[$a]['jaminan']; ?></td>
+			  			<?php
+                        if(json_decode($data[$a]['jaminan']) == NULL) {
+                            $jaminan = $data[$a]['jaminan'];
+                        } else {
+                            $jaminan = '';
+                            $string = json_decode($data[$a]['jaminan']);
+                            for($i = 0; $i < sizeof($string); $i++) {
+                                $jaminan .= $string[$i]->keterangan.'; ';
+                            }
+                            $jaminan = substr($jaminan, 0, -2);
+                        }
+                    ?>
+                    <td><?php echo $jaminan; ?></td>
 			  			<?php 
 						  	$tgl 		= strtotime($data[$a]['tanggal_pinjaman']);
 							$tanggal 	= date("d-m-Y",$tgl);

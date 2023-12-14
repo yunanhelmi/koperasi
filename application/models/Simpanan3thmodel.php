@@ -129,6 +129,52 @@ class Simpanan3thModel extends CI_Model {
 		return $a;
 	}
 
+	function laporan_rekap_simpanan($tanggal, $id_master) {
+		$query = $this->db->query("
+								SELECT
+									nasabah.nama,
+									nasabah.nomor_koperasi,
+									nasabah.kelurahan,
+									simpanan_3th.total_setoran as simpanan3th_total_setoran,
+									simpanan_3th.total_tarikan as simpanan3th_total_tarikan
+								FROM 
+									nasabah
+								LEFT JOIN
+									(
+										SELECT 
+											simpanan3th.id_nasabah,
+											SUM(ds.total_setoran_detail) as total_setoran,
+											SUM(ds.total_tarikan_detail) as total_tarikan
+										FROM 
+											(
+												SELECT 
+													detail_simpanan3th.id_simpanan3th as id_simpanan3th,
+													SUM(IF(detail_simpanan3th.jenis = 'Setoran', jumlah, 0)) as total_setoran_detail,
+													SUM(IF(detail_simpanan3th.jenis = 'Tarikan', jumlah, 0)) as total_tarikan_detail
+												FROM 
+													detail_simpanan3th
+												WHERE 
+													detail_simpanan3th.waktu <= '$tanggal'
+													AND detail_simpanan3th.status_post = '1'
+												GROUP BY 
+													detail_simpanan3th.id_simpanan3th
+											) as ds
+										LEFT JOIN
+											simpanan3th
+										ON
+											ds.id_simpanan3th = simpanan3th.id
+										WHERE
+											simpanan3th.id_master = '$id_master'
+										GROUP BY 
+											simpanan3th.id_nasabah
+									) as simpanan_3th
+								ON
+									nasabah.id = simpanan_3th.id_nasabah
+								");
+		$a = $query->result_array();
+		return $a;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `simpanan3th`");
 		$a = $query->result_array();

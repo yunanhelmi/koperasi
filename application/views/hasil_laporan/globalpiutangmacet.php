@@ -130,7 +130,7 @@
             }
             $data[$a]['keterangan'] = 'Hijau';
     		$data[$a]['keterangan_level'] = 0;
-    		if ($lama_pinjam > 30 && $lama_pinjam <= 150) {
+    		/*if ($lama_pinjam > 30 && $lama_pinjam <= 150) {
     			$data[$a]['keterangan'] = 'Kuning 1';
     			$data[$a]['keterangan_level'] = 1;
             } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
@@ -142,7 +142,18 @@
             } else if ($lama_pinjam > 730) {
     			$data[$a]['keterangan'] = 'Merah 2';
     			$data[$a]['keterangan_level'] = 4;
-    		}
+    		}*/
+            if ($lama_pinjam >= 6 && $lama_pinjam <= 150) {
+                $data[$a]['keterangan'] = 'Kuning 1';
+                $data[$a]['keterangan_level'] = 1;
+            } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
+                $data[$a]['keterangan'] = 'Kuning 2';
+                $data[$a]['keterangan_level'] = 2;
+            } else if ($lama_pinjam > 365) {
+                $data[$a]['keterangan'] = 'Merah';
+                $data[$a]['keterangan_level'] = 3;
+            }
+
             $data[$a]['sisa_kali_angsuran'] 			= $sisa_kali_angsuran;
             $data[$a]['today'] 							= $tanggal_laporan;
             $data[$a]['tgl_terakhir_bayar'] 			= $tgl_terakhir_bayar;
@@ -186,7 +197,7 @@
             }
             $data[$a]['keterangan'] = 'Hijau';
     		$data[$a]['keterangan_level'] = 0;
-       		if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
+       		/*if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
         		$data[$a]['keterangan'] = 'Kuning 1';
     			$data[$a]['keterangan_level'] = 1;
             } else if ($lama_pinjam > 240 && $lama_pinjam <= 365) {
@@ -198,7 +209,18 @@
         	} else if ($lama_pinjam > 730) {
         		$data[$a]['keterangan'] = 'Merah 2';
     			$data[$a]['keterangan_level'] = 4;
+            }*/
+            if ($lama_pinjam >= 126 && $lama_pinjam <= 240) {
+                $data[$a]['keterangan'] = 'Kuning 1';
+                $data[$a]['keterangan_level'] = 1;
+            } else if ($lama_pinjam > 240 && $lama_pinjam <= 365) {
+                $data[$a]['keterangan'] = 'Kuning 2';
+                $data[$a]['keterangan_level'] = 2;
+            } else if ($lama_pinjam > 365) {
+                $data[$a]['keterangan'] = 'Merah';
+                $data[$a]['keterangan_level'] = 3;
             }
+
             $data[$a]['sisa_kali_angsuran'] 			= $sisa_kali_angsuran;
             $data[$a]['today'] 							= $tanggal_laporan;
             $data[$a]['tgl_terakhir_bayar'] 			= $tgl_terakhir_bayar;
@@ -246,9 +268,11 @@
         $data[$a]['total_tagihan'] 		= (int)$total_tagihan;
 	}
 	foreach ($data as $key => $row) {
-	    $level[$key]  = $row['keterangan_level'];
-	}  
-	array_multisort($level, SORT_ASC, $data);
+	    $sort['keterangan_level'][$key]  = $row['keterangan_level'];
+        $sort['jenis_pinjaman'][$key]  = $row['jenis_pinjaman'];
+	}
+    //array_multisort($sort['keterangan_level'], SORT_ASC, $sort['jenis_pinjaman'], SORT_ASC, $data);
+	array_multisort($sort['jenis_pinjaman'], SORT_ASC, $sort['keterangan_level'], SORT_ASC, $data);
 ?>
 
 <table border="1" style="width:100%; border-collapse: collapse;">
@@ -290,7 +314,19 @@
 		  			<td><?php echo $data[$a]['rt']; ?></td>
 		  			<td><?php echo $data[$a]['rw']; ?></td>
 		  			<td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
-		  			<td><?php echo $data[$a]['jaminan']; ?></td>
+                    <?php
+                        if(json_decode($data[$a]['jaminan']) == NULL) {
+                            $jaminan = $data[$a]['jaminan'];
+                        } else {
+                            $jaminan = '';
+                            $string = json_decode($data[$a]['jaminan']);
+                            for($i = 0; $i < sizeof($string); $i++) {
+                                $jaminan .= $string[$i]->keterangan.'; ';
+                            }
+                            $jaminan = substr($jaminan, 0, -2);
+                        }
+                    ?>
+                    <td style="text-align: center;"><?php echo $jaminan; ?></td>
 				  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tanggal_pinjaman']); ?></td>
 		  			<td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
 		  			<td style="text-align: right;"><?php echo $data[$a]['uang_kurang']; ?></td>
@@ -321,10 +357,6 @@
 		            			<td style="background-color: orange; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
 		            <?php
 		                    } else if ($data[$a]['keterangan_level'] == 3) {
-		            ?>
-		            			<td style="background-color: pink; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
-		            <?php
-		                    } else if ($data[$a]['keterangan_level'] == 4) {
 		            ?>
 		            			<td style="background-color: red; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
 		            <?php

@@ -123,6 +123,8 @@ class SurattagihanCon extends CI_Controller {
 
         //$jenis_pinjaman   = $this->input->post('jenis_pinjaman');
         $desa = $this->input->post('desa');
+        $status = $this->input->post('status');
+        $jenis_pinjaman = $this->input->post('jenis_pinjaman');
 
         if($desa == 'all') {
             $data_surat_tagihan = $this->surattagihanmodel->get_data_all($tanggal); 
@@ -140,7 +142,8 @@ class SurattagihanCon extends CI_Controller {
         $data['tanggal'] 	    = $tanggal;
         $data['tanggal_ori']    = $tanggal1;
         $data['id_desa']        = $desa;
-        //$data['jenis_pinjaman']    = $jenis_pinjaman;
+        $data['status']         = $status;
+        $data['jenis_pinjaman'] = $jenis_pinjaman;
 
         /*echo "<pre>";
         var_dump($data_surat_tagihan);
@@ -490,6 +493,15 @@ class SurattagihanCon extends CI_Controller {
         $lama_pinjam_long = $lama_pinjam_raw->y." Tahun ".$lama_pinjam_raw->m." Bulan ".$lama_pinjam_raw->d." Hari";
         $bulan_pinjam = (($lama_pinjam_raw->format('%y') * 12) + $lama_pinjam_raw->format('%m'));
         $lama_pinjam_bulan_hari = $bulan_pinjam." Bulan ".$lama_pinjam_raw->d." Hari";
+        if($lama_pinjam_raw->d >= 6 && $lama_pinjam_raw->d <= 11) {
+            $jasa_hari = ($sisa_pinjaman * 1)/100;
+        } else if($lama_pinjam_raw->d >= 12 && $lama_pinjam_raw->d <= 17) {
+            $jasa_hari = ($sisa_pinjaman * 1.5)/100;
+        } else if($lama_pinjam_raw->d >= 18 && $lama_pinjam_raw->d <= 23) {
+            $jasa_hari = ($sisa_pinjaman * 2)/100;
+        } else if($lama_pinjam_raw->d >= 24 && $lama_pinjam_raw->d <= 30) {
+            $jasa_hari = ($sisa_pinjaman * 3)/100;
+        }
 
         $lama_akhir_bayar = $today->diff($tgl_akhir_bayar)->format("%a");
         $lama_akhir_bayar_raw = $today->diff($tgl_akhir_bayar);
@@ -543,6 +555,7 @@ class SurattagihanCon extends CI_Controller {
         $res['lama_jatuh_tempo_bulan_hari'] = $lama_jatuh_tempo_bulan_hari;
         $res['biaya_administrasi']          = $biaya_administrasi;
         $res['kali_administrasi']           = $kali_administrasi;
+        $res['jasa_hari']                   = $jasa_hari;
         $res['total']                       = $total;
         $res['tanggal']                     = $tanggal;
 

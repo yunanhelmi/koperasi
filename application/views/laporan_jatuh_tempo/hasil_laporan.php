@@ -118,19 +118,30 @@
             }
             $data[$a]['keterangan'] = 'Hijau';
     		$data[$a]['keterangan_level'] = 0;
-    		if ($lama_pinjam > 30 && $lama_pinjam <= 150) {
-    			$data[$a]['keterangan'] = 'Kuning 1';
-    			$data[$a]['keterangan_level'] = 1;
+    		/*if ($lama_pinjam > 30 && $lama_pinjam <= 150) {
+                $data[$a]['keterangan'] = 'Kuning 1';
+                $data[$a]['keterangan_level'] = 1;
             } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
-    			$data[$a]['keterangan'] = 'Kuning 2';
-    			$data[$a]['keterangan_level'] = 2;
+                $data[$a]['keterangan'] = 'Kuning 2';
+                $data[$a]['keterangan_level'] = 2;
             } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
-    			$data[$a]['keterangan'] = 'Merah 1';
-    			$data[$a]['keterangan_level'] = 3;
+                $data[$a]['keterangan'] = 'Merah 1';
+                $data[$a]['keterangan_level'] = 3;
             } else if ($lama_pinjam > 730) {
-    			$data[$a]['keterangan'] = 'Merah 2';
-    			$data[$a]['keterangan_level'] = 4;
-    		}
+                $data[$a]['keterangan'] = 'Merah 2';
+                $data[$a]['keterangan_level'] = 4;
+            }*/
+            if ($lama_pinjam >= 6 && $lama_pinjam <= 150) {
+                $data[$a]['keterangan'] = 'Kuning 1';
+                $data[$a]['keterangan_level'] = 1;
+            } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
+                $data[$a]['keterangan'] = 'Kuning 2';
+                $data[$a]['keterangan_level'] = 2;
+            } else if ($lama_pinjam > 365) {
+                $data[$a]['keterangan'] = 'Merah';
+                $data[$a]['keterangan_level'] = 3;
+            }
+
             $data[$a]['sisa_kali_angsuran'] 			= $sisa_kali_angsuran;
             $data[$a]['today'] 							= $tanggal_laporan;
             $data[$a]['tgl_pinjaman'] 			        = $tgl_pinjaman;
@@ -175,19 +186,30 @@
             }
             $data[$a]['keterangan'] = 'Hijau';
     		$data[$a]['keterangan_level'] = 0;
-       		if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
-        		$data[$a]['keterangan'] = 'Kuning 1';
-    			$data[$a]['keterangan_level'] = 1;
+       		/*if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
+                $data[$a]['keterangan'] = 'Kuning 1';
+                $data[$a]['keterangan_level'] = 1;
             } else if ($lama_pinjam > 240 && $lama_pinjam <= 365) {
-        		$data[$a]['keterangan'] = 'Kuning 2';
-    			$data[$a]['keterangan_level'] = 2;
+                $data[$a]['keterangan'] = 'Kuning 2';
+                $data[$a]['keterangan_level'] = 2;
             } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
-        		$data[$a]['keterangan'] = 'Merah 1';
-    			$data[$a]['keterangan_level'] = 3;
-        	} else if ($lama_pinjam > 730) {
-        		$data[$a]['keterangan'] = 'Merah 2';
-    			$data[$a]['keterangan_level'] = 4;
+                $data[$a]['keterangan'] = 'Merah 1';
+                $data[$a]['keterangan_level'] = 3;
+            } else if ($lama_pinjam > 730) {
+                $data[$a]['keterangan'] = 'Merah 2';
+                $data[$a]['keterangan_level'] = 4;
+            }*/
+            if ($lama_pinjam >= 126 && $lama_pinjam <= 240) {
+                $data[$a]['keterangan'] = 'Kuning 1';
+                $data[$a]['keterangan_level'] = 1;
+            } else if ($lama_pinjam > 240 && $lama_pinjam <= 365) {
+                $data[$a]['keterangan'] = 'Kuning 2';
+                $data[$a]['keterangan_level'] = 2;
+            } else if ($lama_pinjam > 365) {
+                $data[$a]['keterangan'] = 'Merah';
+                $data[$a]['keterangan_level'] = 3;
             }
+
             $data[$a]['sisa_kali_angsuran'] 			= $sisa_kali_angsuran;
             $data[$a]['today'] 							= $tanggal_laporan;
             $data[$a]['tgl_pinjaman']                   = $tgl_pinjaman;
@@ -237,9 +259,11 @@
 	}
     if($data != NULL) {
         foreach ($data as $key => $row) {
-            $level[$key]  = $row['keterangan_level'];
-        }  
-        array_multisort($level, SORT_ASC, $data);
+            $sort['keterangan_level'][$key]  = $row['keterangan_level'];
+            $sort['jenis_pinjaman'][$key]  = $row['jenis_pinjaman'];
+        }
+        //array_multisort($sort['keterangan_level'], SORT_ASC, $sort['jenis_pinjaman'], SORT_ASC, $data);
+        array_multisort($sort['jenis_pinjaman'], SORT_ASC, $sort['keterangan_level'], SORT_ASC, $data);
     }
 ?>
 
@@ -282,63 +306,173 @@
 	  	$total_sisa = 0;
 	  	for($a = 0; $a < sizeof($data); $a++) {
             $tanggungan_jasa = $data[$a]['jasa_pinjaman'] - $data[$a]['total_jasa_detail'];
-	  		if($data[$a]['saldo'] != 0 || $tanggungan_jasa > 0) {
+	  		if(($data[$a]['saldo'] != 0 || $tanggungan_jasa > 0) && $data[$a]['keterangan_level'] != 0) {
 	  			$total_sisa += $data[$a]['saldo'];
-	  			if($data[$a]['keterangan_level'] == $status) {
-	?>
-				<tr>
-					<td style="text-align: center;"><?php echo $no ?></td>
-		  			<td><?php echo $data[$a]['nama']; ?></td>
-		  			<td style="text-align: center;"><?php echo $data[$a]['nomor_koperasi']; ?></td>
-        <?php
-                    if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
-        ?>
-                        <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
-        <?php
-                    } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
-        ?>              
-                        <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
-        <?php
+	  			if($status != 'all' && $data[$a]['keterangan_level'] == $status && $data[$a]['saldo'] > 0) {
+                    if($jenis_pinjaman != 'all' && $data[$a]['jenis_pinjaman'] == $jenis_pinjaman) {
+    ?>
+                    <tr>
+                        <td style="text-align: center;"><?php echo $no ?></td>
+                        <td><?php echo $data[$a]['nama']; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['nomor_koperasi']; ?></td>
+                        <?php
+                        if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
+                        ?>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                        <?php
+                        } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
+                        ?>              
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                        <?php
+                        }
+                        ?>
+                        <td><?php echo $data[$a]['kelurahan']; ?></td>
+                        <td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
+                        <td><?php echo $data[$a]['jaminan']; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
+                        <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                        <?php
+                        if ($data[$a]['keterangan_level'] == 1) {
+                        ?>
+                            <td style="background-color: yellow; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                        <?php
+                        } else if ($data[$a]['keterangan_level'] == 2) {
+                        ?>
+                            <td style="background-color: orange; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                        <?php
+                        } else if ($data[$a]['keterangan_level'] == 3) {
+                        ?>
+                            <td style="background-color: red; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+    <?php
+                    $no++;
+                    } else if($jenis_pinjaman == 'all') {
+    ?>
+                    <tr>
+                        <td style="text-align: center;"><?php echo $no ?></td>
+                        <td><?php echo $data[$a]['nama']; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['nomor_koperasi']; ?></td>
+                        <?php
+                        if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
+                        ?>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                        <?php
+                        } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
+                        ?>              
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                        <?php
+                        }
+                        ?>
+                        <td><?php echo $data[$a]['kelurahan']; ?></td>
+                        <td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
+                        <td><?php echo $data[$a]['jaminan']; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
+                        <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                        <?php
+                        if ($data[$a]['keterangan_level'] == 1) {
+                        ?>
+                            <td style="background-color: yellow; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                        <?php
+                        } else if ($data[$a]['keterangan_level'] == 2) {
+                        ?>
+                            <td style="background-color: orange; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                        <?php
+                        } else if ($data[$a]['keterangan_level'] == 3) {
+                        ?>
+                            <td style="background-color: red; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+    <?php
+                    $no++;
                     }
-        ?>
-		  			<!--<td><?php echo $data[$a]['alamat']; ?></td>-->
-		  			<td><?php echo $data[$a]['kelurahan']; ?></td>
-		  			<!--<td><?php echo $data[$a]['dusun']; ?></td>-->
-		  			<!--<td><?php echo $data[$a]['rt']; ?></td>-->
-		  			<!--<td><?php echo $data[$a]['rw']; ?></td>-->
-		  			<td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
-		  			<td><?php echo $data[$a]['jaminan']; ?></td>
-				  	<td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
-				  	<!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
-				  	<!--<td style="text-align: center;"><?php echo $data[$a]['tgl_jatuh_tempo']; ?></td>-->
-				  	<!--<td style="text-align: center;"><?php echo $data[$a]['sisa_kali_angsuran']; ?></td>-->
-		  			<td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
-		  			<!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
-		  			<!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
-		    		<!--<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>-->
-		  			<?php
-		            		if ($data[$a]['keterangan_level'] == 1) {
-		            ?>
-		            			<td style="background-color: yellow; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
-		            <?php
-		                    } else if ($data[$a]['keterangan_level'] == 2) {
-		            ?>
-		            			<td style="background-color: orange; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
-		            <?php
-		                    } else if ($data[$a]['keterangan_level'] == 3) {
-		            ?>
-		            			<td style="background-color: pink; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
-		            <?php
-		                    } else if ($data[$a]['keterangan_level'] == 4) {
-		            ?>
-		            			<td style="background-color: red; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
-		            <?php
-		            		}
-		            ?>
-				</tr>
-		<?php    
-				$no++;
-				}
+				} else if($status == 'all' && $data[$a]['saldo'] > 0) {
+                    if($jenis_pinjaman != 'all' && $data[$a]['jenis_pinjaman'] == $jenis_pinjaman) {
+    ?>
+                    <tr>
+                        <td style="text-align: center;"><?php echo $no ?></td>
+                        <td><?php echo $data[$a]['nama']; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['nomor_koperasi']; ?></td>
+                        <?php
+                        if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
+                        ?>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                        <?php
+                        } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
+                        ?>              
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                        <?php
+                        }
+                        ?>
+                        <td><?php echo $data[$a]['kelurahan']; ?></td>
+                        <td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
+                        <td><?php echo $data[$a]['jaminan']; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
+                        <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                        <?php
+                        if ($data[$a]['keterangan_level'] == 1) {
+                        ?>
+                            <td style="background-color: yellow; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                        <?php
+                        } else if ($data[$a]['keterangan_level'] == 2) {
+                        ?>
+                            <td style="background-color: orange; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                        <?php
+                        } else if ($data[$a]['keterangan_level'] == 3) {
+                        ?>
+                            <td style="background-color: red; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+    <?php
+                    $no++;
+                    } else if($jenis_pinjaman == 'all') {
+    ?>
+                    <tr>
+                        <td style="text-align: center;"><?php echo $no ?></td>
+                        <td><?php echo $data[$a]['nama']; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['nomor_koperasi']; ?></td>
+                        <?php
+                        if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
+                        ?>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                        <?php
+                        } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
+                        ?>              
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                        <?php
+                        }
+                        ?>
+                        <td><?php echo $data[$a]['kelurahan']; ?></td>
+                        <td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
+                        <td><?php echo $data[$a]['jaminan']; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
+                        <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                        <?php
+                        if ($data[$a]['keterangan_level'] == 1) {
+                        ?>
+                            <td style="background-color: yellow; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                        <?php
+                        } else if ($data[$a]['keterangan_level'] == 2) {
+                        ?>
+                            <td style="background-color: orange; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                        <?php
+                        } else if ($data[$a]['keterangan_level'] == 3) {
+                        ?>
+                            <td style="background-color: red; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+    <?php
+                    $no++;
+                    }
+                }
 	  		}
 	  	}
 	?>

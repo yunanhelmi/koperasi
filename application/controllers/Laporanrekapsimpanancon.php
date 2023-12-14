@@ -11,6 +11,7 @@ class LaporanrekapsimpananCon extends CI_Controller {
 		$this->load->model('simpanan3thmastermodel');
 		$this->load->model('transaksiakuntansimodel');
 		$this->load->model('laporanrekapsimpananmodel');
+		$this->load->model('simpanan3thmodel');
 
 		$this->load->library('session');
 		$this->load->library('form_validation');
@@ -79,15 +80,20 @@ class LaporanrekapsimpananCon extends CI_Controller {
         $rincian_jasa = $this->transaksiakuntansimodel->get_jumlah_by_sampai_kode_akun($tanggal, '401');
 
         $simpanan3th_master = $this->simpanan3thmastermodel->showData();
-        $simpanan3th = 0;
+        $simpanan3th_nasabah = array();
+        $simpanan3th = array();
         for($i=0; $i<sizeof($simpanan3th_master); $i++) {
+        	$simpanan3th_nasabah[$i]['nama_simpanan3th'] = $simpanan3th_master[$i]['nama'];
+        	$simpanan3th_nasabah[$i]['data'] = $this->simpanan3thmodel->laporan_rekap_simpanan($tanggal, $simpanan3th_master[$i]['id']);
+        	$simpanan3th[$i]['total_neraca'] = 0;
         	if($tanggal < '2019-01-01') {
 	            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_sampai_kode_akun($tanggal, $simpanan3th_master[$i]['kode_debet_pencairan_simp']);
 	        } else if($tanggal >= '2019-01-01') {
 	            $transaksi    = $this->transaksiakuntansimodel->get_jumlah_by_dari_sampai_kode_akun('2019-01-01', $tanggal, $simpanan3th_master[$i]['kode_debet_pencairan_simp']);
 	        }
 	        if($transaksi != NULL) {
-	            $simpanan3th += $transaksi[0]['jumlah_kredit'] - $transaksi[0]['jumlah_debet'];
+	            $simpanan3th[$i]['nama'] = $simpanan3th_master[$i]['nama'];
+	            $simpanan3th[$i]['total_neraca'] += $transaksi[0]['jumlah_kredit'] - $transaksi[0]['jumlah_debet'];
 	        }
         }
 
@@ -96,18 +102,20 @@ class LaporanrekapsimpananCon extends CI_Controller {
         $total_neraca['simpanan_khusus'] = $simpanankhusus[0]['jumlah_kredit'] - $simpanankhusus[0]['jumlah_debet'];
         $total_neraca['rincian_jasa'] = $rincian_jasa[0]['jumlah_kredit'] - $rincian_jasa[0]['jumlah_debet'];
         $total_neraca['pencairan_jasa'] = $rincian_jasa[0]['jumlah_debet'];
-        $total_neraca['simpanan3th'] = $simpanan3th;
+        //$total_neraca['simpanan3th'] = $simpanan3th;
 
         /*echo "<pre>";
-        var_dump($total_neraca);
+        var_dump($simpanan3th);
         echo "</pre>";
         echo "<pre>";
-        var_dump(sizeof($data));
+        var_dump($simpanan3th_nasabah);
         echo "</pre>";*/
 
         $data['tanggal'] = $tanggal;
         $data['data'] = $result;
         $data['total_neraca'] = $total_neraca;
+        $data['simpanan3th'] = $simpanan3th;
+        $data['simpanan3th_nasabah'] = $simpanan3th_nasabah;
 
         $this->load->view('/hasil_laporan/rekapsimpanan', $data);
     }
