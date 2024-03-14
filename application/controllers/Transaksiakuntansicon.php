@@ -37,7 +37,8 @@ class TransaksiakuntansiCon extends CI_Controller {
 			$data['tgl_dari'] = $tgl_dari1;
 			$data['tgl_sampai'] = $tgl_sampai1;
 		} else {
-			$data['transaksi_akuntansi'] 	= $this->transaksiakuntansimodel->show_by_dari_sampai('', '');
+			//$data['transaksi_akuntansi'] 	= $this->transaksiakuntansimodel->show_by_dari_sampai('', '');
+			$data['transaksi_akuntansi'] 	= NULL;
 			$data['tgl_dari'] = '';
 			$data['tgl_sampai'] = '';
 		}
@@ -181,7 +182,18 @@ class TransaksiakuntansiCon extends CI_Controller {
 		redirect('transaksiakuntansicon');
 	}
 
-	
+	function delete_multiple_transaksi_akuntansi() {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+		$ids = $this->input->post('ids');
+
+		$this->db->where_in('id', explode(",", $ids));
+        $this->db->delete('transaksi_akuntansi');
+
+        echo json_encode(['success'=>"Item Deleted successfully."]);
+	}
 }
 
 ?>

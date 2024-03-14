@@ -66,16 +66,22 @@ function rupiah($angka){
           <!-- general form elements -->
           <div class="box box-danger"> 
             <div class="box-header">
-              <div class="col-xs-3">
+              <div class="col-xs-2">
                 <div class="form-group pull-left">
                   <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksiakuntansicon/create_transaksi_akuntansi"); ?>"><i class="fa fa-plus-square-o"></i> Tambahkan Transaksi</a>
                 </div>
               </div>
+              <div class="col-xs-2">
+                <div class="form-group pull-left">
+                  <button style="margin-bottom: 10px" class="btn btn-danger delete_all" data-url="<?php echo site_url("transaksiakuntansicon/delete_multiple_transaksi_akuntansi"); ?>">Hapus Transaksi yang Dipilih</button>
+                </div>
+              </div> 
             </div>
             <div class="box-body">
               <table id="transaksi_akuntansi_table" class="table table-bordered table-hover"  width="100%">
                 <thead>
                   <tr>
+                    <th></th>
                     <th>No.</th>
                     <th>Tanggal</th>
                     <th>Kode Akun</th>
@@ -95,6 +101,7 @@ function rupiah($angka){
                     for($i = 0; $i < sizeof($transaksi_akuntansi); $i++) {
                   ?>
                   <tr>
+                    <td><input type="checkbox" class="sub_chk" data-id="<?php echo $transaksi_akuntansi[$i]['id'] ?>"></td>
                     <td style='text-align: center'><?php echo $no."."?></td>
                     <?php 
                     $waktu = strtotime( $transaksi_akuntansi[$i]['tanggal'] );
@@ -172,5 +179,39 @@ function rupiah($angka){
     $(document).ready(function() {
       $('#dari').datepicker({}).on('changeDate', function(ev){});
       $('#sampai').datepicker({}).on('changeDate', function(ev){});
+
+      $('.delete_all').on('click', function(e) {
+        var allVals = [];  
+        $(".sub_chk:checked").each(function() {  
+            allVals.push($(this).attr('data-id'));
+        });
+        if(allVals.length <=0) {  
+          alert("Anda belum memilih transaksi yang akan dihapus.");  
+        } else {
+          var check = confirm("Apakah anda yakin akan menghapus transaksi tersebut?");
+          if(check == true) {
+            var join_selected_values = allVals.join(",");
+            $.ajax({
+              url: $(this).data('url'),
+              type: 'POST',
+              data: 'ids='+join_selected_values,
+              success: function (data) {
+                console.log(data);
+                $(".sub_chk:checked").each(function() {  
+                    $(this).parents("tr").remove();
+                });
+                alert("Item Deleted successfully.");
+              },
+              error: function (data) {
+                  alert(data.responseText);
+              }
+            });
+
+            $.each(allVals, function( index, value ) {
+              $('table tr').filter("[data-row-id='" + value + "']").remove();
+            });
+          }
+        }
+      });
     });
   </script>
