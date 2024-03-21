@@ -175,7 +175,25 @@
             <td>:</td>
             <td>Rp. </td>
             <td><?php echo number_format($sisa_pinjaman,0,",",".") ?></td>
+            <?php
+            if(is_array(json_decode($data[0]['jaminan']))) {
+                $string_jaminan = '';
+                $jaminan = json_decode($data[0]['jaminan']);
+                for($i = 0; $i < sizeof($jaminan); $i++) {
+                    $string_jaminan .= $jaminan[$i]->keterangan;
+                    $string_jaminan .= '; ';
+                }
+                $string_jaminan = substr($string_jaminan, 0, -2);
+            ?>
+            <td>(<?php echo $string_jaminan ?>)</td>
+            <?php
+            } else {
+            ?>
             <td>(<?php echo $data[0]['jaminan'] ?>)</td>
+            <?php
+            }
+            ?>
+            
         </tr>
         <tr>
             <td>Jasa Pinjaman</td>

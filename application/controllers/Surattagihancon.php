@@ -493,6 +493,7 @@ class SurattagihanCon extends CI_Controller {
         $lama_pinjam_long = $lama_pinjam_raw->y." Tahun ".$lama_pinjam_raw->m." Bulan ".$lama_pinjam_raw->d." Hari";
         $bulan_pinjam = (($lama_pinjam_raw->format('%y') * 12) + $lama_pinjam_raw->format('%m'));
         $lama_pinjam_bulan_hari = $bulan_pinjam." Bulan ".$lama_pinjam_raw->d." Hari";
+        $jasa_hari = 0;
         if($lama_pinjam_raw->d >= 6 && $lama_pinjam_raw->d <= 11) {
             $jasa_hari = ($sisa_pinjaman * 1)/100;
         } else if($lama_pinjam_raw->d >= 12 && $lama_pinjam_raw->d <= 17) {
