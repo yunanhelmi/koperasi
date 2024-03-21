@@ -131,7 +131,7 @@
                 $data[$a]['keterangan'] = 'Merah 2';
                 $data[$a]['keterangan_level'] = 4;
             }*/
-            if ($lama_pinjam >= 6 && $lama_pinjam <= 150) {
+            if ($lama_pinjam >= 36 && $lama_pinjam <= 150) {
                 $data[$a]['keterangan'] = 'Kuning 1';
                 $data[$a]['keterangan_level'] = 1;
             } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
@@ -332,7 +332,24 @@
     		  			<td><?php echo $data[$a]['rt']; ?></td>
     		  			<td><?php echo $data[$a]['rw']; ?></td>
     		  			<td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
-    		  			<td><?php echo $data[$a]['jaminan']; ?></td>
+                        <?php
+                        if(is_array(json_decode($data[$a]['jaminan']))) {
+                            $string_jaminan = '';
+                            $jaminan = json_decode($data[$a]['jaminan']);
+                            for($i = 0; $i < sizeof($jaminan); $i++) {
+                                $string_jaminan .= $jaminan[$i]->keterangan;
+                                $string_jaminan .= '; ';
+                            }
+                            $string_jaminan = substr($string_jaminan, 0, -2);
+                        ?>
+                        <td>(<?php echo $string_jaminan ?>)</td>
+                        <?php
+                        } else {
+                        ?>
+                        <td>(<?php echo $data[$a]['jaminan'] ?>)</td>
+                        <?php
+                        }
+                        ?>
     				  	<td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
     				  	<!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
     				  	<!--<td style="text-align: center;"><?php echo $data[$a]['tgl_jatuh_tempo']; ?></td>-->
@@ -382,7 +399,24 @@
                         <td><?php echo $data[$a]['rt']; ?></td>
                         <td><?php echo $data[$a]['rw']; ?></td>
                         <td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
-                        <td><?php echo $data[$a]['jaminan']; ?></td>
+                        <?php
+                        if(is_array(json_decode($data[$a]['jaminan']))) {
+                            $string_jaminan = '';
+                            $jaminan = json_decode($data[$a]['jaminan']);
+                            for($i = 0; $i < sizeof($jaminan); $i++) {
+                                $string_jaminan .= $jaminan[$i]->keterangan;
+                                $string_jaminan .= '; ';
+                            }
+                            $string_jaminan = substr($string_jaminan, 0, -2);
+                        ?>
+                        <td>(<?php echo $string_jaminan ?>)</td>
+                        <?php
+                        } else {
+                        ?>
+                        <td>(<?php echo $data[$a]['jaminan'] ?>)</td>
+                        <?php
+                        }
+                        ?>
                         <td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
                         <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_jatuh_tempo']; ?></td>-->
@@ -434,7 +468,24 @@
                         <td><?php echo $data[$a]['rt']; ?></td>
                         <td><?php echo $data[$a]['rw']; ?></td>
                         <td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
-                        <td><?php echo $data[$a]['jaminan']; ?></td>
+                        <?php
+                        if(is_array(json_decode($data[$a]['jaminan']))) {
+                            $string_jaminan = '';
+                            $jaminan = json_decode($data[$a]['jaminan']);
+                            for($i = 0; $i < sizeof($jaminan); $i++) {
+                                $string_jaminan .= $jaminan[$i]->keterangan;
+                                $string_jaminan .= '; ';
+                            }
+                            $string_jaminan = substr($string_jaminan, 0, -2);
+                        ?>
+                        <td>(<?php echo $string_jaminan ?>)</td>
+                        <?php
+                        } else {
+                        ?>
+                        <td>(<?php echo $data[$a]['jaminan'] ?>)</td>
+                        <?php
+                        }
+                        ?>
                         <td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
                         <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_jatuh_tempo']; ?></td>-->
@@ -484,7 +535,24 @@
                         <td><?php echo $data[$a]['rt']; ?></td>
                         <td><?php echo $data[$a]['rw']; ?></td>
                         <td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
-                        <td><?php echo $data[$a]['jaminan']; ?></td>
+                        <?php
+                        if(is_array(json_decode($data[$a]['jaminan']))) {
+                            $string_jaminan = '';
+                            $jaminan = json_decode($data[$a]['jaminan']);
+                            for($i = 0; $i < sizeof($jaminan); $i++) {
+                                $string_jaminan .= $jaminan[$i]->keterangan;
+                                $string_jaminan .= '; ';
+                            }
+                            $string_jaminan = substr($string_jaminan, 0, -2);
+                        ?>
+                        <td>(<?php echo $string_jaminan ?>)</td>
+                        <?php
+                        } else {
+                        ?>
+                        <td>(<?php echo $data[$a]['jaminan'] ?>)</td>
+                        <?php
+                        }
+                        ?>
                         <td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
                         <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_jatuh_tempo']; ?></td>-->
