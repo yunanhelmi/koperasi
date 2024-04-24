@@ -143,7 +143,7 @@
     			$data[$a]['keterangan'] = 'Merah 2';
     			$data[$a]['keterangan_level'] = 4;
     		}*/
-            if ($lama_pinjam >= 6 && $lama_pinjam <= 150) {
+            if ($lama_pinjam >= 36 && $lama_pinjam <= 150) {
                 $data[$a]['keterangan'] = 'Kuning 1';
                 $data[$a]['keterangan_level'] = 1;
             } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
