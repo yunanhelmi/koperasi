@@ -142,10 +142,9 @@
 </style>
 
 <div id="kop_surat">
-    <h2>KOPPONTREN MAMBA'UL MUBBASYIRIN SHIDDIQIYAH</h2>
-    <h2>BOJONEGORO</h2>
-    <h3>Badan Hukum : 8181 / BH / II / 95</h3>
-    <h4>Kantor Pelayanan : Timur Pasar Ngumpak dalem, Dander Bojoneogoro</h4>
+    <h2>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</h2>
+    <h3>AHU-0003689.AH.01.39.TAHUN 2022</h3>
+    <h4>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</h4>
     <hr size="4px">
 </div>
 <div></div>
