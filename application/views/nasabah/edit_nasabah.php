@@ -91,12 +91,12 @@
                   <?php echo '<input type="text" class="form-control" id="dusun" name="dusun" placeholder="Dusun" value="'.$nasabah->dusun.'">'; ?>
                 </div>
                 <div class="form-group col-xs-3">
-                  <label for="exampleInputPassword1">RT</label>
-                  <?php echo '<input type="text" class="form-control" id="rt" name="rt" placeholder="RT" value="'.$nasabah->rt.'">'; ?>
-                </div>
-                <div class="form-group col-xs-3">
                   <label for="exampleInputPassword1">RW</label>
                   <?php echo '<input type="text" class="form-control" id="rw" name="rw" placeholder="RW" value="'.$nasabah->rw.'">'; ?>
+                </div>
+                <div class="form-group col-xs-3">
+                  <label for="exampleInputPassword1">RT</label>
+                  <?php echo '<input type="text" class="form-control" id="rt" name="rt" placeholder="RT" value="'.$nasabah->rt.'">'; ?>
                 </div>
                 <div class="form-group col-xs-3">
                   <label for="exampleInputFile">Foto</label>

@@ -159,7 +159,7 @@
         <br>
         Kepada<br/>
         Yth. Bpk / Ibu <strong><?php echo $data[0]['nama'] ?></strong><br/>
-        Di <strong><?php echo $data[0]['rt'] == "" ? '' : 'RT '.$data[0]['rt'] ?> <?php echo $data[0]['rw'] == "" ? '' : 'RW '.$data[0]['rw'] ?> <?php echo $data[0]['dusun'] ?> <?php echo $data[0]['kelurahan'] ?></strong>
+        Di <strong><?php echo $data[0]['rw'] == "" ? '' : 'RW '.$data[0]['rw'] ?> <?php echo $data[0]['rt'] == "" ? '' : 'RT '.$data[0]['rt'] ?> <?php echo $data[0]['dusun'] ?> <?php echo $data[0]['kelurahan'] ?></strong>
     </p>
     <br>
     <p>Assalamu'alaikum Wr. Wb.</p>
