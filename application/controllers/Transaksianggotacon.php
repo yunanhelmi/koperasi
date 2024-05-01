@@ -196,6 +196,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$insert['total_angsuran_perbulan'] 	= $this->input->post('total_angsuran_perbulan');
 		$insert['sisa_angsuran'] 			= $this->input->post('jumlah_pinjaman');
 		$insert['keterangan'] 				= $this->input->post('keterangan');
+		$insert['status_pinjaman'] 			= $this->input->post('status_pinjaman');
 
 		$detail = array();
 		$detail['waktu'] 		= $insert['waktu'];
@@ -289,6 +290,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$update['jasa_perbulan'] 			= $this->input->post('jasa_perbulan');
 		$update['total_angsuran_perbulan'] 	= $this->input->post('total_angsuran_perbulan');
 		$update['keterangan'] 				= $this->input->post('keterangan');
+		$update['status_pinjaman'] 			= $this->input->post('status_pinjaman');
 		$update['uang_kurang'] 				= $this->input->post('uang_kurang');
 		$update['janji'] 					= $this->input->post('janji');
 		$this->pinjamanmodel->updateData($id_pinjaman, $update);

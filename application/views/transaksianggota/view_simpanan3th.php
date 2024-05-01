@@ -189,9 +189,12 @@ function rupiah($angka){
                       <th>Tanggal Pinjam</th>
                       <th>Jaminan</th>
                       <th>Jatuh Tempo</th>
+                      <th>Keterangan</th>
+                      <th>Status Pinjaman</th>
                       <th>Jumlah Pinjaman</th>
                       <th>Sisa Pinjaman</th>
                       <th>Jumlah Angsuran</th>
+                      <th>Uang Kurang</th>
                       <th>View</th>
                       <th>Edit</th>
                       <th>Delete</th>
@@ -200,6 +203,9 @@ function rupiah($angka){
                   <tbody>
                     <?php
                       $no = 1;
+                      $total_pinjaman = 0;
+                      $total_sisa = 0;
+                      //$total_angsuran = 0;
                       for($i = 0; $i < sizeof($pinjaman); $i++) {
                     ?>
                     <tr <?php echo $pinjaman[$i]['sisa_angsuran'] == 0 ? "style='background-color: #90EE90'" : "" ?>>
@@ -225,14 +231,29 @@ function rupiah($angka){
                       <td><?php echo $str_jaminan?></td>
                       <?php $jatuh_tempo = strtotime($pinjaman[$i]['jatuh_tempo'])?>
                       <td><?php echo date("d-m-Y", $jatuh_tempo)?></td>
+                      <td><?php echo $pinjaman[$i]['keterangan']?></td>
+                      <td><?php echo $pinjaman[$i]['status_pinjaman']?></td>
                       <td><?php echo rupiah($pinjaman[$i]['jumlah_pinjaman'])?></td>
                       <td><?php echo rupiah($pinjaman[$i]['sisa_angsuran'])?></td>
                       <td><?php echo $pinjaman[$i]['jumlah_angsuran']?></td>
+                      <td><?php echo rupiah($pinjaman[$i]['uang_kurang'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_pinjaman/".$pinjaman[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_pinjaman/".$pinjaman[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                       <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationPinjaman('<?php echo $pinjaman[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                     </tr>
-                    <?php $no++;}?>
+                    <?php 
+                        $no++;
+                        $total_pinjaman += $pinjaman[$i]['jumlah_pinjaman'];
+                        $total_sisa += $pinjaman[$i]['sisa_angsuran'];
+                        //$total_angsuran += $pinjaman[$i]['jumlah_angsuran'];
+                      }
+                    ?>
+                    <tr>
+                      <td colspan="6"><strong>Total</strong></td>
+                      <td><strong><?php echo rupiah($total_pinjaman) ?></strong></td>
+                      <td><strong><?php echo rupiah($total_sisa) ?></strong></td>
+                      <!--<td><strong><?php echo rupiah($total_angsuran) ?></strong></td>-->
+                    </tr>
                   </tbody>
                 </table>
               </div>

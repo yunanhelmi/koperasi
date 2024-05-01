@@ -284,6 +284,13 @@ function rupiah($angka){
                     <!-- <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan" value=""> -->
                     <textarea class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan"></textarea>
                   </div>
+                  <div class="form-group col-xs-6">
+                    <label for="exampleInputPassword1">Status Pinjaman</label>
+                    <select id="status_pinjaman" name="status_pinjaman" class="form-control" style="width: 100%;">
+                      <option value='Baru'>Baru</option>
+                      <option value='Perpanjangan'>Perpanjangan</option>
+                    </select>
+                  </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">

@@ -292,6 +292,13 @@ function rupiah($angka){
                     <label for="exampleInputPassword1">Janji</label>
                     <input type="text" class="form-control" id="janji" name="janji" placeholder="" value="<?php echo $pinjaman->janji?>">
                   </div>
+                  <div class="form-group col-xs-6">
+                    <label for="exampleInputPassword1">Status Pinjaman</label>
+                    <select id="status_pinjaman" name="status_pinjaman" class="form-control" style="width: 100%;">
+                      <option value='Baru' <?php echo $pinjaman->status_pinjaman == 'Baru' ? 'selected' : ''?> >Baru</option>
+                    <option value='Perpanjangan' <?php echo $pinjaman->status_pinjaman == 'Perpanjangan' ? 'selected' : ''?> >Perpanjangan</option>
+                    </select>
+                  </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">

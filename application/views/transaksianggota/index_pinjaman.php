@@ -189,6 +189,7 @@ function rupiah($angka){
                       <th>Jaminan</th>
                       <th>Jatuh Tempo</th>
                       <th>Keterangan</th>
+                      <th>Status Pinjaman</th>
                       <th>Jumlah Pinjaman</th>
                       <th>Sisa Pinjaman</th>
                       <th>Jumlah Angsuran</th>
@@ -230,6 +231,7 @@ function rupiah($angka){
                       <?php $jatuh_tempo = strtotime($pinjaman[$i]['jatuh_tempo'])?>
                       <td><?php echo date("d-m-Y", $jatuh_tempo)?></td>
                       <td><?php echo $pinjaman[$i]['keterangan']?></td>
+                      <td><?php echo $pinjaman[$i]['status_pinjaman']?></td>
                       <td><?php echo rupiah($pinjaman[$i]['jumlah_pinjaman'])?></td>
                       <td><?php echo rupiah($pinjaman[$i]['sisa_angsuran'])?></td>
                       <td><?php echo $pinjaman[$i]['jumlah_angsuran']?></td>
@@ -246,7 +248,7 @@ function rupiah($angka){
                       }
                     ?>
                     <tr>
-                      <td colspan="6"><strong>Total</strong></td>
+                      <td colspan="7"><strong>Total</strong></td>
                       <td><strong><?php echo rupiah($total_pinjaman) ?></strong></td>
                       <td><strong><?php echo rupiah($total_sisa) ?></strong></td>
                       <!--<td><strong><?php echo rupiah($total_angsuran) ?></strong></td>-->

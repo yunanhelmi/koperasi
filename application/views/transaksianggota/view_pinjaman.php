@@ -263,6 +263,10 @@ function rupiah($angka){
                         <p><?php echo $pinjaman->keterangan;?></p>
                       </div>
                       <div class="form-group col-xs-3">
+                        <label for="exampleInputPassword1">Status Pinjaman</label>
+                        <p><?php echo $pinjaman->status_pinjaman;?></p>
+                      </div>
+                      <div class="form-group col-xs-3">
                         <label for="exampleInputPassword1">Lama Hari</label>
                         <?php
                           if($lama_hari_long != "LUNAS") {
