@@ -661,7 +661,7 @@ function rupiah($angka){
                               <label for="exampleInputEmail1">:</label>
                             </div>
                             <div class="form-group col-xs-2" style="text-align: right">
-                              <p><?php echo number_format($dilunasi['sisa_pinjaman'],0,",",".");?></p>
+                              <p><?php echo number_format($pinjaman->sisa_angsuran,0,",",".");?></p>
                             </div>  
                           </div>
                           <div class="row">
@@ -672,10 +672,10 @@ function rupiah($angka){
                               <label for="exampleInputEmail1">:</label>
                             </div>
                             <div class="form-group col-xs-2" style="text-align: right">
-                              <p><?php echo number_format($dilunasi['jasa_pinjaman'],0,",",".");?></p>
+                              <p><?php echo number_format(($dilunasi['jasa_pinjaman'] * ($pinjaman->jumlah_angsuran - $dilunasi['bulan_jasa'])),0,",",".");?></p>
                             </div>
                             <div class="form-group col-xs-5">
-                              <p>(<?php echo $dilunasi['lama_akhir_bayar']." - ".$dilunasi['lama_akhir_bayar_bulan_hari']  ?> / <?php echo date('d-m-Y') ?>)</p>
+                              <p>(<?php echo ($pinjaman->jumlah_angsuran - $dilunasi['bulan_jasa'])  ?> Bulan)</p>
                             </div>
                           </div>
                           <div class="row">
