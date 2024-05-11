@@ -641,6 +641,328 @@ function rupiah($angka){
                       </div>
                     </form>
                   </div>
+                  <br>
+                  <div class="box box-danger">
+                    <legend style="text-align:center;">PERHITUNGAN JIKA DILUNASI</legend>
+                    <?php
+                      if($dilunasi == NULL) {
+                        echo "<strong><p>Belum Ada Transaksi yang Diposting</p></strong>";
+                      }
+                    ?>
+                    <?php
+                      if($pinjaman->jenis_pinjaman == 'Angsuran' && $dilunasi != NULL) {
+                    ?>
+                        <div class="box-body">
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputEmail1">Pokok Pinjaman</label>
+                            </div>
+                            <div class="form-group col-xs-1" style="text-align: right">
+                              <label for="exampleInputEmail1">:</label>
+                            </div>
+                            <div class="form-group col-xs-2" style="text-align: right">
+                              <p><?php echo number_format($dilunasi['sisa_pinjaman'],0,",",".");?></p>
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputEmail1">Jasa Pinjaman</label>
+                            </div>
+                            <div class="form-group col-xs-1" style="text-align: right">
+                              <label for="exampleInputEmail1">:</label>
+                            </div>
+                            <div class="form-group col-xs-2" style="text-align: right">
+                              <p><?php echo number_format($dilunasi['jasa_pinjaman'],0,",",".");?></p>
+                            </div>
+                            <div class="form-group col-xs-5">
+                              <p>(<?php echo $dilunasi['lama_akhir_bayar']." - ".$dilunasi['lama_akhir_bayar_bulan_hari']  ?> / <?php echo date('d-m-Y') ?>)</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputEmail1">Total</label>
+                            </div>
+                            <div class="form-group col-xs-1" style="text-align: right">
+                              <label for="exampleInputEmail1">:</label>
+                            </div>
+                            <div class="form-group col-xs-2" style="text-align: right">
+                              <strong><p><?php echo number_format($dilunasi['total'],0,",",".");?></p></strong>
+                            </div>  
+                          </div>
+                        </div>
+                    <?php
+                      } else if($pinjaman->jenis_pinjaman == 'Musiman' && $dilunasi != NULL) {
+                    ?>
+                        <div class="box-body">
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputEmail1">Pokok Pinjaman</label>
+                            </div>
+                            <div class="form-group col-xs-1" style="text-align: right">
+                              <label for="exampleInputEmail1">:</label>
+                            </div>
+                            <div class="form-group col-xs-2" style="text-align: right">
+                              <p><?php echo number_format($dilunasi['sisa_pinjaman'],0,",",".");?></p>
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputEmail1">Jasa Pinjaman</label>
+                            </div>
+                            <div class="form-group col-xs-1" style="text-align: right">
+                              <label for="exampleInputEmail1">:</label>
+                            </div>
+                            <div class="form-group col-xs-2" style="text-align: right">
+                              <p><?php echo number_format($dilunasi['jasa_pinjaman'] - $dilunasi['jasa_terbayar'] + $dilunasi['jasa_hari'],0,",",".");?></p>
+                            </div>
+                            <div class="form-group col-xs-5">
+                              <p>(<?php echo $dilunasi['lama_pinjam_bulan_hari']?>)</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputEmail1">Administrasi (<?php echo $dilunasi['kali_administrasi'] ?>x)</label>
+                            </div>
+                            <div class="form-group col-xs-1" style="text-align: right">
+                              <label for="exampleInputEmail1">:</label>
+                            </div>
+                            <div class="form-group col-xs-2" style="text-align: right">
+                              <p><?php echo number_format($dilunasi['biaya_administrasi'],0,",",".");?></p>
+                            </div>
+                            <div class="form-group col-xs-5">
+                              <p>(<?php echo $dilunasi['lama_pinjam']." - ".$dilunasi['lama_pinjam_bulan_hari']  ?> / <?php echo date('d-m-Y') ?>)</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputEmail1">Total</label>
+                            </div>
+                            <div class="form-group col-xs-1" style="text-align: right">
+                              <label for="exampleInputEmail1">:</label>
+                            </div>
+                            <div class="form-group col-xs-2" style="text-align: right">
+                              <strong><p><?php echo number_format($dilunasi['total'] - $dilunasi['jasa_terbayar'] + $dilunasi['jasa_hari'],0,",",".");?></p></strong>
+                            </div>  
+                          </div>
+                        </div>
+                    <?php
+                      }
+                    ?>
+                  </div>
+                  <br>
+                  <div class="box box-danger">
+                    <legend style="text-align:center;">PERHITUNGAN JIKA DIPERPANJANG</legend>
+                    <?php
+                      if($dilunasi == NULL) {
+                        echo "<strong><p>Belum Ada Transaksi yang Diposting</p></strong>";
+                      }
+                    ?>
+                    <?php
+                      if($pinjaman->jenis_pinjaman == 'Angsuran') {
+                    ?>
+                        <div class="box-body">
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputPassword1">Sisa Pinjaman</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="angsuran_sisa_pinjaman" name="angsuran_sisa_pinjaman" placeholder="Sisa Pinjaman" value='<?php echo $pinjaman->sisa_angsuran ?>'>
+                              </div>
+                              <div id="label_angsuran_sisa_pinjaman" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputPassword1">Potongan 1%</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="angsuran_potongan" name="angsuran_potongan" value='<?php echo $pinjaman->sisa_angsuran * 0.01 ?>' readonly>
+                              </div>
+                              <div id="label_angsuran_potongan" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputPassword1">Dansos 1%</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="angsuran_dansos" name="angsuran_dansos" value='<?php echo $pinjaman->sisa_angsuran * 0.01 ?>' readonly>
+                              </div>
+                              <div id="label_angsuran_dansos" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputPassword1">Wajib Belanja 1%</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="angsuran_wajib_belanja" name="angsuran_wajib_belanja" value='<?php echo $pinjaman->sisa_angsuran * 0.01 ?>' readonly>
+                              </div>
+                              <div id="label_angsuran_wajib_belanja" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputPassword1">Terima Bersih</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="angsuran_terima_bersih" name="angsuran_terima_bersih" value='<?php echo $pinjaman->sisa_angsuran - ($pinjaman->sisa_angsuran * 0.03) ?>' readonly>
+                              </div>
+                              <div id="label_angsuran_terima_bersih" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-2">
+                              <label for="exampleInputPassword1">Dengan Materai</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="angsuran_dengan_materai" name="angsuran_dengan_materai" value='<?php echo ($pinjaman->sisa_angsuran - ($pinjaman->sisa_angsuran * 0.03)) - 10000 ?>' readonly>
+                              </div>
+                              <div id="label_angsuran_dengan_materai" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                        </div>
+                    <?php
+                      } else if($pinjaman->jenis_pinjaman == 'Musiman') {
+                    ?>
+                        <div class="box-body">
+                          <div class="row">
+                            <div class="form-group col-xs-3">
+                              <label for="exampleInputPassword1">Pinjaman Sebelumnya</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="musiman_sisa_pinjaman" name="musiman_sisa_pinjaman" placeholder="Sisa Pinjaman" value='<?php echo $pinjaman->sisa_angsuran ?>'>
+                              </div>
+                              <div id="label_musiman_sisa_pinjaman" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-3">
+                              <label for="exampleInputPassword1">Potongan 1%</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="musiman_potongan" name="musiman_potongan" value='<?php echo $pinjaman->sisa_angsuran * 0.01 ?>' readonly>
+                              </div>
+                              <div id="label_musiman_potongan" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-3">
+                              <label for="exampleInputPassword1">Dansos 1%</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="musiman_dansos" name="musiman_dansos" value='<?php echo $pinjaman->sisa_angsuran * 0.01 ?>' readonly>
+                              </div>
+                              <div id="label_musiman_dansos" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-3">
+                              <label for="exampleInputPassword1">Wajib Belanja 1%</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="musiman_wajib_belanja" name="musiman_wajib_belanja" value='<?php echo $pinjaman->sisa_angsuran * 0.01 ?>' readonly>
+                              </div>
+                              <div id="label_musiman_wajib_belanja" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-3">
+                              <label for="exampleInputPassword1">Wajib Minimum 10%</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="musiman_wajib_minimum" name="musiman_wajib_minimum" value='<?php echo $pinjaman->sisa_angsuran * 0.01 ?>' readonly>
+                              </div>
+                              <div id="label_musiman_wajib_minimum" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-3">
+                              <label for="exampleInputPassword1">Total Bayar dengan Jasa 1 Bulan</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="musiman_bayar_dg_jasa_1_bulan" name="musiman_bayar_dg_jasa_1_bulan" value='<?php echo $pinjaman->sisa_angsuran * 0.01 ?>' readonly>
+                              </div>
+                              <div id="label_musiman_bayar_dg_jasa_1_bulan" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-3">
+                              <label for="exampleInputPassword1">Total Bayar dengan Jasa 2 Bulan</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="musiman_bayar_dg_jasa_2_bulan" name="musiman_bayar_dg_jasa_2_bulan" value='<?php echo $pinjaman->sisa_angsuran * 0.01 ?>' readonly>
+                              </div>
+                              <div id="label_musiman_bayar_dg_jasa_2_bulan" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-3">
+                              <label for="exampleInputPassword1">Total Bayar dengan Jasa 3 Bulan</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="musiman_bayar_dg_jasa_3_bulan" name="musiman_bayar_dg_jasa_3_bulan" value='<?php echo $pinjaman->sisa_angsuran * 0.01 ?>' readonly>
+                              </div>
+                              <div id="label_musiman_bayar_dg_jasa_3_bulan" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-3">
+                              <label for="exampleInputPassword1">Total Bayar dengan Jasa 4 Bulan</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="musiman_bayar_dg_jasa_4_bulan" name="musiman_bayar_dg_jasa_4_bulan" value='<?php echo $pinjaman->sisa_angsuran * 0.01 ?>' readonly>
+                              </div>
+                              <div id="label_musiman_bayar_dg_jasa_4_bulan" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-xs-3">
+                              <label for="exampleInputPassword1">Pinjaman Setelah Perbaikan</label>
+                            </div>
+                            <div class="form-group col-xs-2">
+                              <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">Rp</span>
+                                <input style="text-align: right !important;" type="text" class="form-control" id="musiman_pinjaman_setelah_perbaikan" name="musiman_pinjaman_setelah_perbaikan" value='<?php echo $pinjaman->sisa_angsuran * 0.01 ?>' readonly>
+                              </div>
+                              <div id="label_musiman_pinjaman_setelah_perbaikan" class="alert-danger"></div> 
+                            </div>
+                          </div>
+                        </div>
+                    <?php
+                      }
+                    ?>
+                  </div>
                 </div>
               </div>
 
@@ -1386,6 +1708,74 @@ function rupiah($angka){
         console.log(angsuran);
       }
 
+      /*** FORM PERHITUNGAN ***/
+      function label_angsuran_sisa_pinjaman() {
+        var angsuran_sisa_pinjaman = $('#angsuran_sisa_pinjaman').val();
+        $("#label_angsuran_sisa_pinjaman").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(angsuran_sisa_pinjaman)));
+      }
+      function label_angsuran_potongan() {
+        var angsuran_potongan = $('#angsuran_potongan').val();
+        $("#label_angsuran_potongan").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(angsuran_potongan)));
+      }
+      function label_angsuran_dansos() {
+        var angsuran_dansos = $('#angsuran_dansos').val();
+        $("#label_angsuran_dansos").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(angsuran_dansos)));
+      }
+      function label_angsuran_wajib_belanja() {
+        var angsuran_wajib_belanja = $('#angsuran_wajib_belanja').val();
+        $("#label_angsuran_wajib_belanja").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(angsuran_wajib_belanja)));
+      }
+      function label_angsuran_terima_bersih() {
+        var angsuran_terima_bersih = $('#angsuran_terima_bersih').val();
+        $("#label_angsuran_terima_bersih").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(angsuran_terima_bersih)));
+      }
+      function label_angsuran_dengan_materai() {
+        var angsuran_dengan_materai = $('#angsuran_dengan_materai').val();
+        $("#label_angsuran_dengan_materai").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(angsuran_dengan_materai)));
+      }
+
+      function label_musiman_sisa_pinjaman() {
+        var musiman_sisa_pinjaman = $('#musiman_sisa_pinjaman').val();
+        $("#label_musiman_sisa_pinjaman").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(musiman_sisa_pinjaman)));
+      }
+      function label_musiman_potongan() {
+        var musiman_potongan = $('#musiman_potongan').val();
+        $("#label_musiman_potongan").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(musiman_potongan)));
+      }
+      function label_musiman_dansos() {
+        var musiman_dansos = $('#musiman_dansos').val();
+        $("#label_musiman_dansos").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(musiman_dansos)));
+      }
+      function label_musiman_wajib_belanja() {
+        var musiman_wajib_belanja = $('#musiman_wajib_belanja').val();
+        $("#label_musiman_wajib_belanja").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(musiman_wajib_belanja)));
+      }
+      function label_musiman_wajib_minimum() {
+        var musiman_wajib_minimum = $('#musiman_wajib_minimum').val();
+        $("#label_musiman_wajib_minimum").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(musiman_wajib_minimum)));
+      }
+      function label_musiman_bayar_dg_jasa_1_bulan() {
+        var musiman_bayar_dg_jasa_1_bulan = $('#musiman_bayar_dg_jasa_1_bulan').val();
+        $("#label_musiman_bayar_dg_jasa_1_bulan").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(musiman_bayar_dg_jasa_1_bulan)));
+      }
+      function label_musiman_bayar_dg_jasa_2_bulan() {
+        var musiman_bayar_dg_jasa_2_bulan = $('#musiman_bayar_dg_jasa_2_bulan').val();
+        $("#label_musiman_bayar_dg_jasa_2_bulan").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(musiman_bayar_dg_jasa_2_bulan)));
+      }
+      function label_musiman_bayar_dg_jasa_3_bulan() {
+        var musiman_bayar_dg_jasa_3_bulan = $('#musiman_bayar_dg_jasa_3_bulan').val();
+        $("#label_musiman_bayar_dg_jasa_3_bulan").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(musiman_bayar_dg_jasa_3_bulan)));
+      }
+      function label_musiman_bayar_dg_jasa_4_bulan() {
+        var musiman_bayar_dg_jasa_4_bulan = $('#musiman_bayar_dg_jasa_4_bulan').val();
+        $("#label_musiman_bayar_dg_jasa_4_bulan").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(musiman_bayar_dg_jasa_4_bulan)));
+      }
+      function label_musiman_pinjaman_setelah_perbaikan() {
+        var musiman_pinjaman_setelah_perbaikan = $('#musiman_pinjaman_setelah_perbaikan').val();
+        $("#label_musiman_pinjaman_setelah_perbaikan").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(musiman_pinjaman_setelah_perbaikan)));
+      }
+      /*** END OF FORM PERHITUNGAN ***/
+
       $(document).ready(function(){
         $('#waktu').datepicker({}).on('changeDate', function(ev){
           hitung_jatuh_tempo();
@@ -1452,6 +1842,80 @@ function rupiah($angka){
             document.getElementById("div_no_pol").style.display = "block";
           }
         });
+
+        /*** FORM PERHITUNGAN ***/
+        var jenis_pinjaman = "<?php echo $pinjaman->jenis_pinjaman; ?>";
+        if(jenis_pinjaman == 'Angsuran') {
+          label_angsuran_sisa_pinjaman();
+          label_angsuran_potongan();
+          label_angsuran_dansos();
+          label_angsuran_wajib_belanja();
+          label_angsuran_terima_bersih();
+          label_angsuran_dengan_materai();
+          $('#angsuran_sisa_pinjaman').keyup(function() {
+            label_angsuran_sisa_pinjaman();
+            var sisa_pinjaman = $('#angsuran_sisa_pinjaman').val();
+            var potongan = sisa_pinjaman * 0.01;
+            var dansos = sisa_pinjaman * 0.01;
+            var wajib_belanja = sisa_pinjaman * 0.01;
+            var terima_bersih = sisa_pinjaman - (potongan + dansos + wajib_belanja);
+            var dengan_materai = terima_bersih - 10000;
+            $('#angsuran_potongan').val(potongan);
+            label_angsuran_potongan();
+            $('#angsuran_dansos').val(dansos);
+            label_angsuran_dansos();
+            $('#angsuran_wajib_belanja').val(wajib_belanja);
+            label_angsuran_wajib_belanja();
+            $('#angsuran_terima_bersih').val(terima_bersih);
+            label_angsuran_terima_bersih();
+            $('#angsuran_dengan_materai').val(dengan_materai);
+            label_angsuran_dengan_materai();
+          });
+        } else if(jenis_pinjaman == 'Musiman') {
+          label_musiman_sisa_pinjaman();
+          label_musiman_potongan();
+          label_musiman_dansos();
+          label_musiman_wajib_belanja();
+          label_musiman_wajib_minimum();
+          label_musiman_bayar_dg_jasa_1_bulan();
+          label_musiman_bayar_dg_jasa_2_bulan();
+          label_musiman_bayar_dg_jasa_3_bulan();
+          label_musiman_bayar_dg_jasa_4_bulan();
+          label_musiman_pinjaman_setelah_perbaikan();
+          $('#musiman_sisa_pinjaman').keyup(function() {
+            label_musiman_sisa_pinjaman();
+            var sisa_pinjaman = $('#musiman_sisa_pinjaman').val();
+            var wajib_minimum = sisa_pinjaman * 0.1;
+            var pinjaman_setelah_perbaikan = sisa_pinjaman - wajib_minimum;
+            var potongan = pinjaman_setelah_perbaikan * 0.01;
+            var dansos = pinjaman_setelah_perbaikan * 0.01;
+            var wajib_belanja = pinjaman_setelah_perbaikan * 0.01;
+            var bayar_dg_jasa_1_bulan = (0.03 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+            var bayar_dg_jasa_2_bulan = (0.06 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+            var bayar_dg_jasa_3_bulan = (0.09 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+            var bayar_dg_jasa_4_bulan = (0.12 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+            
+            $('#musiman_potongan').val(potongan);
+            label_musiman_potongan();
+            $('#musiman_dansos').val(dansos);
+            label_musiman_dansos();
+            $('#musiman_wajib_belanja').val(wajib_belanja);
+            label_musiman_wajib_belanja();
+            $('#musiman_wajib_minimum').val(wajib_minimum);
+            label_musiman_wajib_minimum();
+            $('#musiman_bayar_dg_jasa_1_bulan').val(bayar_dg_jasa_1_bulan);
+            label_musiman_bayar_dg_jasa_1_bulan();
+            $('#musiman_bayar_dg_jasa_2_bulan').val(bayar_dg_jasa_2_bulan);
+            label_musiman_bayar_dg_jasa_2_bulan();
+            $('#musiman_bayar_dg_jasa_3_bulan').val(bayar_dg_jasa_3_bulan);
+            label_musiman_bayar_dg_jasa_3_bulan();
+            $('#musiman_bayar_dg_jasa_4_bulan').val(bayar_dg_jasa_4_bulan);
+            label_musiman_bayar_dg_jasa_4_bulan();
+            $('#musiman_pinjaman_setelah_perbaikan').val(pinjaman_setelah_perbaikan);
+            label_musiman_pinjaman_setelah_perbaikan();
+          });
+        }
+        /*** END OF FORM PERHITUNGAN ***/
 
       });
 

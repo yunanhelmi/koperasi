@@ -258,6 +258,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <i class="fa fa-file-text"></i> <span>Daftar Penerimaan Surat</span>
           </a>
         </li>
+        <!-- <li class="treeview">
+          <a href="<?php echo base_url()."assets/"; ?>#">
+            <i class="fa fa-calculator"></i> <span>Form Perhitungan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url(); ?>index.php/formperhitungancon/dilunasi"><i class="fa fa-chevron-right"></i>Jika Dilunasi</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/formperhitungancon/diperpanjang"><i class="fa fa-chevron-right"></i>Jika Diperpanjang</a>
+          </ul>
+        </li> -->
         <!--<li>
           <a href="<?php echo base_url(); ?>index.php/surattagihancon">
             <i class="fa fa-envelope"></i> <span>Surat Tagihan</span>
