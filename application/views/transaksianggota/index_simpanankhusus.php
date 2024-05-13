@@ -171,6 +171,7 @@ function rupiah($angka){
             <!--<li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>-->
             <li><a href="#simpanan_pihak_ketiga" data-toggle="tab">Simpanan Pihak Ketiga</a></li>
             <li><a href="#aset_kekayaan" data-toggle="tab">Aset Kekayaan</a></li>
+            <li><a href="#berkas" data-toggle="tab">Scan Berkas</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane" id="pinjaman">
@@ -693,6 +694,45 @@ function rupiah($angka){
                 </table>
               </div>
             </div>
+            <div class="tab-pane" id="berkas">
+              <div class="box-header" style="text-align:left" >
+                <h3>
+                  <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksianggotacon/create_berkas/".$nasabah->id); ?>">Tambahkan Scan Berkas</a>
+                </h3>
+              </div> 
+              <div class="box-body">
+                <table id="berkas_table" class="table table-bordered table-hover"  width="100%">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Nama</th>
+                      <th>Link Gambar</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      if($berkas != NULL){
+                        $no = 1;
+                        for($i = 0; $i < sizeof($berkas); $i++) {
+                    ?>
+                        <tr>
+                          <td><?php echo $no ?></td>
+                          <td><?php echo $berkas[$i]['nama_berkas'] ?></td>
+                          <td style='text-align: center'><a class="btn btn-primary" href="<?php echo base_url(); ?>files/uploads/berkas/<?php echo $berkas[$i]['file_berkas']; ?>" target="_blank"><i class="fa fa-eye"></i></a></td>
+                          <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_berkas/".$berkas[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+                          <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationBerkas('<?php echo $berkas[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                        </tr>
+                    <?php
+                        }
+                        $no++;
+                      }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
 
 
           </div>
@@ -824,6 +864,26 @@ function rupiah($angka){
     var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
     if( retVal == true ){
       window.location.href= base_url + '/' + controller + '/delete_simpananpihakketiga/' + id;
+      //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
+    }
+  }
+
+  function getConfirmationAsetkekayaan(id){
+    var retVal = confirm("Apakah anda yakin akan menghapus data tersebut ?");
+    var controller = 'transaksianggotacon';
+    var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
+    if( retVal == true ){
+      window.location.href= base_url + '/' + controller + '/delete_asetkekayaan/' + id;
+      //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
+    }
+  }
+
+  function getConfirmationBerkas(id){
+    var retVal = confirm("Apakah anda yakin akan menghapus data tersebut ?");
+    var controller = 'transaksianggotacon';
+    var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
+    if( retVal == true ){
+      window.location.href= base_url + '/' + controller + '/delete_berkas/' + id;
       //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
     }
   }

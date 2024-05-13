@@ -30,6 +30,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$this->load->model('kodeakunmodel');
 		$this->load->model('transaksiakuntansimodel');
 		$this->load->model('surattagihanmodel');
+		$this->load->model('berkasmodel');
 
 		$this->load->library('session');
 		$this->load->library('form_validation');
@@ -125,6 +126,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -147,6 +149,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -230,6 +233,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -337,6 +341,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -602,6 +607,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 			= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']	= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']			= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 				= $session_data['username'];
 		$data['status'] 				= $session_data['status'];
 
@@ -874,6 +880,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 			= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']	= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']			= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 				= $session_data['username'];
 		$data['status'] 				= $session_data['status'];
 
@@ -1345,6 +1352,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -1367,6 +1375,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -1413,6 +1422,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -1462,6 +1472,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -1663,6 +1674,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -1686,6 +1698,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -1733,6 +1746,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 		
@@ -1797,6 +1811,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 			= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']	= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']			= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']					= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 				= $session_data['username'];
 		$data['status'] 				= $session_data['status'];
 		
@@ -1870,6 +1885,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 				= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']		= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']				= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 					= $session_data['username'];
 		$data['status'] 					= $session_data['status'];
 
@@ -2085,6 +2101,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -2107,6 +2124,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -2154,6 +2172,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 		
@@ -2218,6 +2237,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 			= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']	= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 				= $session_data['username'];
 		$data['status'] 				= $session_data['status'];
 		
@@ -2291,7 +2311,8 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankanzun'] 			= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
 		$data['simpanan3th'] 				= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']		= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
-		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']				= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']						= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 					= $session_data['username'];
 		$data['status'] 					= $session_data['status'];
 
@@ -2584,6 +2605,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -2606,6 +2628,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -2653,6 +2676,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 		
@@ -2715,8 +2739,9 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankhusus'] 			= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpanankanzun'] 			= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
 		$data['simpanan3th'] 				= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
-		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
-		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['simpananpihakketiga']		= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']				= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']						= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 					= $session_data['username'];
 		$data['status'] 					= $session_data['status'];
 		
@@ -2789,7 +2814,8 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankanzun'] 				= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
 		$data['simpanan3th'] 					= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']			= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
-		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']					= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']							= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 						= $session_data['username'];
 		$data['status'] 						= $session_data['status'];
 
@@ -3029,6 +3055,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -3051,6 +3078,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -3098,6 +3126,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 		
@@ -3161,7 +3190,8 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankhusus'] 		= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpanan3th'] 			= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']	= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
-		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']			= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']					= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 				= $session_data['username'];
 		$data['status'] 				= $session_data['status'];
 		
@@ -3234,7 +3264,8 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankhusus'] 			= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpanan3th'] 				= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']		= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
-		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']				= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']						= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 					= $session_data['username'];
 		$data['status'] 					= $session_data['status'];
 
@@ -3450,6 +3481,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -3472,6 +3504,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankhusus'] 	= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -3519,6 +3552,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankhusus'] 	= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 		
@@ -3581,8 +3615,9 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanandanasosial'] 	= $this->simpanandanasosialmodel->get_simpanandanasosial_by_id_nasabah($id_nasabah);
 		$data['simpanankanzun'] 		= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
 		$data['simpanankhusus'] 		= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
-		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
-		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['simpananpihakketiga']	= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']			= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']					= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 				= $session_data['username'];
 		$data['status'] 				= $session_data['status'];
 		
@@ -3655,7 +3690,8 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankanzun'] 			= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
 		$data['simpanankhusus'] 			= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']		= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
-		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']				= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']						= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 					= $session_data['username'];
 		$data['status'] 					= $session_data['status'];
 
@@ -3737,6 +3773,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -3759,6 +3796,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankhusus'] 	= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -3806,6 +3844,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankhusus'] 	= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 		
@@ -3870,7 +3909,8 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankanzun'] 					= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
 		$data['simpanankhusus'] 					= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpanan3th'] 						= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
-		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']						= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']								= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 							= $session_data['username'];
 		$data['status'] 							= $session_data['status'];
 
@@ -3945,7 +3985,8 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankanzun'] 					= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
 		$data['simpanankhusus'] 					= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpanan3th'] 						= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
-		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']						= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']								= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 							= $session_data['username'];
 		$data['status'] 							= $session_data['status'];
 
@@ -4077,7 +4118,8 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankanzun'] 						= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
 		$data['simpanankhusus'] 						= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpanan3th'] 							= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
-		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']							= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']									= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 								= $session_data['username'];
 		$data['status'] 								= $session_data['status'];
 
@@ -4442,6 +4484,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
 		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -4464,6 +4507,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankhusus'] 	= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -4496,7 +4540,7 @@ class TransaksianggotaCon extends CI_Controller {
 
 		// Upload File 
 		$config['upload_path'] 		= './files/uploads/aset_kekayaan/'; //path folder
-        $config['allowed_types'] 	= 'jpg|png|jpeg'; //type yang dapat diakses bisa anda sesuaikan
+        $config['allowed_types'] 	= 'jpg|jpeg'; //type yang dapat diakses bisa anda sesuaikan
         $config['file_name'] 		= time().$insert['id'].'.jpeg';
         $this->load->library('upload');
         $this->upload->initialize($config);
@@ -4531,6 +4575,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['simpanankhusus'] 	= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
 		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
 		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
 		$data['username'] 			= $session_data['username'];
 		$data['status'] 			= $session_data['status'];
 
@@ -4548,6 +4593,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$insert = array();
 
 		$id_asetkekayaan 			= $this->input->post('id');
+		$edit_asetkekayaan			= $this->asetkekayaanmodel->get_asetkekayaan_by_id($id_asetkekayaan);
 		$insert['id_nasabah'] 		= $this->input->post('id_nasabah');
 		$id_nasabah = $insert['id_nasabah'];
 		$insert['waktu'] 			= date("Y-m-d");
@@ -4563,20 +4609,24 @@ class TransaksianggotaCon extends CI_Controller {
 		$insert['atas_nama']		= $this->input->post('atas_nama');
 		$insert['no_pol']			= $this->input->post('no_pol');
 
-		// Upload File 
-		$config['upload_path'] 		= './files/uploads/aset_kekayaan/'; //path folder
-        $config['allowed_types'] 	= 'jpg|png|jpeg'; //type yang dapat diakses bisa anda sesuaikan
-        $config['file_name'] 		= time().$insert['id'].'.jpeg';
-        $this->load->library('upload');
-        $this->upload->initialize($config);
-        if(!empty($_FILES['file_img']['name'])) {
-        	if ($this->upload->do_upload('file_img')) {
-        		$gbr = $this->upload->data();
-        		$insert['file_img']			= $config['file_name'];
-        	} else {
-        		$insert['file_img']			= "";
-        	}
-        }
+		if(!empty($_FILES['file_img']['name'])) {
+			// Upload File 
+			$config['upload_path'] 		= './files/uploads/aset_kekayaan/'; //path folder
+	        $config['allowed_types'] 	= 'jpg|jpeg'; //type yang dapat diakses bisa anda sesuaikan
+	        $config['file_name'] 		= time().$insert['id'].'.jpeg';
+	        $this->load->library('upload');
+	        $this->upload->initialize($config);
+	        if(!empty($_FILES['file_img']['name'])) {
+	        	if ($this->upload->do_upload('file_img')) {
+	        		$gbr = $this->upload->data();
+	        		$insert['file_img']			= $config['file_name'];
+	        		unlink($config['upload_path'].$edit_asetkekayaan->file_img);
+	        	}
+	        } 
+		} else {
+			$insert['file_img'] = $edit_asetkekayaan->file_img;
+		}
+		
 		$this->asetkekayaanmodel->updateData($id_asetkekayaan, $insert);
 
 		redirect('transaksianggotacon/asetkekayaan/'.$id_nasabah);
@@ -4590,10 +4640,172 @@ class TransaksianggotaCon extends CI_Controller {
 
 		$data['asetkekayaan']= $this->asetkekayaanmodel->get_asetkekayaan_by_id($id_asetkekayaan);
 		$id_nasabah					= $data['asetkekayaan']->id_nasabah;
+		$config['upload_path'] 		= './files/uploads/aset_kekayaan/'; //path folder
+		unlink($config['upload_path'].$data['asetkekayaan']->file_img);
 
 		$this->asetkekayaanmodel->deleteData($id_asetkekayaan);
 
 		redirect('transaksianggotacon/asetkekayaan/'.$id_nasabah);
 	}
 	/*** End of Aset Kekayaan ***/
+
+	/*** BERKAS ***/
+	function berkas($id_nasabah) {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+		$data['nasabah'] 			= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
+		$data['pinjaman'] 			= $this->pinjamanmodel->get_pinjaman_by_id_nasabah($id_nasabah);
+		$data['simpananpokok'] 		= $this->simpananpokokmodel->get_simpananpokok_by_id_nasabah($id_nasabah);
+		$data['simpananwajib'] 		= $this->simpananwajibmodel->get_simpananwajib_by_id_nasabah($id_nasabah);
+		$data['simpanankhusus'] 	= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
+		$data['simpanandanasosial'] = $this->simpanandanasosialmodel->get_simpanandanasosial_by_id_nasabah($id_nasabah);
+		$data['simpanankanzun'] 	= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
+		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
+		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['berkas']				= $this->berkasmodel->get_berkas_by_id_nasabah($id_nasabah);
+		$data['username'] 			= $session_data['username'];
+		$data['status'] 			= $session_data['status'];
+
+		$this->load->view('/layouts/menu', $data);
+		$this->load->view('/transaksianggota/index_berkas', $data);
+		$this->load->view('/layouts/footer', $data);
+	}
+
+	function create_berkas($id_nasabah) {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+		$data['nasabah'] 			= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
+		$data['pinjaman'] 			= $this->pinjamanmodel->get_pinjaman_by_id_nasabah($id_nasabah);
+		$data['simpananpokok'] 		= $this->simpananpokokmodel->get_simpananpokok_by_id_nasabah($id_nasabah);
+		$data['simpananwajib'] 		= $this->simpananwajibmodel->get_simpananwajib_by_id_nasabah($id_nasabah);
+		$data['simpanandanasosial'] = $this->simpanandanasosialmodel->get_simpanandanasosial_by_id_nasabah($id_nasabah);
+		$data['simpanankanzun'] 	= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
+		$data['simpanankhusus'] 	= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
+		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
+		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['username'] 			= $session_data['username'];
+		$data['status'] 			= $session_data['status'];
+
+		$this->load->view('/layouts/menu', $data);
+		$this->load->view('/transaksianggota/create_berkas', $data);
+		$this->load->view('/layouts/footer', $data);
+	}
+
+	function insert_berkas($id_nasabah) {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		$insert = array();
+		$insert['id'] 				= $this->berkasmodel->getNewId();
+		$insert['id_nasabah'] 		= $id_nasabah;
+		$insert['waktu'] 			= date("Y-m-d H:i:s");
+		$insert['nama_berkas'] 		= $this->input->post('nama_berkas');
+
+		// Upload File 
+		$config['upload_path'] 		= './files/uploads/berkas/'; //path folder
+        $config['allowed_types'] 	= 'jpg|jpeg'; //type yang dapat diakses bisa anda sesuaikan
+        $config['file_name'] 		= time().$insert['id'].'.jpeg';
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+        if(!empty($_FILES['file_berkas']['name'])) {
+        	if ($this->upload->do_upload('file_berkas')) {
+        		$gbr = $this->upload->data();
+        		$insert['file_berkas']			= $config['file_name'];
+        	} else {
+        		$insert['file_berkas']			= "";
+        	}
+        }
+		$this->berkasmodel->inputData($insert);
+
+		redirect('transaksianggotacon/berkas/'.$id_nasabah);
+	}
+
+	function edit_berkas($id_berkas) {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		$data['berkas']= $this->berkasmodel->get_berkas_by_id($id_berkas);
+		$id_nasabah					= $data['berkas']->id_nasabah;
+
+		$data['nasabah'] 			= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
+		$data['pinjaman'] 			= $this->pinjamanmodel->get_pinjaman_by_id_nasabah($id_nasabah);
+		$data['simpananpokok'] 		= $this->simpananpokokmodel->get_simpananpokok_by_id_nasabah($id_nasabah);
+		$data['simpananwajib'] 		= $this->simpananwajibmodel->get_simpananwajib_by_id_nasabah($id_nasabah);
+		$data['simpanandanasosial'] = $this->simpanandanasosialmodel->get_simpanandanasosial_by_id_nasabah($id_nasabah);
+		$data['simpanankanzun'] 	= $this->simpanankanzunmodel->get_simpanankanzun_by_id_nasabah($id_nasabah);
+		$data['simpanankhusus'] 	= $this->simpanankhususmodel->get_simpanankhusus_by_id_nasabah($id_nasabah);
+		$data['simpanan3th'] 		= $this->simpanan3thmodel->get_simpanan3th_by_id_nasabah($id_nasabah);
+		$data['simpananpihakketiga']= $this->simpananpihakketigamodel->get_simpananpihakketiga_by_id_nasabah($id_nasabah);
+		$data['aset_kekayaan']		= $this->asetkekayaanmodel->get_asetkekayaan_by_id_nasabah($id_nasabah);
+		$data['username'] 			= $session_data['username'];
+		$data['status'] 			= $session_data['status'];
+
+		$this->load->view('/layouts/menu', $data);
+		$this->load->view('/transaksianggota/edit_berkas', $data);
+		$this->load->view('/layouts/footer', $data);
+	}
+
+	function update_berkas() {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		$insert = array();
+		$id_berkas 				= $this->input->post('id');
+		$edit_berkas 			= $this->berkasmodel->get_berkas_by_id($id_berkas);
+		$insert['id_nasabah'] 	= $this->input->post('id_nasabah');
+		$id_nasabah 			= $insert['id_nasabah'];
+		$insert['waktu'] 		= date("Y-m-d H:i:s");
+		$insert['nama_berkas'] 	= $this->input->post('nama_berkas');
+
+		if(!empty($_FILES['file_berkas']['name'])) {
+			// Upload File 
+			$config['upload_path'] 		= './files/uploads/berkas/'; //path folder
+	        $config['allowed_types'] 	= 'jpg|jpeg'; //type yang dapat diakses bisa anda sesuaikan
+	        $config['file_name'] 		= time().$insert['id'].'.jpeg';
+	        $this->load->library('upload');
+	        $this->upload->initialize($config);
+	        if(!empty($_FILES['file_berkas']['name'])) {
+	        	if ($this->upload->do_upload('file_berkas')) {
+	        		$gbr = $this->upload->data();
+	        		$insert['file_berkas']			= $config['file_name'];
+	        		unlink($config['upload_path'].$edit_berkas->file_berkas);
+	        	}
+	        }	
+		} else {
+			$insert['file_berkas'] = $edit_berkas->file_berkas;
+		}
+		
+		$this->berkasmodel->updateData($id_berkas, $insert);
+
+		redirect('transaksianggotacon/berkas/'.$id_nasabah);
+	}
+
+	function delete_berkas($id_berkas) {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+
+		$data['berkas'] = $this->berkasmodel->get_berkas_by_id($id_berkas);
+		$id_nasabah		= $data['berkas']->id_nasabah;
+		$config['upload_path'] 		= './files/uploads/berkas/'; //path folder
+		unlink($config['upload_path'].$data['berkas']->file_berkas);
+
+		$this->berkasmodel->deleteData($id_berkas);
+
+		redirect('transaksianggotacon/berkas/'.$id_nasabah);
+	}
+	/*** END OF BERKAS ***/
 }

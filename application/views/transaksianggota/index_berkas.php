@@ -170,8 +170,8 @@ function rupiah($angka){
             <li><a href="#simpanan_kanzun" data-toggle="tab">Simpanan Kanzun</a></li>
             <!--<li><a href="#simpanan_3th" data-toggle="tab">Simpanan 3 Th</a></li>-->
             <li><a href="#simpanan_pihak_ketiga" data-toggle="tab">Simpanan Pihak Ketiga</a></li>
-            <li class="active"><a href="#aset_kekayaan" data-toggle="tab">Aset Kekayaan</a></li>
-            <li><a href="#berkas" data-toggle="tab">Scan Berkas</a></li>
+            <li><a href="#aset_kekayaan" data-toggle="tab">Aset Kekayaan</a></li>
+            <li class="active"><a href="#berkas" data-toggle="tab">Scan Berkas</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane" id="pinjaman">
@@ -658,88 +658,58 @@ function rupiah($angka){
                 </table>
               </div>
             </div>
-            <div class="active tab-pane" id="aset_kekayaan">
-              <legend style="text-align:center;">EDIT ASET KEKAYAAN</legend>
-              <form action="<?php echo base_url()."index.php/transaksianggotacon/update_asetkekayaan/".$nasabah->id;?>" method="post" enctype="multipart/form-data" role="form">
-                <div class="box-body">
-                  <div class="form-group col-xs-6">
-                    <label for="exampleInputEmail1">Nama Anggota</label>
-                    <input type="text" class="form-control" id="nama_nasabah" name="nama_nasabah" placeholder="Nama Nasabah" value="<?php echo $nasabah->nama;?>" readonly>
-                    <input type="hidden" class="form-control" value="<?php echo $asetkekayaan->id?>" id="id" name="id">
-                    <input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah" value="<?php echo $asetkekayaan->id_nasabah;?>">
-                  </div>
-                  <div class="form-group col-xs-6">
-                    <label for="exampleInputPassword1">Jenis Aset</label>
-                    <select id="jenis_aset" name="jenis_aset" class="form-control" style="width: 100%;">
-                      <option value='sertifikat' <?php echo $asetkekayaan->jenis_aset == 'sertifikat' ? 'selected' : ''?> >Sertifikat</option>
-                      <option value='bpkb' <?php echo $asetkekayaan->jenis_aset == 'bpkb' ? 'selected' : ''?> >BPKB</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-xs-6" id="div_nama_pemilik">
-                    <label for="exampleInputPassword1">Nama Pemilik</label>
-                    <input type="text" class="form-control" id="nama_pemilik" name="nama_pemilik" value="<?php echo $asetkekayaan->nama_pemilik;?>" placeholder="">
-                  </div>
-                  <div class="form-group col-xs-6" id="div_no_sertifikat">
-                    <label for="exampleInputPassword1">No. Sertifikat</label>
-                    <input type="text" class="form-control" id="no_sertifikat" name="no_sertifikat" value="<?php echo $asetkekayaan->no_sertifikat;?>" placeholder="">
-                  </div>
-                  <div class="form-group col-xs-6" id="div_luas">
-                    <label for="exampleInputPassword1">Luas</label>
-                    <input type="number" class="form-control" id="luas" name="luas" value="<?php echo $asetkekayaan->luas;?>" placeholder="">
-                  </div>
-                  <div class="form-group col-xs-6" id="div_jenis_tanah">
-                    <label for="exampleInputPassword1">Jenis Tanah</label>
-                    <select id="jenis_tanah" name="jenis_tanah" class="form-control" style="width: 100%;">
-                      <option value='perumahan' <?php echo $asetkekayaan->jenis_tanah == 'perumahan' ? 'selected' : ''?> >Perumahan</option>
-                      <option value='pekarangan' <?php echo $asetkekayaan->jenis_tanah == 'pekarangan' ? 'selected' : ''?> >Pekarangan</option>
-                      <option value='pertanian' <?php echo $asetkekayaan->jenis_tanah == 'pertanian' ? 'selected' : ''?> >Pertanian</option>
-                      <option value='perkebunan' <?php echo $asetkekayaan->jenis_tanah == 'perkebunan' ? 'selected' : ''?> >Perkebunan</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-xs-6" id="div_lokasi_tanah">
-                    <label for="exampleInputPassword1">Lokasi Tanah</label>
-                    <input type="text" class="form-control" id="lokasi_tanah" name="lokasi_tanah" value="<?php echo $asetkekayaan->lokasi_tanah;?>" placeholder="">
-                  </div>
-                  <div class="form-group col-xs-6" id="div_merek" style="display:none">
-                    <label for="exampleInputPassword1">Merek</label>
-                    <select id="merek" name="merek" class="form-control" style="width: 100%;">
-                      <option value='HONDA' <?php echo $asetkekayaan->merek == 'HONDA' ? 'selected' : ''?> >HONDA</option>
-                      <option value='YAMAHA' <?php echo $asetkekayaan->merek == 'YAMAHA' ? 'selected' : ''?> >YAMAHA</option>
-                      <option value='SUZUKI' <?php echo $asetkekayaan->merek == 'SUZUKI' ? 'selected' : ''?> >SUZUKI</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-xs-6" id="div_jenis_motor" style="display:none">
-                    <label for="exampleInputPassword1">Jenis Motor</label>
-                    <input type="text" class="form-control" id="jenis_motor" name="jenis_motor" value="<?php echo $asetkekayaan->jenis_motor;?>" placeholder="">
-                  </div>
-                  <div class="form-group col-xs-6" id="div_tahun" style="display:none">
-                    <label for="exampleInputPassword1">Tahun</label>
-                    <input type="number" class="form-control" id="tahun" name="tahun" value="<?php echo $asetkekayaan->tahun;?>" placeholder="">
-                  </div>
-                  <div class="form-group col-xs-6" id="div_atas_nama" style="display:none">
-                    <label for="exampleInputPassword1">Atas Nama</label>
-                    <input type="text" class="form-control" id="atas_nama" name="atas_nama" value="<?php echo $asetkekayaan->atas_nama;?>" placeholder="">
-                  </div>
-                  <div class="form-group col-xs-6" id="div_no_pol" style="display:none">
-                    <label for="exampleInputPassword1">No. Polisi</label>
-                    <input type="text" class="form-control" id="no_pol" name="no_pol" value="<?php echo $asetkekayaan->no_pol;?>" placeholder="">
-                  </div>
-                  <div class="form-group col-xs-6">
-                    <label for="exampleInputFile">Foto Aset</label>
-                    <input type="file" accept=".jpg, .jpeg" name="file_img" <?php echo $asetkekayaan->file_img == (NULL || "") ? "required" : "" ?>>
-                  </div>
-                </div>
-                <div class="box-footer">
-                  <div class="col-xs-3">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                  </div>
-                  <div class="col-xs-3">
-                    <a class="btn btn-primary btn-warning" href="<?php echo site_url("transaksianggotacon/asetkekayaan/".$nasabah->id); ?>">Batal</a>
-                  </div>
-                </div>
-              </form>
+            <div class="tab-pane" id="aset_kekayaan">
+              <div class="box-header" style="text-align:left" >
+                <h3>
+                  <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksianggotacon/create_aset_kekayaan/".$nasabah->id); ?>">Tambahkan Aset Kekayaan</a>
+                </h3>
+              </div> 
+              <div class="box-body">
+                <table id="aset_kekayaan_table" class="table table-bordered table-hover"  width="100%">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Jenis Aset</th>
+                      <th>Keterangan</th>
+                      <th>Link Gambar</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      if($aset_kekayaan != NULL){
+                        $no = 1;
+                        for($i = 0; $i < sizeof($aset_kekayaan); $i++) {
+                    ?>
+                        <tr>
+                          <td><?php echo $no ?></td>
+                          <td><?php echo strtoupper($aset_kekayaan[$i]['jenis_aset']) ?></td>
+                    <?php
+                          if($aset_kekayaan[$i]['jenis_aset'] == 'sertifikat') {
+                    ?> 
+                            <td style="word-wrap: break-word; text-align: left;"><?php echo strtoupper($aset_kekayaan[$i]['jenis_aset']).'. Nama Pemilik: '.$aset_kekayaan[$i]['nama_pemilik'].' No. Sertifikat: '.$aset_kekayaan[$i]['no_sertifikat'].' Luas(m2): '.$aset_kekayaan[$i]['luas'].' Jenis Tanah: '.$aset_kekayaan[$i]['jenis_tanah'].' Lokasi Tanah: '.$aset_kekayaan[$i]['lokasi_tanah'] ?></td>
+                    <?php
+                          } else if($aset_kekayaan[$i]['jenis_aset'] == 'bpkb') {
+                    ?>
+                            <td style="word-wrap: break-word; text-align: left;"><?php echo strtoupper($aset_kekayaan[$i]['jenis_aset']).'. Atas Nama: '.$aset_kekayaan[$i]['atas_nama'].' No. Polisi: '.$aset_kekayaan[$i]['no_pol'].' Merek: '.$aset_kekayaan[$i]['merek'].' Jenis: '.$aset_kekayaan[$i]['jenis_motor'].' Tahun: '.$aset_kekayaan[$i]['tahun'] ?></td>
+                    <?php
+                          }
+                    ?>
+                          <td style='text-align: center'><a href="<?php echo base_url(); ?>files/uploads/aset_kekayaan/<?php echo $aset_kekayaan[$i]['file_img']; ?>" target="_blank">lihat</a></td>
+                          <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_asetkekayaan/".$aset_kekayaan[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+                          <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationAsetkekayaan('<?php echo $aset_kekayaan[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                        </tr>
+                    <?php
+                        }
+                        $no++;
+                      }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div class="tab-pane" id="berkas">
+            <div class="active tab-pane" id="berkas">
               <div class="box-header" style="text-align:left" >
                 <h3>
                   <a class="btn btn-primary btn-success" href="<?php echo site_url("transaksianggotacon/create_berkas/".$nasabah->id); ?>">Tambahkan Scan Berkas</a>
@@ -931,85 +901,5 @@ function rupiah($angka){
       //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
     }
   }
-
-  $(document).ready(function() {
-    if($('#jenis_aset').val() == 'sertifikat') {
-        document.getElementById("div_merek").style.display = "none";
-        document.getElementById("div_jenis_motor").style.display = "none";
-        document.getElementById("div_tahun").style.display = "none";
-        document.getElementById("div_atas_nama").style.display = "none";
-        document.getElementById("div_no_pol").style.display = "none";
-
-        document.getElementById("merek").value = "";
-        document.getElementById("jenis_motor").value = "";
-        document.getElementById("tahun").value = "";
-        document.getElementById("atas_nama").value = "";
-        document.getElementById("no_pol").value = "";
-
-        document.getElementById("div_nama_pemilik").style.display = "block";
-        document.getElementById("div_no_sertifikat").style.display = "block";
-        document.getElementById("div_luas").style.display = "block";
-        document.getElementById("div_jenis_tanah").style.display = "block";
-        document.getElementById("div_lokasi_tanah").style.display = "block";
-      } else if($('#jenis_aset').val() == 'bpkb') {     
-        document.getElementById("div_nama_pemilik").style.display = "none";
-        document.getElementById("div_no_sertifikat").style.display = "none";
-        document.getElementById("div_luas").style.display = "none";
-        document.getElementById("div_jenis_tanah").style.display = "none";
-        document.getElementById("div_lokasi_tanah").style.display = "none";
-
-        document.getElementById("nama_pemilik").value = "";
-        document.getElementById("no_sertifikat").value = "";
-        document.getElementById("luas").value = "";
-        document.getElementById("jenis_tanah").value = "";
-        document.getElementById("lokasi_tanah").value = "";
-
-        document.getElementById("div_merek").style.display = "block";
-        document.getElementById("div_jenis_motor").style.display = "block";
-        document.getElementById("div_tahun").style.display = "block";
-        document.getElementById("div_atas_nama").style.display = "block";
-        document.getElementById("div_no_pol").style.display = "block";
-      }
-
-    $('#jenis_aset').change(function() {
-      if($('#jenis_aset').val() == 'sertifikat') {
-        document.getElementById("div_merek").style.display = "none";
-        document.getElementById("div_jenis_motor").style.display = "none";
-        document.getElementById("div_tahun").style.display = "none";
-        document.getElementById("div_atas_nama").style.display = "none";
-        document.getElementById("div_no_pol").style.display = "none";
-
-        document.getElementById("merek").value = "";
-        document.getElementById("jenis_motor").value = "";
-        document.getElementById("tahun").value = "";
-        document.getElementById("atas_nama").value = "";
-        document.getElementById("no_pol").value = "";
-
-        document.getElementById("div_nama_pemilik").style.display = "block";
-        document.getElementById("div_no_sertifikat").style.display = "block";
-        document.getElementById("div_luas").style.display = "block";
-        document.getElementById("div_jenis_tanah").style.display = "block";
-        document.getElementById("div_lokasi_tanah").style.display = "block";
-      } else if($('#jenis_aset').val() == 'bpkb') {     
-        document.getElementById("div_nama_pemilik").style.display = "none";
-        document.getElementById("div_no_sertifikat").style.display = "none";
-        document.getElementById("div_luas").style.display = "none";
-        document.getElementById("div_jenis_tanah").style.display = "none";
-        document.getElementById("div_lokasi_tanah").style.display = "none";
-
-        document.getElementById("nama_pemilik").value = "";
-        document.getElementById("no_sertifikat").value = "";
-        document.getElementById("luas").value = "";
-        document.getElementById("jenis_tanah").value = "";
-        document.getElementById("lokasi_tanah").value = "";
-
-        document.getElementById("div_merek").style.display = "block";
-        document.getElementById("div_jenis_motor").style.display = "block";
-        document.getElementById("div_tahun").style.display = "block";
-        document.getElementById("div_atas_nama").style.display = "block";
-        document.getElementById("div_no_pol").style.display = "block";
-      }
-    });
-  });
   
   </script>
