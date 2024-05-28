@@ -393,7 +393,7 @@ class SurattagihanCon extends CI_Controller {
         $bulan_jatuh_tempo = (($lama_jatuh_tempo_raw->format('%y') * 12) + $lama_jatuh_tempo_raw->format('%m'));
         $lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
 
-
+        $res['level'] = 0;
         if ($lama_akhir_bayar > 30 && $lama_akhir_bayar <= 150) {
             $res['level'] = 1;
             $res['keterangan'] = 'K1';
@@ -418,10 +418,12 @@ class SurattagihanCon extends CI_Controller {
         $kali_administrasi = $bulan_akhir_bayar / 4;
         $kali_administrasi = (int)$kali_administrasi;
 
+        $jasa_pinjaman = 0;
+        $biaya_administrasi = 0;
         if($res['level'] == 1) {
             $jasa_pinjaman = ($data[0]['total_pinjaman_detail'] * $bulan_akhir_bayar * 2) / 100;
             $biaya_administrasi = 0;
-        } else {
+        } else if($res['level'] > 1){
             $jasa_pinjaman = ($sisa_pinjaman * $bulan_akhir_bayar * 3) / 100;
             $biaya_administrasi = ($sisa_pinjaman * $kali_administrasi) / 100;
         }
@@ -519,10 +521,13 @@ class SurattagihanCon extends CI_Controller {
         $jasa_terbayar = $data[0]['total_jasa_detail'];
         $kali_administrasi = $bulan_pinjam / 4;
         $kali_administrasi = (int)$kali_administrasi;
-        $jasa_pinjaman = ($sisa_pinjaman * $bulan_pinjam * 3) / 100;
+        //$jasa_pinjaman = ($sisa_pinjaman * $bulan_pinjam * 3) / 100;
+        $jasa_pinjaman = ($tagihan[0]['jumlah_pinjaman'] * $bulan_pinjam * 3) / 100;
         $biaya_administrasi = ($sisa_pinjaman * $kali_administrasi) / 100;
         $total = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
 
+        $res['level'] = 0;
+        $res['keterangan'] = '';
         if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
             $res['level'] = 1;
             $res['keterangan'] = 'K1';
