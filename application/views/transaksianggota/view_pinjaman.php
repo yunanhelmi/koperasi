@@ -1927,15 +1927,28 @@ function rupiah($angka){
         /*** FORM PERHITUNGAN ***/
         var jenis_pinjaman = "<?php echo $pinjaman->jenis_pinjaman; ?>";
         if(jenis_pinjaman == 'Angsuran') {
+          var sisa_pinjaman = $('#angsuran_sisa_pinjaman').val();
+          var potongan = sisa_pinjaman * 0.01;
+          var dansos = sisa_pinjaman * 0.01;
+          var wajib_belanja = sisa_pinjaman * 0.01;
+          var terima_bersih = sisa_pinjaman - (potongan + dansos + wajib_belanja);
+          var dengan_materai = terima_bersih - 10000;
+
           label_angsuran_sisa_pinjaman();
+          $('#angsuran_potongan').val(potongan);
           label_angsuran_potongan();
+          $('#angsuran_dansos').val(dansos);
           label_angsuran_dansos();
+          $('#angsuran_wajib_belanja').val(wajib_belanja);
           label_angsuran_wajib_belanja();
+          $('#angsuran_terima_bersih').val(terima_bersih);
           label_angsuran_terima_bersih();
+          $('#angsuran_dengan_materai').val(dengan_materai);
           label_angsuran_dengan_materai();
+
           $('#angsuran_sisa_pinjaman').keyup(function() {
             label_angsuran_sisa_pinjaman();
-            var sisa_pinjaman = $('#angsuran_sisa_pinjaman').val();
+            var sisa_pinjaman = parseInt($('#angsuran_sisa_pinjaman').val());
             var potongan = sisa_pinjaman * 0.01;
             var dansos = sisa_pinjaman * 0.01;
             var wajib_belanja = sisa_pinjaman * 0.01;
@@ -1952,30 +1965,56 @@ function rupiah($angka){
             $('#angsuran_dengan_materai').val(dengan_materai);
             label_angsuran_dengan_materai();
           });
-          /**$('#angsuran_wajib_belanja').keyup(function() {
+
+          $('#angsuran_wajib_belanja').keyup(function() {
             label_angsuran_wajib_belanja();
-            var wajib_belanja = $('#angsuran_wajib_belanja').val();
-            var sisa_pinjaman = $('#angsuran_sisa_pinjaman').val();
+            var sisa_pinjaman = parseInt($('#angsuran_sisa_pinjaman').val());
             var potongan = sisa_pinjaman * 0.01;
             var dansos = sisa_pinjaman * 0.01;
+            var wajib_belanja = parseInt($('#angsuran_wajib_belanja').val());
             var terima_bersih = sisa_pinjaman - (potongan + dansos + wajib_belanja);
             var dengan_materai = terima_bersih - 10000;
+            $('#angsuran_potongan').val(potongan);
+            label_angsuran_potongan();
+            $('#angsuran_dansos').val(dansos);
+            label_angsuran_dansos();
             $('#angsuran_terima_bersih').val(terima_bersih);
             label_angsuran_terima_bersih();
             $('#angsuran_dengan_materai').val(dengan_materai);
             label_angsuran_dengan_materai();
-          });**/
+          });
         } else if(jenis_pinjaman == 'Musiman') {
+          var sisa_pinjaman = $('#musiman_sisa_pinjaman').val();
+          var wajib_minimum = sisa_pinjaman * 0.1;
+          var pinjaman_setelah_perbaikan = sisa_pinjaman - wajib_minimum;
+          var potongan = pinjaman_setelah_perbaikan * 0.01;
+          var dansos = pinjaman_setelah_perbaikan * 0.01;
+          var wajib_belanja = pinjaman_setelah_perbaikan * 0.01;
+          var bayar_dg_jasa_1_bulan = (0.03 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+          var bayar_dg_jasa_2_bulan = (0.06 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+          var bayar_dg_jasa_3_bulan = (0.09 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+          var bayar_dg_jasa_4_bulan = (0.12 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+          
           label_musiman_sisa_pinjaman();
+          $('#musiman_potongan').val(potongan);
           label_musiman_potongan();
+          $('#musiman_dansos').val(dansos);
           label_musiman_dansos();
+          $('#musiman_wajib_belanja').val(wajib_belanja);
           label_musiman_wajib_belanja();
+          $('#musiman_wajib_minimum').val(wajib_minimum);
           label_musiman_wajib_minimum();
+          $('#musiman_bayar_dg_jasa_1_bulan').val(bayar_dg_jasa_1_bulan);
           label_musiman_bayar_dg_jasa_1_bulan();
+          $('#musiman_bayar_dg_jasa_2_bulan').val(bayar_dg_jasa_2_bulan);
           label_musiman_bayar_dg_jasa_2_bulan();
+          $('#musiman_bayar_dg_jasa_3_bulan').val(bayar_dg_jasa_3_bulan);
           label_musiman_bayar_dg_jasa_3_bulan();
+          $('#musiman_bayar_dg_jasa_4_bulan').val(bayar_dg_jasa_4_bulan);
           label_musiman_bayar_dg_jasa_4_bulan();
+          $('#musiman_pinjaman_setelah_perbaikan').val(pinjaman_setelah_perbaikan);
           label_musiman_pinjaman_setelah_perbaikan();
+
           $('#musiman_sisa_pinjaman').keyup(function() {
             label_musiman_sisa_pinjaman();
             var sisa_pinjaman = $('#musiman_sisa_pinjaman').val();
@@ -2008,6 +2047,69 @@ function rupiah($angka){
             $('#musiman_pinjaman_setelah_perbaikan').val(pinjaman_setelah_perbaikan);
             label_musiman_pinjaman_setelah_perbaikan();
           });
+
+          $('#musiman_wajib_belanja').keyup(function() {
+            label_musiman_wajib_belanja();
+            var sisa_pinjaman = $('#musiman_sisa_pinjaman').val();
+            var wajib_minimum = parseInt($('#musiman_wajib_minimum').val());
+            var pinjaman_setelah_perbaikan = sisa_pinjaman - wajib_minimum;
+            var potongan = pinjaman_setelah_perbaikan * 0.01;
+            var dansos = pinjaman_setelah_perbaikan * 0.01;
+            var wajib_belanja = parseInt($('#musiman_wajib_belanja').val());
+            var bayar_dg_jasa_1_bulan = (0.03 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+            var bayar_dg_jasa_2_bulan = (0.06 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+            var bayar_dg_jasa_3_bulan = (0.09 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+            var bayar_dg_jasa_4_bulan = (0.12 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+
+            $('#musiman_potongan').val(potongan);
+            label_musiman_potongan();
+            $('#musiman_dansos').val(dansos);
+            label_musiman_dansos();
+            $('#musiman_wajib_minimum').val(wajib_minimum);
+            label_musiman_wajib_minimum();
+            $('#musiman_bayar_dg_jasa_1_bulan').val(bayar_dg_jasa_1_bulan);
+            label_musiman_bayar_dg_jasa_1_bulan();
+            $('#musiman_bayar_dg_jasa_2_bulan').val(bayar_dg_jasa_2_bulan);
+            label_musiman_bayar_dg_jasa_2_bulan();
+            $('#musiman_bayar_dg_jasa_3_bulan').val(bayar_dg_jasa_3_bulan);
+            label_musiman_bayar_dg_jasa_3_bulan();
+            $('#musiman_bayar_dg_jasa_4_bulan').val(bayar_dg_jasa_4_bulan);
+            label_musiman_bayar_dg_jasa_4_bulan();
+            $('#musiman_pinjaman_setelah_perbaikan').val(pinjaman_setelah_perbaikan);
+            label_musiman_pinjaman_setelah_perbaikan();
+          });
+
+          $('#musiman_wajib_minimum').keyup(function() {
+            label_musiman_wajib_minimum();
+            var sisa_pinjaman = $('#musiman_sisa_pinjaman').val();
+            var wajib_minimum = parseInt($('#musiman_wajib_minimum').val());
+            var pinjaman_setelah_perbaikan = sisa_pinjaman - wajib_minimum;
+            var potongan = pinjaman_setelah_perbaikan * 0.01;
+            var dansos = pinjaman_setelah_perbaikan * 0.01;
+            var wajib_belanja = parseInt($('#musiman_wajib_belanja').val());
+            var bayar_dg_jasa_1_bulan = (0.03 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+            var bayar_dg_jasa_2_bulan = (0.06 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+            var bayar_dg_jasa_3_bulan = (0.09 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+            var bayar_dg_jasa_4_bulan = (0.12 * sisa_pinjaman) + (potongan + dansos + wajib_belanja + wajib_minimum);
+
+            $('#musiman_potongan').val(potongan);
+            label_musiman_potongan();
+            $('#musiman_dansos').val(dansos);
+            label_musiman_dansos();
+            $('#musiman_wajib_belanja').val(wajib_belanja);
+            label_musiman_wajib_belanja();
+            $('#musiman_bayar_dg_jasa_1_bulan').val(bayar_dg_jasa_1_bulan);
+            label_musiman_bayar_dg_jasa_1_bulan();
+            $('#musiman_bayar_dg_jasa_2_bulan').val(bayar_dg_jasa_2_bulan);
+            label_musiman_bayar_dg_jasa_2_bulan();
+            $('#musiman_bayar_dg_jasa_3_bulan').val(bayar_dg_jasa_3_bulan);
+            label_musiman_bayar_dg_jasa_3_bulan();
+            $('#musiman_bayar_dg_jasa_4_bulan').val(bayar_dg_jasa_4_bulan);
+            label_musiman_bayar_dg_jasa_4_bulan();
+            $('#musiman_pinjaman_setelah_perbaikan').val(pinjaman_setelah_perbaikan);
+            label_musiman_pinjaman_setelah_perbaikan();
+          });
+          
         }
         /*** END OF FORM PERHITUNGAN ***/
 
