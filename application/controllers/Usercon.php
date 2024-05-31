@@ -27,9 +27,9 @@ class UserCon extends CI_Controller {
 		if($this->session->userdata('mubasyirin_logged_in')) {
 			redirect("transaksianggotacon", "refresh");
 		} else {
-			$session_data = $this->session->userdata('mubasyirin_logged_in');
+			/*$session_data = $this->session->userdata('mubasyirin_logged_in');
 			$data['username'] = $session_data['username'];
-			$data['status'] = $session_data['status'];
+			$data['status'] = $session_data['status'];*/
 			$this->load->view('/site/login');
 		}
 	}
