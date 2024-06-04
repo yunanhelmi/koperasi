@@ -98,7 +98,8 @@ function rupiah($angka){
                     $no = 1;
                     $total_debet = 0;
                     $total_kredit = 0;
-                    for($i = 0; $i < sizeof($transaksi_akuntansi); $i++) {
+                    if($transaksi_akuntansi != NULL) {
+                      for($i = 0; $i < sizeof($transaksi_akuntansi); $i++) {
                   ?>
                   <tr>
                     <td><input type="checkbox" class="sub_chk" data-id="<?php echo $transaksi_akuntansi[$i]['id'] ?>"></td>
@@ -120,7 +121,10 @@ function rupiah($angka){
                     <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksiakuntansicon/edit_transaksi_akuntansi/".$transaksi_akuntansi[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                     <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmation('<?php echo $transaksi_akuntansi[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
                   </tr>
-                  <?php $no++;}?>
+                  <?php 
+                      $no++;}
+                    } 
+                  ?>
                   <!--<tr>
                     <td colspan='5' style='text-align: center'><strong>TOTAL</strong></td>
                     <td style='text-align: right'><strong><?php echo rupiah($total_debet)?></strong></td>
