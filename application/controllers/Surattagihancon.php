@@ -522,7 +522,7 @@ class SurattagihanCon extends CI_Controller {
         $kali_administrasi = $bulan_pinjam / 4;
         $kali_administrasi = (int)$kali_administrasi;
         //$jasa_pinjaman = ($sisa_pinjaman * $bulan_pinjam * 3) / 100;
-        $jasa_pinjaman = ($tagihan[0]['jumlah_pinjaman'] * $bulan_pinjam * 3) / 100;
+        $jasa_pinjaman = ($data[0]['jumlah_pinjaman'] * $bulan_pinjam * 3) / 100;
         $biaya_administrasi = ($sisa_pinjaman * $kali_administrasi) / 100;
         $total = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
 
