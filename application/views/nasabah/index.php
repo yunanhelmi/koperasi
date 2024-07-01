@@ -42,8 +42,8 @@
                     <th>NIK</th>
                     <th>Alamat</th>
                     <th>Desa</th>
-                    <th>RW</th>
                     <th>RT</th>
+                    <th>RW</th>
                     <th>Reputasi Nasabah</th>
                     <th>View</th>
                     <th>Edit</th>
@@ -62,8 +62,8 @@
                     <td style='text-align: center'><?php echo $nasabah[$i]['nik']?></td>
                     <td><?php echo $nasabah[$i]['alamat']?></td>
                     <td><?php echo $nasabah[$i]['kelurahan']?></td>
-                    <td><?php echo $nasabah[$i]['rw']?></td>
                     <td><?php echo $nasabah[$i]['rt']?></td>
+                    <td><?php echo $nasabah[$i]['rw']?></td>
                     <?php
                       if($nasabah[$i]['blacklist'] == 0) {
                     ?>

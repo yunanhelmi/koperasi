@@ -92,8 +92,8 @@
         <th>ALAMAT</th>
         <th>DESA</th>
         <th>DUSUN</th>
-        <th>RW</th>
         <th>RT</th>
+        <th>RW</th>
         <th>JUMLAH JASA</th>
     </tr>
     <?php
@@ -110,8 +110,8 @@
                 <td style="text-align: center;"><?php echo $data[$a]['alamat'] ?></td>
                 <td style="text-align: center;"><?php echo $data[$a]['kelurahan'] ?></td>
                 <td style="text-align: center;"><?php echo $data[$a]['dusun'] ?></td>
-                <td style="text-align: center;"><?php echo $data[$a]['rw'] ?></td>
                 <td style="text-align: center;"><?php echo $data[$a]['rt'] ?></td>
+                <td style="text-align: center;"><?php echo $data[$a]['rw'] ?></td>
                 <td style="text-align: right;"><?php echo $jumlah_jasa ?></td>
             </tr>
     <?php

@@ -60,12 +60,12 @@
 		                  	<p><?php echo $simpananpihakketiga->dusun;?></p>
 		                </div>
 		                <div class="form-group col-xs-6">
-		                  	<label for="exampleInputEmail1">RW</label>
-		                  	<p><?php echo $simpananpihakketiga->rw;?></p>
-		                </div>
-		                <div class="form-group col-xs-6">
 		                  	<label for="exampleInputEmail1">RT</label>
 		                  	<p><?php echo $simpananpihakketiga->rt;?></p>
+		                </div>
+		                <div class="form-group col-xs-6">
+		                  	<label for="exampleInputEmail1">RW</label>
+		                  	<p><?php echo $simpananpihakketiga->rw;?></p>
 		                </div>
 		                <div class="form-group col-xs-6">
 							<label for="exampleInputPassword1">Tanggal</label>

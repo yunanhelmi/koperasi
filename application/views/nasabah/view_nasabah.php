@@ -121,16 +121,16 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">RW</label>
-                    <div class="col-sm-10">
-                      <?php echo '<input type="text" class="form-control" name="rw" id="rw" readonly value="'.$nasabah->rw.'">'; ?>
-                    </div>
-                  </div>
-                  <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label">RT</label>
 
                     <div class="col-sm-10">
                       <?php echo '<input type="text" class="form-control" name="rt" id="rt" readonly value="'.$nasabah->rt.'">'; ?>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-2 control-label">RW</label>
+                    <div class="col-sm-10">
+                      <?php echo '<input type="text" class="form-control" name="rw" id="rw" readonly value="'.$nasabah->rw.'">'; ?>
                     </div>
                   </div>
                   <div class="form-group">

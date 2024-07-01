@@ -38,8 +38,8 @@
 		<th>ALAMAT</th>
 		<th>DESA</th>
 		<th>DUSUN</th>
-		<th>RW</th>
 		<th>RT</th>
+		<th>RW</th>
 		<th>TANGGAL</th>
 		<th>JUMLAH SIMPANAN</th>
 	</tr>
@@ -56,8 +56,8 @@
 	                <td style="text-align: center;"><?php echo $data[$a]['alamat'] ?></td>
 	                <td style="text-align: center;"><?php echo $data[$a]['kelurahan'] ?></td>
 	                <td style="text-align: center;"><?php echo $data[$a]['dusun'] ?></td>
-	                <td style="text-align: center;"><?php echo $data[$a]['rw'] ?></td>
 	                <td style="text-align: center;"><?php echo $data[$a]['rt'] ?></td>
+	                <td style="text-align: center;"><?php echo $data[$a]['rw'] ?></td>
 	                <td style="text-align: center;"><?php echo tanggal_indo($data[$a]['waktu']) ?></td>
 	                <td style="text-align: right;"><?php echo $pinjaman ?></td>
 	            </tr>

@@ -64,12 +64,12 @@
                   <input type="text" class="form-control" id="dusun" name="dusun" placeholder="Dusun">
                 </div>
                 <div class="form-group col-xs-3">
-                  <label for="exampleInputPassword1">RW</label>
-                  <input type="text" class="form-control" id="rw" name="rw" placeholder="RW">
-                </div>
-                <div class="form-group col-xs-3">
                   <label for="exampleInputPassword1">RT</label>
                   <input type="text" class="form-control" id="rt" name="rt" placeholder="RT">
+                </div>
+                <div class="form-group col-xs-3">
+                  <label for="exampleInputPassword1">RW</label>
+                  <input type="text" class="form-control" id="rw" name="rw" placeholder="RW">
                 </div>
                 <div class="form-group col-xs-6">
                   <label for="exampleInputPassword1">Tanggal</label>

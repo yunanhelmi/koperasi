@@ -33,8 +33,8 @@
                     <th>Alamat</th>
                     <th>Dusun</th>
                     <th>Desa</th>
-                    <th>RW</th>
                     <th>RT</th>
+                    <th>RW</th>
                     <th>Reputasi Nasabah</th>
                     <th>Transaksi</th>
                     <th>Post/Unpost</th>
@@ -53,8 +53,8 @@
                     <td><?php echo $nasabah[$i]['alamat']?></td>
                     <td><?php echo $nasabah[$i]['dusun']?></td>
                     <td><?php echo $nasabah[$i]['kelurahan']?></td>
-                    <td><?php echo $nasabah[$i]['rw']?></td>
                     <td><?php echo $nasabah[$i]['rt']?></td>
+                    <td><?php echo $nasabah[$i]['rw']?></td>
                     <?php
                       if($nasabah[$i]['blacklist'] == 0) {
                     ?>
