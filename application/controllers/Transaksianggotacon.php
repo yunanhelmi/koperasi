@@ -715,6 +715,10 @@ class TransaksianggotaCon extends CI_Controller {
 		if($session_data == NULL) {
 			redirect("usercon/login", "refresh");
 		}
+		$data['scansurattagihan'] = $this->scansurattagihanmodel->get_scan_surat_tagihan_by_id($id_scan_surat_tagihan);
+		$config['upload_path'] 		= './files/uploads/scan_surat_tagihan/'; //path folder
+		unlink($config['upload_path'].$data['scansurattagihan']->file_surat);
+		
 		$this->scansurattagihanmodel->deleteData($id_scan_surat_tagihan);
 		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
 	}
