@@ -712,6 +712,121 @@ function rupiah($angka){
                       </div>
                     </form>
                   </div>
+                  <br>
+                  <br>
+                  <div class="box box-danger">
+                    <legend style="text-align:center;">SCAN SURAT TAGIHAN</legend>
+                    <table id="scan_surat_tagihan_table" class="table table-bordered table-hover"  width="100%">
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>Jenis Surat</th>
+                          <th>Tanggal Penerimaan Surat</th>
+                          <th>Hasil Penagihan / Janji</th>
+                          <th>Keterangan</th>
+                          <th>Lihat File</th>
+                          <th>Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                          if($scansurattagihan != NULL) {
+                            $no = 1;
+                            for($i = 0; $i < sizeof($scansurattagihan); $i++) {
+                        ?>
+                          <tr>
+                            <td><?php echo $no; ?></td>
+                            <td><?php echo $scansurattagihan[$i]['jenis_surat']; ?></td>
+                            <?php 
+                              $waktu = strtotime( $scansurattagihan[$i]['tgl_penerimaan_surat'] );
+                              $wkt = date( 'd M Y', $waktu );
+                            ?>
+                            <td><?php echo $wkt; ?></td>
+                            <td><?php echo $scansurattagihan[$i]['hasil_penagihan_janji']; ?></td>
+                            <td><?php echo $scansurattagihan[$i]['keterangan']; ?></td>
+                            <td style='text-align: center'><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_test"><i class="fa fa-eye"></i></button></td>
+                            <div class="modal fade" id="modal_test" tabindex="-1" style="display: none;" aria-hidden="true">
+                              <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">File Surat</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body" style="max-height:500px; max-width:890px; overflow: scroll;">
+                                    
+                                      <img src="<?php echo base_url(); ?>files/uploads/scan_surat_tagihan/<?php echo $scansurattagihan[$i]['file_surat']; ?>">
+                                    
+                                  </div>
+                                  <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationDeleteScanSuratTagihan('<?php echo $pinjaman->id?>','<?php echo $scansurattagihan[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                          </tr>
+                        <?php    
+                            }
+                          }
+                        ?>
+                      </tbody>
+                    </table>
+                    <br>
+                    <div class="form-group col-xs-12">
+                      <button onclick="tambahScanSuratTagihan()" type="submit" class="btn btn-success" style="float: right;">Tambah Scan Surat Tagihan</button>
+                    </div>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="box box-danger" id="div_tambah_scansurattagihan" style="display:none">
+                    <legend style="text-align:center;">TAMBAH SCAN SURAT TAGIHAN</legend>
+                    <form action="<?php echo base_url()."index.php/transaksianggotacon/insert_scan_surat_tagihan/".$nasabah->id;?>" method="post" enctype="multipart/form-data" role="form">
+                      <div class="box-body">
+                        <div class="form-group col-xs-6">
+                          <label for="exampleInputPassword1">Jenis Surat</label>
+                          <select id="jenis_jaminan" name="jenis_surat" class="form-control" style="width: 100%;">
+                            <option value='K1'>K1</option>
+                            <option value='K2'>K2</option>
+                            <option value='Merah'>Merah</option>
+                          </select>
+                          <input type="hidden" class="form-control" value="<?php echo $pinjaman->id?>" id="id_pinjaman" name="id_pinjaman">
+                        </div>
+                        <div class="form-group col-xs-6">
+                          <label for="exampleInputPassword1">Tanggal Penerimaan Surat</label>
+                          <div class="input-group date">
+                            <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" name="tgl_penerimaan_surat" id="tgl_penerimaan_surat" data-date-format="dd-mm-yyyy" required>
+                          </div>
+                        </div>
+                        <div class="form-group col-xs-6">
+                          <label for="exampleInputPassword1">Hasil Penagihan / Janji</label>
+                          <textarea id="hasil_penagihan_janji" name="hasil_penagihan_janji" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group col-xs-6">
+                          <label for="exampleInputPassword1">Keterangan</label>
+                          <textarea id="keterangan" name="keterangan" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group col-xs-6">
+                          <label for="exampleInputFile">Upload File</label>
+                          <input type="file" accept=".jpg, .jpeg" name="file_surat" required>
+                        </div>
+                      </div>
+                      <div class="box-footer">
+                        <div class="col-xs-3">
+                          <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                        <div class="col-xs-3">
+                          <button type="button" onclick="cancelScanSuratTagihan()" class="btn btn-warning">Batal</button>
+                        </div>
+                      </div>
+                    </form>
+                    <br>
+                    <br>
+                  </div>
                 </div>
               </div>
 
@@ -1497,6 +1612,16 @@ function rupiah($angka){
         }
       }
 
+      function getConfirmationDeleteScanSuratTagihan(id_pinjaman, id_scan_surat_tagihan){
+        var retVal = confirm("Apakah anda yakin akan menghapus data tersebut ?");
+        var controller = 'transaksianggotacon';
+        var base_url = '<?php echo site_url(); //you have to load the "url_helper" to use this function ?>';
+        if( retVal == true ){
+          window.location.href= base_url + '/' + controller + '/delete_scan_surat_tagihan/' + id_pinjaman + '/' + id_scan_surat_tagihan;
+          //console.log(base_url + '/' + controller + '/delete_nasabah/' + id)
+        }
+      }
+
       function getConfirmationDeleteAngsuran(id_pinjaman, id_detail_angsuran){
         var retVal = confirm("Apakah anda yakin akan menghapus data tersebut ?");
         var controller = 'transaksianggotacon';
@@ -1528,6 +1653,14 @@ function rupiah($angka){
         document.getElementById("div_edit_jaminan").style.display = "none";
       }
 
+      function tambahScanSuratTagihan() {
+        document.getElementById("div_tambah_scansurattagihan").style.display = "block";
+      }
+
+      function cancelScanSuratTagihan() {
+        document.getElementById("div_tambah_scansurattagihan").style.display = "none";
+      }
+
       function editAngsuran(angsuran) {
         //document.getElementById("div_edit_angsuran").style.display = "block";
         console.log(angsuran);
@@ -1539,6 +1672,8 @@ function rupiah($angka){
         });
 
         $('#jatuh_tempo').datepicker({}).on('changeDate', function(ev){});
+
+        $('#tgl_penerimaan_surat').datepicker({}).on('changeDate', function(ev){});
 
         hitung_total();
         label_angsuran();

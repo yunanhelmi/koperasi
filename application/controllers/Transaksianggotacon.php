@@ -11,6 +11,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$this->load->model('pinjamanmodel');
 		$this->load->model('detailangsuranmodel');
 		$this->load->model('detailjaminanmodel');
+		$this->load->model('scansurattagihanmodel');
 		$this->load->model('asetkekayaanmodel');
 		$this->load->model('simpananpokokmodel');
 		$this->load->model('simpananwajibmodel');
@@ -330,6 +331,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['pinjaman'] 			= $this->pinjamanmodel->get_pinjaman_by_id($id_pinjaman);
 		$data['detail_angsuran'] 	= $this->detailangsuranmodel->get_detail_angsuran_by_id_pinjaman($id_pinjaman);
 		$data['detail_jaminan'] 	= $this->detailjaminanmodel->get_detail_jaminan_by_id_pinjaman($id_pinjaman);
+		$data['scansurattagihan'] 	= $this->scansurattagihanmodel->get_scan_surat_tagihan_by_id_pinjaman($id_pinjaman);
 		$data['max_bulanke_angsuran'] = $this->detailangsuranmodel->get_max_bulanke($id_pinjaman);
 		$id_nasabah					= $data['pinjaman']->id_nasabah;
 		$data['nasabah'] 			= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
@@ -604,6 +606,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$id_nasabah						= $data['pinjaman']->id_nasabah;
 		$data['detail_angsuran'] 		= $this->detailangsuranmodel->get_detail_angsuran_by_id_pinjaman($id_pinjaman);
 		$data['detail_jaminan'] 		= $this->detailjaminanmodel->get_detail_jaminan_by_id_pinjaman($id_pinjaman);
+		$data['scansurattagihan'] 		= $this->scansurattagihanmodel->get_scan_surat_tagihan_by_id_pinjaman($id_pinjaman);
 		$data['edit_detail_jaminan'] 	= $this->detailjaminanmodel->get_detail_jaminan_by_id($id_detail_jaminan);
 		$data['nasabah'] 				= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
 		$data['simpananpokok'] 			= $this->simpananpokokmodel->get_simpananpokok_by_id_nasabah($id_nasabah);
@@ -670,6 +673,49 @@ class TransaksianggotaCon extends CI_Controller {
 			redirect("usercon/login", "refresh");
 		}
 		$this->detailjaminanmodel->deleteData($id_detail_jaminan);
+		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
+	}
+
+	function insert_scan_surat_tagihan($id_nasabah){
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+		// Insert Detail Jaminan ke dalam table detail_jaminan
+		$input['id'] 					= $this->scansurattagihanmodel->getNewId();
+		$input['id_pinjaman'] 			= $this->input->post('id_pinjaman');
+		$input['jenis_surat'] 			= $this->input->post('jenis_surat');
+		$date1 							= $this->input->post('tgl_penerimaan_surat');
+		$date 							= strtotime($date1);
+		$input['tgl_penerimaan_surat'] 	= date("Y-m-d",$date);
+		$input['hasil_penagihan_janji'] = $this->input->post('hasil_penagihan_janji');
+		$input['keterangan'] 			= $this->input->post('keterangan');
+		// Upload File 
+		$config['upload_path'] 		= './files/uploads/scan_surat_tagihan/'; //path folder
+        $config['allowed_types'] 	= 'jpg|jpeg'; //type yang dapat diakses bisa anda sesuaikan
+        $config['file_name'] 		= time().$input['id'].'.jpeg';
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+        if(!empty($_FILES['file_surat']['name'])) {
+        	if ($this->upload->do_upload('file_surat')) {
+        		$gbr = $this->upload->data();
+        		$input['file_surat']			= $config['file_name'];
+        	} else {
+        		$input['file_surat']			= "";
+        	}
+        }
+		$this->scansurattagihanmodel->inputData($input);
+
+		$id_pinjaman = $this->input->post('id_pinjaman');
+		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
+	}
+
+	function delete_scan_surat_tagihan($id_pinjaman, $id_scan_surat_tagihan) {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+		$this->scansurattagihanmodel->deleteData($id_scan_surat_tagihan);
 		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
 	}
 
@@ -877,6 +923,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$id_nasabah						= $data['pinjaman']->id_nasabah;
 		$data['detail_angsuran'] 		= $this->detailangsuranmodel->get_detail_angsuran_by_id_pinjaman($id_pinjaman);
 		$data['detail_jaminan'] 		= $this->detailjaminanmodel->get_detail_jaminan_by_id_pinjaman($id_pinjaman);
+		$data['scansurattagihan'] 		= $this->scansurattagihanmodel->get_scan_surat_tagihan_by_id_pinjaman($id_pinjaman);
 		$data['edit_detail_angsuran'] 	= $this->detailangsuranmodel->get_detail_angsuran_by_id($id_detail_angsuran);
 		$data['nasabah'] 				= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
 		$data['simpananpokok'] 			= $this->simpananpokokmodel->get_simpananpokok_by_id_nasabah($id_nasabah);
