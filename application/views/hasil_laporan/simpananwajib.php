@@ -35,6 +35,7 @@
 	<tr>
 		<th>NO</th>
 		<th>NAMA</th>
+		<th>NOMOR NASABAH</th>
 		<th>ALAMAT</th>
 		<th>DESA</th>
 		<th>DUSUN</th>
@@ -53,6 +54,7 @@
     			<tr>
 	                <td style="text-align: center;"><?php echo $no ?></td>
 	                <td style="text-align: center;"><?php echo $data[$a]['nama'] ?></td>
+	                <td style="text-align: center;"><?php echo $data[$a]['nomor_nasabah'] ?></td>
 	                <td style="text-align: center;"><?php echo $data[$a]['alamat'] ?></td>
 	                <td style="text-align: center;"><?php echo $data[$a]['kelurahan'] ?></td>
 	                <td style="text-align: center;"><?php echo $data[$a]['dusun'] ?></td>
