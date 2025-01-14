@@ -371,8 +371,8 @@ class SurattagihanCon extends CI_Controller {
         $tgl_terakhir_bayar = date('d-m-Y', strtotime($data[0]['waktu_terakhir_angsuran']));
         $tgl_akhir_bayar = new DateTime($tgl_akhir_bayar);
 
-        $jatuh_tempo = date('Y-m-d', strtotime($data[0]['waktu_terakhir_angsuran'].' + 30 days'));
-        $tgl_jatuh_tempo = date('d-m-Y', strtotime($data[0]['waktu_terakhir_angsuran'].' + 30 days'));
+        $jatuh_tempo = date('Y-m-d', strtotime($data[0]['jatuh_tempo']));
+        $tgl_jatuh_tempo = date('d-m-Y', strtotime($data[0]['jatuh_tempo']));
         $jatuh_tempo = new DateTime($jatuh_tempo);
 
         $lama_pinjam = $today->diff($tanggal_pinjaman)->format("%a");
@@ -393,22 +393,21 @@ class SurattagihanCon extends CI_Controller {
         $bulan_jatuh_tempo = (($lama_jatuh_tempo_raw->format('%y') * 12) + $lama_jatuh_tempo_raw->format('%m'));
         $lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
 
-        $res['level'] = 0;
-        if ($lama_akhir_bayar > 30 && $lama_akhir_bayar <= 150) {
+        if ($lama_jatuh_tempo > 0 && $lama_jatuh_tempo <= 7) {
+            $res['level'] = 0;
+            $res['keterangan'] = 'H';
+        } else if($lama_jatuh_tempo > 7 && $lama_jatuh_tempo <= 30) {
             $res['level'] = 1;
             $res['keterangan'] = 'K1';
-        } else if ($lama_akhir_bayar > 150 && $lama_akhir_bayar <= 365) {
+        } else if ($lama_jatuh_tempo > 30 && $lama_jatuh_tempo <= 90) {
             $res['level'] = 2;
             $res['keterangan'] = 'K2';
-        } else if ($lama_akhir_bayar > 365 && $lama_akhir_bayar <= 730) {
+        } else if ($lama_jatuh_tempo > 90) {
             $res['level'] = 3;
-            $res['keterangan'] = 'M1';
-        }  else if ($lama_akhir_bayar > 730) {
-            $res['level'] = 4;
-            $res['keterangan'] = 'M2';
+            $res['keterangan'] = 'M';
         }
 
-        if($bulan_akhir_bayar > ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail'])) {
+        if($bulan_akhir_bayar >= 4) {
             $sisa_pinjaman = $data[0]['total_pinjaman_detail'] - $data[0]['total_angsuran_detail'];
         } else {
             $sisa_pinjaman = $angsuran_perbulan * $bulan_akhir_bayar;
@@ -420,10 +419,10 @@ class SurattagihanCon extends CI_Controller {
 
         $jasa_pinjaman = 0;
         $biaya_administrasi = 0;
-        if($res['level'] == 1) {
+        if($res['level'] <= 2) {
             $jasa_pinjaman = ($data[0]['total_pinjaman_detail'] * $bulan_akhir_bayar * 2) / 100;
             $biaya_administrasi = 0;
-        } else if($res['level'] > 1){
+        } else if($res['level'] > 2){
             $jasa_pinjaman = ($sisa_pinjaman * $bulan_akhir_bayar * 3) / 100;
             $biaya_administrasi = ($sisa_pinjaman * $kali_administrasi) / 100;
         }
@@ -527,19 +526,16 @@ class SurattagihanCon extends CI_Controller {
         $total = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
 
         $res['level'] = 0;
-        $res['keterangan'] = '';
-        if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
+        $res['keterangan'] = 'H';
+        if ($lama_pinjam > 127 && $lama_pinjam <= 150) {
             $res['level'] = 1;
             $res['keterangan'] = 'K1';
-        } else if ($lama_pinjam > 240 && $lama_pinjam <= 365) {
+        } else if ($lama_pinjam > 150 && $lama_pinjam <= 240) {
             $res['level'] = 2;
             $res['keterangan'] = 'K2';
-        } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
+        } else if ($lama_pinjam > 240) {
             $res['level'] = 3;
-            $res['keterangan'] = 'M1';
-        }  else if ($lama_pinjam > 730) {
-            $res['level'] = 4;
-            $res['keterangan'] = 'M2';
+            $res['keterangan'] = 'M';
         }
 
         $res['data']                        = $data;

@@ -106,7 +106,10 @@ class LaporanpiutangModel extends CI_Model {
 									ds.jumlah_pinjaman_detail,
 									ds.total_angsuran_detail,
 									ds.total_pinjaman_detail,
-									ds.waktu_terakhir_angsuran
+									ds.waktu_terakhir_angsuran,
+									ds.jasa_terakhir_angsuran,
+									ds.bulanke_terakhir_angsuran,
+									ds.bulan_tahun_terakhir_angsuran
 								FROM 
 									(
 										SELECT 
@@ -115,7 +118,10 @@ class LaporanpiutangModel extends CI_Model {
 											COUNT(IF(jenis = 'Pinjaman', 1, NULL)) as jumlah_pinjaman_detail,
 											SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran_detail,
 											SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman_detail,
-											MAX(waktu) as waktu_terakhir_angsuran
+											MAX(waktu) as waktu_terakhir_angsuran,
+											MAX(jasa) as jasa_terakhir_angsuran,
+											MAX(bulan_ke) as bulanke_terakhir_angsuran,
+											MAX(bulan_tahun) as bulan_tahun_terakhir_angsuran
 										FROM 
 											detail_angsuran
 										WHERE 

@@ -71,14 +71,32 @@
 	$tanggal_title 	= date("d-m-Y",$tgl);
 ?>
 
-<center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center>
-<br>
-<center>LAPORAN GLOBAL PIUTANG MACET ANGGOTA <?php echo $tanggal_title ?></center>
-<br>
-<center><strong>AHU-0003689.AH.01.39.TAHUN 2022</strong></center>
-<br>
-<center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center>
-<br>
+<style type="text/css">
+    .kop_surat {
+        width: 100%;
+    }
+    .kop_surat .bold {
+        font-weight: bold;
+    }
+    .kop_surat tr {
+        height: 30px;
+    }
+</style>
+
+<table class="kop_surat">
+    <tr>
+        <td colspan="15"><center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center></td>
+    </tr>
+    <tr>
+        <td colspan="15"><center>LAPORAN GLOBAL PIUTANG MACET ANGGOTA <?php echo $tanggal_title ?></center></td>
+    </tr>
+    <tr>
+        <td class="bold" colspan="15"><center>AHU-0003689.AH.01.39.TAHUN 2022</center></td>
+    </tr>
+    <tr>
+        <td colspan="15"><center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center></td>
+    </tr>
+</table>
 <br>
 
 <?php
@@ -96,11 +114,11 @@
 	    $tgl_akhir_bayar = new DateTime($tgl_akhir_bayar);
 
 		if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
-			$jatuh_tempo = date('Y-m-d', strtotime($data[$a]['waktu_terakhir_angsuran'].' + 30 days'));
-		    $tgl_jatuh_tempo = date('Y-m-d', strtotime($data[$a]['waktu_terakhir_angsuran'].' + 30 days'));
+			$jatuh_tempo = date('Y-m-d', strtotime($data[$a]['jatuh_tempo']));
+		    $tgl_jatuh_tempo = date('Y-m-d', strtotime($data[$a]['jatuh_tempo']));
 		    $jatuh_tempo = new DateTime($jatuh_tempo);
 
-            if($today < $tgl_akhir_bayar) {
+            if($today < $jatuh_tempo) {
             	$lama_pinjam = 0;
             	$lama_pinjam_long = '0 Tahun 0 Bulan 0 Hari';
             	$bulan_pinjam = 0;
@@ -143,13 +161,16 @@
     			$data[$a]['keterangan'] = 'Merah 2';
     			$data[$a]['keterangan_level'] = 4;
     		}*/
-            if ($lama_pinjam >= 36 && $lama_pinjam <= 150) {
+            if ($lama_pinjam >= 0 && $lama_jatuh_tempo <= 7) {
+                $data[$a]['keterangan'] = 'Hijau';
+                $data[$a]['keterangan_level'] = 0;
+            }else if ($lama_jatuh_tempo > 7 && $lama_jatuh_tempo <= 30) {
                 $data[$a]['keterangan'] = 'Kuning 1';
                 $data[$a]['keterangan_level'] = 1;
-            } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
+            } else if ($lama_jatuh_tempo > 30 && $lama_jatuh_tempo <= 90) {
                 $data[$a]['keterangan'] = 'Kuning 2';
                 $data[$a]['keterangan_level'] = 2;
-            } else if ($lama_pinjam > 365) {
+            } else if ($lama_jatuh_tempo > 91) {
                 $data[$a]['keterangan'] = 'Merah';
                 $data[$a]['keterangan_level'] = 3;
             }
@@ -210,13 +231,13 @@
         		$data[$a]['keterangan'] = 'Merah 2';
     			$data[$a]['keterangan_level'] = 4;
             }*/
-            if ($lama_pinjam >= 126 && $lama_pinjam <= 240) {
+            if ($lama_pinjam > 127 && $lama_pinjam <= 150) {
                 $data[$a]['keterangan'] = 'Kuning 1';
                 $data[$a]['keterangan_level'] = 1;
-            } else if ($lama_pinjam > 240 && $lama_pinjam <= 365) {
+            } else if ($lama_pinjam > 150 && $lama_pinjam <= 240) {
                 $data[$a]['keterangan'] = 'Kuning 2';
                 $data[$a]['keterangan_level'] = 2;
-            } else if ($lama_pinjam > 365) {
+            } else if ($lama_pinjam > 240) {
                 $data[$a]['keterangan'] = 'Merah';
                 $data[$a]['keterangan_level'] = 3;
             }
@@ -313,7 +334,7 @@
 		  			<td><?php echo $data[$a]['dusun']; ?></td>
 		  			<td><?php echo $data[$a]['rt']; ?></td>
                     <td><?php echo $data[$a]['rw']; ?></td>
-		  			<td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
+		  			<td><?php echo $data[$a]['jenis_pinjaman'] == 'Angsuran' ? $data[$a]['jenis_pinjaman']." (".$data[$a]['jumlah_angsuran'].")" : $data[$a]['jenis_pinjaman']; ?></td>
                     <?php
                         if(json_decode($data[$a]['jaminan']) == NULL) {
                             $jaminan = $data[$a]['jaminan'];

@@ -6,16 +6,32 @@
 	$tanggal_sampai	= date("d-m-Y",$tgl);
 ?>
 
-<center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center>
-<br>
-<center>LAPORAN KEUANGAN <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
-<br>
-<center><strong>AHU-0003689.AH.01.39.TAHUN 2022</strong></center>
-<br>
-<center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center>
-<br>
-<center>HISTORI RIWAYAT AKUN <?php echo $kode_akun ?> - <?php echo $nama_akun ?> <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center>
-<br>
+<style type="text/css">
+    .kop_surat {
+        width: 100%;
+    }
+    .kop_surat .bold {
+        font-weight: bold;
+    }
+    .kop_surat tr {
+        height: 30px;
+    }
+</style>
+
+<table class="kop_surat">
+    <tr>
+        <td colspan="6"><center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center></td>
+    </tr>
+    <tr>
+        <td colspan="6"><center>LAPORAN RINCIAN AKUN <?php echo $tanggal_dari ?> s/d <?php echo $tanggal_sampai ?></center></td>
+    </tr>
+    <tr>
+        <td class="bold" colspan="6"><center>AHU-0003689.AH.01.39.TAHUN 2022</center></td>
+    </tr>
+    <tr>
+        <td colspan="6"><center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center></td>
+    </tr>
+</table>
 <br>
 
 <table border="1" style="width:100%; border-collapse: collapse;">

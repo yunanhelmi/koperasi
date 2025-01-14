@@ -171,15 +171,12 @@
     <p>Assalamu'alaikum Wr. Wb.</p>
     <p class="body_content">
         Dengan ini kami memberitahukan bahwa pinjaman Bapak / Ibu, yang pernah dilakukan<br/>
-        pada koperasi kami tanggal <strong><?php echo $tanggal_pinjaman ?></strong> sampai bulan ini telah melampaui jatuh tempo, dengan<br/>
-        rincian sebagai berikut:<br/>
+        pada koperasi kami tanggal <strong><?php echo $tanggal_pinjaman ?></strong> sampai bulan ini telah melampaui jatuh tempo selama <?php echo $lama_jatuh_tempo?>, dengan rincian sebagai berikut:<br/>
     </p>
     <table id="table_rincian">
         <tr>
-            <td>Pokok Pinjaman</td>
+            <td>Jaminan</td>
             <td>:</td>
-            <td>Rp. </td>
-            <td><?php echo number_format($sisa_pinjaman,0,",",".") ?></td>
             <?php
             if(is_array(json_decode($data[0]['jaminan']))) {
                 $string_jaminan = '';
@@ -190,14 +187,20 @@
                 }
                 $string_jaminan = substr($string_jaminan, 0, -2);
             ?>
-            <td>(<?php echo $string_jaminan ?>)</td>
+            <td colspan="3"><?php echo $string_jaminan ?></td>
             <?php
             } else {
             ?>
-            <td>(<?php echo $data[0]['jaminan'] ?>)</td>
+            <td colspan="3"><?php echo $data[0]['jaminan'] ?></td>
             <?php
             }
             ?>
+        </tr>
+        <tr>
+            <td>Pokok Pinjaman</td>
+            <td>:</td>
+            <td>Rp. </td>
+            <td><?php echo number_format($sisa_pinjaman,0,",",".") ?></td>
         </tr>
         <?php 
             if($level== 1) {
@@ -207,7 +210,7 @@
             <td>:</td>
             <td style="border-bottom: 1px solid black;">Rp. </td>
             <td style="border-bottom: 1px solid black;"><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
-            <td style="border-bottom: 1px solid black;">(<?php echo $lama_akhir_bayar." - ".$lama_akhir_bayar_bulan_hari  ?> / <?php echo $tanggal_laporan ?>)</td>
+            <td style="border-bottom: 1px solid black;">(<?php echo $lama_akhir_bayar_bulan_hari  ?>)</td>
         </tr>
         <tr>
             <td>Total</td>
@@ -224,7 +227,7 @@
             <td>:</td>
             <td>Rp. </td>
             <td><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
-            <td>(<?php echo $lama_akhir_bayar." - ".$lama_akhir_bayar_bulan_hari  ?> / <?php echo $tanggal_laporan ?>)</td>
+            <td>(<?php echo $lama_akhir_bayar_bulan_hari  ?>)</td>
         </tr>
         <tr>
             <td>Administrasi (<?php echo $kali_administrasi ?>x)</td>
@@ -261,11 +264,24 @@
             }
         ?>
     -->
+    <br>
     <p class="body_content">
         Untuk itu dimohon dengan hormat kepada Bapak / Ibu untuk segera datang ke kantor palayanan<br/>
-        kami Timur Pasar Ngumpak Dalem, pada :<br/>
-        HARI : Senin - Jum'at JAM KERJA : Pagi (08.00 - 12.00) dan Sore (15.30 - 17.00)<br/>
-        Untuk:<br/>
+        kami Timur Pasar Ngumpak Dalem, pada<br/>
+        <table>
+            <tr>
+                <td>HARI</td>
+                <td>:</td>
+                <td>Senin - Jum'at</td>
+            </tr>
+            <tr>
+                <td>JAM KERJA</td>
+                <td>:</td>
+                <td>Pagi (08.00 - 12.00) dan Sore (15.30 - 17.00)</td>
+            </tr>
+        </table>
+        <br>
+        <!--Untuk:<br/>
         <?php 
             if($level == 1) {
         ?>
@@ -281,7 +297,8 @@
                 <d style="padding-left:3em;" >Atas perhatian Bapak / Ibu sebelumnya kami sampaikan terima kasih.</d><br/>
         <?php
             }
-        ?>
+        ?> -->
+        <d style="padding-left:3em;" >Atas perhatian Bapak / Ibu sebelumnya kami sampaikan terima kasih.</d><br/>
     </p>
     <p>Wassalamu'alaikum Wr. Wb.</p>
     <br>

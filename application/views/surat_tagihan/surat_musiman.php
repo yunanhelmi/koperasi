@@ -117,7 +117,7 @@
         padding-left: -3px;
     }
     #table_rincian tr td:nth-child(1) {
-        width: 150px;
+        width: 40px;
     }
     #table_rincian tr td:nth-child(2) {
         width: 10px;
@@ -165,15 +165,12 @@
     <p>Assalamu'alaikum Wr. Wb.</p>
     <p class="body_content">
         Dengan ini kami memberitahukan bahwa pinjaman Bapak / Ibu, yang pernah dilakukan<br/>
-        pada koperasi kami tanggal <strong><?php echo $tanggal_pinjaman ?></strong> sampai bulan ini telah melampaui jatuh tempo, dengan<br/>
-        rincian sebagai berikut:
+        pada koperasi kami tanggal <strong><?php echo $tanggal_pinjaman ?></strong> sampai bulan ini telah berlangsung <?php echo $lama_pinjam_bulan_hari ?> dengan keterlambatan selama <?php echo $lama_jatuh_tempo ?> dari jatuh tempo, dengan rincian sebagai berikut:
     </p>
     <table id="table_rincian">
         <tr>
-            <td>Pokok Pinjaman</td>
+            <td>Jaminan</td>
             <td>:</td>
-            <td>Rp. </td>
-            <td><?php echo number_format($sisa_pinjaman,0,",",".") ?></td>
             <?php
             if(is_array(json_decode($data[0]['jaminan']))) {
                 $string_jaminan = '';
@@ -184,15 +181,20 @@
                 }
                 $string_jaminan = substr($string_jaminan, 0, -2);
             ?>
-            <td>(<?php echo $string_jaminan ?>)</td>
+            <td colspan="3"><?php echo $string_jaminan ?></td>
             <?php
             } else {
             ?>
-            <td>(<?php echo $data[0]['jaminan'] ?>)</td>
+            <td colspan="3"><?php echo $data[0]['jaminan'] ?></td>
             <?php
             }
             ?>
-            
+        </tr>
+        <tr>
+            <td>Pokok Pinjaman</td>
+            <td>:</td>
+            <td>Rp. </td>
+            <td><?php echo number_format($sisa_pinjaman,0,",",".") ?></td>
         </tr>
         <tr>
             <td>Jasa Pinjaman</td>
@@ -200,32 +202,45 @@
             <td>Rp. </td>
             <td><?php echo number_format($jasa_pinjaman - $jasa_terbayar + $jasa_hari,0,",",".") ?></td>
             <!-- <td>(<?php echo $bulan_pinjam - $bulan_jasa ?> Bulan)</td> -->
-            <td>(<?php echo $lama_pinjam_bulan_hari ?>)</td>
+            <!-- <td>(<?php echo $lama_pinjam_bulan_hari ?>)</td> -->
         </tr>
         <tr>
             <td>Administrasi (<?php echo $kali_administrasi ?>x)</td>
             <td>:</td>
             <td style="border-bottom: 1px solid black;">Rp. </td>
             <td style="border-bottom: 1px solid black;"><?php echo number_format($biaya_administrasi,0,",",".") ?></td>
-            <td style="border-bottom: 1px solid black;">(<?php echo $lama_pinjam." - ".$lama_pinjam_bulan_hari  ?> / <?php echo $tanggal_laporan ?>)</td>
+            <!-- <td style="border-bottom: 1px solid black;">(<?php echo $lama_pinjam." - ".$lama_pinjam_bulan_hari  ?> / <?php echo $tanggal_laporan ?>)</td> -->
         </tr>
         <tr>
             <td>Total</td>
             <td>:</td>
             <td>Rp. </td>
             <td><?php echo number_format($total - $jasa_terbayar + $jasa_hari,0,",",".") ?></td>
-            <td></td>
+            <!-- <td></td> -->
         </tr>
     </table>
+    <br>
         <!--Pokok Pinjaman<d style="padding-left:3em;" >: Rp. <?php echo number_format($sisa_pinjaman,0,",",".") ?> (<?php echo $data[0]['jaminan'] ?>)</d><br/>
         Jasa Pinjaman<d style="padding-left:4em;" >: Rp. <?php echo number_format($jasa_pinjaman,0,",",".") ?> (<?php echo $lama_pinjam." - ".$lama_pinjam_long  ?> / <?php echo $tanggal_laporan ?>)</d><br/>
         Administrasi (<?php echo $kali_administrasi ?>x)&nbsp;<d style="padding-left:2em;" > : <u>Rp. <?php echo number_format($biaya_administrasi,0,",",".") ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></d><br/>
         Total<d style="padding-left:7em;" > &nbsp;: <strong>Rp. <?php echo number_format($total,0,",",".") ?></d></strong><br/>-->
     <p class="body_content">
         Untuk itu dimohon dengan hormat kepada Bapak / Ibu untuk segera datang ke kantor palayanan<br/>
-        kami Timur Pasar Ngumpak Dalem, pada :<br/>
-        HARI : Senin - Jum'at JAM KERJA : Pagi (08.00 - 12.00) dan Sore (15.30 - 17.00)<br/>
-        Untuk:<br/>
+        kami Timur Pasar Ngumpak Dalem, pada<br/>
+        <table>
+            <tr>
+                <td>HARI</td>
+                <td>:</td>
+                <td>Senin - Jum'at</td>
+            </tr>
+            <tr>
+                <td>JAM KERJA</td>
+                <td>:</td>
+                <td>Pagi (08.00 - 12.00) dan Sore (15.30 - 17.00)</td>
+            </tr>
+        </table>
+        <br>
+        <!--Untuk:<br/>
         <?php 
             if($level == 1) {
         ?>
@@ -241,10 +256,10 @@
                 <d style="padding-left:3em;" >Atas perhatian Bapak / Ibu sebelumnya kami sampaikan terima kasih.</d><br/>
         <?php
             }
-        ?>
+        ?> -->
+        <d style="padding-left:3em;" >Atas perhatian Bapak / Ibu sebelumnya kami sampaikan terima kasih.</d><br/>
     </p>
     <p>Wassalamu'alaikum Wr. Wb.</p>
-    <br>
     <p class="header_content">
         Bojonegoro, <?php echo tanggal_indo($tanggal) ?><br/>
         Ketua<br/>

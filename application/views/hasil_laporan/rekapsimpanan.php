@@ -19,16 +19,39 @@
 
   	$tgl 		= strtotime($tanggal);
 	$tanggal 	= date("d-m-Y",$tgl);
+
+    $column = 0;
+    for($i = 0; $i < sizeof($simpanan3th); $i++) {
+        $column++;
+    }
 ?>
 
-<center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center>
-<br>
-<center>LAPORAN REKAP SIMPANAN <?php echo $tanggal ?> <?php echo sizeof($data) ?></center>
-<br>
-<center><strong>AHU-0003689.AH.01.39.TAHUN 2022</strong></center>
-<br>
-<center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center>
-<br>
+<style type="text/css">
+    .kop_surat {
+        width: 100%;
+    }
+    .kop_surat .bold {
+        font-weight: bold;
+    }
+    .kop_surat tr {
+        height: 30px;
+    }
+</style>
+
+<table class="kop_surat">
+    <tr>
+        <td colspan="<?php echo $column+8; ?>"><center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center></td>
+    </tr>
+    <tr>
+        <td colspan="<?php echo $column+8; ?>"><center>LAPORAN REKAP SIMPANAN <?php echo $tanggal ?> <?php echo sizeof($data) ?></center></td>
+    </tr>
+    <tr>
+        <td class="bold" colspan="<?php echo $column+8; ?>"><center>AHU-0003689.AH.01.39.TAHUN 2022</center></td>
+    </tr>
+    <tr>
+        <td colspan="<?php echo $column+8; ?>"><center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center></td>
+    </tr>
+</table>
 <br>
 
 <table border="1" style="width:100%; border-collapse: collapse;">
