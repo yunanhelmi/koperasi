@@ -113,6 +113,7 @@ class LaporanglobalpiutangmacetCon extends CI_Controller {
         $tanggal1   = $this->input->post('tanggal');
         $tgl        = strtotime($tanggal1);
         $tanggal    = date("Y-m-d",$tgl);
+        $status = $this->input->post('status');
 
         $data_piutang = $this->laporanpiutangmodel->get_data($tanggal); 
 
@@ -127,6 +128,7 @@ class LaporanglobalpiutangmacetCon extends CI_Controller {
         $data['data'] = $data_piutang;
         $data['piutang_neraca'] = $piutang_neraca;
         $data['tanggal_laporan'] = $tanggal;
+        $data['status'] = $status;
 
         $this->load->view('/hasil_laporan/globalpiutangmacet', $data);
     }

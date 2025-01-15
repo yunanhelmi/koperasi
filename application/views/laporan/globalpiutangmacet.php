@@ -36,6 +36,15 @@
 									<input type="text" class="form-control pull-right" name="tanggal" id="tanggal" value="" data-date-format="dd-mm-yyyy">
 								</div>
 							</div>
+							<div class="form-group col-xs-3" id="div_status">
+		                        <label for="exampleInputPassword1">Status</label>
+		                        <select id="status" name="status" class="form-control" style="width: 100%;">
+									<option value='all'>- SEMUA -</option>
+									<option value='1' >Kuning 1</option>
+									<option value='2' >Kuning 2</option>
+									<option value='3' >Merah</option>
+		                        </select>
+		                    </div>
 			            </div>
 			            <div class="box-footer">
 			            	<!--<div class="col-xs-3">

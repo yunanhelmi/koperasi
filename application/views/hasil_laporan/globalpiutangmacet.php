@@ -321,7 +321,7 @@
 	  	$total_jasa = 0;
 	  	$total_uang_kurang = 0;
 	  	for($a = 0; $a < sizeof($data); $a++) {
-	  		if($data[$a]['saldo'] != 0 && $data[$a]['keterangan_level'] != 0) {
+	  		if($data[$a]['saldo'] != 0 && $data[$a]['keterangan_level'] != 0 && $data[$a]['keterangan_level'] == $status) {
 	  			$total_sisa 		+= $data[$a]['saldo'];
 	  			$total_jasa 		+= $data[$a]['jasa_pinjaman'];
 	  			$total_uang_kurang 	+= $data[$a]['uang_kurang'];
@@ -386,7 +386,72 @@
 				</tr>
 		<?php    
 				$no++;
-	  		}
+	  		} else if($data[$a]['saldo'] != 0 && $status == 'all' && $data[$a]['keterangan_level'] != 0 ){
+                $total_sisa         += $data[$a]['saldo'];
+                $total_jasa         += $data[$a]['jasa_pinjaman'];
+                $total_uang_kurang  += $data[$a]['uang_kurang'];
+        ?>
+                <tr>
+                    <td style="text-align: center;"><?php echo $no ?></td>
+                    <td><?php echo $data[$a]['nama']; ?></td>
+                    <td style="text-align: center;"><?php echo $data[$a]['nomor_koperasi']; ?></td>
+                    <td><?php echo $data[$a]['kelurahan']; ?></td>
+                    <td><?php echo $data[$a]['dusun']; ?></td>
+                    <td><?php echo $data[$a]['rt']; ?></td>
+                    <td><?php echo $data[$a]['rw']; ?></td>
+                    <td><?php echo $data[$a]['jenis_pinjaman'] == 'Angsuran' ? $data[$a]['jenis_pinjaman']." (".$data[$a]['jumlah_angsuran'].")" : $data[$a]['jenis_pinjaman']; ?></td>
+                    <?php
+                        if(json_decode($data[$a]['jaminan']) == NULL) {
+                            $jaminan = $data[$a]['jaminan'];
+                        } else {
+                            $jaminan = '';
+                            $string = json_decode($data[$a]['jaminan']);
+                            for($i = 0; $i < sizeof($string); $i++) {
+                                $jaminan .= $string[$i]->keterangan.'; ';
+                            }
+                            $jaminan = substr($jaminan, 0, -2);
+                        }
+                    ?>
+                    <td style="text-align: center;"><?php echo $jaminan; ?></td>
+                    <td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tanggal_pinjaman']); ?></td>
+                    <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                    <td style="text-align: right;"><?php echo $data[$a]['uang_kurang']; ?></td>
+                    <?php
+                    if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
+                    ?>
+                    <td></td>
+                    <td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>
+                    <?php
+                    } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
+                    ?>
+                    <td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>
+                    <td></td>
+                    <?php
+                    }
+                    ?>
+                    <?php
+                            if ($data[$a]['keterangan_level'] == 0) {
+                    ?>
+                                <td style="background-color: green; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                    <?php
+                            } else if ($data[$a]['keterangan_level'] == 1) {
+                    ?>
+                                <td style="background-color: yellow; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                    <?php
+                            } else if ($data[$a]['keterangan_level'] == 2) {
+                    ?>
+                                <td style="background-color: orange; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                    <?php
+                            } else if ($data[$a]['keterangan_level'] == 3) {
+                    ?>
+                                <td style="background-color: red; text-align: center;"><?php echo $data[$a]['keterangan'] ?></td>
+                    <?php
+                            }
+                    ?>
+                </tr>
+        <?php
+                $no++;
+            }
 	  	}
 	?>
 	<tr>
