@@ -272,7 +272,7 @@
             <tr>
                 <td>HARI</td>
                 <td>:</td>
-                <td>Senin - Jum'at</td>
+                <td>Senin s/d Jum'at</td>
             </tr>
             <tr>
                 <td>JAM BUKA</td>
