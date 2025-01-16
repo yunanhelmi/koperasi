@@ -228,7 +228,7 @@
             <td>:</td>
             <td>Rp. </td>
             <td><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
-            <td>(<?php echo $lama_akhir_bayar_bulan_hari  ?>)</td>
+            <td>(<?php echo $lama_akhir_bayar_bulan_hari?> / <?php echo $bulan_akhir_bayar; ?> x Jasa))</td>
         </tr>
         <tr>
             <td>Administrasi (<?php echo $kali_administrasi ?>x)</td>
