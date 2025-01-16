@@ -560,6 +560,7 @@ class SurattagihanCon extends CI_Controller {
         $res['jasa_hari']                   = $jasa_hari;
         $res['total']                       = $total;
         $res['tanggal']                     = $tanggal;
+        $res['tgl_jatuh_tempo']                     = $tgl_jatuh_tempo;
 
         /*echo "<pre>";
         var_dump($res);
