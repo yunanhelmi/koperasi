@@ -275,7 +275,7 @@
                 <td>Senin - Jum'at</td>
             </tr>
             <tr>
-                <td>JAM KERJA</td>
+                <td>JAM BUKA</td>
                 <td>:</td>
                 <td>Pagi (08.00 - 12.00) dan Sore (15.30 - 17.00)</td>
             </tr>
