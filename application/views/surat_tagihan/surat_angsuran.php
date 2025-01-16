@@ -201,6 +201,7 @@
             <td>:</td>
             <td>Rp. </td>
             <td><?php echo number_format($sisa_pinjaman,0,",",".") ?></td>
+            <td>(<?php echo $bulan_akhir_bayar; ?> kali)</td>
         </tr>
         <?php 
             if($level== 1) {
