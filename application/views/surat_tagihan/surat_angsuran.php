@@ -267,8 +267,8 @@
     -->
     <br>
     <p class="body_content">
-        Untuk itu dimohon dengan hormat kepada Bapak / Ibu untuk segera datang ke kantor palayanan<br/>
-        kami Timur Pasar Ngumpak Dalem, pada<br/>
+        Untuk itu dimohon dengan hormat kepada Bapak / Ibu untuk segera datang ke kantor pelayanan<br/>
+        kami di Timur Pasar Ngumpak Dalem untuk membayar tagihan tersebut, pada<br/>
         <table>
             <tr>
                 <td>HARI</td>
