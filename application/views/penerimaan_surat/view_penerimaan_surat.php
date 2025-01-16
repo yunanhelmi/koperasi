@@ -98,18 +98,24 @@
                       <td><?php echo $detail[$a]['kelurahan']; ?></td>
                       <?php
                         if($detail[$a]['status_surat'] == 0) {
-                          $status = "H";
+                      ?>
+                        <td style="background-color: green; text-align: center;">H</td>
+                      <?php
                         } else if($detail[$a]['status_surat'] == 1) {
-                          $status = "K1";
+                      ?>
+                        <td style="background-color: yellow; text-align: center;">K1</td>
+                      <?php
                         } else if($detail[$a]['status_surat'] == 2) {
-                          $status = "K2";
+                      ?>
+                        <td style="background-color: orange; text-align: center;">K2</td>
+                      <?php
                         } else if($detail[$a]['status_surat'] == 3) {
-                          $status = "M1";
-                        } else if($detail[$a]['status_surat'] == 4) {
-                          $status = "M2";
+                      ?>
+                        <td style="background-color: red; text-align: center;">M</td>
+                      <?php
                         }
                       ?>
-                      <td><?php echo $status; ?></td>
+                      
                       <td><?php echo $detail[$a]['jaminan']; ?></td>
                       <td><?php echo $detail[$a]['tanggal_pinjaman']; ?></td>
                       <td><?php echo "Rp".number_format($detail[$a]['sisa_pokok_pinjaman'],2,",","."); ?></td>
