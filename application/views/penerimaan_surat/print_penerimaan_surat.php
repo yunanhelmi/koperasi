@@ -132,7 +132,7 @@
             <th>TTD</th>
         </tr>
     </thead>
-    <tbody>
+    <!-- <tbody>
         <?php
             $no = 0;
             for($a = 0; $a < sizeof($detail); $a++) {
@@ -152,7 +152,7 @@
         <?php
             }
         ?>
-    </tbody>
+    </tbody> -->
 </table>
 <br>
 <p class="footer">
