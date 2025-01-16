@@ -201,7 +201,7 @@
             <td>:</td>
             <td>Rp. </td>
             <td><?php echo number_format($sisa_pinjaman,0,",",".") ?></td>
-            <td>(<?php echo $bulan_akhir_bayar; ?> kali)</td>
+            <td>(<?php echo $bulan_akhir_bayar; ?> x Angsuran)</td>
         </tr>
         <?php 
             if($level== 1) {
@@ -211,7 +211,8 @@
             <td>:</td>
             <td style="border-bottom: 1px solid black;">Rp. </td>
             <td style="border-bottom: 1px solid black;"><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
-            <td style="border-bottom: 1px solid black;">(<?php echo $lama_akhir_bayar_bulan_hari  ?>)</td>
+            <td style="border-bottom: 1px solid black;">(<?php echo $bulan_akhir_bayar; ?> x Angsuran)</td>
+            <!-- <td style="border-bottom: 1px solid black;">(<?php echo $lama_akhir_bayar_bulan_hari  ?>)</td>-->
         </tr>
         <tr>
             <td>Total</td>
