@@ -132,7 +132,7 @@
             <th>TTD</th>
         </tr>
     </thead>
-    <!-- <tbody>
+    <tbody>
         <?php
             $no = 0;
             for($a = 0; $a < sizeof($detail); $a++) {
@@ -152,7 +152,7 @@
         <?php
             }
         ?>
-    </tbody> -->
+    </tbody>
 </table>
 <br>
 <p class="footer">
@@ -161,8 +161,8 @@
     <?php
     $path = base_url()."assets/image/ttd_drs_suprapto.jpg";
     $type = pathinfo($path, PATHINFO_EXTENSION);
-    $data = file_get_contents($path);
-    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    $data1 = file_get_contents($path);
+    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data1);
     ?>
     <img src="<?php echo $base64 ?>"><br/>
     <u>Drs. SUPRAPTO</u>

@@ -116,8 +116,25 @@
                         }
                       ?>
                       
-                      <td><?php echo $detail[$a]['jaminan']; ?></td>
-                      <td><?php echo $detail[$a]['tanggal_pinjaman']; ?></td>
+                      <?php
+                        if(is_array(json_decode($detail[$a]['jaminan']))) {
+                            $string_jaminan = '';
+                            $jaminan = json_decode($detail[$a]['jaminan']);
+                            for($i = 0; $i < sizeof($jaminan); $i++) {
+                                $string_jaminan .= $jaminan[$i]->keterangan;
+                                $string_jaminan .= '; ';
+                            }
+                            $string_jaminan = substr($string_jaminan, 0, -2);
+                        ?>
+                        <td>(<?php echo $string_jaminan ?>)</td>
+                        <?php
+                        } else {
+                        ?>
+                        <td>(<?php echo $detail[$a]['jaminan'] ?>)</td>
+                        <?php
+                        }
+                        ?>
+                      <td><?php echo date('d-m-Y', strtotime($detail[$a]['tanggal_pinjaman'])); ?></td>
                       <td><?php echo "Rp".number_format($detail[$a]['sisa_pokok_pinjaman'],2,",","."); ?></td>
                       <td><?php echo "Rp".number_format($detail[$a]['sisa_jasa'],2,",","."); ?></td>
                       <td><?php echo "Rp".number_format($detail[$a]['bayar_pokok_pinjaman'],2,",","."); ?></td>
