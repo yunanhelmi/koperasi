@@ -256,7 +256,7 @@
         <?php
             }
         ?> -->
-        <d style="padding-left:3em;" >Atas perhatian Bapak / Ibu sebelumnya kami sampaikan terima kasih.</d><br/>
+        <d style="padding-left:3em;" >Atas perhatian Bapak / Ibu kami sampaikan terima kasih.</d><br/>
     </p>
     <p>Wassalamu'alaikum Wr. Wb.</p>
     <p class="header_content">
