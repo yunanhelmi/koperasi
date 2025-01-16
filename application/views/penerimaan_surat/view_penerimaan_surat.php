@@ -29,7 +29,7 @@
               <div class="box-body">
                 <div class="form-group col-xs-3">
                   <label for="exampleInputPassword1">Tanggal</label>
-                  <p><?php echo $data->tanggal;?></p>
+                  <p><?php echo date('d-m-Y', $data->tanggal);?></p>
                 </div>
                 <div class="form-group col-xs-4">
                   <label for="exampleInputPassword1">Petugas Lapangan</label>

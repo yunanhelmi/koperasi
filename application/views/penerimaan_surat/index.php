@@ -46,7 +46,7 @@
                   ?>
                   <tr>
                     <td style='text-align: center'><?php echo $no."."?></td>
-                    <td><?php echo $data[$i]['tanggal']?></td>
+                    <td><?php echo date('d-m-Y',strtotime($data[$i]['tanggal']))?></td>
                     <td><?php echo $data[$i]['nama_petugas_lapangan']?></td>
                     <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("penerimaansuratcon/view_penerimaan_surat/".$data[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
                     <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("penerimaansuratcon/edit_penerimaan_surat/".$data[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
