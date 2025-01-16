@@ -174,11 +174,11 @@ class PenerimaansuratCon extends CI_Controller {
 		    $tgl_akhir_bayar = new DateTime($tgl_terakhir_bayar);
 
 		    if($pinjaman[$a]['jenis_pinjaman'] == 'Angsuran') {
-		    	$jatuh_tempo = date('Y-m-d', strtotime($pinjaman[$a]['waktu_terakhir_angsuran'].' + 30 days'));
-			    $tgl_jatuh_tempo = date('d-m-Y', strtotime($pinjaman[$a]['waktu_terakhir_angsuran'].' + 30 days'));
+		    	$jatuh_tempo = date('Y-m-d', strtotime($pinjaman[$a]['jatuh_tempo']));
+			    $tgl_jatuh_tempo = date('d-m-Y', strtotime($pinjaman[$a]['jatuh_tempo']));
 			    $jatuh_tempo = new DateTime($jatuh_tempo);
 
-			    if($today < $tgl_akhir_bayar) {
+			    if($today < $jatuh_tempo) {
 	            	$lama_pinjam = 0;
 	            	$lama_pinjam_long = '0 Tahun 0 Bulan 0 Hari';
 	            	$bulan_pinjam = 0;
@@ -206,21 +206,23 @@ class PenerimaansuratCon extends CI_Controller {
 	            		$lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
 	            	}
 	            }
-	            $pinjaman[$a]['keterangan'] = 'Hijau';
-	    		$pinjaman[$a]['keterangan_level'] = 0;
-	    		if ($lama_pinjam > 30 && $lama_pinjam <= 150) {
-	    			$pinjaman[$a]['keterangan'] = 'Kuning 1';
-	    			$pinjaman[$a]['keterangan_level'] = 1;
-	            } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
-	    			$pinjaman[$a]['keterangan'] = 'Kuning 2';
-	    			$pinjaman[$a]['keterangan_level'] = 2;
-	            } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
-	    			$pinjaman[$a]['keterangan'] = 'Merah 1';
-	    			$pinjaman[$a]['keterangan_level'] = 3;
-	            } else if ($lama_pinjam > 730) {
-	    			$pinjaman[$a]['keterangan'] = 'Merah 2';
-	    			$pinjaman[$a]['keterangan_level'] = 4;
-	    		}
+
+	    		if ($lama_jatuh_tempo == 0) {
+	                $pinjaman[$a]['keterangan'] = '';
+	                $pinjaman[$a]['keterangan_level'] = -1;
+	            } else if ($lama_jatuh_tempo >= 5 && $lama_jatuh_tempo <= 11) {
+	                $pinjaman[$a]['keterangan'] = 'Hijau';
+	                $pinjaman[$a]['keterangan_level'] = 0;
+	            } else if($lama_jatuh_tempo > 11 && $lama_jatuh_tempo <= 30) {
+	                $pinjaman[$a]['keterangan'] = 'Kuning 1';
+	                $pinjaman[$a]['keterangan_level'] = 1;
+	            } else if ($lama_jatuh_tempo > 30 && $lama_jatuh_tempo <= 90) {
+	                $pinjaman[$a]['keterangan'] = 'Kuning 2';
+	                $pinjaman[$a]['keterangan_level'] = 2;
+	            } else if ($lama_jatuh_tempo > 90) {
+	                $pinjaman[$a]['keterangan'] = 'Merah';
+	                $pinjaman[$a]['keterangan_level'] = 3;
+	            }
 	            $pinjaman[$a]['sisa_kali_angsuran'] 			= $sisa_kali_angsuran;
 	            $pinjaman[$a]['today'] 							= $tanggal_laporan;
 	            $pinjaman[$a]['tgl_pinjaman'] 			        = $tgl_pinjaman;
@@ -265,20 +267,33 @@ class PenerimaansuratCon extends CI_Controller {
 	            	}
 	            }
 
-	            $pinjaman[$a]['keterangan'] = 'Hijau';
+	       		/*$pinjaman[$a]['keterangan'] = 'Hijau';
 	    		$pinjaman[$a]['keterangan_level'] = 0;
 	       		if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
-	        		$pinjaman[$a]['keterangan'] = 'Kuning 1';
-	    			$pinjaman[$a]['keterangan_level'] = 1;
+	                $data[$a]['keterangan'] = 'Kuning 1';
+	                $data[$a]['keterangan_level'] = 1;
 	            } else if ($lama_pinjam > 240 && $lama_pinjam <= 365) {
-	        		$pinjaman[$a]['keterangan'] = 'Kuning 2';
-	    			$pinjaman[$a]['keterangan_level'] = 2;
+	                $data[$a]['keterangan'] = 'Kuning 2';
+	                $data[$a]['keterangan_level'] = 2;
 	            } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
-	        		$pinjaman[$a]['keterangan'] = 'Merah 1';
-	    			$pinjaman[$a]['keterangan_level'] = 3;
-	        	} else if ($lama_pinjam > 730) {
-	        		$pinjaman[$a]['keterangan'] = 'Merah 2';
-	    			$pinjaman[$a]['keterangan_level'] = 4;
+	                $data[$a]['keterangan'] = 'Merah 1';
+	                $data[$a]['keterangan_level'] = 3;
+	            } else if ($lama_pinjam > 730) {
+	                $data[$a]['keterangan'] = 'Merah 2';
+	                $data[$a]['keterangan_level'] = 4;
+	            }*/
+	            if ($lama_pinjam >= 125 && $lama_pinjam <= 131) {
+	                $pinjaman[$a]['keterangan'] = 'Hijau';
+	                $pinjaman[$a]['keterangan_level'] = 0;
+	            } else if ($lama_pinjam > 131 && $lama_pinjam <= 180) {
+	                $pinjaman[$a]['keterangan'] = 'Kuning 1';
+	                $pinjaman[$a]['keterangan_level'] = 1;
+	            } else if ($lama_pinjam > 180 && $lama_pinjam <= 240) {
+	                $pinjaman[$a]['keterangan'] = 'Kuning 2';
+	                $pinjaman[$a]['keterangan_level'] = 2;
+	            } else if ($lama_pinjam > 240) {
+	                $pinjaman[$a]['keterangan'] = 'Merah';
+	                $pinjaman[$a]['keterangan_level'] = 3;
 	            }
 	            $pinjaman[$a]['sisa_kali_angsuran'] 			= $sisa_kali_angsuran;
 	            $pinjaman[$a]['today'] 							= $tanggal_laporan;
@@ -335,7 +350,8 @@ class PenerimaansuratCon extends CI_Controller {
 		$i = 0;
 		for($a = 0; $a < sizeof($pinjaman); $a++) {
 			$tanggungan_jasa = $pinjaman[$a]['jasa_pinjaman'] - $pinjaman[$a]['total_jasa_detail'];
-			if(($pinjaman[$a]['saldo'] != 0 || $tanggungan_jasa > 0) && $pinjaman[$a]['keterangan_level'] != 0) {
+			//if(($pinjaman[$a]['saldo'] != 0 || $tanggungan_jasa > 0) && $pinjaman[$a]['keterangan_level'] != 0) {
+			if(($pinjaman[$a]['saldo'] != 0 || $tanggungan_jasa > 0)) {
 				$input[$i]['id'] 							= $this->detailpenerimaansuratmodel->getNewId();
 				$input[$i]['id_penerimaan_surat'] 			= $id_penerimaan_surat;
 				$input[$i]['id_nasabah'] 					= $pinjaman[$a]['id_nasabah'];
