@@ -211,8 +211,7 @@
             <td>:</td>
             <td style="border-bottom: 1px solid black;">Rp. </td>
             <td style="border-bottom: 1px solid black;"><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
-            <td style="border-bottom: 1px solid black;">(<?php echo $bulan_akhir_bayar; ?> x Angsuran)</td>
-            <!-- <td style="border-bottom: 1px solid black;">(<?php echo $lama_akhir_bayar_bulan_hari  ?>)</td>-->
+            <td style="border-bottom: 1px solid black;">(<?php echo $lama_akhir_bayar_bulan_hari?> / <?php echo $bulan_akhir_bayar; ?> x Jasa)</td>
         </tr>
         <tr>
             <td>Total</td>
