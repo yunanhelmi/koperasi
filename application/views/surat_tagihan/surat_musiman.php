@@ -225,8 +225,7 @@
         Administrasi (<?php echo $kali_administrasi ?>x)&nbsp;<d style="padding-left:2em;" > : <u>Rp. <?php echo number_format($biaya_administrasi,0,",",".") ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></d><br/>
         Total<d style="padding-left:7em;" > &nbsp;: <strong>Rp. <?php echo number_format($total,0,",",".") ?></d></strong><br/>-->
     <p class="body_content">
-        Untuk itu dimohon dengan hormat kepada Bapak / Ibu untuk segera datang ke kantor pelayanan<br/>
-        kami di Timur Pasar Ngumpak Dalem untuk membayar tagihan tersebut, pada<br/>
+        Sehubungan dengan hal tersebut, dimohon dengan hormat kepada Bapak / Ibu untuk segera membayar tagihan ke kantor pelayanan kami di Timur Pasar Ngumpak Dalem, pada<br/>
         <table>
             <tr>
                 <td>HARI</td>
