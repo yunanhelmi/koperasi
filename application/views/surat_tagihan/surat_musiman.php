@@ -273,5 +273,5 @@
     </p>
     <br>
     <!-- <i><strong>NB: Jika terdapat kesalahan perhitungan dari keterangan yang tercantum di atas, bisa diubah sebagaimana mestinya ketika datang ke kantor pelayanan koperasi.</strong></i> -->
-    <i><strong>NB: Jika terdapat perbedaan / perubahan perhitungan disebabkan berjalannya waktu, keterangan yang tercantum di atas bisa berubah sebagaimana mestinya ketika datang ke kantor pelayanan koperasi.</strong></i>
+    <i><strong>NB: Jika terdapat perbedaan / perubahan perhitungan disebabkan berjalannya waktu, keterangan yang tercantum di atas bisa berubah sebagaimana mestinya dan akan dijelaskan saat datang ke kantor pelayanan koperasi.</strong></i>
 </div>
