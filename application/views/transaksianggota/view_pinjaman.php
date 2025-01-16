@@ -803,7 +803,7 @@ function rupiah($angka){
                               <label for="exampleInputEmail1">:</label>
                             </div>
                             <div class="form-group col-xs-2" style="text-align: right">
-                              <strong><p><?php echo number_format($dilunasi['total'],0,",",".");?></p></strong>
+                              <strong><p><?php echo number_format($pinjaman->sisa_angsuran + ($dilunasi['jasa_pinjaman'] * ($pinjaman->jumlah_angsuran - $dilunasi['bulan_jasa'])),0,",",".");?></p></strong>
                             </div>  
                           </div>
                         </div>
