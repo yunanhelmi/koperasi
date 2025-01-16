@@ -158,9 +158,9 @@
 <div id="halaman">
 
     <p class="header_content">
-        Nomor<d style="padding-left:3em;" >: <?php echo $data[0]['nomor_koperasi'] ?> / MM / <?php echo $level == 1 ? 'Srt Pemberitahuan.' : 'Srt Tagihan.' ?> / A / <?php echo $keterangan ?> / <?php echo date("Y") ?></d><br/>
+        Nomor<d style="padding-left:3em;" >: <?php echo $data[0]['nomor_koperasi'] ?> / MM / <?php echo $level <= 1 ? 'Srt Pemberitahuan.' : 'Srt Tagihan.' ?> / A / <?php echo $keterangan ?> / <?php echo date("Y") ?></d><br/>
         Lampiran<d style="padding-left:2em;" >: -</d><br/>
-        Perihal<d style="padding-left:3em;" >: <?php echo $level == 1 ? 'Angsuran Pinjaman' : 'Tagihan Pinjaman' ?></d>
+        Perihal<d style="padding-left:3em;" >: <?php echo $level <= 1 ? 'Angsuran Pinjaman' : 'Tagihan Pinjaman' ?></d>
     </p>
     <p class="header_content">
         Kepada<br/>
