@@ -156,12 +156,13 @@ class PenerimaansuratCon extends CI_Controller {
 		}
 
 		$id_nasabah = $this->input->post('id_nasabah');
+		$tanggal_surat = $this->input->post('tanggal_surat');
 
 		$pinjaman = $this->pinjamanmodel->get_data_penerimaan_surat_by_id_nasabah($id_nasabah);
 
 		for($a = 0; $a < sizeof($pinjaman); $a++) {
 			$saldo = $pinjaman[$a]['total_pinjaman_detail'] - $pinjaman[$a]['total_angsuran_detail'];
-			$tanggal_laporan = date('Y-m-d');
+			$tanggal_laporan = date('Y-m-d', strtotime($tanggal_surat));
 	        $today = new DateTime($tanggal_laporan);
 
 	        $sisa_kali_angsuran = $pinjaman[$a]['jumlah_angsuran'] - $pinjaman[$a]['jumlah_angsuran_detail'];

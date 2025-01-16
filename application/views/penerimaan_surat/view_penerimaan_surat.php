@@ -48,6 +48,7 @@
                   <label for="exampleInputPassword1">Nama Nasabah</label>
                   <input type="text" class="form-control" id="nama_nasabah" name="nama_nasabah" placeholder="Nama Nasabah">
                   <input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah">
+                  <input type="hidden" class="form-control" id="tanggal_surat" name="tanggal_surat" value="<?php echo $data->tanggal;?>">
                 </div>
                 <div class="form-group col-xs-6">
                   <label for="exampleInputPassword1">Nomor Nasabah</label>
