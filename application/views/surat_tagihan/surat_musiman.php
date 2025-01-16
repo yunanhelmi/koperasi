@@ -165,7 +165,7 @@
     <p>Assalamu'alaikum Wr. Wb.</p>
     <p class="body_content">
         Dengan ini kami memberitahukan bahwa pinjaman Bapak / Ibu, yang pernah dilakukan<br/>
-        pada koperasi kami tanggal <strong><?php echo $tanggal_pinjaman ?></strong> sampai bulan ini telah berlangsung <?php echo $lama_pinjam_bulan_hari ?> dengan keterlambatan selama <?php echo $lama_jatuh_tempo ?> dari jatuh tempo, dengan rincian sebagai berikut:
+        pada koperasi kami tanggal <strong><?php echo $tanggal_pinjaman ?></strong> sampai bulan ini telah berlangsung <?php echo $lama_jatuh_tempo ?> dengan keterlambatan selama <?php echo $lama_pinjam_bulan_hari ?> dari jatuh tempo, dengan rincian sebagai berikut:
     </p>
     <table id="table_rincian">
         <tr>
