@@ -450,6 +450,7 @@ class SurattagihanCon extends CI_Controller {
         $res['kali_administrasi']           = $kali_administrasi;
         $res['total']                       = $total;
         $res['tanggal']                     = $tanggal;
+        $res['tgl_jatuh_tempo']                     = $tgl_jatuh_tempo;
 
         /*echo "<pre>";
         var_dump($res);

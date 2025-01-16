@@ -171,7 +171,7 @@
     <p>Assalamu'alaikum Wr. Wb.</p>
     <p class="body_content">
         Dengan ini kami memberitahukan bahwa pinjaman Bapak / Ibu, yang pernah dilakukan<br/>
-        pada koperasi kami tanggal <strong><?php echo $tanggal_pinjaman ?></strong> sampai bulan ini telah melampaui jatuh tempo selama <?php echo $lama_jatuh_tempo?>, dengan rincian sebagai berikut:<br/>
+        pada koperasi kami tanggal <strong><?php echo $tanggal_pinjaman ?></strong> sampai bulan ini telah melampaui dari jatuh tempo tanggal <strong><?php echo $tgl_jatuh_tempo ?></strong> selama <?php echo $lama_jatuh_tempo?>, dengan rincian sebagai berikut:<br/>
     </p>
     <table id="table_rincian">
         <tr>
