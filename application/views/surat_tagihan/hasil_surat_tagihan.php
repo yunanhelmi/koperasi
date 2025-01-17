@@ -54,6 +54,24 @@
         return $date->format('Y-m-d');
     }
 
+    function tanggal_indo($tanggal) {
+        $bulan = array (1 =>   'Januari',
+                    'Februari',
+                    'Maret',
+                    'April',
+                    'Mei',
+                    'Juni',
+                    'Juli',
+                    'Agustus',
+                    'September',
+                    'Oktober',
+                    'November',
+                    'Desember'
+                );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+    }
+
   	$tgl 				= strtotime($tanggal);
 	$tanggal_laporan 	= date("d-m-Y",$tgl);
 ?>
@@ -116,13 +134,13 @@
             		$lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
             	}
             }
-            if ($lama_jatuh_tempo == 0) {
+            if ($lama_jatuh_tempo < 5) {
                 $data[$a]['keterangan'] = '';
                 $data[$a]['keterangan_level'] = -1;
-            } else if ($lama_jatuh_tempo > 0 && $lama_jatuh_tempo <= 7) {
+            } else if ($lama_jatuh_tempo >= 5 && $lama_jatuh_tempo <= 11) {
                 $data[$a]['keterangan'] = 'Hijau';
                 $data[$a]['keterangan_level'] = 0;
-            } else if($lama_jatuh_tempo > 7 && $lama_jatuh_tempo <= 30) {
+            } else if($lama_jatuh_tempo > 11 && $lama_jatuh_tempo <= 30) {
                 $data[$a]['keterangan'] = 'Kuning 1';
                 $data[$a]['keterangan_level'] = 1;
             } else if ($lama_jatuh_tempo > 30 && $lama_jatuh_tempo <= 90) {
@@ -175,8 +193,8 @@
             		$lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
             	}
             }
-            $data[$a]['keterangan'] = 'Hijau';
-    		$data[$a]['keterangan_level'] = 0;
+            $data[$a]['keterangan'] = '';
+    		$data[$a]['keterangan_level'] = -1;
        		/*if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
                 $data[$a]['keterangan'] = 'Kuning 1';
                 $data[$a]['keterangan_level'] = 1;
@@ -190,10 +208,13 @@
                 $data[$a]['keterangan'] = 'Merah 2';
                 $data[$a]['keterangan_level'] = 4;
             }*/
-            if ($lama_pinjam > 127 && $lama_pinjam <= 150) {
+            if ($lama_pinjam >= 125 && $lama_pinjam <= 131) {
+                $data[$a]['keterangan'] = 'Hijau';
+                $data[$a]['keterangan_level'] = 0;
+            } else if ($lama_pinjam > 131 && $lama_pinjam <= 180) {
                 $data[$a]['keterangan'] = 'Kuning 1';
                 $data[$a]['keterangan_level'] = 1;
-            } else if ($lama_pinjam > 150 && $lama_pinjam <= 240) {
+            } else if ($lama_pinjam > 180 && $lama_pinjam <= 240) {
                 $data[$a]['keterangan'] = 'Kuning 2';
                 $data[$a]['keterangan_level'] = 2;
             } else if ($lama_pinjam > 240) {
@@ -283,7 +304,7 @@
 	    <th>JAMINAN</th>
 	    <th>TGL PINJAM</th>
 	    <!--<th>TGL TERAKHIR BAYAR</th>-->
-	    <!--<th>TGL JATUH TEMPO</th>-->
+	    <th>TGL JATUH TEMPO</th>
 	    <!--<th>SLD X</th>-->
 	    <th>SISA PINJAMAN</th>
 	    <!--<th>JASA PINJAMAN</th>-->
@@ -341,9 +362,9 @@
                         <?php
                         }
                         ?>
-    				  	<td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
+    				  	<td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_pinjaman']))); ?></td>
     				  	<!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
-    				  	<!--<td style="text-align: center;"><?php echo $data[$a]['tgl_jatuh_tempo']; ?></td>-->
+    				  	<td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_jatuh_tempo']))); ?></td>
     				  	<!--<td style="text-align: center;"><?php echo $data[$a]['sisa_kali_angsuran']; ?></td>-->
     		  			<td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
     		  			<!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
@@ -412,9 +433,9 @@
                         <?php
                         }
                         ?>
-                        <td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
+                        <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_pinjaman']))); ?></td>
                         <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
-                        <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_jatuh_tempo']; ?></td>-->
+                        <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_jatuh_tempo']))); ?></td>
                         <!--<td style="text-align: center;"><?php echo $data[$a]['sisa_kali_angsuran']; ?></td>-->
                         <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
                         <!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
@@ -485,9 +506,9 @@
                         <?php
                         }
                         ?>
-                        <td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
+                        <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_pinjaman']))); ?></td>
                         <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
-                        <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_jatuh_tempo']; ?></td>-->
+                        <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_jatuh_tempo']))); ?></td>
                         <!--<td style="text-align: center;"><?php echo $data[$a]['sisa_kali_angsuran']; ?></td>-->
                         <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
                         <!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
@@ -556,9 +577,9 @@
                         <?php
                         }
                         ?>
-                        <td style="text-align: center;"><?php echo $data[$a]['tgl_pinjaman']; ?></td>
+                        <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_pinjaman']))); ?></td>
                         <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
-                        <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_jatuh_tempo']; ?></td>-->
+                        <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_jatuh_tempo']))); ?></td>
                         <!--<td style="text-align: center;"><?php echo $data[$a]['sisa_kali_angsuran']; ?></td>-->
                         <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
                         <!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->

@@ -161,10 +161,10 @@
     			$data[$a]['keterangan'] = 'Merah 2';
     			$data[$a]['keterangan_level'] = 4;
     		}*/
-            if ($lama_pinjam >= 0 && $lama_jatuh_tempo <= 7) {
+            if ($lama_pinjam >= 0 && $lama_jatuh_tempo <= 11) {
                 $data[$a]['keterangan'] = 'Hijau';
                 $data[$a]['keterangan_level'] = 0;
-            }else if ($lama_jatuh_tempo > 7 && $lama_jatuh_tempo <= 30) {
+            }else if ($lama_jatuh_tempo > 11 && $lama_jatuh_tempo <= 30) {
                 $data[$a]['keterangan'] = 'Kuning 1';
                 $data[$a]['keterangan_level'] = 1;
             } else if ($lama_jatuh_tempo > 30 && $lama_jatuh_tempo <= 90) {
@@ -216,9 +216,9 @@
             		$lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
             	}
             }
-            $data[$a]['keterangan'] = 'Hijau';
+            /*$data[$a]['keterangan'] = 'Hijau';
     		$data[$a]['keterangan_level'] = 0;
-       		/*if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
+       		if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
         		$data[$a]['keterangan'] = 'Kuning 1';
     			$data[$a]['keterangan_level'] = 1;
             } else if ($lama_pinjam > 240 && $lama_pinjam <= 365) {
@@ -231,10 +231,13 @@
         		$data[$a]['keterangan'] = 'Merah 2';
     			$data[$a]['keterangan_level'] = 4;
             }*/
-            if ($lama_pinjam > 127 && $lama_pinjam <= 150) {
+            if ($lama_pinjam <= 131) {
+                $data[$a]['keterangan'] = 'Hijau';
+                $data[$a]['keterangan_level'] = 0;
+            } else if ($lama_pinjam > 131 && $lama_pinjam <= 180) {
                 $data[$a]['keterangan'] = 'Kuning 1';
                 $data[$a]['keterangan_level'] = 1;
-            } else if ($lama_pinjam > 150 && $lama_pinjam <= 240) {
+            } else if ($lama_pinjam > 180 && $lama_pinjam <= 240) {
                 $data[$a]['keterangan'] = 'Kuning 2';
                 $data[$a]['keterangan_level'] = 2;
             } else if ($lama_pinjam > 240) {
@@ -308,6 +311,7 @@
 	    <th>JENIS PINJAMAN</th>
 	    <th>JAMINAN</th>
 	    <th>TGL PINJAM</th>
+        <th>TGL JATUH TEMPO</th>
 	    <th>SISA PINJAMAN</th>
 	    <th>UANG KURANG</th>
 	    <th>LAMA PINJAM</th>
@@ -321,7 +325,7 @@
 	  	$total_jasa = 0;
 	  	$total_uang_kurang = 0;
 	  	for($a = 0; $a < sizeof($data); $a++) {
-	  		if($data[$a]['saldo'] != 0 && $data[$a]['keterangan_level'] != 0 && $data[$a]['keterangan_level'] == $status) {
+	  		if($data[$a]['saldo'] != 0 && $data[$a]['keterangan_level'] > 0 && $data[$a]['keterangan_level'] == $status) {
 	  			$total_sisa 		+= $data[$a]['saldo'];
 	  			$total_jasa 		+= $data[$a]['jasa_pinjaman'];
 	  			$total_uang_kurang 	+= $data[$a]['uang_kurang'];
@@ -349,6 +353,7 @@
                     ?>
                     <td style="text-align: center;"><?php echo $jaminan; ?></td>
 				  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tanggal_pinjaman']); ?></td>
+                    <td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_jatuh_tempo']); ?></td>
 		  			<td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
 		  			<td style="text-align: right;"><?php echo $data[$a]['uang_kurang']; ?></td>
 		  			<?php
@@ -386,7 +391,7 @@
 				</tr>
 		<?php    
 				$no++;
-	  		} else if($data[$a]['saldo'] != 0 && $status == 'all' && $data[$a]['keterangan_level'] != 0 ){
+	  		} else if($data[$a]['saldo'] != 0 && $status == 'all' && $data[$a]['keterangan_level'] > 0 ){
                 $total_sisa         += $data[$a]['saldo'];
                 $total_jasa         += $data[$a]['jasa_pinjaman'];
                 $total_uang_kurang  += $data[$a]['uang_kurang'];
@@ -414,6 +419,7 @@
                     ?>
                     <td style="text-align: center;"><?php echo $jaminan; ?></td>
                     <td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tanggal_pinjaman']); ?></td>
+                    <td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_jatuh_tempo']); ?></td>
                     <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
                     <td style="text-align: right;"><?php echo $data[$a]['uang_kurang']; ?></td>
                     <?php
