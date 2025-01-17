@@ -347,17 +347,17 @@
 		                    ?>
 		                    <td style="text-align: center;"><?php echo $jaminan; ?></td>
 						  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tanggal_pinjaman']); ?></td>
-						  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_terakhir_bayar']); ?>
+						  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_terakhir_bayar'])." "; ?>
                             <?php
                                 if($data[$a]['jasa_terakhir_angsuran'] >= 0) {
                                   $bln_thn = strtotime( $data[$a]['bulan_tahun_terakhir_angsuran'] );
                                   $bulan_tahun = date( 'M-Y', $bln_thn );
                             ?>
-                            <br><?php echo $data[$a]['bulanke_terakhir_angsuran'] > 0 ? "Pembayaran ke-".$data[$a]['bulanke_terakhir_angsuran']." (".$bulan_tahun.")" : ""?>
+                            <?php echo $data[$a]['bulanke_terakhir_angsuran'] > 0 ? "Pembayaran ke-".$data[$a]['bulanke_terakhir_angsuran']." (".$bulan_tahun.")" : ""?>
                             <?php
                                 } else {
                             ?>
-                              <br>Pengembalian Jasa
+                              Pengembalian Jasa
                             <?php
                                 }
                             ?>
@@ -432,17 +432,17 @@
 		                    ?>
 		                    <td style="text-align: center;"><?php echo $jaminan; ?></td>
 						  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tanggal_pinjaman']); ?></td>
-						  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_terakhir_bayar']); ?>
+						  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_terakhir_bayar'])." "; ?>
                             <?php
                                 if($data[$a]['jasa_terakhir_angsuran'] >= 0) {
                                   $bln_thn = strtotime( $data[$a]['bulan_tahun_terakhir_angsuran'] );
                                   $bulan_tahun = date( 'M-Y', $bln_thn );
                             ?>
-                            <br><?php echo $data[$a]['bulanke_terakhir_angsuran'] > 0 ? "Pembayaran ke-".$data[$a]['bulanke_terakhir_angsuran']." (".$bulan_tahun.")" : ""?>
+                            <?php echo $data[$a]['bulanke_terakhir_angsuran'] > 0 ? "Pembayaran ke-".$data[$a]['bulanke_terakhir_angsuran']." (".$bulan_tahun.")" : ""?>
                             <?php
                                 } else {
                             ?>
-                              <br>Pengembalian Jasa
+                              Pengembalian Jasa
                             <?php
                                 }
                             ?>
@@ -519,17 +519,17 @@
 		                    ?>
 		                    <td style="text-align: center;"><?php echo $jaminan; ?></td>
 						  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tanggal_pinjaman']); ?></td>
-						  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_terakhir_bayar']); ?>
+						  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_terakhir_bayar'])." "; ?>
                             <?php
                                 if($data[$a]['jasa_terakhir_angsuran'] >= 0) {
                                   $bln_thn = strtotime( $data[$a]['bulan_tahun_terakhir_angsuran'] );
                                   $bulan_tahun = date( 'M-Y', $bln_thn );
                             ?>
-                            <br><?php echo $data[$a]['bulanke_terakhir_angsuran'] > 0 ? "Pembayaran ke-".$data[$a]['bulanke_terakhir_angsuran']." (".$bulan_tahun.")" : ""?>
+                            <?php echo $data[$a]['bulanke_terakhir_angsuran'] > 0 ? "Pembayaran ke-".$data[$a]['bulanke_terakhir_angsuran']." (".$bulan_tahun.")" : ""?>
                             <?php
                                 } else {
                             ?>
-                              <br>Pengembalian Jasa
+                              Pengembalian Jasa
                             <?php
                                 }
                             ?>
@@ -604,17 +604,17 @@
 		                    ?>
 		                    <td style="text-align: center;"><?php echo $jaminan; ?></td>
 						  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tanggal_pinjaman']); ?></td>
-						  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_terakhir_bayar']); ?>
+						  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_terakhir_bayar'])." "; ?>
                             <?php
                                 if($data[$a]['jasa_terakhir_angsuran'] >= 0) {
                                   $bln_thn = strtotime( $data[$a]['bulan_tahun_terakhir_angsuran'] );
                                   $bulan_tahun = date( 'M-Y', $bln_thn );
                             ?>
-                            <br><?php echo $data[$a]['bulanke_terakhir_angsuran'] > 0 ? "Pembayaran ke-".$data[$a]['bulanke_terakhir_angsuran']." (".$bulan_tahun.")" : ""?>
+                            <?php echo $data[$a]['bulanke_terakhir_angsuran'] > 0 ? "Pembayaran ke-".$data[$a]['bulanke_terakhir_angsuran']." (".$bulan_tahun.")" : ""?>
                             <?php
                                 } else {
                             ?>
-                              <br>Pengembalian Jasa
+                              Pengembalian Jasa
                             <?php
                                 }
                             ?>
