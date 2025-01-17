@@ -182,8 +182,23 @@
                 $string_jaminan = '';
                 $jaminan = json_decode($data[0]['jaminan']);
                 for($i = 0; $i < sizeof($jaminan); $i++) {
-                    $string_jaminan .= $jaminan[$i]->keterangan;
-                    $string_jaminan .= '; ';
+                    $keterangan = explode(" ", $jaminan[$i]->keterangan);
+                    if($keterangan[0] == 'BPKB') {
+                        $string_jaminan .= $keterangan[0].' '.$keterangan[2].' '.$keterangan[3];
+                        $string_jaminan .= '; ';
+                    } else if($keterangan[0] == 'SERTIFIKAT') {
+                        // Regex untuk menemukan kata yang semuanya huruf kecil
+                        $pattern = '/\b[a-z]+\b/';
+
+                        // Array untuk menyimpan hasil
+                        $matches = [];
+
+                        // Menjalankan regex
+                        preg_match_all($pattern, $jaminan[$i]->keterangan, $matches);
+
+                        $string_jaminan .= $keterangan[0].' '.$matches[0][0];
+                        $string_jaminan .= '; ';
+                    }
                 }
                 $string_jaminan = substr($string_jaminan, 0, -2);
             ?>
