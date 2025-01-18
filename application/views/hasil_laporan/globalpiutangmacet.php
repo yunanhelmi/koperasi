@@ -146,21 +146,8 @@
             		$lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
             	}
             }
-            $data[$a]['keterangan'] = 'Hijau';
+            /*$data[$a]['keterangan'] = 'Hijau';
     		$data[$a]['keterangan_level'] = 0;
-    		/*if ($lama_pinjam > 30 && $lama_pinjam <= 150) {
-    			$data[$a]['keterangan'] = 'Kuning 1';
-    			$data[$a]['keterangan_level'] = 1;
-            } else if ($lama_pinjam > 150 && $lama_pinjam <= 365) {
-    			$data[$a]['keterangan'] = 'Kuning 2';
-    			$data[$a]['keterangan_level'] = 2;
-            } else if ($lama_pinjam > 365 && $lama_pinjam <= 730) {
-    			$data[$a]['keterangan'] = 'Merah 1';
-    			$data[$a]['keterangan_level'] = 3;
-            } else if ($lama_pinjam > 730) {
-    			$data[$a]['keterangan'] = 'Merah 2';
-    			$data[$a]['keterangan_level'] = 4;
-    		}*/
             if ($lama_pinjam >= 0 && $lama_jatuh_tempo <= 11) {
                 $data[$a]['keterangan'] = 'Hijau';
                 $data[$a]['keterangan_level'] = 0;
@@ -171,6 +158,21 @@
                 $data[$a]['keterangan'] = 'Kuning 2';
                 $data[$a]['keterangan_level'] = 2;
             } else if ($lama_jatuh_tempo > 91) {
+                $data[$a]['keterangan'] = 'Merah';
+                $data[$a]['keterangan_level'] = 3;
+            }*/
+            $data[$a]['keterangan'] = '';
+            $data[$a]['keterangan_level'] = -1;
+            if ($lama_jatuh_tempo > 0 && $lama_jatuh_tempo <= 11) {
+                $data[$a]['keterangan'] = 'Hijau';
+                $data[$a]['keterangan_level'] = 0;
+            } else if($lama_jatuh_tempo > 11 && $lama_jatuh_tempo <= 30) {
+                $data[$a]['keterangan'] = 'Kuning 1';
+                $data[$a]['keterangan_level'] = 1;
+            } else if ($lama_jatuh_tempo > 30 && $lama_jatuh_tempo <= 90) {
+                $data[$a]['keterangan'] = 'Kuning 2';
+                $data[$a]['keterangan_level'] = 2;
+            } else if ($lama_jatuh_tempo > 90) {
                 $data[$a]['keterangan'] = 'Merah';
                 $data[$a]['keterangan_level'] = 3;
             }

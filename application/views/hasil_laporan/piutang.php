@@ -147,10 +147,9 @@
             		$lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
             	}
             }
-            if ($lama_jatuh_tempo == 0) {
-                $data[$a]['keterangan'] = '';
-                $data[$a]['keterangan_level'] = -1;
-            } else if ($lama_jatuh_tempo > 0 && $lama_jatuh_tempo <= 11) {
+            $data[$a]['keterangan'] = '';
+            $data[$a]['keterangan_level'] = -1;
+            if ($lama_jatuh_tempo > 0 && $lama_jatuh_tempo <= 11) {
                 $data[$a]['keterangan'] = 'Hijau';
                 $data[$a]['keterangan_level'] = 0;
             } else if ($lama_jatuh_tempo > 11 && $lama_jatuh_tempo <= 30) {
