@@ -163,7 +163,7 @@
             }*/
             $data[$a]['keterangan'] = '';
             $data[$a]['keterangan_level'] = -1;
-            if ($lama_jatuh_tempo > 0 && $lama_jatuh_tempo <= 11) {
+            if ($lama_jatuh_tempo >= 0 && $lama_jatuh_tempo <= 11) {
                 $data[$a]['keterangan'] = 'Hijau';
                 $data[$a]['keterangan_level'] = 0;
             } else if($lama_jatuh_tempo > 11 && $lama_jatuh_tempo <= 30) {
