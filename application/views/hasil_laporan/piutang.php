@@ -147,6 +147,12 @@
             		$lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
             	}
             }
+            $lama_akhir_bayar = $today->diff($tgl_akhir_bayar)->format("%a");
+            $lama_akhir_bayar_raw = $today->diff($tgl_akhir_bayar);
+            $lama_akhir_bayar_long = $lama_akhir_bayar_raw->y." Tahun ".$lama_akhir_bayar_raw->m." Bulan ".$lama_akhir_bayar_raw->d." Hari";
+            $bulan_akhir_bayar = (($lama_akhir_bayar_raw->format('%y') * 12) + $lama_akhir_bayar_raw->format('%m'));
+            $lama_akhir_bayar_bulan_hari = $bulan_akhir_bayar." Bulan ".$lama_akhir_bayar_raw->d." Hari";
+
             $data[$a]['keterangan'] = '';
             $data[$a]['keterangan_level'] = -1;
             if ($lama_jatuh_tempo >= 0 && $lama_jatuh_tempo <= 11) {
@@ -174,6 +180,41 @@
             $data[$a]['lama_jatuh_tempo'] 				= $lama_jatuh_tempo;
             $data[$a]['lama_jatuh_tempo_long'] 			= $lama_jatuh_tempo_long;
             $data[$a]['lama_jatuh_tempo_bulan_hari'] 	= $lama_jatuh_tempo_bulan_hari;
+
+            if($data[$a]['jumlah_angsuran'] != 0) {
+                $angsuran_perbulan = $data[$a]['jumlah_pinjaman'] / $data[$a]['jumlah_angsuran'];    
+            } else {
+                $angsuran_perbulan = 0;   
+            }
+            $jasa_perbulan = $data[$a]['jumlah_pinjaman'] * 0.02;
+
+            if($bulan_akhir_bayar >= 4) {
+                $sisa_pinjaman = $data[$a]['total_pinjaman_detail'] - $data[$a]['total_angsuran_detail'];
+            } else {
+                $sisa_pinjaman = $angsuran_perbulan * $bulan_akhir_bayar;
+            }
+
+            $jasa_terbayar = $data[$a]['total_jasa_detail'];
+            $kali_administrasi = $bulan_akhir_bayar / 4;
+            $kali_administrasi = (int)$kali_administrasi;
+
+            $jasa_pinjaman = 0;
+            $biaya_administrasi = 0;
+            if($data[$a]['keterangan_level'] <= 2) {
+                $jasa_pinjaman = ($data[$a]['total_pinjaman_detail'] * $bulan_akhir_bayar * 2) / 100;
+                $biaya_administrasi = 0;
+            } else if($data[$a]['keterangan_level'] > 2){
+                $jasa_pinjaman = ($sisa_pinjaman * $bulan_akhir_bayar * 3) / 100;
+                $biaya_administrasi = ($sisa_pinjaman * $kali_administrasi) / 100;
+            }
+            $total_tagihan = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
+
+            $data[$a]['angsuran_perbulan']  = (int)$angsuran_perbulan;
+            $data[$a]['sisa_pinjaman']      = (int)$sisa_pinjaman;
+            $data[$a]['kali_administrasi']  = $kali_administrasi;
+            $data[$a]['jasa_pinjaman']      = (int)$jasa_pinjaman;
+            $data[$a]['biaya_administrasi'] = (int)$biaya_administrasi;
+            $data[$a]['total_tagihan']      = (int)$total_tagihan;
 		} else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
             $jatuh_tempo = date('Y-m-d', strtotime($data[$a]['tanggal_pinjaman'].' + 120 days'));
             $tgl_jatuh_tempo = date('Y-m-d', strtotime($data[$a]['tanggal_pinjaman'].' + 120 days'));
@@ -204,6 +245,12 @@
             		$lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
             	}
             }
+            $lama_akhir_bayar = $today->diff($tgl_akhir_bayar)->format("%a");
+            $lama_akhir_bayar_raw = $today->diff($tgl_akhir_bayar);
+            $lama_akhir_bayar_long = $lama_akhir_bayar_raw->y." Tahun ".$lama_akhir_bayar_raw->m." Bulan ".$lama_akhir_bayar_raw->d." Hari";
+            $bulan_akhir_bayar = (($lama_akhir_bayar_raw->format('%y') * 12) + $lama_akhir_bayar_raw->format('%m'));
+            $lama_akhir_bayar_bulan_hari = $bulan_akhir_bayar." Bulan ".$lama_akhir_bayar_raw->d." Hari";
+
             $data[$a]['keterangan'] = 'Hijau';
     		$data[$a]['keterangan_level'] = 0;
        		/*if ($lama_pinjam > 120 && $lama_pinjam <= 240) {
@@ -241,8 +288,42 @@
             $data[$a]['lama_jatuh_tempo'] 				= $lama_jatuh_tempo;
             $data[$a]['lama_jatuh_tempo_long'] 			= $lama_jatuh_tempo_long;
             $data[$a]['lama_jatuh_tempo_bulan_hari'] 	= $lama_jatuh_tempo_bulan_hari;
+
+            $sisa_pinjaman = $data[$a]['total_pinjaman_detail'] - $data[$a]['total_angsuran_detail'];
+            if($data[$a]['jumlah_angsuran'] != 0) {
+                $angsuran_perbulan = $data[$a]['jumlah_pinjaman'] / $data[$a]['jumlah_angsuran'];    
+            } else {
+                $angsuran_perbulan = 0;
+            }
+            $jasa_hari = 0;
+            if($lama_pinjam_raw->d >= 6 && $lama_pinjam_raw->d <= 11) {
+                $jasa_hari = ($sisa_pinjaman * 1)/100;
+            } else if($lama_pinjam_raw->d >= 12 && $lama_pinjam_raw->d <= 17) {
+                $jasa_hari = ($sisa_pinjaman * 1.5)/100;
+            } else if($lama_pinjam_raw->d >= 18 && $lama_pinjam_raw->d <= 23) {
+                $jasa_hari = ($sisa_pinjaman * 2)/100;
+            } else if($lama_pinjam_raw->d >= 24 && $lama_pinjam_raw->d <= 30) {
+                $jasa_hari = ($sisa_pinjaman * 3)/100;
+            }
+
+            $jasa_terbayar = $data[$a]['total_jasa_detail'];
+            $kali_administrasi = $bulan_pinjam / 4;
+            $kali_administrasi = (int)$kali_administrasi;
+            //$jasa_pinjaman = ($sisa_pinjaman * $bulan_pinjam * 3) / 100;
+            $jasa_pinjaman = ($data[$a]['jumlah_pinjaman'] * $bulan_pinjam * 3) / 100;
+            $biaya_administrasi = ($sisa_pinjaman * $kali_administrasi) / 100;
+            $total_tagihan = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
+
+            $data[$a]['angsuran_perbulan']  = (int)$angsuran_perbulan;
+            $data[$a]['sisa_pinjaman']      = (int)$sisa_pinjaman;
+            $data[$a]['kali_administrasi']  = $kali_administrasi;
+            $data[$a]['jasa_pinjaman']      = (int)$jasa_pinjaman - (int)$jasa_terbayar + (int)$jasa_hari;
+            $data[$a]['biaya_administrasi'] = (int)$biaya_administrasi;
+            $data[$a]['total_tagihan']      = (int)$total_tagihan;
 		}
-		if($data[$a]['jumlah_angsuran'] != 0) {
+        /* END OF ANGSURAN / MUSIMAN */
+
+		/*if($data[$a]['jumlah_angsuran'] != 0) {
             $angsuran_perbulan = $data[$a]['jumlah_pinjaman'] / $data[$a]['jumlah_angsuran'];    
         } else {
             $angsuran_perbulan = 0;
@@ -274,7 +355,7 @@
         $data[$a]['kali_administrasi'] 	= $kali_administrasi;
         $data[$a]['jasa_pinjaman'] 		= (int)$jasa_pinjaman;
         $data[$a]['biaya_administrasi'] = (int)$biaya_administrasi;
-        $data[$a]['total_tagihan'] 		= (int)$total_tagihan;
+        $data[$a]['total_tagihan'] 		= (int)$total_tagihan;*/
 	}
 	foreach ($data as $key => $row) {
         $sort['keterangan_level'][$key]  = $row['keterangan_level'];
