@@ -994,6 +994,12 @@ function rupiah($angka){
     return res1;
   }
 
+  function addDay(date, days) {
+    const result = new Date(date); // Create a new Date object to avoid mutating the original
+    result.setDate(result.getDate() + days); // Add the specified number of days
+    return convertDate(result);
+  }
+
   
   </script>
 
@@ -1106,8 +1112,15 @@ function rupiah($angka){
         var tanggal_pinjaman = $('#waktu').val();
         tanggal_pinjaman = tanggal_pinjaman.split("-").reverse().join("-");
         console.log(tanggal_pinjaman);
-        if($('#jenis_pinjaman').val() == 'Musiman') {
+        /*if($('#jenis_pinjaman').val() == 'Musiman') {
           var jatuh_tempo = addMonths(tanggal_pinjaman, 4);
+          $('#jatuh_tempo').val(jatuh_tempo);
+        } else if($('#jenis_pinjaman').val() == 'Angsuran') {
+          var jatuh_tempo = addMonths(tanggal_pinjaman, 1);
+          $('#jatuh_tempo').val(jatuh_tempo);
+        }*/
+        if($('#jenis_pinjaman').val() == 'Musiman') {
+          var jatuh_tempo = addDay(tanggal_pinjaman, 120);
           $('#jatuh_tempo').val(jatuh_tempo);
         } else if($('#jenis_pinjaman').val() == 'Angsuran') {
           var jatuh_tempo = addMonths(tanggal_pinjaman, 1);
