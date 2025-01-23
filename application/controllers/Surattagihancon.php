@@ -526,12 +526,13 @@ class SurattagihanCon extends CI_Controller {
         $biaya_administrasi = ($sisa_pinjaman * $kali_administrasi) / 100;
         $total = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
 
-        $res['level'] = 0;
-        $res['keterangan'] = 'H';
-        if ($lama_pinjam > 127 && $lama_pinjam <= 150) {
+        if ($lama_pinjam >= 125 && $lama_pinjam <= 131) {
+            $res['level'] = 0;
+            $res['keterangan'] = 'H';
+        } else if ($lama_pinjam > 131 && $lama_pinjam <= 180) {
             $res['level'] = 1;
             $res['keterangan'] = 'K1';
-        } else if ($lama_pinjam > 150 && $lama_pinjam <= 240) {
+        } else if ($lama_pinjam > 180 && $lama_pinjam <= 240) {
             $res['level'] = 2;
             $res['keterangan'] = 'K2';
         } else if ($lama_pinjam > 240) {
