@@ -216,17 +216,28 @@
             <td>:</td>
             <td>Rp. </td>
             <td><?php echo number_format($sisa_pinjaman,0,",",".") ?></td>
-            <td>(<?php echo $bulan_akhir_bayar; ?> x Angsuran)</td>
+            <?php
+                if($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail'] > 0) {
+            ?>
+                    <td>(<?php echo $bulan_akhir_bayar < ($data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail']) ? $bulan_akhir_bayar : $data[0]['jumlah_angsuran'] - $data[0]['jumlah_angsuran_detail']; ?> x Angsuran)</td>
+            <?php
+                } else {
+            ?>
+                    <td>(<?php echo $bulan_akhir_bayar; ?> x Angsuran)</td>
+            <?php
+                }
+            ?>
+            
         </tr>
         <?php 
-            if($level== 1) {
+            if($level <= 1) {
         ?>
         <tr>
             <td>Jasa Pinjaman</td>
             <td>:</td>
             <td style="border-bottom: 1px solid black;">Rp. </td>
             <td style="border-bottom: 1px solid black;"><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
-            <td style="border-bottom: 1px solid black;">(<?php echo $lama_akhir_bayar_bulan_hari?> / <?php echo $bulan_akhir_bayar; ?> x Jasa)</td>
+            <td style="border-bottom: 1px solid black;">(<?php echo $lama_akhir_bayar?> / <?php echo $bulan_akhir_bayar; ?> x Jasa)</td>
         </tr>
         <tr>
             <td>Total</td>
@@ -243,7 +254,7 @@
             <td>:</td>
             <td>Rp. </td>
             <td><?php echo number_format($jasa_pinjaman,0,",",".") ?></td>
-            <td>(<?php echo $lama_akhir_bayar_bulan_hari?> / <?php echo $bulan_akhir_bayar; ?> x Jasa)</td>
+            <td>(<?php echo $lama_akhir_bayar?> / <?php echo $bulan_akhir_bayar; ?> x Jasa)</td>
         </tr>
         <tr>
             <td>Administrasi (<?php echo $kali_administrasi ?>x)</td>

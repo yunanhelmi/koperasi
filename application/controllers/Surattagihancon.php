@@ -381,8 +381,15 @@ class SurattagihanCon extends CI_Controller {
         $bulan_pinjam = (($lama_pinjam_raw->format('%y') * 12) + $lama_pinjam_raw->format('%m'));
         $lama_pinjam_bulan_hari = $bulan_pinjam." Bulan ".$lama_pinjam_raw->d." Hari";
 
-        $lama_akhir_bayar = $today->diff($tgl_akhir_bayar)->format("%a");
+        /*$lama_akhir_bayar = $today->diff($tgl_akhir_bayar)->format("%a");
         $lama_akhir_bayar_raw = $today->diff($tgl_akhir_bayar);
+        $lama_akhir_bayar_long = $lama_akhir_bayar_raw->y." Tahun ".$lama_akhir_bayar_raw->m." Bulan ".$lama_akhir_bayar_raw->d." Hari";
+        $bulan_akhir_bayar = (($lama_akhir_bayar_raw->format('%y') * 12) + $lama_akhir_bayar_raw->format('%m'));
+        $lama_akhir_bayar_bulan_hari = $bulan_akhir_bayar." Bulan ".$lama_akhir_bayar_raw->d." Hari";*/
+        $waktu_terakhir_bayar1 = date('Y-m-d', strtotime($data[0]['jatuh_tempo'].' - 30 days'));
+        $waktu_terakhir_bayar = new DateTime($waktu_terakhir_bayar1);
+        $lama_akhir_bayar = $today->diff($waktu_terakhir_bayar)->format("%a");
+        $lama_akhir_bayar_raw = $today->diff($waktu_terakhir_bayar);
         $lama_akhir_bayar_long = $lama_akhir_bayar_raw->y." Tahun ".$lama_akhir_bayar_raw->m." Bulan ".$lama_akhir_bayar_raw->d." Hari";
         $bulan_akhir_bayar = (($lama_akhir_bayar_raw->format('%y') * 12) + $lama_akhir_bayar_raw->format('%m'));
         $lama_akhir_bayar_bulan_hari = $bulan_akhir_bayar." Bulan ".$lama_akhir_bayar_raw->d." Hari";
