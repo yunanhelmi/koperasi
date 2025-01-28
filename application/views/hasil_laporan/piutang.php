@@ -147,8 +147,15 @@
             		$lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
             	}
             }
-            $lama_akhir_bayar = $today->diff($tgl_akhir_bayar)->format("%a");
+            /*$lama_akhir_bayar = $today->diff($tgl_akhir_bayar)->format("%a");
             $lama_akhir_bayar_raw = $today->diff($tgl_akhir_bayar);
+            $lama_akhir_bayar_long = $lama_akhir_bayar_raw->y." Tahun ".$lama_akhir_bayar_raw->m." Bulan ".$lama_akhir_bayar_raw->d." Hari";
+            $bulan_akhir_bayar = (($lama_akhir_bayar_raw->format('%y') * 12) + $lama_akhir_bayar_raw->format('%m'));
+            $lama_akhir_bayar_bulan_hari = $bulan_akhir_bayar." Bulan ".$lama_akhir_bayar_raw->d." Hari";*/
+            $waktu_terakhir_bayar1 = date('Y-m-d', strtotime($data[$a]['jatuh_tempo'].' - 30 days'));
+            $waktu_terakhir_bayar = new DateTime($waktu_terakhir_bayar1);
+            $lama_akhir_bayar = $today->diff($waktu_terakhir_bayar)->format("%a");
+            $lama_akhir_bayar_raw = $today->diff($waktu_terakhir_bayar);
             $lama_akhir_bayar_long = $lama_akhir_bayar_raw->y." Tahun ".$lama_akhir_bayar_raw->m." Bulan ".$lama_akhir_bayar_raw->d." Hari";
             $bulan_akhir_bayar = (($lama_akhir_bayar_raw->format('%y') * 12) + $lama_akhir_bayar_raw->format('%m'));
             $lama_akhir_bayar_bulan_hari = $bulan_akhir_bayar." Bulan ".$lama_akhir_bayar_raw->d." Hari";
@@ -174,12 +181,18 @@
             $data[$a]['tgl_terakhir_bayar'] 			= $tgl_terakhir_bayar;
             $data[$a]['tgl_jatuh_tempo'] 				= $tgl_jatuh_tempo;
             $data[$a]['saldo'] 							= $saldo;
-            $data[$a]['lama_pinjam'] 					= $lama_pinjam;
+            /*$data[$a]['lama_pinjam'] 					= $lama_pinjam;
             $data[$a]['lama_pinjam_long'] 				= $lama_pinjam_long;
             $data[$a]['lama_pinjam_bulan_hari'] 		= $lama_pinjam_bulan_hari;
             $data[$a]['lama_jatuh_tempo'] 				= $lama_jatuh_tempo;
             $data[$a]['lama_jatuh_tempo_long'] 			= $lama_jatuh_tempo_long;
-            $data[$a]['lama_jatuh_tempo_bulan_hari'] 	= $lama_jatuh_tempo_bulan_hari;
+            $data[$a]['lama_jatuh_tempo_bulan_hari'] 	= $lama_jatuh_tempo_bulan_hari;*/
+            $data[$a]['lama_pinjam']                    = $lama_akhir_bayar;
+            $data[$a]['lama_pinjam_long']               = $lama_akhir_bayar_long;
+            $data[$a]['lama_pinjam_bulan_hari']         = $lama_akhir_bayar_bulan_hari;
+            $data[$a]['lama_jatuh_tempo']               = $lama_jatuh_tempo;
+            $data[$a]['lama_jatuh_tempo_long']          = $lama_jatuh_tempo_long;
+            $data[$a]['lama_jatuh_tempo_bulan_hari']    = $lama_jatuh_tempo_bulan_hari;
 
             if($data[$a]['jumlah_angsuran'] != 0) {
                 $angsuran_perbulan = $data[$a]['jumlah_pinjaman'] / $data[$a]['jumlah_angsuran'];    
