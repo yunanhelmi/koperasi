@@ -467,7 +467,7 @@
     				  	<!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
     				  	<td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_jatuh_tempo']))); ?></td>
     				  	<!--<td style="text-align: center;"><?php echo $data[$a]['sisa_kali_angsuran']; ?></td>-->
-    		  			<td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+    		  			<td style="text-align: right;"><?php echo number_format($data[$a]['saldo'],0,",","."); ?></td>
     		  			<!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
     		  			<!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
     		    		<!--<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>-->
@@ -538,7 +538,7 @@
                         <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
                         <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_jatuh_tempo']))); ?></td>
                         <!--<td style="text-align: center;"><?php echo $data[$a]['sisa_kali_angsuran']; ?></td>-->
-                        <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                        <td style="text-align: right;"><?php echo number_format($data[$a]['saldo'],0,",","."); ?></td>
                         <!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>-->
@@ -611,7 +611,7 @@
                         <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
                         <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_jatuh_tempo']))); ?></td>
                         <!--<td style="text-align: center;"><?php echo $data[$a]['sisa_kali_angsuran']; ?></td>-->
-                        <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                        <td style="text-align: right;"><?php echo number_format($data[$a]['saldo'],0,",","."); ?></td>
                         <!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>-->
@@ -682,7 +682,7 @@
                         <!--<td style="text-align: center;"><?php echo $data[$a]['tgl_terakhir_bayar']; ?></td>-->
                         <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_jatuh_tempo']))); ?></td>
                         <!--<td style="text-align: center;"><?php echo $data[$a]['sisa_kali_angsuran']; ?></td>-->
-                        <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                        <td style="text-align: right;"><?php echo number_format($data[$a]['saldo'],0,",","."); ?></td>
                         <!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>-->

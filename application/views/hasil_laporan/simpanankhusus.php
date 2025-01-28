@@ -79,7 +79,7 @@
 	                <td style="text-align: center;"><?php echo $data[$a]['rt'] ?></td>
 	                <td style="text-align: center;"><?php echo $data[$a]['rw'] ?></td>
 	                <td style="text-align: center;"><?php echo tanggal_indo($data[$a]['waktu']) ?></td>
-	                <td style="text-align: right;"><?php echo $pinjaman ?></td>
+	                <td style="text-align: right;"><?php echo number_format($pinjaman,0,",",".") ?></td>
 	            </tr>
     <?php
     			$total += $pinjaman;
@@ -89,17 +89,17 @@
     ?>
     <tr>
         <td colspan="8" style="text-align: center;"><strong>TOTAL</strong></td>
-        <td style="text-align: right;"><strong><?php echo $total ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total,0,",",".") ?></strong></td>
     </tr>
     <tr>
         <td colspan="8" style="text-align: center;"><strong>TOTAL (NERACA)</strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_neraca ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_neraca,0,",",".") ?></strong></td>
     </tr>
     <?php
         $selisih = $total - $total_neraca;
     ?>
     <tr>
         <td colspan="8" style="text-align: center;"><strong>SELISIH</strong></td>
-        <td style="text-align: right;"><strong><?php echo $selisih ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($selisih,0,",",".") ?></strong></td>
     </tr>
 </table>

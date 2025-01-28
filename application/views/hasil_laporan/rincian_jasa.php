@@ -130,7 +130,7 @@
                 <td style="text-align: center;"><?php echo $data[$a]['dusun'] ?></td>
                 <td style="text-align: center;"><?php echo $data[$a]['rt'] ?></td>
                 <td style="text-align: center;"><?php echo $data[$a]['rw'] ?></td>
-                <td style="text-align: right;"><?php echo $jumlah_jasa ?></td>
+                <td style="text-align: right;"><?php echo number_format($jumlah_jasa,0,",",".") ?></td>
             </tr>
     <?php
         $no++;
@@ -138,28 +138,28 @@
     ?>
     <tr>
         <td colspan="8" style="text-align: center;"><strong>TOTAL JASA</strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_jasa ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_jasa,0,",",".") ?></strong></td>
     </tr>
     <tr>
         <td colspan="8" style="text-align: center;"><strong>TOTAL (NERACA)</strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_neraca ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_neraca,0,",",".") ?></strong></td>
     </tr>
     <?php
         $selisih = $total_jasa - $total_neraca;
     ?>
     <tr>
         <td colspan="8" style="text-align: center;"><strong>SELISIH</strong></td>
-        <td style="text-align: right;"><strong><?php echo $selisih ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($selisih,0,",",".") ?></strong></td>
     </tr>
     <tr>
         <td colspan="8" style="text-align: center;"><strong>PENCAIRAN</strong></td>
-        <td style="text-align: right;"><strong><?php echo $transaksi_pendapatan[0]['jumlah_debet'] ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($transaksi_pendapatan[0]['jumlah_debet'],0,",",".") ?></strong></td>
     </tr>
     <?php
         $selisih_pencairan = $selisih - $transaksi_pendapatan[0]['jumlah_debet'];
     ?>
     <tr>
         <td colspan="8" style="text-align: center;"><strong>SELISIH</strong></td>
-        <td style="text-align: right;"><strong><?php echo $selisih_pencairan ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($selisih_pencairan,0,",",".") ?></strong></td>
     </tr>
 </table>

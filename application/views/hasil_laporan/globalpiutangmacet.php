@@ -356,8 +356,8 @@
                     <td style="text-align: center;"><?php echo $jaminan; ?></td>
 				  	<td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tanggal_pinjaman']); ?></td>
                     <td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_jatuh_tempo']); ?></td>
-		  			<td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
-		  			<td style="text-align: right;"><?php echo $data[$a]['uang_kurang']; ?></td>
+		  			<td style="text-align: right;"><?php echo number_format($data[$a]['saldo']); ?></td>
+		  			<td style="text-align: right;"><?php echo number_format($data[$a]['uang_kurang']); ?></td>
 		  			<?php
 		  			if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
 		  			?>
@@ -422,8 +422,8 @@
                     <td style="text-align: center;"><?php echo $jaminan; ?></td>
                     <td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tanggal_pinjaman']); ?></td>
                     <td style="text-align: center;"><?php echo tanggal_indo($data[$a]['tgl_jatuh_tempo']); ?></td>
-                    <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
-                    <td style="text-align: right;"><?php echo $data[$a]['uang_kurang']; ?></td>
+                    <td style="text-align: right;"><?php echo number_format($data[$a]['saldo']); ?></td>
+                    <td style="text-align: right;"><?php echo number_format($data[$a]['uang_kurang']); ?></td>
                     <?php
                     if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
                     ?>
@@ -463,9 +463,9 @@
 	  	}
 	?>
 	<tr>
-		<td colspan="10" style="text-align: center;"><strong>TOTAL PIUTANG</strong></td>
-		<td style="text-align: right;"><strong><?php echo $total_sisa ?></strong></td>
-		<td style="text-align: right;"><strong><?php echo $total_uang_kurang ?></strong></td>
+		<td colspan="11" style="text-align: center;"><strong>TOTAL PIUTANG</strong></td>
+		<td style="text-align: right;"><strong><?php echo number_format($total_sisa,0,",",".") ?></strong></td>
+		<td style="text-align: right;"><strong><?php echo number_format($total_uang_kurang,0,",",".") ?></strong></td>
 		<td colspan="3"></td>
 	</tr>
 	<!--<tr>

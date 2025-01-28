@@ -108,9 +108,9 @@
                     <td style="text-align: center;"><?php echo $data[$a]['nomor_nasabah'] ?></td>
                     <td style="text-align: center;"><?php echo $data[$a]['jumlah_pinjaman'] ?></td>
                     <td style="text-align: center;"><?php echo $data[$a]['jumlah_angsuran'] ?></td>
-                    <td style="text-align: right;"><?php echo $data[$a]['total_pinjaman'] ?></td>
-                    <td style="text-align: right;"><?php echo $data[$a]['total_angsuran'] ?></td>
-                    <td style="text-align: right;"><?php echo $saldo ?></td>
+                    <td style="text-align: right;"><?php echo number_format($data[$a]['total_pinjaman'],0,",",".") ?></td>
+                    <td style="text-align: right;"><?php echo number_format($data[$a]['total_angsuran'],0,",",".") ?></td>
+                    <td style="text-align: right;"><?php echo number_format($saldo,0,",",".") ?></td>
                 </tr>
     <?php
             $no++;
@@ -119,7 +119,7 @@
     ?>
     <tr>
         <td colspan="8" style="text-align: center;"><strong>TOTAL PIUTANG</strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_sisa ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_sisa,0,",",".") ?></strong></td>
         <td></td>
     </tr>
 </table>

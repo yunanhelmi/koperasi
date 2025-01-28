@@ -470,7 +470,7 @@
                         ?>
                         <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_pinjaman']))); ?></td>
                         <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_jatuh_tempo']))); ?></td>
-                        <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                        <td style="text-align: right;"><?php echo number_format($data[$a]['saldo'],0,",","."); ?></td>
                         <?php
                         if ($data[$a]['keterangan_level'] == 1) {
                         ?>
@@ -532,7 +532,7 @@
                         ?>
                         <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_pinjaman']))); ?></td>
                         <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_jatuh_tempo']))); ?></td>
-                        <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                        <td style="text-align: right;"><?php echo number_format($data[$a]['saldo'],0,",","."); ?></td>
                         <?php
                         if ($data[$a]['keterangan_level'] == 1) {
                         ?>
@@ -596,7 +596,7 @@
                         ?>
                         <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_pinjaman']))); ?></td>
                         <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_jatuh_tempo']))); ?></td>
-                        <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                        <td style="text-align: right;"><?php echo number_format($data[$a]['saldo'],0,",","."); ?></td>
                         <?php
                         if ($data[$a]['keterangan_level'] == 1) {
                         ?>
@@ -658,7 +658,7 @@
                         ?>
                         <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_pinjaman']))); ?></td>
                         <td style="text-align: center;"><?php echo tanggal_indo(date('Y-m-d', strtotime($data[$a]['tgl_jatuh_tempo']))); ?></td>
-                        <td style="text-align: right;"><?php echo $data[$a]['saldo']; ?></td>
+                        <td style="text-align: right;"><?php echo number_format($data[$a]['saldo'],0,",","."); ?></td>
                         <?php
                         if ($data[$a]['keterangan_level'] == 1) {
                         ?>

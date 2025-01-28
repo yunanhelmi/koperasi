@@ -91,16 +91,16 @@
                 <td style="text-align: center;"><?php echo $data[$a]['nama'] ?></td>
                 <td style="text-align: center;"><?php echo $data[$a]['nomor_koperasi'] ?></td>
                 <td style="text-align: center;"><?php echo $data[$a]['kelurahan'] ?></td>
-                <td style="text-align: right;"><?php echo $simpananpokok ?></td>
-                <td style="text-align: right;"><?php echo $simpananwajib ?></td>
-                <td style="text-align: right;"><?php echo $simpanankhusus ?></td>
-                <td style="text-align: right;"><?php echo $rincian_jasa ?></td>
+                <td style="text-align: right;"><?php echo number_format($simpananpokok,0,",",".") ?></td>
+                <td style="text-align: right;"><?php echo number_format($simpananwajib,0,",",".") ?></td>
+                <td style="text-align: right;"><?php echo number_format($simpanankhusus,0,",",".") ?></td>
+                <td style="text-align: right;"><?php echo number_format($rincian_jasa,0,",",".") ?></td>
                 <?php
                     for($b = 0; $b < sizeof($simpanan3th); $b++) {
                         $temp_simpanan3th = $simpanan3th_nasabah[$b]['data'][$a]['simpanan3th_total_setoran'] - $simpanan3th_nasabah[$b]['data'][$a]['simpanan3th_total_tarikan'];
                         $total_simpanan3th[$b] += $temp_simpanan3th;
                 ?>
-                        <td style="text-align: right;"><?php echo $temp_simpanan3th ?></td>
+                        <td style="text-align: right;"><?php echo number_format($temp_simpanan3th,0,",",".") ?></td>
                 <?php
                     }
                 ?>
@@ -115,14 +115,14 @@
     ?>
     <tr>
         <td colspan="4" style="text-align: center;"><strong>TOTAL</strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_simpananpokok ?></strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_simpananwajib ?></strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_simpanankhusus ?></strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_rincian_jasa ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_simpananpokok,0,",",".") ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_simpananwajib,0,",",".") ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_simpanankhusus,0,",",".") ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_rincian_jasa,0,",",".") ?></strong></td>
         <?php
             for($i = 0; $i < sizeof($simpanan3th); $i++) {
         ?>
-                <td style="text-align: right;"><strong><?php echo $total_simpanan3th[$i] ?></strong></td>
+                <td style="text-align: right;"><strong><?php echo number_format($total_simpanan3th[$i],0,",",".") ?></strong></td>
         <?php
             }
         ?>
@@ -130,15 +130,15 @@
     </tr>
     <tr>
         <td colspan="4" style="text-align: center;"><strong>TOTAL (NERACA)</strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_neraca['simpanan_pokok'] ?></strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_neraca['simpanan_wajib'] ?></strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_neraca['simpanan_khusus'] ?></strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_neraca['rincian_jasa'] ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_neraca['simpanan_pokok'],0,",",".") ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_neraca['simpanan_wajib'],0,",",".") ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_neraca['simpanan_khusus'],0,",",".") ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_neraca['rincian_jasa'],0,",",".") ?></strong></td>
         <?php
             for($i = 0; $i < sizeof($simpanan3th); $i++) {
                 $selisih_simpanan3th[$i] = $total_simpanan3th[$i] - $simpanan3th[$i]['total_neraca'];
         ?>
-                <td style="text-align: right;"><strong><?php echo $simpanan3th[$i]['total_neraca'] ?></strong></td>
+                <td style="text-align: right;"><strong><?php echo number_format($simpanan3th[$i]['total_neraca'],0,",",".") ?></strong></td>
         <?php
             }
         ?>
@@ -152,14 +152,14 @@
     ?>
     <tr>
         <td colspan="4" style="text-align: center;"><strong>SELISIH</strong></td>
-        <td style="text-align: right;"><strong><?php echo $selisih_simpananpokok ?></strong></td>
-        <td style="text-align: right;"><strong><?php echo $selisih_simpananwajib ?></strong></td>
-        <td style="text-align: right;"><strong><?php echo $selisih_simpanankhusus ?></strong></td>
-        <td style="text-align: right;"><strong><?php echo $selisih_rincian_jasa ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($selisih_simpananpokok,0,",",".") ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($selisih_simpananwajib,0,",",".") ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($selisih_simpanankhusus,0,",",".") ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($selisih_rincian_jasa,0,",",".") ?></strong></td>
         <?php
             for($i = 0; $i < sizeof($simpanan3th); $i++) {
         ?>
-                <td style="text-align: right;"><strong><?php echo $selisih_simpanan3th[$i] ?></strong></td>
+                <td style="text-align: right;"><strong><?php echo number_format($selisih_simpanan3th[$i],0,",",".") ?></strong></td>
         <?php
             }
         ?>
@@ -169,7 +169,7 @@
         <td style="text-align: right;"><strong>0</strong></td>
         <td style="text-align: right;"><strong>0</strong></td>
         <td style="text-align: right;"><strong>0</strong></td>
-        <td style="text-align: right;"><strong><?php echo $total_neraca['pencairan_jasa'] ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($total_neraca['pencairan_jasa'],0,",",".") ?></strong></td>
         <?php
             for($i = 0; $i < sizeof($simpanan3th); $i++) {
         ?>
@@ -183,7 +183,7 @@
         <td style="text-align: right;"><strong>0</strong></td>
         <td style="text-align: right;"><strong>0</strong></td>
         <td style="text-align: right;"><strong>0</strong></td>
-        <td style="text-align: right;"><strong><?php echo $selisih_pencairan_jasa ?></strong></td>
+        <td style="text-align: right;"><strong><?php echo number_format($selisih_pencairan_jasa,0,",",".") ?></strong></td>
         <?php
             for($i = 0; $i < sizeof($simpanan3th); $i++) {
         ?>
