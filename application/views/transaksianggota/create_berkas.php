@@ -186,6 +186,7 @@ function rupiah($angka){
                     <tr>
                       <th>No.</th>
                       <th>Nama</th>
+                      <th>Jenis Pinjaman</th>
                       <th>Tanggal Pinjam</th>
                       <th>Jaminan</th>
                       <th>Jatuh Tempo</th>
@@ -208,9 +209,10 @@ function rupiah($angka){
                       //$total_angsuran = 0;
                       for($i = 0; $i < sizeof($pinjaman); $i++) {
                     ?>
-                    <tr <?php echo $pinjaman[$i]['sisa_angsuran'] == 0 ? "style='background-color: #90EE90'" : "" ?>>
+                    <tr <?php echo $pinjaman[$i]['sisa_angsuran'] == 0 ? "style='background-color: #EEEEEE'" : "style='background-color: #90EE90'" ?>>
                       <td style='text-align: center'><?php echo $no."."?></td>
                       <td><?php echo $pinjaman[$i]['nama_nasabah']?></td>
+                      <td><?php echo $pinjaman[$i]['jenis_pinjaman']?></td>
                       <?php $waktu = strtotime($pinjaman[$i]['waktu'])?>
                       <td><?php echo date("d-m-Y", $waktu)?></td>
                       <?php
@@ -234,7 +236,7 @@ function rupiah($angka){
                       <td><?php echo $pinjaman[$i]['keterangan']?></td>
                       <td><?php echo $pinjaman[$i]['status_pinjaman']?></td>
                       <td><?php echo rupiah($pinjaman[$i]['jumlah_pinjaman'])?></td>
-                      <td><?php echo rupiah($pinjaman[$i]['sisa_angsuran'])?></td>
+                      <td><?php echo $pinjaman[$i]['sisa_angsuran'] > 0 ? rupiah($pinjaman[$i]['sisa_angsuran']) : rupiah($pinjaman[$i]['sisa_angsuran'])." (LUNAS)" ?></td>
                       <td><?php echo $pinjaman[$i]['jumlah_angsuran']?></td>
                       <td><?php echo rupiah($pinjaman[$i]['uang_kurang'])?></td>
                       <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_pinjaman/".$pinjaman[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
@@ -249,7 +251,7 @@ function rupiah($angka){
                       }
                     ?>
                     <tr>
-                      <td colspan="6"><strong>Total</strong></td>
+                      <td colspan="8"><strong>Total</strong></td>
                       <td><strong><?php echo rupiah($total_pinjaman) ?></strong></td>
                       <td><strong><?php echo rupiah($total_sisa) ?></strong></td>
                       <!--<td><strong><?php echo rupiah($total_angsuran) ?></strong></td>-->
