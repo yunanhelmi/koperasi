@@ -35,6 +35,7 @@
                     <th>Desa</th>
                     <th>RT</th>
                     <th>RW</th>
+                    <th>Catatan Khusus</th>
                     <th>Reputasi Nasabah</th>
                     <th>Transaksi</th>
                     <th>Post/Unpost</th>
@@ -55,6 +56,7 @@
                     <td><?php echo $nasabah[$i]['kelurahan']?></td>
                     <td><?php echo $nasabah[$i]['rt']?></td>
                     <td><?php echo $nasabah[$i]['rw']?></td>
+                    <td><?php echo $nasabah[$i]['catatan_khusus']?></td>
                     <?php
                       if($nasabah[$i]['blacklist'] == 0) {
                     ?>

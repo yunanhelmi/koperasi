@@ -97,6 +97,7 @@ class NasabahCon extends CI_Controller {
 				$data['rw'] 			= $this->input->post('rw');
 				$data['file_foto'] 		= './files/uploads/foto_nasabah/'.time().$data['id'].'.jpeg';
 				$data['blacklist'] 		= $this->input->post('blacklist');
+				$data['catatan_khusus'] = $this->input->post('catatan_khusus');
 
 				$this->nasabahmodel->inputData($data);
 				redirect('nasabahcon');
@@ -120,6 +121,7 @@ class NasabahCon extends CI_Controller {
 			$data['rt'] 			= $this->input->post('rt');
 			$data['rw'] 			= $this->input->post('rw');
 			$data['blacklist'] 		= $this->input->post('blacklist');
+			$data['catatan_khusus'] = $this->input->post('catatan_khusus');
 			$this->nasabahmodel->inputData($data);
 			redirect('nasabahcon');
         }
@@ -190,6 +192,7 @@ class NasabahCon extends CI_Controller {
 				$data['rw'] 		= $this->input->post('rw');
 				$data['file_foto'] 	= './files/uploads/foto_nasabah/'.time().$id.'.jpeg';
 				$data['blacklist'] 	= $this->input->post('blacklist');
+				$data['catatan_khusus'] = $this->input->post('catatan_khusus');
 
 				$this->nasabahmodel->updateData($id, $data);
 				redirect('nasabahcon');
@@ -208,6 +211,7 @@ class NasabahCon extends CI_Controller {
 			$data['rt'] 		= $this->input->post('rt');
 			$data['rw'] 		= $this->input->post('rw');
 			$data['blacklist'] 	= $this->input->post('blacklist');
+			$data['catatan_khusus'] = $this->input->post('catatan_khusus');
 
 			$this->nasabahmodel->updateData($id, $data);
 			redirect('nasabahcon');

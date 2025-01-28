@@ -110,6 +110,10 @@
                     <option value=2 <?php echo $nasabah->blacklist == 2 ? 'selected' : ''?> >BL 2</option>
                   </select>
                 </div>
+                <div class="form-group col-xs-6">
+                  <label for="exampleInputPassword1">Catatan Khusus</label>
+                  <?php echo '<input type="text" class="form-control" id="catatan_khusus" name="catatan_khusus" placeholder="Catatan Khusus" value="'.$nasabah->catatan_khusus.'">'; ?>
+                </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">

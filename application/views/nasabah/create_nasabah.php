@@ -92,6 +92,10 @@
                     <option value=2>BL 2</option>
                   </select>
                 </div>
+                <div class="form-group col-xs-6">
+                  <label for="exampleInputPassword1">Catatan Khusus</label>
+                  <input type="text" class="form-control" id="catatan_khusus" name="catatan_khusus" placeholder="Catatan Khusus">
+                </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">

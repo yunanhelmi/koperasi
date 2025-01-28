@@ -148,6 +148,13 @@
                       <input type="text" class="form-control" name="blacklist" id="blacklist" readonly value=<?php echo $reputasi_nasabah ?> >
                     </div>
                   </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Catatan Khusus</label>
+
+                    <div class="col-sm-10">
+                      <?php echo '<input type="textarea" class="form-control" name="catatan_khusus" id="catatan_khusus" readonly value="'.$nasabah->catatan_khusus.'">'; ?>
+                    </div>
+                  </div>
                 </form>
               </div>
               <!-- /.tab-pane -->
