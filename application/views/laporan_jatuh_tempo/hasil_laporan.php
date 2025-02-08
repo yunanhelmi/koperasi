@@ -90,16 +90,16 @@
 
 <table class="kop_surat">
     <tr>
-        <td colspan="12"><center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center></td>
+        <td colspan="11"><center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center></td>
     </tr>
     <tr>
-        <td colspan="12"><center>LAPORAN JATUH TEMPO <?php echo $tanggal ?></center></td>
+        <td colspan="11"><center>LAPORAN JATUH TEMPO <?php echo $tanggal ?></center></td>
     </tr>
     <tr>
-        <td class="bold" colspan="12"><center>AHU-0003689.AH.01.39.TAHUN 2022</center></td>
+        <td class="bold" colspan="11"><center>AHU-0003689.AH.01.39.TAHUN 2022</center></td>
     </tr>
     <tr>
-        <td colspan="12"><center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center></td>
+        <td colspan="11"><center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center></td>
     </tr>
 </table>
 <br>
@@ -333,7 +333,7 @@
 	    <th>NO</th>
 	    <th>NAMA</th>
 	    <th>NOMOR NASABAH</th>
-        <th>CETAK</th>
+        <!--<th>CETAK</th>-->
 	    <!--<th>ALAMAT</th>-->
 	    <th>DESA</th>
 	    <!--<th>DUSUN</th>-->
@@ -366,7 +366,7 @@
                         <td style="text-align: center;"><?php echo $no ?></td>
                         <td><?php echo $data[$a]['nama']; ?></td>
                         <td style="text-align: center;"><?php echo $data[$a]['nomor_koperasi']; ?></td>
-                        <?php
+                        <!--<?php
                         if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
                         ?>
                             <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
@@ -376,7 +376,7 @@
                             <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
                         <?php
                         }
-                        ?>
+                        ?>-->
                         <td><?php echo $data[$a]['kelurahan']; ?></td>
                         <td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
                         <?php
@@ -433,7 +433,7 @@
                         <td style="text-align: center;"><?php echo $no ?></td>
                         <td><?php echo $data[$a]['nama']; ?></td>
                         <td style="text-align: center;"><?php echo $data[$a]['nomor_koperasi']; ?></td>
-                        <?php
+                        <!--<?php
                         if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
                         ?>
                             <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
@@ -443,7 +443,7 @@
                             <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
                         <?php
                         }
-                        ?>
+                        ?>-->
                         <td><?php echo $data[$a]['kelurahan']; ?></td>
                         <td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
                         <?php
@@ -502,7 +502,7 @@
                         <td style="text-align: center;"><?php echo $no ?></td>
                         <td><?php echo $data[$a]['nama']; ?></td>
                         <td style="text-align: center;"><?php echo $data[$a]['nomor_koperasi']; ?></td>
-                        <?php
+                        <!--<?php
                         if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
                         ?>
                             <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
@@ -512,7 +512,7 @@
                             <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
                         <?php
                         }
-                        ?>
+                        ?>-->
                         <td><?php echo $data[$a]['kelurahan']; ?></td>
                         <td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
                         <?php
@@ -569,7 +569,7 @@
                         <td style="text-align: center;"><?php echo $no ?></td>
                         <td><?php echo $data[$a]['nama']; ?></td>
                         <td style="text-align: center;"><?php echo $data[$a]['nomor_koperasi']; ?></td>
-                        <?php
+                        <!--<?php
                         if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
                         ?>
                             <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
@@ -579,7 +579,7 @@
                             <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
                         <?php
                         }
-                        ?>
+                        ?>-->
                         <td><?php echo $data[$a]['kelurahan']; ?></td>
                         <td><?php echo $data[$a]['jenis_pinjaman']; ?></td>
                         <?php
