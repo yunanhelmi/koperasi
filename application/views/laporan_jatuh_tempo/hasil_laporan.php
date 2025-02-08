@@ -349,7 +349,7 @@
 	    <!--<th>JASA PINJAMAN</th>-->
 	    <!--<th>LAMA TERAKHIR BAYAR / LAMA PINJAM</th>-->
 	    <th>LAMA JATUH TEMPO</th>
-	    <th>KETERANGAN</th>
+	    <th>KET.</th>
 	</tr>
 
 	<?php
