@@ -40,7 +40,8 @@
 		                        <label for="exampleInputPassword1">Status</label>
 		                        <select id="status" name="status" class="form-control" style="width: 100%;">
 									<option value='all'>- SEMUA -</option>
-									<option value='0' >Hijau</option>
+									<option value='-1' >Hijau</option>
+									<option value='0' >Hijau Tempo</option>
 									<option value='1' >Kuning 1</option>
 									<option value='2' >Kuning 2</option>
 									<option value='3' >Merah</option>

@@ -376,31 +376,21 @@ class SurattagihanCon extends CI_Controller {
         $jatuh_tempo = new DateTime($jatuh_tempo);
 
         $lama_pinjam = $today->diff($tanggal_pinjaman)->format("%a");
-        $lama_pinjam_raw = $today->diff($tanggal_pinjaman);
-        $lama_pinjam_long = $lama_pinjam_raw->y." Tahun ".$lama_pinjam_raw->m." Bulan ".$lama_pinjam_raw->d." Hari";
-        $bulan_pinjam = (($lama_pinjam_raw->format('%y') * 12) + $lama_pinjam_raw->format('%m'));
-        $lama_pinjam_bulan_hari = $bulan_pinjam." Bulan ".$lama_pinjam_raw->d." Hari";
+        $bulan_pinjam = floor($lama_pinjam/30);
+        $lama_pinjam_bulan_hari = $bulan_pinjam." Bulan ".($lama_pinjam%30)." Hari";
 
-        /*$lama_akhir_bayar = $today->diff($tgl_akhir_bayar)->format("%a");
-        $lama_akhir_bayar_raw = $today->diff($tgl_akhir_bayar);
-        $lama_akhir_bayar_long = $lama_akhir_bayar_raw->y." Tahun ".$lama_akhir_bayar_raw->m." Bulan ".$lama_akhir_bayar_raw->d." Hari";
-        $bulan_akhir_bayar = (($lama_akhir_bayar_raw->format('%y') * 12) + $lama_akhir_bayar_raw->format('%m'));
-        $lama_akhir_bayar_bulan_hari = $bulan_akhir_bayar." Bulan ".$lama_akhir_bayar_raw->d." Hari";*/
         $waktu_terakhir_bayar1 = date('Y-m-d', strtotime($data[0]['jatuh_tempo'].' - 30 days'));
         $waktu_terakhir_bayar = new DateTime($waktu_terakhir_bayar1);
+
         $lama_akhir_bayar = $today->diff($waktu_terakhir_bayar)->format("%a");
-        $lama_akhir_bayar_raw = $today->diff($waktu_terakhir_bayar);
-        $lama_akhir_bayar_long = $lama_akhir_bayar_raw->y." Tahun ".$lama_akhir_bayar_raw->m." Bulan ".$lama_akhir_bayar_raw->d." Hari";
-        $bulan_akhir_bayar = (($lama_akhir_bayar_raw->format('%y') * 12) + $lama_akhir_bayar_raw->format('%m'));
-        $lama_akhir_bayar_bulan_hari = $bulan_akhir_bayar." Bulan ".$lama_akhir_bayar_raw->d." Hari";
+        $bulan_akhir_bayar = floor($lama_akhir_bayar/30);
+        $lama_akhir_bayar_bulan_hari = $bulan_akhir_bayar." Bulan ".($lama_akhir_bayar%30)." Hari";
         
         $lama_jatuh_tempo = $today->diff($jatuh_tempo)->format("%a");
-        $lama_jatuh_tempo_raw = $today->diff($jatuh_tempo);
-        $lama_jatuh_tempo_long = $lama_jatuh_tempo_raw->y." Tahun ".$lama_jatuh_tempo_raw->m." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
-        $bulan_jatuh_tempo = (($lama_jatuh_tempo_raw->format('%y') * 12) + $lama_jatuh_tempo_raw->format('%m'));
-        $lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
+        $bulan_jatuh_tempo = floor($lama_jatuh_tempo/30);
+        $lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".($lama_jatuh_tempo%30)." Hari";
 
-        if ($lama_jatuh_tempo > 0 && $lama_jatuh_tempo <= 7) {
+        /*if ($lama_jatuh_tempo > 0 && $lama_jatuh_tempo <= 7) {
             $res['level'] = 0;
             $res['keterangan'] = 'H';
         } else if($lama_jatuh_tempo > 7 && $lama_jatuh_tempo <= 30) {
@@ -412,6 +402,24 @@ class SurattagihanCon extends CI_Controller {
         } else if ($lama_jatuh_tempo > 90) {
             $res['level'] = 3;
             $res['keterangan'] = 'M';
+        }*/
+        $res['keterangan'] = 'H';
+        $res['level'] = -1;
+        /*if ($lama_jatuh_tempo >= 0 && $lama_jatuh_tempo <= 4) {
+            $data[$a]['keterangan'] = 'Hijau';
+            $data[$a]['keterangan_level'] = -1;
+        } else*/ if ($lama_jatuh_tempo > 4 && $lama_jatuh_tempo <= 11) {
+            $res['keterangan'] = 'H';
+            $res['level'] = 0;
+        } else if ($lama_jatuh_tempo > 11 && $lama_jatuh_tempo <= 30) {
+            $res['keterangan'] = 'K1';
+            $res['level'] = 1;
+        } else if ($lama_jatuh_tempo > 30 && $lama_jatuh_tempo <= 90) {
+            $res['keterangan'] = 'K2';
+            $res['level'] = 2;
+        } else if ($lama_jatuh_tempo > 91) {
+            $res['keterangan'] = 'M';
+            $res['level'] = 3;
         }
 
         if($bulan_akhir_bayar >= 4) {
@@ -442,15 +450,12 @@ class SurattagihanCon extends CI_Controller {
         $res['jasa_terbayar']               = (int)$jasa_terbayar;
         $res['bulan_jasa']                  = (int)$data[0]['jumlah_jasa_detail'];
         $res['lama_pinjam']                 = $lama_pinjam." Hari";
-        $res['lama_pinjam_long']            = $lama_pinjam_long;
         $res['bulan_pinjam']                = $bulan_pinjam;
         $res['lama_pinjam_bulan_hari']      = $lama_pinjam_bulan_hari;
         $res['lama_akhir_bayar']            = $lama_akhir_bayar." Hari";
-        $res['lama_akhir_bayar_long']       = $lama_akhir_bayar_long;
         $res['bulan_akhir_bayar']           = $bulan_akhir_bayar;
         $res['lama_akhir_bayar_bulan_hari'] = $lama_akhir_bayar_bulan_hari;
         $res['lama_jatuh_tempo']            = $lama_jatuh_tempo." Hari";
-        $res['lama_jatuh_tempo_long']       = $lama_jatuh_tempo_long;
         $res['bulan_jatuh_tempo']           = $bulan_jatuh_tempo;
         $res['lama_jatuh_tempo_bulan_hari'] = $lama_jatuh_tempo_bulan_hari;
         $res['biaya_administrasi']          = $biaya_administrasi;
@@ -498,11 +503,10 @@ class SurattagihanCon extends CI_Controller {
         $jatuh_tempo = new DateTime($jatuh_tempo);
 
         $lama_pinjam = $today->diff($tanggal_pinjaman)->format("%a");
-        $lama_pinjam_raw = $today->diff($tanggal_pinjaman);
-        $lama_pinjam_long = $lama_pinjam_raw->y." Tahun ".$lama_pinjam_raw->m." Bulan ".$lama_pinjam_raw->d." Hari";
-        $bulan_pinjam = (($lama_pinjam_raw->format('%y') * 12) + $lama_pinjam_raw->format('%m'));
-        $lama_pinjam_bulan_hari = $bulan_pinjam." Bulan ".$lama_pinjam_raw->d." Hari";
-        $jasa_hari = 0;
+        $bulan_pinjam = floor($lama_pinjam/30);
+        $lama_pinjam_bulan_hari = $bulan_pinjam." Bulan ".($lama_pinjam%30)." Hari";
+
+        /*$jasa_hari = 0;
         if($lama_pinjam_raw->d >= 6 && $lama_pinjam_raw->d <= 11) {
             $jasa_hari = ($sisa_pinjaman * 1)/100;
         } else if($lama_pinjam_raw->d >= 12 && $lama_pinjam_raw->d <= 17) {
@@ -511,19 +515,25 @@ class SurattagihanCon extends CI_Controller {
             $jasa_hari = ($sisa_pinjaman * 2)/100;
         } else if($lama_pinjam_raw->d >= 24 && $lama_pinjam_raw->d <= 30) {
             $jasa_hari = ($sisa_pinjaman * 3)/100;
+        }*/
+        $jasa_hari = 0;
+        if(($lama_pinjam%30) >= 6 && ($lama_pinjam%30) <= 11) {
+            $jasa_hari = ($sisa_pinjaman * 1)/100;
+        } else if(($lama_pinjam%30) >= 12 && ($lama_pinjam%30) <= 17) {
+            $jasa_hari = ($sisa_pinjaman * 1.5)/100;
+        } else if(($lama_pinjam%30) >= 18 && ($lama_pinjam%30) <= 23) {
+            $jasa_hari = ($sisa_pinjaman * 2)/100;
+        } else if(($lama_pinjam%30) >= 24 && ($lama_pinjam%30) <= 29) {
+            $jasa_hari = ($sisa_pinjaman * 3)/100;
         }
 
         $lama_akhir_bayar = $today->diff($tgl_akhir_bayar)->format("%a");
-        $lama_akhir_bayar_raw = $today->diff($tgl_akhir_bayar);
-        $lama_akhir_bayar_long = $lama_akhir_bayar_raw->y." Tahun ".$lama_akhir_bayar_raw->m." Bulan ".$lama_akhir_bayar_raw->d." Hari";
-        $bulan_akhir_bayar = (($lama_akhir_bayar_raw->format('%y') * 12) + $lama_akhir_bayar_raw->format('%m'));
-        $lama_akhir_bayar_bulan_hari = $bulan_akhir_bayar." Bulan ".$lama_akhir_bayar_raw->d." Hari";
+        $bulan_akhir_bayar = floor($lama_akhir_bayar/30);
+        $lama_akhir_bayar_bulan_hari = $bulan_akhir_bayar." Bulan ".($lama_akhir_bayar%30)." Hari";
         
         $lama_jatuh_tempo = $today->diff($jatuh_tempo)->format("%a");
-        $lama_jatuh_tempo_raw = $today->diff($jatuh_tempo);
-        $lama_jatuh_tempo_long = $lama_jatuh_tempo_raw->y." Tahun ".$lama_jatuh_tempo_raw->m." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
-        $bulan_jatuh_tempo = (($lama_jatuh_tempo_raw->format('%y') * 12) + $lama_jatuh_tempo_raw->format('%m'));
-        $lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".$lama_jatuh_tempo_raw->d." Hari";
+        $bulan_jatuh_tempo = floor($lama_jatuh_tempo/30);
+        $lama_jatuh_tempo_bulan_hari = $bulan_jatuh_tempo." Bulan ".($lama_jatuh_tempo%30)." Hari";
 
         $jasa_terbayar = $data[0]['total_jasa_detail'];
         $kali_administrasi = $bulan_pinjam / 4;
@@ -533,7 +543,7 @@ class SurattagihanCon extends CI_Controller {
         $biaya_administrasi = ($sisa_pinjaman * $kali_administrasi) / 100;
         $total = $sisa_pinjaman + $jasa_pinjaman + $biaya_administrasi;
 
-        if ($lama_pinjam >= 125 && $lama_pinjam <= 131) {
+        /*if ($lama_pinjam >= 125 && $lama_pinjam <= 131) {
             $res['level'] = 0;
             $res['keterangan'] = 'H';
         } else if ($lama_pinjam > 131 && $lama_pinjam <= 180) {
@@ -545,6 +555,22 @@ class SurattagihanCon extends CI_Controller {
         } else if ($lama_pinjam > 240) {
             $res['level'] = 3;
             $res['keterangan'] = 'M';
+        }*/
+
+        $res['keterangan'] = 'H';
+        $res['level'] = -1;
+        if ($lama_pinjam >= 125 && $lama_pinjam <= 131) {
+            $res['keterangan'] = 'H';
+            $res['level'] = 0;
+        } else if ($lama_pinjam > 131 && $lama_pinjam <= 180) {
+            $res['keterangan'] = 'K1';
+            $res['level'] = 1;
+        } else if ($lama_pinjam > 180 && $lama_pinjam <= 240) {
+            $res['keterangan'] = 'K2';
+            $res['level'] = 2;
+        } else if ($lama_pinjam > 240) {
+            $res['keterangan'] = 'M';
+            $res['level'] = 3;
         }
 
         $res['data']                        = $data;
@@ -553,15 +579,12 @@ class SurattagihanCon extends CI_Controller {
         $res['jasa_terbayar']               = (int)$jasa_terbayar;
         $res['bulan_jasa']                  = (int)$data[0]['jumlah_jasa_detail'];
         $res['lama_pinjam']                 = $lama_pinjam." Hari";
-        $res['lama_pinjam_long']            = $lama_pinjam_long;
         $res['bulan_pinjam']                = $bulan_pinjam;
         $res['lama_pinjam_bulan_hari']      = $lama_pinjam_bulan_hari;
         $res['lama_akhir_bayar']            = $lama_akhir_bayar." Hari";
-        $res['lama_akhir_bayar_long']       = $lama_akhir_bayar_long;
         $res['bulan_akhir_bayar']           = $bulan_akhir_bayar;
         $res['lama_akhir_bayar_bulan_hari'] = $lama_akhir_bayar_bulan_hari;
         $res['lama_jatuh_tempo']            = $lama_jatuh_tempo." Hari";
-        $res['lama_jatuh_tempo_long']       = $lama_jatuh_tempo_long;
         $res['bulan_jatuh_tempo']           = $bulan_jatuh_tempo;
         $res['lama_jatuh_tempo_bulan_hari'] = $lama_jatuh_tempo_bulan_hari;
         $res['biaya_administrasi']          = $biaya_administrasi;
