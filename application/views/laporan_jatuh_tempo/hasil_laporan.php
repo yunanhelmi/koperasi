@@ -167,7 +167,7 @@
             } else if ($lama_jatuh_tempo > 30 && $lama_jatuh_tempo <= 90) {
                 $data[$a]['keterangan'] = 'Kuning 2';
                 $data[$a]['keterangan_level'] = 2;
-            } else if ($lama_jatuh_tempo > 91) {
+            } else if ($lama_jatuh_tempo > 90) {
                 $data[$a]['keterangan'] = 'Merah';
                 $data[$a]['keterangan_level'] = 3;
             }
