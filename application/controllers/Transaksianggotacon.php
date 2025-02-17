@@ -730,18 +730,21 @@ class TransaksianggotaCon extends CI_Controller {
 		}
 
 		// Insert Detail Angsuran ke dalam table detail_angsuran
-		$date1 					= $this->input->post('waktu');
-		$date 					= strtotime($date1);
-		$input['waktu'] 		= date("Y-m-d",$date);
-		$input['bulan_ke'] 		= $this->input->post('bulan_ke');
-		$input['bulan_tahun'] 	= $this->input->post('bulan_tahun');
-		$input['jenis'] 		= $this->input->post('jenis');
-		$input['id_pinjaman'] 	= $this->input->post('id_pinjaman');
-		$input['angsuran'] 		= $this->input->post('angsuran');
-		$input['jasa'] 			= $this->input->post('jasa');
-		$input['denda'] 		= $this->input->post('denda');
-		$input['total'] 		= $this->input->post('total');
-		$input['keterangan']	= $this->input->post('keterangan');
+		$date1 							= $this->input->post('waktu');
+		$date 							= strtotime($date1);
+		$input['waktu'] 				= date("Y-m-d",$date);
+		$input['bulan_ke'] 				= $this->input->post('bulan_ke');
+		$input['bulan_tahun'] 			= $this->input->post('bulan_tahun');
+		$input['jenis'] 				= $this->input->post('jenis');
+		$input['id_pinjaman'] 			= $this->input->post('id_pinjaman');
+		$input['angsuran'] 				= $this->input->post('angsuran');
+		$input['jasa'] 					= $this->input->post('jasa');
+		$input['denda'] 				= $this->input->post('denda');
+		$input['total'] 				= $this->input->post('total');
+		$input['keterangan']			= $this->input->post('keterangan');
+		$input['janji'] 				= date("Y-m-d",strtotime($this->input->post('janji')));
+		$input['penagihan_followup'] 	= date("Y-m-d",strtotime($this->input->post('penagihan_followup')));
+		
 		$this->detailangsuranmodel->inputData($input);
 
 		$id_pinjaman = $this->input->post('id_pinjaman');
@@ -966,19 +969,21 @@ class TransaksianggotaCon extends CI_Controller {
 		}
 
 		//Update Detail Angsuran ke dalam table detail_angsuran
-		$id_detail_angsuran 	= $this->input->post('edit_id');
-		$date1 					= $this->input->post('edit_waktu');
-		$date 					= strtotime($date1);
-		$input['waktu'] 		= date("Y-m-d",$date);
-		$input['bulan_ke'] 		= $this->input->post('edit_bulan_ke');
-		$input['bulan_tahun'] 		= $this->input->post('edit_bulan_tahun');
-		$input['jenis'] 		= $this->input->post('edit_jenis');
-		$input['id_pinjaman'] 	= $this->input->post('edit_id_pinjaman');
-		$input['angsuran'] 		= $this->input->post('edit_angsuran');
-		$input['jasa'] 			= $this->input->post('edit_jasa');
-		$input['denda'] 		= $this->input->post('edit_denda');
-		$input['total'] 		= $this->input->post('edit_total');
-		$input['keterangan']	= $this->input->post('edit_keterangan');
+		$id_detail_angsuran 			= $this->input->post('edit_id');
+		$date1 							= $this->input->post('edit_waktu');
+		$date 							= strtotime($date1);
+		$input['waktu'] 				= date("Y-m-d",$date);
+		$input['bulan_ke'] 				= $this->input->post('edit_bulan_ke');
+		$input['bulan_tahun'] 			= $this->input->post('edit_bulan_tahun');
+		$input['jenis'] 				= $this->input->post('edit_jenis');
+		$input['id_pinjaman'] 			= $this->input->post('edit_id_pinjaman');
+		$input['angsuran'] 				= $this->input->post('edit_angsuran');
+		$input['jasa'] 					= $this->input->post('edit_jasa');
+		$input['denda'] 				= $this->input->post('edit_denda');
+		$input['total'] 				= $this->input->post('edit_total');
+		$input['keterangan']			= $this->input->post('edit_keterangan');
+		$input['janji'] 				= date("Y-m-d",strtotime($this->input->post('edit_janji')));
+		$input['penagihan_followup'] 	= date("Y-m-d",strtotime($this->input->post('edit_penagihan_followup')));
 
 		$this->detailangsuranmodel->updateData($id_detail_angsuran, $input);
 

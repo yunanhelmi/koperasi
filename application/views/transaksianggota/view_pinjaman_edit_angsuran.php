@@ -303,6 +303,8 @@ function rupiah($angka){
                             <th>Jasa</th>
                             <th>Jasa Tambahan</th>
                             <th>Sisa Pinjaman</th>
+                            <th>Janji</th>
+                            <th>Penagihan / Follow Up</th>
                             <th>Edit</th>
                             <th>Delete</th>
                             <th>Post</th>
@@ -365,6 +367,8 @@ function rupiah($angka){
                           <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['jasa'],2,',','.');?></td>
                           <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['denda'],2,',','.');?></td>
                           <td style='text-align: right'><?php echo "Rp " . number_format($sisa_pinjaman[$i],2,',','.');?></td>
+                          <td><?php echo $detail_angsuran[$i]['janji'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['janji'])) : '';?></td>
+                          <td><?php echo $detail_angsuran[$i]['penagihan_followup'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['penagihan_followup'])) : '';?></td>
                           <?php 
                             $total_jasa += $detail_angsuran[$i]['jasa'];
                             $total_denda += $detail_angsuran[$i]['denda'];
@@ -493,6 +497,24 @@ function rupiah($angka){
                         <!-- <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder=""> -->
                         <textarea class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan"></textarea>
                       </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Janji</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right" name="janji" id="janji" data-date-format="dd-mm-yyyy" required>
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Penagihan / Follow Up</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right" name="penagihan_followup" id="penagihan_followup" data-date-format="dd-mm-yyyy" required>
+                        </div>
+                      </div>
                     </div>
                     <div class="box-footer">
                       <div class="col-xs-3">
@@ -593,6 +615,24 @@ function rupiah($angka){
                         <label for="exampleInputPassword1">Keterangan</label>
                         <!-- <input type="text" class="form-control" id="edit_keterangan" name="edit_keterangan" placeholder="" value="<?php echo $edit_detail_angsuran->keterangan ?>"> -->
                         <textarea class="form-control" id="edit_keterangan" name="edit_keterangan" placeholder="Keterangan"><?php echo $edit_detail_angsuran->keterangan ?></textarea>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Janji</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right" name="edit_janji" id="edit_janji" value="<?php echo date("d-m-Y",strtotime($edit_detail_angsuran->janji));?>" data-date-format="dd-mm-yyyy" required>
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Penagihan / Follow Up</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right" name="edit_penagihan_followup" id="edit_penagihan_followup" value="<?php echo date("d-m-Y",strtotime($edit_detail_angsuran->penagihan_followup));?>" data-date-format="dd-mm-yyyy" required>
+                        </div>
                       </div>
                     </div>
                     <div class="box-footer">
@@ -1104,6 +1144,7 @@ function rupiah($angka){
                     <tr>
                       <td colspan="5"><strong>Total</strong></td>
                       <td><strong><?php echo rupiah($total_simpananpihakketiga) ?></strong></td>
+                      <td></td>
                     </tr>
                   </tbody>
                 </table>
@@ -1375,7 +1416,7 @@ function rupiah($angka){
     }
   }
 
-  $(function () {
+  /*$(function () {
     $('#pinjaman_table').DataTable({
       'paging'      : true,
       'lengthChange': true,
@@ -1461,10 +1502,10 @@ function rupiah($angka){
       'info'        : true,
       'autoWidth'   : true
     })
-  })
+  })*/
   </script>
 
-  <script>
+  <script type="text/javascript">
       function formatRupiah(nilaiUang2)
       {
         var nilaiUang=nilaiUang2+"";
@@ -1715,6 +1756,7 @@ function rupiah($angka){
       }
 
       $(document).ready(function(){
+        console.log('document_ready');
         $('#waktu').datepicker({}).on('changeDate', function(ev){
           hitung_jatuh_tempo();
         });
@@ -1726,6 +1768,11 @@ function rupiah($angka){
         $('#edit_jatuh_tempo').datepicker({}).on('changeDate', function(ev){});
 
         $('#tgl_penerimaan_surat').datepicker({}).on('changeDate', function(ev){});
+
+        $('#janji').datepicker({}).on('changeDate', function(ev){});
+        $('#penagihan_followup').datepicker({}).on('changeDate', function(ev){});
+        $('#edit_janji').datepicker({}).on('changeDate', function(ev){});
+        $('#edit_penagihan_followup').datepicker({}).on('changeDate', function(ev){});
 
         hitung_total();
         label_angsuran();

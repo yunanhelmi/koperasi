@@ -90,16 +90,16 @@
 
 <table class="kop_surat">
     <tr>
-        <td colspan="14"><center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center></td>
+        <td colspan="15"><center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center></td>
     </tr>
     <tr>
-        <td colspan="14"><center>DAFTAR SURAT TAGIHAN <?php echo $tanggal ?></center></td>
+        <td colspan="15"><center>DAFTAR SURAT TAGIHAN <?php echo $tanggal ?></center></td>
     </tr>
     <tr>
-        <td class="bold" colspan="14"><center>AHU-0003689.AH.01.39.TAHUN 2022</center></td>
+        <td class="bold" colspan="15"><center>AHU-0003689.AH.01.39.TAHUN 2022</center></td>
     </tr>
     <tr>
-        <td colspan="14"><center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center></td>
+        <td colspan="15"><center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center></td>
     </tr>
 </table>
 <br>
@@ -118,6 +118,18 @@
 	    $tgl_akhir_bayar = date('Y-m-d', strtotime($data[$a]['waktu_terakhir_angsuran']));
 	    $tgl_terakhir_bayar = date('d-m-Y', strtotime($data[$a]['waktu_terakhir_angsuran']));
 	    $tgl_akhir_bayar = new DateTime($tgl_terakhir_bayar);
+
+        if($data[$a]['penagihan_followup'] != NULL) {
+            $tanggal_penagihan_followup = new DateTime(date('Y-m-d', strtotime($data[$a]['penagihan_followup'])));
+            if($today < $tanggal_penagihan_followup) {
+                $durasi_penagihan = ($today->diff($tanggal_penagihan_followup)->format("%a") * -1).' Hari';
+            } else {
+                $durasi_penagihan = ($today->diff($tanggal_penagihan_followup)->format("%a")).' Hari';
+            }
+        } else {
+            $durasi_penagihan = '';
+        }
+        $data[$a]['durasi_penagihan'] = $durasi_penagihan;
 
 		if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
 			$jatuh_tempo = date('Y-m-d', strtotime($data[$a]['jatuh_tempo']));
@@ -333,6 +345,7 @@
 	    <th>TGL JATUH TEMPO</th>
 	    <th>SISA PINJAMAN</th>
 	    <th>LAMA DARI JATUH TEMPO</th>
+        <th>DURASI PENAGIHAN</th>
 	    <th>KET.</th>
 	</tr>
 
@@ -399,6 +412,7 @@
     		  			<!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
     		  			<!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
     		    		<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." Hari"; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['durasi_penagihan'] ?></td>
     		  			<?php
                         if ($data[$a]['keterangan_level'] == -1) {
                         ?>
@@ -474,6 +488,7 @@
                         <!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
                         <td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." Hari"; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['durasi_penagihan'] ?></td>
                         <?php
                         if ($data[$a]['keterangan_level'] == -1) {
                         ?>
@@ -551,6 +566,7 @@
                         <!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
                         <td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." Hari"; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['durasi_penagihan'] ?></td>
                         <?php
                         if ($data[$a]['keterangan_level'] == -1) {
                         ?>
@@ -626,6 +642,7 @@
                         <!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
                         <td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." Hari"; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['durasi_penagihan'] ?></td>
                         <?php
                         if ($data[$a]['keterangan_level'] == -1) {
                         ?>

@@ -110,7 +110,9 @@ class LaporanpiutangModel extends CI_Model {
 									ds.waktu_terakhir_angsuran,
 									ds.jasa_terakhir_angsuran,
 									ds.bulanke_terakhir_angsuran,
-									ds.bulan_tahun_terakhir_angsuran
+									ds.bulan_tahun_terakhir_angsuran,
+									ds.janji,
+									ds.penagihan_followup
 								FROM 
 									(
 										SELECT 
@@ -123,7 +125,9 @@ class LaporanpiutangModel extends CI_Model {
 											MAX(waktu) as waktu_terakhir_angsuran,
 											MAX(jasa) as jasa_terakhir_angsuran,
 											MAX(bulan_ke) as bulanke_terakhir_angsuran,
-											MAX(bulan_tahun) as bulan_tahun_terakhir_angsuran
+											MAX(bulan_tahun) as bulan_tahun_terakhir_angsuran,
+											MAX(janji) as janji,
+											MAX(penagihan_followup) as penagihan_followup
 										FROM 
 											detail_angsuran
 										WHERE 

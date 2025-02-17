@@ -92,7 +92,9 @@ class SurattagihanModel extends CI_Model {
 									ds.total_angsuran_detail,
 									ds.total_pinjaman_detail,
 									ds.total_jasa_detail,
-									ds.waktu_terakhir_angsuran
+									ds.waktu_terakhir_angsuran,
+									ds.janji,
+									ds.penagihan_followup
 								FROM 
 									(
 										SELECT 
@@ -103,7 +105,9 @@ class SurattagihanModel extends CI_Model {
 											SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran_detail,
 											SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman_detail,
 											SUM(CASE WHEN jenis = 'Angsuran' AND jasa > 0 THEN jasa ELSE 0 END) as total_jasa_detail,
-											MAX(waktu) as waktu_terakhir_angsuran
+											MAX(waktu) as waktu_terakhir_angsuran,
+											MAX(janji) as janji,
+											MAX(penagihan_followup) as penagihan_followup
 										FROM 
 											detail_angsuran
 										WHERE 
@@ -152,7 +156,9 @@ class SurattagihanModel extends CI_Model {
 									ds.total_angsuran_detail,
 									ds.total_pinjaman_detail,
 									ds.total_jasa_detail,
-									ds.waktu_terakhir_angsuran
+									ds.waktu_terakhir_angsuran,
+									ds.janji,
+									ds.penagihan_followup
 								FROM 
 									(
 										SELECT 
@@ -163,7 +169,9 @@ class SurattagihanModel extends CI_Model {
 											SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran_detail,
 											SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman_detail,
 											SUM(CASE WHEN jenis = 'Angsuran' AND jasa > 0 THEN jasa ELSE 0 END) as total_jasa_detail,
-											MAX(waktu) as waktu_terakhir_angsuran
+											MAX(waktu) as waktu_terakhir_angsuran,
+											MAX(janji) as janji,
+											MAX(penagihan_followup) as penagihan_followup
 										FROM 
 											detail_angsuran
 										WHERE 

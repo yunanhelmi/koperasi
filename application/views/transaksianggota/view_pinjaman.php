@@ -437,6 +437,8 @@ function rupiah($angka){
                           <th>Jasa</th>
                           <th>Jasa Tambahan</th>
                           <th>Sisa Pinjaman</th>
+                          <th>Janji</th>
+                          <th>Penagihan / Follow Up</th>
                           <th>Edit</th>
                           <th>Delete</th>
                           <th>Post</th>
@@ -499,6 +501,8 @@ function rupiah($angka){
                           <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['jasa'],2,',','.');?></td>
                           <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['denda'],2,',','.');?></td>
                           <td style='text-align: right'><?php echo "Rp " . number_format($sisa_pinjaman[$i],2,',','.');?></td>
+                          <td><?php echo $detail_angsuran[$i]['janji'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['janji'])) : '';?></td>
+                          <td><?php echo $detail_angsuran[$i]['penagihan_followup'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['penagihan_followup'])) : '';?></td>
                           <?php 
                             $total_jasa += $detail_angsuran[$i]['jasa'];
                             $total_denda += $detail_angsuran[$i]['denda'];
@@ -631,6 +635,24 @@ function rupiah($angka){
                         <label for="exampleInputPassword1">Keterangan</label>
                         <!-- <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder=""> -->
                         <textarea class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan"></textarea>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Janji</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right" name="janji" id="janji" data-date-format="dd-mm-yyyy" required>
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Penagihan / Follow Up</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right" name="penagihan_followup" id="penagihan_followup" data-date-format="dd-mm-yyyy" required>
+                        </div>
                       </div>
                     </div>
                     <div class="box-footer">
@@ -1997,6 +2019,9 @@ function rupiah($angka){
         });
 
         $('#jatuh_tempo').datepicker({}).on('changeDate', function(ev){});
+
+        $('#janji').datepicker({}).on('changeDate', function(ev){});
+        $('#penagihan_followup').datepicker({}).on('changeDate', function(ev){});
 
         $('#tgl_penerimaan_surat').datepicker({}).on('changeDate', function(ev){});
         

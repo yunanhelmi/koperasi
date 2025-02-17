@@ -85,16 +85,16 @@
 
 <table class="kop_surat">
     <tr>
-        <td colspan="17"><center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center></td>
+        <td colspan="18"><center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center></td>
     </tr>
     <tr>
-        <td colspan="17"><center>LAPORAN PIUTANG ANGGOTA <?php echo $tanggal_title ?></center></td>
+        <td colspan="18"><center>LAPORAN PIUTANG ANGGOTA <?php echo $tanggal_title ?></center></td>
     </tr>
     <tr>
-        <td class="bold" colspan="17"><center>AHU-0003689.AH.01.39.TAHUN 2022</center></td>
+        <td class="bold" colspan="18"><center>AHU-0003689.AH.01.39.TAHUN 2022</center></td>
     </tr>
     <tr>
-        <td colspan="17"><center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center></td>
+        <td colspan="18"><center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center></td>
     </tr>
 </table>
 <br>
@@ -111,6 +111,18 @@
 	    $tgl_akhir_bayar = date('Y-m-d', strtotime($data[$a]['waktu_terakhir_angsuran']));
 	    $tgl_terakhir_bayar = date('Y-m-d', strtotime($data[$a]['waktu_terakhir_angsuran']));
 	    $tgl_akhir_bayar = new DateTime($tgl_akhir_bayar);
+
+        if($data[$a]['penagihan_followup'] != NULL) {
+            $tanggal_penagihan_followup = new DateTime(date('Y-m-d', strtotime($data[$a]['penagihan_followup'])));
+            if($today < $tanggal_penagihan_followup) {
+                $durasi_penagihan = ($today->diff($tanggal_penagihan_followup)->format("%a") * -1).' Hari';
+            } else {
+                $durasi_penagihan = ($today->diff($tanggal_penagihan_followup)->format("%a")).' Hari';
+            }
+        } else {
+            $durasi_penagihan = '';
+        }
+        $data[$a]['durasi_penagihan'] = $durasi_penagihan;
 
 		if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
             $jatuh_tempo = date('Y-m-d', strtotime($data[$a]['jatuh_tempo']));
@@ -342,8 +354,8 @@
 	    <th>UANG KURANG</th>
 	    <th>JASA YG HARUS DIBAYAR</th>
         <th>LAMA DARI JATUH TEMPO</th>
-	    <!--<th>LAMA PINJAM</th>
-	    <th>LAMA TERAKHIR BAYAR</th>
+	    <th>DURASI PENAGIHAN</th>
+	    <!--<th>LAMA TERAKHIR BAYAR</th>
 	    <th>LAMA JATUH TEMPO</th>-->
 	    <th>KET.</th>
 	</tr>
@@ -407,6 +419,7 @@
 				  			<td style="text-align: right;"><?php echo number_format($data[$a]['uang_kurang'],0,",","."); ?></td>
 				  			<td style="text-align: right;"><?php echo number_format($data[$a]['jasa_pinjaman'],0,",","."); ?></td>
                             <td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." Hari" ?></td>
+                            <td style="text-align: center;"><?php echo $data[$a]['durasi_penagihan'] ?></td>
 				    		<!--<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>-->
 				  			<?php
 				            if ($data[$a]['keterangan_level'] == -1) {
@@ -485,6 +498,7 @@
                             <td style="text-align: right;"><?php echo number_format($data[$a]['uang_kurang'],0,",","."); ?></td>
                             <td style="text-align: right;"><?php echo number_format($data[$a]['jasa_pinjaman'],0,",","."); ?></td>
 				  			<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." Hari" ?></td>
+                            <td style="text-align: center;"><?php echo $data[$a]['durasi_penagihan'] ?></td>
 				    		<!--<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>-->
 				  			<?php
                             if ($data[$a]['keterangan_level'] == -1) {
@@ -565,6 +579,7 @@
                             <td style="text-align: right;"><?php echo number_format($data[$a]['uang_kurang'],0,",","."); ?></td>
                             <td style="text-align: right;"><?php echo number_format($data[$a]['jasa_pinjaman'],0,",","."); ?></td>
 				  			<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." Hari" ?></td>
+                            <td style="text-align: center;"><?php echo $data[$a]['durasi_penagihan'] ?></td>
 				    		<!--<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>-->
 				  			<?php
                             if ($data[$a]['keterangan_level'] == -1) {
@@ -643,6 +658,7 @@
                             <td style="text-align: right;"><?php echo number_format($data[$a]['uang_kurang'],0,",","."); ?></td>
                             <td style="text-align: right;"><?php echo number_format($data[$a]['jasa_pinjaman'],0,",","."); ?></td>
 				  			<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." Hari" ?></td>
+                            <td style="text-align: center;"><?php echo $data[$a]['durasi_penagihan'] ?></td>
 				    		<!--<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." hari"." ".$data[$a]['lama_jatuh_tempo_bulan_hari'] ?></td>-->
 				  			<?php
                             if ($data[$a]['keterangan_level'] == -1) {
@@ -682,14 +698,14 @@
 		<td style="text-align: right;"><strong><?php echo number_format($total_sisa,0,",",".") ?></strong></td>
 		<td style="text-align: right;"><strong><?php echo number_format($total_uang_kurang,0,",",".") ?></strong></td>
 		<td style="text-align: right;"><strong><?php echo number_format($total_jasa,0,",",".") ?></strong></td>
-		<td colspan="2"></td>
+		<td colspan="3"></td>
 	</tr>
 	<tr>
 		<td colspan="12" style="text-align: center;"><strong>TOTAL PIUTANG (NERACA)</strong></td>
 		<td style="text-align: right;"><strong><?php echo number_format($piutang_neraca,0,",",".") ?></strong></td>
 		<td></td>
 		<td></td>
-		<td colspan="2"></td>
+		<td colspan="3"></td>
 	</tr>
 	<?php
 		$selisih = $total_sisa - $piutang_neraca;
@@ -699,6 +715,6 @@
 		<td style="text-align: right;"><strong><?php echo $selisih ?></strong></td>
 		<td></td>
 		<td></td>
-		<td colspan="2"></td>
+		<td colspan="3"></td>
 	</tr>
 </table>
