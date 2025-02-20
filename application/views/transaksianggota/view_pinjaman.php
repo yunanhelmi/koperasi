@@ -469,7 +469,7 @@ function rupiah($angka){
                           <?php
                             } else if($detail_angsuran[$i]['jasa'] == 0 && $detail_angsuran[$i]['total'] == 0) {
                           ?>
-                          <td style='text-align: left'>Penagihan Bulan ke-<?php echo $detail_angsuran[$i]['bulan_ke']?></td>
+                          <td style='text-align: left'>Penagihan ke-<?php echo $detail_angsuran[$i]['bulan_ke']?></td>
                           <?php
                             } else {
                           ?>
