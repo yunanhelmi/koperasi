@@ -467,6 +467,10 @@ function rupiah($angka){
                           ?>
                           <td style='text-align: left'><?php echo $detail_angsuran[$i]['jenis']?></td>
                           <?php
+                            } else if($detail_angsuran[$i]['jasa'] == 0 && $detail_angsuran[$i]['total'] == 0) {
+                          ?>
+                          <td style='text-align: left'>Penagihan Bulan ke-<?php echo $detail_angsuran[$i]['bulan_ke']?></td>
+                          <?php
                             } else {
                           ?>
                           <td style='text-align: left'>Pengembalian Jasa</td>
@@ -479,7 +483,7 @@ function rupiah($angka){
                           <?php $total_kredit += $detail_angsuran[$i]['total'];?>
                           <?php } else if($detail_angsuran[$i]['jenis'] == "Angsuran") {?>
                           <?php
-                            if($detail_angsuran[$i]['jasa'] > 0 && $detail_angsuran[$i]['total'] > 0) {
+                            if($detail_angsuran[$i]['jasa'] >= 0) {
                               $bln_thn = strtotime( $detail_angsuran[$i]['bulan_tahun'] );
                               $bulan_tahun = date( 'M-Y', $bln_thn );
                           ?>
