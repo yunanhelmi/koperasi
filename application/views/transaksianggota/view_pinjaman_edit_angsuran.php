@@ -503,7 +503,7 @@ function rupiah($angka){
                           <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                           </div>
-                          <input type="text" class="form-control pull-right" name="janji" id="janji" data-date-format="dd-mm-yyyy" required>
+                          <input type="text" class="form-control pull-right" name="janji" id="janji" data-date-format="dd-mm-yyyy">
                         </div>
                       </div>
                       <div class="form-group col-xs-6">
@@ -512,7 +512,7 @@ function rupiah($angka){
                           <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                           </div>
-                          <input type="text" class="form-control pull-right" name="penagihan_followup" id="penagihan_followup" data-date-format="dd-mm-yyyy" required>
+                          <input type="text" class="form-control pull-right" name="penagihan_followup" id="penagihan_followup" data-date-format="dd-mm-yyyy">
                         </div>
                       </div>
                     </div>
