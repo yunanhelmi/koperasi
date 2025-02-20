@@ -463,7 +463,7 @@ function rupiah($angka){
                           <td><?php echo $wkt?></td>
                           <?php if($detail_angsuran[$i]['jenis'] == "Pinjaman") {?>
                           <?php
-                            if($detail_angsuran[$i]['jasa'] > 0 && $detail_angsuran[$i]['total'] > 0) {
+                            if($detail_angsuran[$i]['total'] > 0) {
                           ?>
                           <td style='text-align: left'><?php echo $detail_angsuran[$i]['jenis']?></td>
                           <?php
