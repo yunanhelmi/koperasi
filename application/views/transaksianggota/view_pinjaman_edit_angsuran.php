@@ -329,7 +329,7 @@ function rupiah($angka){
                           <td><?php echo $wkt?></td>
                           <?php if($detail_angsuran[$i]['jenis'] == "Pinjaman") {?>
                           <?php
-                            if($detail_angsuran[$i]['jasa'] >= 0) {
+                            if($detail_angsuran[$i]['jasa'] > 0 && $detail_angsuran[$i]['total'] > 0) {
                           ?>
                           <td style='text-align: left'><?php echo $detail_angsuran[$i]['jenis']?></td>
                           <?php
@@ -345,7 +345,7 @@ function rupiah($angka){
                           <?php $total_kredit += $detail_angsuran[$i]['total'];?>
                           <?php } else if($detail_angsuran[$i]['jenis'] == "Angsuran") {?>
                           <?php
-                            if($detail_angsuran[$i]['jasa'] >= 0) {
+                            if($detail_angsuran[$i]['jasa'] > 0 && $detail_angsuran[$i]['total'] > 0) {
                               $bln_thn = strtotime( $detail_angsuran[$i]['bulan_tahun'] );
                               $bulan_tahun = date( 'M-Y', $bln_thn );
                           ?>
@@ -622,7 +622,7 @@ function rupiah($angka){
                           <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                           </div>
-                          <input type="text" class="form-control pull-right" name="edit_janji" id="edit_janji" value="<?php echo date("d-m-Y",strtotime($edit_detail_angsuran->janji));?>" data-date-format="dd-mm-yyyy" required>
+                          <input type="text" class="form-control pull-right" name="edit_janji" id="edit_janji" value="<?php echo $edit_detail_angsuran->janji != NULL ? date("d-m-Y",strtotime($edit_detail_angsuran->janji)) : '';?>" data-date-format="dd-mm-yyyy">
                         </div>
                       </div>
                       <div class="form-group col-xs-6">
@@ -631,7 +631,7 @@ function rupiah($angka){
                           <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                           </div>
-                          <input type="text" class="form-control pull-right" name="edit_penagihan_followup" id="edit_penagihan_followup" value="<?php echo date("d-m-Y",strtotime($edit_detail_angsuran->penagihan_followup));?>" data-date-format="dd-mm-yyyy" required>
+                          <input type="text" class="form-control pull-right" name="edit_penagihan_followup" id="edit_penagihan_followup" value="<?php echo $edit_detail_angsuran->penagihan_followup != NULL ? date("d-m-Y",strtotime($edit_detail_angsuran->penagihan_followup)) : '';?>" data-date-format="dd-mm-yyyy">
                         </div>
                       </div>
                     </div>

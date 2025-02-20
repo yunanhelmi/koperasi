@@ -986,11 +986,11 @@ class TransaksianggotaCon extends CI_Controller {
 		$input['denda'] 				= $this->input->post('edit_denda');
 		$input['total'] 				= $this->input->post('edit_total');
 		$input['keterangan']			= $this->input->post('edit_keterangan');
-		if($this->input->post('janji') != NULL) {
-			$input['janji'] 				= date("Y-m-d",strtotime($this->input->post('janji')));	
+		if($this->input->post('edit_janji') != NULL) {
+			$input['janji'] 				= date("Y-m-d",strtotime($this->input->post('edit_janji')));	
 		}
-		if($this->input->post('penagihan_followup') != NULL) {
-			$input['penagihan_followup'] 	= date("Y-m-d",strtotime($this->input->post('penagihan_followup')));
+		if($this->input->post('edit_penagihan_followup') != NULL) {
+			$input['penagihan_followup'] 	= date("Y-m-d",strtotime($this->input->post('edit_penagihan_followup')));
 		}
 
 		$this->detailangsuranmodel->updateData($id_detail_angsuran, $input);
