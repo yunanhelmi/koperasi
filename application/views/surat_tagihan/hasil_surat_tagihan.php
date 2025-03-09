@@ -119,12 +119,12 @@
 	    $tgl_terakhir_bayar = date('d-m-Y', strtotime($data[$a]['waktu_terakhir_angsuran']));
 	    $tgl_akhir_bayar = new DateTime($tgl_terakhir_bayar);
 
-        if($data[$a]['penagihan_followup'] != NULL) {
-            $tanggal_penagihan_followup = new DateTime(date('Y-m-d', strtotime($data[$a]['penagihan_followup'])));
-            if($today < $tanggal_penagihan_followup) {
-                $durasi_penagihan = ($today->diff($tanggal_penagihan_followup)->format("%a") * -1).' Hari';
+        if($data[$a]['penagihan'] != NULL) {
+            $tanggal_penagihan = new DateTime(date('Y-m-d', strtotime($data[$a]['penagihan'])));
+            if($today < $tanggal_penagihan) {
+                $durasi_penagihan = ($today->diff($tanggal_penagihan)->format("%a") * -1).' Hari';
             } else {
-                $durasi_penagihan = ($today->diff($tanggal_penagihan_followup)->format("%a")).' Hari';
+                $durasi_penagihan = ($today->diff($tanggal_penagihan)->format("%a")).' Hari';
             }
         } else {
             $durasi_penagihan = '';

@@ -181,83 +181,100 @@ function rupiah($angka){
                 </h3>
               </div> 
               <div class="box-body">
-                <table id="pinjaman_table" class="table table-bordered table-hover"  width="100%">
-                  <thead>
-                    <tr>
-                      <th>No.</th>
-                      <th>Nama</th>
-                      <th>Jenis Pinjaman</th>
-                      <th>Tanggal Pinjam</th>
-                      <th>Jaminan</th>
-                      <th>Jatuh Tempo</th>
-                      <th>Keterangan</th>
-                      <th>Status Pinjaman</th>
-                      <th>Jumlah Pinjaman</th>
-                      <th>Sisa Pinjaman</th>
-                      <th>Jumlah Angsuran</th>
-                      <th>Uang Kurang</th>
-                      <th>View</th>
-                      <th>Edit</th>
-                      <th>Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                      $no = 1;
-                      $total_pinjaman = 0;
-                      $total_sisa = 0;
-                      //$total_angsuran = 0;
-                      for($i = 0; $i < sizeof($pinjaman); $i++) {
-                    ?>
-                    <tr <?php echo $pinjaman[$i]['sisa_angsuran'] == 0 ? "style='background-color: #EEEEEE'" : "style='background-color: #90EE90'" ?>>
-                      <td style='text-align: center'><?php echo $no."."?></td>
-                      <td><?php echo $pinjaman[$i]['nama_nasabah']?></td>
-                      <td><?php echo $pinjaman[$i]['jenis_pinjaman']?></td>
-                      <?php $waktu = strtotime($pinjaman[$i]['waktu'])?>
-                      <td><?php echo date("d-m-Y", $waktu)?></td>
+                <div class="table-responsive">
+                  <table id="pinjaman_table" class="table table-bordered table-hover"  width="100%">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>No.</th>
+                        <th>Nama</th>
+                        <th>Jenis Pinjaman</th>
+                        <th>Tanggal Pinjam</th>
+                        <th>Jaminan</th>
+                        <th>Jatuh Tempo</th>
+                        <th>Keterangan</th>
+                        <th>Status Pinjaman</th>
+                        <th>Jumlah Pinjaman</th>
+                        <th>Sisa Pinjaman</th>
+                        <th>Jumlah Angsuran</th>
+                        <th>Uang Kurang</th>
+                        <th>View</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
                       <?php
-                        $jaminan = json_decode($pinjaman[$i]['jaminan']);
-                        $test = @json_decode($pinjaman[$i]['jaminan']);
-                        if ($test)  {
-                          $str_jaminan = '';
-                          for($a = 0; $a < sizeof($jaminan); $a++) {
-                            $str_jaminan .= $jaminan[$a]->keterangan;
-                            $str_jaminan .= '; ';
-                          }
-                          $str_jaminan = substr($str_jaminan, 0, -2);
-                        } else {
-                          $str_jaminan = $pinjaman[$i]['jaminan'];
-                        }
-                        
+                        $no = 1;
+                        $total_pinjaman = 0;
+                        $total_sisa = 0;
+                        //$total_angsuran = 0;
+                        for($i = 0; $i < sizeof($pinjaman); $i++) {
                       ?>
-                      <td><?php echo $str_jaminan?></td>
-                      <?php $jatuh_tempo = strtotime($pinjaman[$i]['jatuh_tempo'])?>
-                      <td><?php echo date("d-m-Y", $jatuh_tempo)?></td>
-                      <td><?php echo $pinjaman[$i]['keterangan']?></td>
-                      <td><?php echo $pinjaman[$i]['status_pinjaman']?></td>
-                      <td><?php echo rupiah($pinjaman[$i]['jumlah_pinjaman'])?></td>
-                      <td><?php echo $pinjaman[$i]['sisa_angsuran'] > 0 ? rupiah($pinjaman[$i]['sisa_angsuran']) : rupiah($pinjaman[$i]['sisa_angsuran'])." (LUNAS)" ?></td>
-                      <td><?php echo $pinjaman[$i]['jumlah_angsuran']?></td>
-                      <td><?php echo rupiah($pinjaman[$i]['uang_kurang'])?></td>
-                      <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_pinjaman/".$pinjaman[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
-                      <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_pinjaman/".$pinjaman[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
-                      <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationPinjaman('<?php echo $pinjaman[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
-                    </tr>
-                    <?php 
-                        $no++;
-                        $total_pinjaman += $pinjaman[$i]['jumlah_pinjaman'];
-                        $total_sisa += $pinjaman[$i]['sisa_angsuran'];
-                        //$total_angsuran += $pinjaman[$i]['jumlah_angsuran'];
-                      }
-                    ?>
-                    <tr>
-                      <td colspan="8"><strong>Total</strong></td>
-                      <td><strong><?php echo rupiah($total_pinjaman) ?></strong></td>
-                      <td><strong><?php echo rupiah($total_sisa) ?></strong></td>
-                      <!--<td><strong><?php echo rupiah($total_angsuran) ?></strong></td>-->
-                    </tr>
-                  </tbody>
-                </table>
+                      <tr <?php echo $pinjaman[$i]['sisa_angsuran'] == 0 ? "style='background-color: #EEEEEE'" : "style='background-color: #90EE90'" ?>>
+                        <td>
+                            <button class="btn btn-info toggle-detail-pinjaman">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+                        <td style='text-align: center'><?php echo $no."."?></td>
+                        <td><?php echo $pinjaman[$i]['nama_nasabah']?></td>
+                        <td><?php echo $pinjaman[$i]['jenis_pinjaman']?></td>
+                        <?php $waktu = strtotime($pinjaman[$i]['waktu'])?>
+                        <td><?php echo date("d-m-Y", $waktu)?></td>
+                        <?php
+                          $jaminan = json_decode($pinjaman[$i]['jaminan']);
+                          $test = @json_decode($pinjaman[$i]['jaminan']);
+                          if ($test)  {
+                            $str_jaminan = '';
+                            for($a = 0; $a < sizeof($jaminan); $a++) {
+                              $str_jaminan .= $jaminan[$a]->keterangan;
+                              $str_jaminan .= '; ';
+                            }
+                            $str_jaminan = substr($str_jaminan, 0, -2);
+                          } else {
+                            $str_jaminan = $pinjaman[$i]['jaminan'];
+                          }
+                          
+                        ?>
+                        <td><?php echo $str_jaminan?></td>
+                        <?php $jatuh_tempo = strtotime($pinjaman[$i]['jatuh_tempo'])?>
+                        <td><?php echo date("d-m-Y", $jatuh_tempo)?></td>
+                        <td><?php echo $pinjaman[$i]['keterangan']?></td>
+                        <td><?php echo $pinjaman[$i]['status_pinjaman']?></td>
+                        <td><?php echo rupiah($pinjaman[$i]['jumlah_pinjaman'])?></td>
+                        <td><?php echo $pinjaman[$i]['sisa_angsuran'] > 0 ? rupiah($pinjaman[$i]['sisa_angsuran']) : rupiah($pinjaman[$i]['sisa_angsuran'])." (LUNAS)" ?></td>
+                        <td><?php echo $pinjaman[$i]['jumlah_angsuran']?></td>
+                        <td><?php echo rupiah($pinjaman[$i]['uang_kurang'])?></td>
+                        <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_pinjaman/".$pinjaman[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>
+                        <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_pinjaman/".$pinjaman[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+                        <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationPinjaman('<?php echo $pinjaman[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                      </tr>
+                      <tr class="detail-pinjaman-row" style="display: none;">
+                          <td colspan="16" style="text-align: left">
+                              <strong>Hijau:</strong> <?php echo $pinjaman[$i]['jumlah_hijau'] ?><br>
+                              <strong>Hijau Tempo:</strong> <?php echo $pinjaman[$i]['jumlah_hijau_tempo'] ?><br>
+                              <strong>Kuning 1:</strong> <?php echo $pinjaman[$i]['jumlah_hijau_kuning1'] ?><br>
+                              <strong>Kuning 2:</strong> <?php echo $pinjaman[$i]['jumlah_hijau_kuning2'] ?><br>
+                              <strong>Merah:</strong> <?php echo $pinjaman[$i]['jumlah_hijau_merah'] ?><br>
+                          </td>
+                      </tr>
+                      <?php 
+                          $no++;
+                          $total_pinjaman += $pinjaman[$i]['jumlah_pinjaman'];
+                          $total_sisa += $pinjaman[$i]['sisa_angsuran'];
+                          //$total_angsuran += $pinjaman[$i]['jumlah_angsuran'];
+                        }
+                      ?>
+                      <tr>
+                        <td colspan="8"><strong>Total</strong></td>
+                        <td><strong><?php echo rupiah($total_pinjaman) ?></strong></td>
+                        <td><strong><?php echo rupiah($total_sisa) ?></strong></td>
+                        <!--<td><strong><?php echo rupiah($total_angsuran) ?></strong></td>-->
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
             <div class="tab-pane" id="simpanan_pokok">
@@ -956,6 +973,12 @@ function rupiah($angka){
   }
 
   $(document).ready(function() {
+    $(".toggle-detail-pinjaman").click(function(){
+        var icon = $(this).find("i");
+        icon.toggleClass("fa-plus fa-minus");
+        $(this).closest("tr").next(".detail-pinjaman-row").toggle();
+    });
+    
     if($('#jenis_aset').val() == 'sertifikat') {
         document.getElementById("div_merek").style.display = "none";
         document.getElementById("div_jenis_motor").style.display = "none";

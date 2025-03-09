@@ -509,7 +509,12 @@ function rupiah($angka){
                           <th>Jasa Tambahan</th>
                           <th>Sisa Pinjaman</th>
                           <th>Janji</th>
-                          <th>Penagihan / Follow Up</th>
+                          <th>Penagihan</th>
+                          <th>Follow Up</th>
+                          <th>Jatuh Tempo Sebelum</th>
+                          <th>Jatuh Tempo Sesudah</th>
+                          <th>Lama Jatuh Tempo</th>
+                          <th>Status</th>
                           <th>Edit</th>
                           <th>Delete</th>
                           <th>Post</th>
@@ -577,7 +582,38 @@ function rupiah($angka){
                           <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['denda'],2,',','.');?></td>
                           <td style='text-align: right'><?php echo "Rp " . number_format($sisa_pinjaman[$i],2,',','.');?></td>
                           <td><?php echo $detail_angsuran[$i]['janji'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['janji'])) : '';?></td>
-                          <td><?php echo $detail_angsuran[$i]['penagihan_followup'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['penagihan_followup'])) : '';?></td>
+                          <td><?php echo $detail_angsuran[$i]['penagihan'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['penagihan'])) : '';?></td>
+                          <td><?php echo $detail_angsuran[$i]['followup'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['followup'])) : '';?></td>
+                          <td><?php echo $detail_angsuran[$i]['jatuh_tempo_sebelum'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['jatuh_tempo_sebelum'])) : '';?></td>
+                          <td><?php echo $detail_angsuran[$i]['jatuh_tempo_sesudah'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['jatuh_tempo_sesudah'])) : '';?></td>
+                          <td><?php echo $detail_angsuran[$i]['lama_bayar']." Hari"?></td>
+                          <?php
+                          if ($detail_angsuran[$i]['status_angsuran'] == 'Hijau Tempo') {
+                          ?>
+                            <td style="background-color: green; text-align: center;"><?php echo $detail_angsuran[$i]['status_angsuran'] ?></td>
+                          <?php
+                          } else if ($detail_angsuran[$i]['status_angsuran'] == 'Hijau') {
+                          ?>
+                              <td style="background-color: lightgreen; text-align: center;"><?php echo $detail_angsuran[$i]['status_angsuran'] ?></td>
+                          <?php
+                          } else if ($detail_angsuran[$i]['status_angsuran'] == 'Kuning 1') {
+                          ?>
+                            <td style="background-color: yellow; text-align: center;"><?php echo $detail_angsuran[$i]['status_angsuran'] ?></td>
+                          <?php
+                          } else if ($detail_angsuran[$i]['status_angsuran'] == 'Kuning 2') {
+                          ?>
+                            <td style="background-color: orange; text-align: center;"><?php echo $detail_angsuran[$i]['status_angsuran'] ?></td>
+                          <?php
+                          } else if ($detail_angsuran[$i]['status_angsuran'] == 'Merah') {
+                          ?>
+                            <td style="background-color: red; text-align: center;"><?php echo $detail_angsuran[$i]['status_angsuran'] ?></td>
+                          <?php
+                          } else {
+                          ?>
+                            <td><?php echo $detail_angsuran[$i]['status_angsuran']?></td>
+                          <?php
+                          }
+                          ?>
                           <?php 
                             $total_jasa += $detail_angsuran[$i]['jasa'];
                             $total_denda += $detail_angsuran[$i]['denda'];
@@ -629,15 +665,21 @@ function rupiah($angka){
                         </div>
                       </div>
                       <div class="form-group col-xs-6">
-                        <label for="exampleInputPassword1">Tanggal Jatuh Tempo</label>
+                        <label for="exampleInputPassword1">Tanggal Jatuh Tempo Sebelum</label>
                         <div class="input-group date">
                           <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                           </div>
-                          <?php
-                            $jatuh_tempo = date("d-m-Y", strtotime($pinjaman->jatuh_tempo));
-                          ?>
-                          <input type="text" class="form-control pull-right" name="jatuh_tempo" id="jatuh_tempo" value="<?php echo $jatuh_tempo;?>" data-date-format="dd-mm-yyyy" required>
+                          <input type="text" class="form-control pull-right" name="jatuh_tempo_sebelum" id="jatuh_tempo_sebelum" data-date-format="dd-mm-yyyy" required>
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Tanggal Jatuh Tempo Sesudah</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right" name="jatuh_tempo_sesudah" id="jatuh_tempo_sesudah" data-date-format="dd-mm-yyyy" required>
                         </div>
                       </div>
                       <div class="form-group col-xs-6">
@@ -719,12 +761,21 @@ function rupiah($angka){
                         </div>
                       </div>
                       <div class="form-group col-xs-6">
-                        <label for="exampleInputPassword1">Penagihan / Follow Up</label>
+                        <label for="exampleInputPassword1">Penagihan</label>
                         <div class="input-group date">
                           <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                           </div>
-                          <input type="text" class="form-control pull-right" name="penagihan_followup" id="penagihan_followup" data-date-format="dd-mm-yyyy">
+                          <input type="text" class="form-control pull-right" name="penagihan" id="penagihan" data-date-format="dd-mm-yyyy">
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Follow Up</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right" name="followup" id="followup" data-date-format="dd-mm-yyyy">
                         </div>
                       </div>
                     </div>
@@ -1698,9 +1749,12 @@ function rupiah($angka){
         });
 
         $('#janji').datepicker({}).on('changeDate', function(ev){});
-        $('#penagihan_followup').datepicker({}).on('changeDate', function(ev){});
+        $('#penagihan').datepicker({}).on('changeDate', function(ev){});
+        $('#followup').datepicker({}).on('changeDate', function(ev){});
 
         $('#jatuh_tempo').datepicker({}).on('changeDate', function(ev){});
+        $('#jatuh_tempo_sebelum').datepicker({}).on('changeDate', function(ev){});
+        $('#jatuh_tempo_sesudah').datepicker({}).on('changeDate', function(ev){});
 
         $('#tgl_penerimaan_surat').datepicker({}).on('changeDate', function(ev){});
 

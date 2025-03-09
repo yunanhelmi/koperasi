@@ -45,6 +45,12 @@ class DetailangsuranModel extends CI_Model {
 		return $a->max_bulanke;
 	}
 
+	function get_max_jatuh_tempo_sesudah($id_pinjaman) {
+		$query = $this->db->query("SELECT MAX(jatuh_tempo_sesudah) as jatuh_tempo_sesudah from `detail_angsuran` WHERE id_pinjaman = '$id_pinjaman' AND jenis = 'Angsuran'");
+		$a = $query->row();
+		return $a->jatuh_tempo_sesudah;
+	}
+
 	function showData() {
 		$query = $this->db->query("SELECT * from `detail_angsuran`");
 		$a = $query->result_array();

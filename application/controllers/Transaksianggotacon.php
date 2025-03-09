@@ -204,10 +204,11 @@ class TransaksianggotaCon extends CI_Controller {
 		$insert['status_pinjaman'] 			= $this->input->post('status_pinjaman');
 
 		$detail = array();
-		$detail['waktu'] 		= $insert['waktu'];
-		$detail['id_pinjaman'] 	= $insert['id'];
-		$detail['jenis'] 		= "Pinjaman";
-		$detail['total'] 		= $insert['jumlah_pinjaman'];
+		$detail['waktu'] 				= $insert['waktu'];
+		$detail['jatuh_tempo_sesudah'] 	= $insert['jatuh_tempo'];
+		$detail['id_pinjaman'] 			= $insert['id'];
+		$detail['jenis'] 				= "Pinjaman";
+		$detail['total'] 				= $insert['jumlah_pinjaman'];
 		
 		$this->pinjamanmodel->inputData($insert);
 		$this->detailangsuranmodel->inputData($detail);
@@ -730,9 +731,9 @@ class TransaksianggotaCon extends CI_Controller {
 		}
 
 		// Insert Detail Angsuran ke dalam table detail_angsuran
-		$date1 							= $this->input->post('waktu');
-		$date 							= strtotime($date1);
-		$input['waktu'] 				= date("Y-m-d",$date);
+		if($this->input->post('waktu') != NULL) {
+			$input['waktu'] 	= date("Y-m-d",strtotime($this->input->post('waktu')));	
+		}
 		$input['bulan_ke'] 				= $this->input->post('bulan_ke');
 		$input['bulan_tahun'] 			= $this->input->post('bulan_tahun');
 		$input['jenis'] 				= $this->input->post('jenis');
@@ -742,17 +743,77 @@ class TransaksianggotaCon extends CI_Controller {
 		$input['denda'] 				= $this->input->post('denda');
 		$input['total'] 				= $this->input->post('total');
 		$input['keterangan']			= $this->input->post('keterangan');
+		if($this->input->post('jatuh_tempo_sebelum') != NULL) {
+			$input['jatuh_tempo_sebelum'] 	= date("Y-m-d",strtotime($this->input->post('jatuh_tempo_sebelum')));	
+		}
+		if($this->input->post('jatuh_tempo_sesudah') != NULL) {
+			$input['jatuh_tempo_sesudah'] 	= date("Y-m-d",strtotime($this->input->post('jatuh_tempo_sesudah')));	
+		}
 		if($this->input->post('janji') != NULL) {
 			$input['janji'] 				= date("Y-m-d",strtotime($this->input->post('janji')));	
 		}
-		if($this->input->post('penagihan_followup') != NULL) {
-			$input['penagihan_followup'] 	= date("Y-m-d",strtotime($this->input->post('penagihan_followup')));
+		if($this->input->post('penagihan') != NULL) {
+			$input['penagihan'] 	= date("Y-m-d",strtotime($this->input->post('penagihan')));
 		}
-		
-		$this->detailangsuranmodel->inputData($input);
+		if($this->input->post('followup') != NULL) {
+			$input['followup'] 	= date("Y-m-d",strtotime($this->input->post('followup')));
+		}
 
 		$id_pinjaman = $this->input->post('id_pinjaman');
 		$data['pinjaman'] = $this->pinjamanmodel->get_pinjaman_by_id($id_pinjaman);
+
+		if($data['pinjaman']->jenis_pinjaman == 'Angsuran') {
+			if($this->input->post('jatuh_tempo_sebelum') != NULL) {
+				$waktu_bayar = new DateTime($input['waktu']);
+				$jatuh_tempo_sebelum = new DateTime($input['jatuh_tempo_sebelum']);
+				if($waktu_bayar < $jatuh_tempo_sebelum) {
+					$lama_bayar = $waktu_bayar->diff($jatuh_tempo_sebelum)->format("%a") * -1;
+				} else {
+					$lama_bayar = $waktu_bayar->diff($jatuh_tempo_sebelum)->format("%a");
+				}
+				$status_angsuran = 'Hijau';
+				if ($lama_bayar > 4 && $lama_bayar <= 11) {
+	                $status_angsuran = 'Hijau Tempo';
+	            } else if ($lama_bayar > 11 && $lama_bayar <= 30) {
+	                $status_angsuran = 'Kuning 1';
+	            } else if ($lama_bayar > 30 && $lama_bayar <= 90) {
+	                $status_angsuran = 'Kuning 2';
+	            } else if ($lama_bayar > 90) {
+	                $status_angsuran = 'Merah';
+	            }
+	            $input['lama_bayar'] = $lama_bayar;
+	            $input['status_angsuran'] = $status_angsuran;
+			} else {
+				$input['lama_bayar'] = NULL;
+	            $input['status_angsuran'] = NULL;
+			}
+		} else if($data['pinjaman']->jenis_pinjaman == 'Musiman') {
+			if($this->input->post('jatuh_tempo_sebelum') != NULL) {
+				$waktu_bayar = new DateTime($input['waktu']);
+				$jatuh_tempo_sebelum = new DateTime($input['jatuh_tempo_sebelum']);
+				if($waktu_bayar < $jatuh_tempo_sebelum) {
+					$lama_bayar = $waktu_bayar->diff($jatuh_tempo_sebelum)->format("%a") * -1;
+				} else {
+					$lama_bayar = $waktu_bayar->diff($jatuh_tempo_sebelum)->format("%a");
+				}
+				$status_angsuran = 'Hijau';
+				if ($lama_bayar > 125 && $lama_bayar <= 131) {
+	                $status_angsuran = 'Hijau Tempo';
+	            } else if ($lama_bayar > 131 && $lama_bayar <= 180) {
+	                $status_angsuran = 'Kuning 1';
+	            } else if ($lama_bayar > 180 && $lama_bayar <= 240) {
+	                $status_angsuran = 'Kuning 2';
+	            } else if ($lama_bayar > 240) {
+	                $status_angsuran = 'Merah';
+	            }
+	            $input['lama_bayar'] = $lama_bayar;
+	            $input['status_angsuran'] = $status_angsuran;
+			} else {
+				$input['lama_bayar'] = NULL;
+	            $input['status_angsuran'] = NULL;
+			}
+		}
+		$this->detailangsuranmodel->inputData($input);
 
 		if($input['jenis'] == 'Pinjaman') {
 			//Update Sisa Angsuran Jika Jenis Transaksi 'Pinjaman'
@@ -800,81 +861,14 @@ class TransaksianggotaCon extends CI_Controller {
 		}*/
 
 		/* UPDATE Jatuh Tempo */
-		$tgl_jatuh_tempo = date_create($this->input->post('jatuh_tempo'));
-		$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, date_format($tgl_jatuh_tempo, "Y-m-d"));
-		/*if($data['pinjaman']->jenis_pinjaman == 'Angsuran') {
-			if($input['jenis'] == 'Angsuran') {
-				$wkt_pinjam			= $data['pinjaman']->waktu;
-				$wkt_pinjam			= new DateTime($wkt_pinjam);
-				$tgl_pinjam			= $wkt_pinjam->format('d');
-
-				if($data['pinjaman']->jatuh_tempo == "0000-00-00" || $data['pinjaman']->jatuh_tempo == NULL) {
-					$detail = $this->detailangsuranmodel->get_total_kali_angsuran($data['pinjaman']->id);
-					$total_kali_angsuran = $detail;
-
-					$jatuh_tempo_new 	= $this->addMonths($wkt_pinjam->format('Y-m-d'), $total_kali_angsuran + 1);
-					$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
-
-				} else {
-					$jatuh_tempo_old 	= $data['pinjaman']->jatuh_tempo;
-					$jatuh_tempo_old 	= new DateTime($jatuh_tempo_old);	
-
-					$jatuh_tempo_new 	= $this->addMonths($jatuh_tempo_old->format('Y-m-d'), 1);
-					$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
-				}
-
-				$bulan_jatuh_tempo_new = (int)$jatuh_tempo_new->format('m');
-				$tahun_jatuh_tempo_new = $jatuh_tempo_new->format('Y');
-
-				$max_tgl_bulan_jatuh_tempo_new = $this->getDaysInMonth($tahun_jatuh_tempo_new, $bulan_jatuh_tempo_new);
-
-				if($tgl_pinjam <= $max_tgl_bulan_jatuh_tempo_new) {
-					$tanggal = $tgl_pinjam;
-				} else {
-					$tanggal = $max_tgl_bulan_jatuh_tempo_new;
-				}
-				
-				$jatuh_tempo 		= $jatuh_tempo_new->setDate($jatuh_tempo_new->format('Y'), $jatuh_tempo_new->format('m'), $tanggal);
-				
-				$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, $jatuh_tempo->format('Y-m-d'));
-			}
-
-		} else if ($data['pinjaman']->jenis_pinjaman == 'Musiman') {
-			if($input['jenis'] == 'Pinjaman') {
-				$wkt_pinjam			= $data['pinjaman']->waktu;
-				$wkt_pinjam			= new DateTime($wkt_pinjam);
-				$tgl_pinjam			= $wkt_pinjam->format('d');
-
-				if($data['pinjaman']->jatuh_tempo == "0000-00-00" || $data['pinjaman']->jatuh_tempo == NULL) {
-					$detail = $this->detailangsuranmodel->get_total_kali_pinjaman($data['pinjaman']->id);
-					$total_kali_pinjaman = $detail;
-
-					$jatuh_tempo_new 	= $this->addMonths($wkt_pinjam->format('Y-m-d'), $total_kali_pinjaman * 4);
-					$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
-				} else {
-					$jatuh_tempo_old 	= $data['pinjaman']->jatuh_tempo;
-					$jatuh_tempo_old 	= new DateTime($jatuh_tempo_old);
-
-					$jatuh_tempo_new 	= $this->addMonths($jatuh_tempo_old->format('Y-m-d'), 4);
-					$jatuh_tempo_new 	= new DateTime($jatuh_tempo_new);
-				}
-
-				$bulan_jatuh_tempo_new = (int)$jatuh_tempo_new->format('m');
-				$tahun_jatuh_tempo_new = $jatuh_tempo_new->format('Y');
-
-				$max_tgl_bulan_jatuh_tempo_new = $this->getDaysInMonth($tahun_jatuh_tempo_new, $bulan_jatuh_tempo_new);
-
-				if($tgl_pinjam <= $max_tgl_bulan_jatuh_tempo_new) {
-					$tanggal = $tgl_pinjam;
-				} else {
-					$tanggal = $max_tgl_bulan_jatuh_tempo_new;
-				}
-				
-				$jatuh_tempo 		= $jatuh_tempo_new->setDate($jatuh_tempo_new->format('Y'), $jatuh_tempo_new->format('m'), $tanggal);
-				
-				$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, $jatuh_tempo->format('Y-m-d'));
-			}
-		}*/
+		//$tgl_jatuh_tempo = date_create($this->input->post('jatuh_tempo'));
+		$jatuh_tempo = $this->detailangsuranmodel->get_max_jatuh_tempo_sesudah($data['pinjaman']->id);
+		if($jatuh_tempo != NULL) {
+			$tgl_jatuh_tempo = date_create($jatuh_tempo);
+			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, date_format($tgl_jatuh_tempo, "Y-m-d"));
+		} else {
+			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, NULL);
+		}
 		/*END OF UPDATE Jatuh Tempo */
 		
 		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
@@ -974,9 +968,9 @@ class TransaksianggotaCon extends CI_Controller {
 
 		//Update Detail Angsuran ke dalam table detail_angsuran
 		$id_detail_angsuran 			= $this->input->post('edit_id');
-		$date1 							= $this->input->post('edit_waktu');
-		$date 							= strtotime($date1);
-		$input['waktu'] 				= date("Y-m-d",$date);
+		if($this->input->post('edit_waktu') != NULL) {
+			$input['waktu'] 	= date("Y-m-d",strtotime($this->input->post('edit_waktu')));	
+		}
 		$input['bulan_ke'] 				= $this->input->post('edit_bulan_ke');
 		$input['bulan_tahun'] 			= $this->input->post('edit_bulan_tahun');
 		$input['jenis'] 				= $this->input->post('edit_jenis');
@@ -986,17 +980,78 @@ class TransaksianggotaCon extends CI_Controller {
 		$input['denda'] 				= $this->input->post('edit_denda');
 		$input['total'] 				= $this->input->post('edit_total');
 		$input['keterangan']			= $this->input->post('edit_keterangan');
+		if($this->input->post('edit_jatuh_tempo_sebelum') != NULL) {
+			$input['jatuh_tempo_sebelum'] 	= date("Y-m-d",strtotime($this->input->post('edit_jatuh_tempo_sebelum')));	
+		}
+		if($this->input->post('edit_jatuh_tempo_sesudah') != NULL) {
+			$input['jatuh_tempo_sesudah'] 	= date("Y-m-d",strtotime($this->input->post('edit_jatuh_tempo_sesudah')));	
+		}
 		if($this->input->post('edit_janji') != NULL) {
 			$input['janji'] 				= date("Y-m-d",strtotime($this->input->post('edit_janji')));	
 		}
-		if($this->input->post('edit_penagihan_followup') != NULL) {
-			$input['penagihan_followup'] 	= date("Y-m-d",strtotime($this->input->post('edit_penagihan_followup')));
+		if($this->input->post('edit_penagihan') != NULL) {
+			$input['penagihan'] 	= date("Y-m-d",strtotime($this->input->post('edit_penagihan')));
 		}
-
-		$this->detailangsuranmodel->updateData($id_detail_angsuran, $input);
+		if($this->input->post('edit_followup') != NULL) {
+			$input['followup'] 	= date("Y-m-d",strtotime($this->input->post('edit_followup')));
+		}
 
 		$id_pinjaman = $this->input->post('edit_id_pinjaman');
 		$data['pinjaman'] = $this->pinjamanmodel->get_pinjaman_by_id($id_pinjaman);
+
+		if($data['pinjaman']->jenis_pinjaman == 'Angsuran') {
+			if($this->input->post('edit_jatuh_tempo_sebelum') != NULL) {
+				$waktu_bayar = new DateTime($input['waktu']);
+				$jatuh_tempo_sebelum = new DateTime($input['jatuh_tempo_sebelum']);
+				if($waktu_bayar < $jatuh_tempo_sebelum) {
+					$lama_bayar = $waktu_bayar->diff($jatuh_tempo_sebelum)->format("%a") * -1;
+				} else {
+					$lama_bayar = $waktu_bayar->diff($jatuh_tempo_sebelum)->format("%a");
+				}
+				$status_angsuran = 'Hijau';
+				if ($lama_bayar > 4 && $lama_bayar <= 11) {
+	                $status_angsuran = 'Hijau Tempo';
+	            } else if ($lama_bayar > 11 && $lama_bayar <= 30) {
+	                $status_angsuran = 'Kuning 1';
+	            } else if ($lama_bayar > 30 && $lama_bayar <= 90) {
+	                $status_angsuran = 'Kuning 2';
+	            } else if ($lama_bayar > 90) {
+	                $status_angsuran = 'Merah';
+	            }
+	            $input['lama_bayar'] = $lama_bayar;
+	            $input['status_angsuran'] = $status_angsuran;
+			} else {
+				$input['lama_bayar'] = NULL;
+	            $input['status_angsuran'] = NULL;
+			}
+		} else if($data['pinjaman']->jenis_pinjaman == 'Musiman') {
+			if($this->input->post('edit_jatuh_tempo_sebelum') != NULL) {
+				$waktu_bayar = new DateTime($input['waktu']);
+				$jatuh_tempo_sebelum = new DateTime($input['jatuh_tempo_sebelum']);
+				if($waktu_bayar < $jatuh_tempo_sebelum) {
+					$lama_bayar = $waktu_bayar->diff($jatuh_tempo_sebelum)->format("%a") * -1;
+				} else {
+					$lama_bayar = $waktu_bayar->diff($jatuh_tempo_sebelum)->format("%a");
+				}
+				$status_angsuran = 'Hijau';
+				if ($lama_bayar > 125 && $lama_bayar <= 131) {
+	                $status_angsuran = 'Hijau Tempo';
+	            } else if ($lama_bayar > 131 && $lama_bayar <= 180) {
+	                $status_angsuran = 'Kuning 1';
+	            } else if ($lama_bayar > 180 && $lama_bayar <= 240) {
+	                $status_angsuran = 'Kuning 2';
+	            } else if ($lama_bayar > 240) {
+	                $status_angsuran = 'Merah';
+	            }
+	            $input['lama_bayar'] = $lama_bayar;
+	            $input['status_angsuran'] = $status_angsuran;
+			} else {
+				$input['lama_bayar'] = NULL;
+	            $input['status_angsuran'] = NULL;
+			}
+		}
+
+		$this->detailangsuranmodel->updateData($id_detail_angsuran, $input);
 
 		if($input['jenis'] == 'Pinjaman') {
 			//Update Sisa Angsuran Jika Jenis Transaksi 'Pinjaman'
@@ -1044,8 +1099,15 @@ class TransaksianggotaCon extends CI_Controller {
 		}*/
 
 		/* UPDATE Jatuh Tempo */
-		$tgl_jatuh_tempo = date_create($this->input->post('edit_jatuh_tempo'));
-		$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, date_format($tgl_jatuh_tempo, "Y-m-d"));
+		//$tgl_jatuh_tempo = date_create($this->input->post('jatuh_tempo'));
+		$jatuh_tempo = $this->detailangsuranmodel->get_max_jatuh_tempo_sesudah($data['pinjaman']->id);
+		if($jatuh_tempo != NULL) {
+			$tgl_jatuh_tempo = date_create($jatuh_tempo);
+			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, date_format($tgl_jatuh_tempo, "Y-m-d"));
+		} else {
+			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, NULL);
+		}
+		/*END OF UPDATE Jatuh Tempo */
 
 		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
 	}

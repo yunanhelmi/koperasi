@@ -26,7 +26,26 @@ class PinjamanModel extends CI_Model {
 	}
 
 	function get_pinjaman_by_id_nasabah($id_nasabah) {
-		$query = $this->db->query("SELECT * from `pinjaman` WHERE id_nasabah = '$id_nasabah' ORDER BY id DESC");
+		//$query = $this->db->query("SELECT * from `pinjaman` WHERE id_nasabah = '$id_nasabah' ORDER BY id DESC");
+		$query = $this->db->query("
+									SELECT 
+										p.*, 
+										COUNT(CASE WHEN d.status_angsuran = 'Hijau' THEN 1 END) AS jumlah_hijau,
+										COUNT(CASE WHEN d.status_angsuran = 'Hijau Tempo' THEN 1 END) AS jumlah_hijau_tempo,
+										COUNT(CASE WHEN d.status_angsuran = 'Kuning 1' THEN 1 END) AS jumlah_hijau_kuning1,
+										COUNT(CASE WHEN d.status_angsuran = 'Kuning 2' THEN 1 END) AS jumlah_hijau_kuning2,
+										COUNT(CASE WHEN d.status_angsuran = 'Merah' THEN 1 END) AS jumlah_hijau_merah
+									FROM 
+										pinjaman p
+									LEFT JOIN 
+										detail_angsuran d ON p.id = d.id_pinjaman
+									WHERE 
+										p.id_nasabah = '$id_nasabah'
+									GROUP BY 
+										p.id, p.id_nasabah
+									ORDER BY 
+										p.id DESC;
+			");
 		$a = $query->result_array();
 		return $a;
 	}

@@ -425,119 +425,157 @@ function rupiah($angka){
 
                   <div class="box box-danger">
                     <legend style="text-align:center;">DETAIL ANGSURAN</legend>
-                    <table id="detail_angsuran_table" class="table table-bordered table-hover"  width="100%">
-                      <thead>
-                        <tr>
-                          <th>No.</th>
-                          <th>Waktu</th>
-                          <th>Jenis</th>
-                          <th>Keterangan</th>
-                          <th>Debet</th>
-                          <th>Kredit</th>
-                          <th>Jasa</th>
-                          <th>Jasa Tambahan</th>
-                          <th>Sisa Pinjaman</th>
-                          <th>Janji</th>
-                          <th>Penagihan / Follow Up</th>
-                          <th>Edit</th>
-                          <th>Delete</th>
-                          <th>Post</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                          $no           = 1;
-                          $total_debet  = 0;
-                          $total_kredit = 0;
-                          $total_jasa   = 0;
-                          $total_denda  = 0;
-                          $sisa_pinjaman = array();
-                          for($i = 0; $i < sizeof($detail_angsuran); $i++) {
-                        ?>
-                        <tr>
-                          <td style='text-align: center'><?php echo $no."."?></td>
-                          <?php 
-                          $waktu = strtotime( $detail_angsuran[$i]['waktu'] );
-                          $wkt = date( 'd-m-Y', $waktu );
-                          ?>
-                          <td><?php echo $wkt?></td>
-                          <?php if($detail_angsuran[$i]['jenis'] == "Pinjaman") {?>
+                    <div class="table-responsive">
+                      <table id="detail_angsuran_table" class="table table-bordered table-hover"  width="100%">
+                        <thead>
+                          <tr>
+                            <th>No.</th>
+                            <th>Waktu</th>
+                            <th>Jenis</th>
+                            <th>Keterangan</th>
+                            <th>Debet</th>
+                            <th>Kredit</th>
+                            <th>Jasa</th>
+                            <th>Jasa Tambahan</th>
+                            <th>Sisa Pinjaman</th>
+                            <th>Janji</th>
+                            <th>Penagihan</th>
+                            <th>Follow Up</th>
+                            <th>Jatuh Tempo Sebelum</th>
+                            <th>Jatuh Tempo Sesudah</th>
+                            <th>Lama Jatuh Tempo</th>
+                            <th>Status</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Post</th>
+                          </tr>
+                        </thead>
+                        <tbody>
                           <?php
-                            if($detail_angsuran[$i]['total'] > 0) {
+                            $no           = 1;
+                            $total_debet  = 0;
+                            $total_kredit = 0;
+                            $total_jasa   = 0;
+                            $total_denda  = 0;
+                            $sisa_pinjaman = array();
+                            for($i = 0; $i < sizeof($detail_angsuran); $i++) {
                           ?>
-                          <td style='text-align: left'><?php echo $detail_angsuran[$i]['jenis']?></td>
-                          <?php
-                            } else if($detail_angsuran[$i]['jasa'] == 0 && $detail_angsuran[$i]['total'] == 0) {
-                          ?>
-                          <td style='text-align: left'>Penagihan ke-<?php echo $detail_angsuran[$i]['bulan_ke']?></td>
-                          <?php
+                          <tr>
+                            <td style='text-align: center'><?php echo $no."."?></td>
+                            <?php 
+                            $waktu = strtotime( $detail_angsuran[$i]['waktu'] );
+                            $wkt = date( 'd-m-Y', $waktu );
+                            ?>
+                            <td><?php echo $wkt?></td>
+                            <?php if($detail_angsuran[$i]['jenis'] == "Pinjaman") {?>
+                            <?php
+                              if($detail_angsuran[$i]['total'] > 0) {
+                            ?>
+                            <td style='text-align: left'><?php echo $detail_angsuran[$i]['jenis']?></td>
+                            <?php
+                              } else if($detail_angsuran[$i]['jasa'] == 0 && $detail_angsuran[$i]['total'] == 0) {
+                            ?>
+                            <td style='text-align: left'>Penagihan ke-<?php echo $detail_angsuran[$i]['bulan_ke']?></td>
+                            <?php
+                              } else {
+                            ?>
+                            <td style='text-align: left'>Pengembalian Jasa</td>
+                            <?php
+                              }
+                            ?>
+                            <td><?php echo $detail_angsuran[$i]['keterangan']?></td>
+                            <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
+                            <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['total'],2,',','.');?></td>
+                            <?php $total_kredit += $detail_angsuran[$i]['total'];?>
+                            <?php } else if($detail_angsuran[$i]['jenis'] == "Angsuran") {?>
+                            <?php
+                              if($detail_angsuran[$i]['jasa'] >= 0) {
+                                $bln_thn = strtotime( $detail_angsuran[$i]['bulan_tahun'] );
+                                $bulan_tahun = date( 'M-Y', $bln_thn );
+                            ?>
+                            <td style='text-align: left'><?php echo $detail_angsuran[$i]['jenis']." Bulan ke-".$detail_angsuran[$i]['bulan_ke']." (".$bulan_tahun.")"?></td>
+                            <?php
+                              } else {
+                            ?>
+                            <td style='text-align: left'>Pengembalian Jasa</td>
+                            <?php
+                              }
+                            ?>
+                            <td><?php echo $detail_angsuran[$i]['keterangan']?></td>
+                            <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['angsuran'],2,',','.');?></td>
+                            <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
+                            <?php $total_debet += $detail_angsuran[$i]['angsuran'];?>
+                            <?php }
+                            $sisa_pinjaman[$i] = $total_kredit - $total_debet;
+                            ?>
+                            <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['jasa'],2,',','.');?></td>
+                            <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['denda'],2,',','.');?></td>
+                            <td style='text-align: right'><?php echo "Rp " . number_format($sisa_pinjaman[$i],2,',','.');?></td>
+                            <td><?php echo $detail_angsuran[$i]['janji'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['janji'])) : '';?></td>
+                            <td><?php echo $detail_angsuran[$i]['penagihan'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['penagihan'])) : '';?></td>
+                            <td><?php echo $detail_angsuran[$i]['followup'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['followup'])) : '';?></td>
+                            <td><?php echo $detail_angsuran[$i]['jatuh_tempo_sebelum'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['jatuh_tempo_sebelum'])) : '';?></td>
+                            <td><?php echo $detail_angsuran[$i]['jatuh_tempo_sesudah'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['jatuh_tempo_sesudah'])) : '';?></td>
+                            <td><?php echo $detail_angsuran[$i]['lama_bayar']." Hari"?></td>
+                            <?php
+                            if ($detail_angsuran[$i]['status_angsuran'] == 'Hijau Tempo') {
+                            ?>
+                              <td style="background-color: green; text-align: center;"><?php echo $detail_angsuran[$i]['status_angsuran'] ?></td>
+                            <?php
+                            } else if ($detail_angsuran[$i]['status_angsuran'] == 'Hijau') {
+                            ?>
+                                <td style="background-color: lightgreen; text-align: center;"><?php echo $detail_angsuran[$i]['status_angsuran'] ?></td>
+                            <?php
+                            } else if ($detail_angsuran[$i]['status_angsuran'] == 'Kuning 1') {
+                            ?>
+                              <td style="background-color: yellow; text-align: center;"><?php echo $detail_angsuran[$i]['status_angsuran'] ?></td>
+                            <?php
+                            } else if ($detail_angsuran[$i]['status_angsuran'] == 'Kuning 2') {
+                            ?>
+                              <td style="background-color: orange; text-align: center;"><?php echo $detail_angsuran[$i]['status_angsuran'] ?></td>
+                            <?php
+                            } else if ($detail_angsuran[$i]['status_angsuran'] == 'Merah') {
+                            ?>
+                              <td style="background-color: red; text-align: center;"><?php echo $detail_angsuran[$i]['status_angsuran'] ?></td>
+                            <?php
                             } else {
-                          ?>
-                          <td style='text-align: left'>Pengembalian Jasa</td>
-                          <?php
+                            ?>
+                              <td><?php echo $detail_angsuran[$i]['status_angsuran']?></td>
+                            <?php
                             }
-                          ?>
-                          <td><?php echo $detail_angsuran[$i]['keterangan']?></td>
-                          <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
-                          <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['total'],2,',','.');?></td>
-                          <?php $total_kredit += $detail_angsuran[$i]['total'];?>
-                          <?php } else if($detail_angsuran[$i]['jenis'] == "Angsuran") {?>
-                          <?php
-                            if($detail_angsuran[$i]['jasa'] >= 0) {
-                              $bln_thn = strtotime( $detail_angsuran[$i]['bulan_tahun'] );
-                              $bulan_tahun = date( 'M-Y', $bln_thn );
-                          ?>
-                          <td style='text-align: left'><?php echo $detail_angsuran[$i]['jenis']." Bulan ke-".$detail_angsuran[$i]['bulan_ke']." (".$bulan_tahun.")"?></td>
-                          <?php
+                            ?>
+                            <?php 
+                              $total_jasa += $detail_angsuran[$i]['jasa'];
+                              $total_denda += $detail_angsuran[$i]['denda'];
+                            ?>
+                            <?php 
+                            if($detail_angsuran[$i]['status_post'] == 1) {
+                            ?>
+                            <td></td>
+                            <td></td>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/angsuran_unpost_akuntansi/".$pinjaman->id."/".$detail_angsuran[$i]['id']); ?>"><i class="fa fa-times"></i></a></td>
+                            <?php
                             } else {
-                          ?>
-                          <td style='text-align: left'>Pengembalian Jasa</td>
-                          <?php
+                            ?>
+                            <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_detail_angsuran/".$pinjaman->id."/".$detail_angsuran[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+                            <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationDeleteAngsuran('<?php echo $pinjaman->id?>','<?php echo $detail_angsuran[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/angsuran_post_akuntansi/".$pinjaman->id."/".$detail_angsuran[$i]['id']); ?>"><i class="fa fa-upload"></i></a></td>
+                            <?php
                             }
-                          ?>
-                          <td><?php echo $detail_angsuran[$i]['keterangan']?></td>
-                          <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['angsuran'],2,',','.');?></td>
-                          <td style='text-align: right'><?php echo "Rp " . number_format(0,2,',','.');?></td>
-                          <?php $total_debet += $detail_angsuran[$i]['angsuran'];?>
-                          <?php }
-                          $sisa_pinjaman[$i] = $total_kredit - $total_debet;
-                          ?>
-                          <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['jasa'],2,',','.');?></td>
-                          <td style='text-align: right'><?php echo "Rp " . number_format($detail_angsuran[$i]['denda'],2,',','.');?></td>
-                          <td style='text-align: right'><?php echo "Rp " . number_format($sisa_pinjaman[$i],2,',','.');?></td>
-                          <td><?php echo $detail_angsuran[$i]['janji'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['janji'])) : '';?></td>
-                          <td><?php echo $detail_angsuran[$i]['penagihan_followup'] != NULL ? date('d-m-Y', strtotime($detail_angsuran[$i]['penagihan_followup'])) : '';?></td>
-                          <?php 
-                            $total_jasa += $detail_angsuran[$i]['jasa'];
-                            $total_denda += $detail_angsuran[$i]['denda'];
-                          ?>
-                          <?php 
-                          if($detail_angsuran[$i]['status_post'] == 1) {
-                          ?>
-                          <td></td>
-                          <td></td>
-                          <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/angsuran_unpost_akuntansi/".$pinjaman->id."/".$detail_angsuran[$i]['id']); ?>"><i class="fa fa-times"></i></a></td>
-                          <?php
-                          } else {
-                          ?>
-                          <td style='text-align: center'><a class="btn btn-warning" href="<?php echo site_url("transaksianggotacon/edit_detail_angsuran/".$pinjaman->id."/".$detail_angsuran[$i]['id']); ?>"><i class="fa fa-pencil-square-o"></i></a></td>
-                          <td style='text-align: center'><a class="btn btn-danger" onClick="getConfirmationDeleteAngsuran('<?php echo $pinjaman->id?>','<?php echo $detail_angsuran[$i]['id']?>');"><i class="fa fa-trash-o"></i></a></td>
-                          <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/angsuran_post_akuntansi/".$pinjaman->id."/".$detail_angsuran[$i]['id']); ?>"><i class="fa fa-upload"></i></a></td>
-                          <?php
-                          }
-                          ?>                            
-                        </tr>
-                        <?php $no++;}?>
-                        <tr>
-                          <td colspan='4'><strong>TOTAL</strong></td>
-                          <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_debet,2,',','.');?></strong></td>
-                          <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_kredit,2,',','.');?></strong></td>
-                          <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_jasa,2,',','.');?></strong></td>
-                          <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_denda,2,',','.');?></strong></td>
-                          <td></td>
-                        </tr>
-                      </tbody>
-                    </table>
+                            ?>                            
+                          </tr>
+                          <?php $no++;}?>
+                          <tr>
+                            <td colspan='4'><strong>TOTAL</strong></td>
+                            <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_debet,2,',','.');?></strong></td>
+                            <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_kredit,2,',','.');?></strong></td>
+                            <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_jasa,2,',','.');?></strong></td>
+                            <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_denda,2,',','.');?></strong></td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                     <br>
                     <div class="form-group col-xs-12">
                       <button onclick="tambahAngsuran()" type="submit" class="btn btn-success" style="float: right;">Tambah Angsuran</button>
@@ -560,15 +598,21 @@ function rupiah($angka){
                         </div>
                       </div>
                       <div class="form-group col-xs-6">
-                        <label for="exampleInputPassword1">Tanggal Jatuh Tempo</label>
+                        <label for="exampleInputPassword1">Tanggal Jatuh Tempo Sebelum</label>
                         <div class="input-group date">
                           <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                           </div>
-                          <?php
-                            $jatuh_tempo = date("d-m-Y", strtotime($pinjaman->jatuh_tempo));
-                          ?>
-                          <input type="text" class="form-control pull-right" name="jatuh_tempo" id="jatuh_tempo" value="<?php echo $jatuh_tempo;?>" data-date-format="dd-mm-yyyy" required>
+                          <input type="text" class="form-control pull-right" name="jatuh_tempo_sebelum" id="jatuh_tempo_sebelum" data-date-format="dd-mm-yyyy">
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Tanggal Jatuh Tempo Sesudah</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right" name="jatuh_tempo_sesudah" id="jatuh_tempo_sesudah" data-date-format="dd-mm-yyyy">
                         </div>
                       </div>
                       <div class="form-group col-xs-6">
@@ -650,12 +694,21 @@ function rupiah($angka){
                         </div>
                       </div>
                       <div class="form-group col-xs-6">
-                        <label for="exampleInputPassword1">Penagihan / Follow Up</label>
+                        <label for="exampleInputPassword1">Penagihan</label>
                         <div class="input-group date">
                           <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                           </div>
-                          <input type="text" class="form-control pull-right" name="penagihan_followup" id="penagihan_followup" data-date-format="dd-mm-yyyy">
+                          <input type="text" class="form-control pull-right" name="penagihan" id="penagihan" data-date-format="dd-mm-yyyy">
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="exampleInputPassword1">Follow Up</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="text" class="form-control pull-right" name="followup" id="followup" data-date-format="dd-mm-yyyy">
                         </div>
                       </div>
                     </div>
@@ -2024,8 +2077,12 @@ function rupiah($angka){
 
         $('#jatuh_tempo').datepicker({}).on('changeDate', function(ev){});
 
+        $('#jatuh_tempo_sebelum').datepicker({}).on('changeDate', function(ev){});
+        $('#jatuh_tempo_sesudah').datepicker({}).on('changeDate', function(ev){});
+
         $('#janji').datepicker({}).on('changeDate', function(ev){});
-        $('#penagihan_followup').datepicker({}).on('changeDate', function(ev){});
+        $('#penagihan').datepicker({}).on('changeDate', function(ev){});
+        $('#followup').datepicker({}).on('changeDate', function(ev){});
 
         $('#tgl_penerimaan_surat').datepicker({}).on('changeDate', function(ev){});
         
