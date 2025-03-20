@@ -1,8 +1,3 @@
-<!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="<?php echo base_url()."assets/"; ?>bower_components/bootstrap/dist/css/bootstrap.min.css">
-<!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url()."assets/"; ?>bower_components/font-awesome/css/font-awesome.min.css">
-
 <?php 
 	function isLeapYear($year) {
         return ((($year % 4 === 0) && ($year % 100 !== 0)) || ($year % 400 === 0));
@@ -90,16 +85,16 @@
 
 <table class="kop_surat">
     <tr>
-        <td colspan="15"><center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center></td>
+        <td colspan="18"><center>KOPERASI KHOZANAH MAMBAUL MUBASYIRIN</center></td>
     </tr>
     <tr>
-        <td colspan="15"><center>DAFTAR SURAT TAGIHAN <?php echo $tanggal ?></center></td>
+        <td colspan="18"><center>DAFTAR SURAT TAGIHAN <?php echo $tanggal ?></center></td>
     </tr>
     <tr>
-        <td class="bold" colspan="15"><center>AHU-0003689.AH.01.39.TAHUN 2022</center></td>
+        <td class="bold" colspan="18"><center>AHU-0003689.AH.01.39.TAHUN 2022</center></td>
     </tr>
     <tr>
-        <td colspan="15"><center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center></td>
+        <td colspan="18"><center>Kantor : Desa Ngumpakdalem Rt 10 Rw 03 Kecamatan Dander Kabupaten Bojonegoro</center></td>
     </tr>
 </table>
 <br>
@@ -345,6 +340,9 @@
 	    <th>TGL JATUH TEMPO</th>
 	    <th>SISA PINJAMAN</th>
 	    <th>LAMA DARI JATUH TEMPO</th>
+        <th>JANJI</th>
+        <th>PENAGIHAN</th>
+        <th>FOLLOW UP</th>
         <th>DURASI PENAGIHAN</th>
 	    <th>KET.</th>
 	</tr>
@@ -412,6 +410,9 @@
     		  			<!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
     		  			<!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
     		    		<td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." Hari"; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['janji'] != NULL ? tanggal_indo($data[$a]['janji']) : '';?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['penagihan'] != NULL ? tanggal_indo($data[$a]['penagihan']) : '';?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['followup'] != NULL ? tanggal_indo($data[$a]['followup']) : '';?></td>
                         <td style="text-align: center;"><?php echo $data[$a]['durasi_penagihan'] ?></td>
     		  			<?php
                         if ($data[$a]['keterangan_level'] == -1) {
@@ -488,6 +489,9 @@
                         <!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
                         <td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." Hari"; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['janji'] != NULL ? tanggal_indo($data[$a]['janji']) : '';?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['penagihan'] != NULL ? tanggal_indo($data[$a]['penagihan']) : '';?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['followup'] != NULL ? tanggal_indo($data[$a]['followup']) : '';?></td>
                         <td style="text-align: center;"><?php echo $data[$a]['durasi_penagihan'] ?></td>
                         <?php
                         if ($data[$a]['keterangan_level'] == -1) {
@@ -566,6 +570,9 @@
                         <!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
                         <td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." Hari"; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['janji'] != NULL ? tanggal_indo($data[$a]['janji']) : '';?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['penagihan'] != NULL ? tanggal_indo($data[$a]['penagihan']) : '';?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['followup'] != NULL ? tanggal_indo($data[$a]['followup']) : '';?></td>
                         <td style="text-align: center;"><?php echo $data[$a]['durasi_penagihan'] ?></td>
                         <?php
                         if ($data[$a]['keterangan_level'] == -1) {
@@ -642,6 +649,9 @@
                         <!--<td style="text-align: right;"><?php echo $data[$a]['jasa_pinjaman']; ?></td>-->
                         <!--<td style="text-align: center;"><?php echo $data[$a]['lama_pinjam_bulan_hari'] ?></td>-->
                         <td style="text-align: center;"><?php echo $data[$a]['lama_jatuh_tempo']." Hari"; ?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['janji'] != NULL ? tanggal_indo($data[$a]['janji']) : '';?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['penagihan'] != NULL ? tanggal_indo($data[$a]['penagihan']) : '';?></td>
+                        <td style="text-align: center;"><?php echo $data[$a]['followup'] != NULL ? tanggal_indo($data[$a]['followup']) : '';?></td>
                         <td style="text-align: center;"><?php echo $data[$a]['durasi_penagihan'] ?></td>
                         <?php
                         if ($data[$a]['keterangan_level'] == -1) {

@@ -34,7 +34,12 @@ class PinjamanModel extends CI_Model {
 										COUNT(CASE WHEN d.status_angsuran = 'Hijau Tempo' THEN 1 END) AS jumlah_hijau_tempo,
 										COUNT(CASE WHEN d.status_angsuran = 'Kuning 1' THEN 1 END) AS jumlah_hijau_kuning1,
 										COUNT(CASE WHEN d.status_angsuran = 'Kuning 2' THEN 1 END) AS jumlah_hijau_kuning2,
-										COUNT(CASE WHEN d.status_angsuran = 'Merah' THEN 1 END) AS jumlah_hijau_merah
+										COUNT(CASE WHEN d.status_angsuran = 'Merah' THEN 1 END) AS jumlah_hijau_merah,
+										(SELECT waktu 
+										 FROM detail_angsuran da 
+										 WHERE da.id_pinjaman = p.id 
+										 ORDER BY da.waktu DESC 
+										 LIMIT 1) AS waktu_angsuran_terakhir
 									FROM 
 										pinjaman p
 									LEFT JOIN 

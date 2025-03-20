@@ -243,7 +243,9 @@ function rupiah($angka){
                         <td><?php echo $pinjaman[$i]['keterangan']?></td>
                         <td><?php echo $pinjaman[$i]['status_pinjaman']?></td>
                         <td><?php echo rupiah($pinjaman[$i]['jumlah_pinjaman'])?></td>
-                        <td><?php echo $pinjaman[$i]['sisa_angsuran'] > 0 ? rupiah($pinjaman[$i]['sisa_angsuran']) : rupiah($pinjaman[$i]['sisa_angsuran'])." (LUNAS)" ?></td>
+                        <td>
+                          <?= $pinjaman[$i]['sisa_angsuran'] > 0 ? rupiah($pinjaman[$i]['sisa_angsuran']) : rupiah($pinjaman[$i]['sisa_angsuran'])." (LUNAS) (".date('d-m-Y', strtotime($pinjaman[$i]['waktu_angsuran_terakhir'])).")" ?>
+                        </td>
                         <td><?php echo $pinjaman[$i]['jumlah_angsuran']?></td>
                         <td><?php echo rupiah($pinjaman[$i]['uang_kurang'])?></td>
                         <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("transaksianggotacon/view_pinjaman/".$pinjaman[$i]['id']); ?>"><i class="fa fa-eye"></i></a></td>

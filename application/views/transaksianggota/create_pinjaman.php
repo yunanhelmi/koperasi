@@ -281,16 +281,33 @@ function rupiah($angka){
                     <div id="label_total_angsuran_perbulan" class="alert-danger"></div> 
                   </div>
                   <div class="form-group col-xs-6">
-                    <label for="exampleInputPassword1">Keterangan</label>
-                    <!-- <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan" value=""> -->
-                    <textarea class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan"></textarea>
-                  </div>
-                  <div class="form-group col-xs-6">
                     <label for="exampleInputPassword1">Status Pinjaman</label>
                     <select id="status_pinjaman" name="status_pinjaman" class="form-control" style="width: 100%;">
                       <option value='Baru'>Baru</option>
                       <option value='Perpanjangan'>Perpanjangan</option>
                     </select>
+                  </div>
+                  <div class="form-group col-xs-6">
+                    <label for="exampleInputPassword1">Jumlah Pinjaman Sebelumnya</label>
+                    <div class="input-group margin-bottom-sm">
+                      <span class="input-group-addon">Rp</span>
+                      <input type="text" class="form-control" id="jumlah_pinjaman_sebelumnya" name="jumlah_pinjaman_sebelumnya">
+                    </div>
+                    <div id="label_jumlah_pinjaman_sebelumnya" class="alert-danger"></div>
+                  </div>
+                  <div class="form-group col-xs-6">
+                    <label for="exampleInputPassword1">Tanggal Pinjaman Sebelumnya</label>
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" name="tanggal_pinjaman_sebelumnya" id="tanggal_pinjaman_sebelumnya" data-date-format="dd-mm-yyyy">
+                    </div>
+                  </div>
+                  <div class="form-group col-xs-6">
+                    <label for="exampleInputPassword1">Keterangan</label>
+                    <!-- <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan" value=""> -->
+                    <textarea class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan"></textarea>
                   </div>
                 </div>
                 <!-- /.box-body -->
@@ -1044,6 +1061,11 @@ function rupiah($angka){
         $("#label_total_angsuran_perbulan").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(total_angsuran_perbulan)));
       }
 
+      function label_jumlah_pinjaman_sebelumnya() {
+        var jumlah_pinjaman_sebelumnya = $('#jumlah_pinjaman_sebelumnya').val();
+        $("#label_jumlah_pinjaman_sebelumnya").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(jumlah_pinjaman_sebelumnya)));
+      }
+
       function hitung_angsuran_perbulan() {
         //var e = document.getElementById("jenis_pinjaman");
         //if(e.options[e.selectedIndex].value == "Angsuran") {
@@ -1132,6 +1154,7 @@ function rupiah($angka){
         $('.select2').select2();
         $('#waktu').datepicker({}).on('changeDate', function(ev){});
         $('#jatuh_tempo').datepicker({}).on('changeDate', function(ev){});
+        $('#tanggal_pinjaman_sebelumnya').datepicker({}).on('changeDate', function(ev){});
 
         $( "#id_nasabah" ).change(function() {
           $.ajax({
@@ -1154,6 +1177,11 @@ function rupiah($angka){
         label_angsuran_perbulan();
         label_jasa_perbulan();
         label_total_angsuran_perbulan();
+        label_jumlah_pinjaman_sebelumnya();
+
+        $('#jumlah_pinjaman_sebelumnya').keyup(function() {
+          label_jumlah_pinjaman_sebelumnya();
+        });
 
         $('#jenis_pinjaman').change(function() {
           hitung_jasa_perbulan();

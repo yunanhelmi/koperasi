@@ -93,8 +93,9 @@ class SurattagihanModel extends CI_Model {
 									ds.total_pinjaman_detail,
 									ds.total_jasa_detail,
 									ds.waktu_terakhir_angsuran,
-									ds.janji,
-									ds.penagihan
+									dp.waktu as penagihan,
+									dp.janji as janji,
+									dp.followup as followup
 								FROM 
 									(
 										SELECT 
@@ -105,9 +106,7 @@ class SurattagihanModel extends CI_Model {
 											SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran_detail,
 											SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman_detail,
 											SUM(CASE WHEN jenis = 'Angsuran' AND jasa > 0 THEN jasa ELSE 0 END) as total_jasa_detail,
-											MAX(waktu) as waktu_terakhir_angsuran,
-											MAX(janji) as janji,
-											MAX(penagihan) as penagihan
+											MAX(waktu) as waktu_terakhir_angsuran
 										FROM 
 											detail_angsuran
 										WHERE 
@@ -124,6 +123,17 @@ class SurattagihanModel extends CI_Model {
 									nasabah 
 								ON 
 									pinjaman.id_nasabah = nasabah.id
+								LEFT JOIN 
+							    (
+							        -- Subquery untuk mendapatkan baris terakhir dari detail_penagihan
+							        SELECT dp1.*
+							        FROM detail_penagihan dp1
+							        WHERE dp1.waktu = (
+							            SELECT MAX(dp2.waktu) 
+							            FROM detail_penagihan dp2 
+							            WHERE dp2.id_pinjaman = dp1.id_pinjaman
+							        )
+							    ) AS dp ON pinjaman.id = dp.id_pinjaman
 								ORDER BY 
 									nasabah.kelurahan
 								");
@@ -157,8 +167,9 @@ class SurattagihanModel extends CI_Model {
 									ds.total_pinjaman_detail,
 									ds.total_jasa_detail,
 									ds.waktu_terakhir_angsuran,
-									ds.janji,
-									ds.penagihan
+									dp.waktu as penagihan,
+									dp.janji as janji,
+									dp.followup as followup
 								FROM 
 									(
 										SELECT 
@@ -169,9 +180,7 @@ class SurattagihanModel extends CI_Model {
 											SUM(IF(jenis = 'Angsuran', angsuran, 0)) as total_angsuran_detail,
 											SUM(IF(jenis = 'Pinjaman', total, 0)) as total_pinjaman_detail,
 											SUM(CASE WHEN jenis = 'Angsuran' AND jasa > 0 THEN jasa ELSE 0 END) as total_jasa_detail,
-											MAX(waktu) as waktu_terakhir_angsuran,
-											MAX(janji) as janji,
-											MAX(penagihan) as penagihan
+											MAX(waktu) as waktu_terakhir_angsuran
 										FROM 
 											detail_angsuran
 										WHERE 
@@ -188,6 +197,17 @@ class SurattagihanModel extends CI_Model {
 									nasabah 
 								ON 
 									pinjaman.id_nasabah = nasabah.id
+								LEFT JOIN 
+							    (
+							        -- Subquery untuk mendapatkan baris terakhir dari detail_penagihan
+							        SELECT dp1.*
+							        FROM detail_penagihan dp1
+							        WHERE dp1.waktu = (
+							            SELECT MAX(dp2.waktu) 
+							            FROM detail_penagihan dp2 
+							            WHERE dp2.id_pinjaman = dp1.id_pinjaman
+							        )
+							    ) AS dp ON pinjaman.id = dp.id_pinjaman
 								WHERE
 									nasabah.kelurahan = '$kelurahan'
 								ORDER BY 

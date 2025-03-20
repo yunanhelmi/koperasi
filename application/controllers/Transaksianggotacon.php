@@ -12,6 +12,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$this->load->model('detailangsuranmodel');
 		$this->load->model('detailjaminanmodel');
 		$this->load->model('scansurattagihanmodel');
+		$this->load->model('detailpenagihanmodel');
 		$this->load->model('asetkekayaanmodel');
 		$this->load->model('simpananpokokmodel');
 		$this->load->model('simpananwajibmodel');
@@ -202,6 +203,10 @@ class TransaksianggotaCon extends CI_Controller {
 		$insert['sisa_angsuran'] 			= $this->input->post('jumlah_pinjaman');
 		$insert['keterangan'] 				= $this->input->post('keterangan');
 		$insert['status_pinjaman'] 			= $this->input->post('status_pinjaman');
+		$insert['jumlah_pinjaman_sebelumnya'] = $this->input->post('jumlah_pinjaman_sebelumnya');
+		if($this->input->post('tanggal_pinjaman_sebelumnya') != NULL) {
+			$insert['tanggal_pinjaman_sebelumnya'] 	= date("Y-m-d",strtotime($this->input->post('tanggal_pinjaman_sebelumnya')));	
+		}
 
 		$detail = array();
 		$detail['waktu'] 				= $insert['waktu'];
@@ -300,6 +305,11 @@ class TransaksianggotaCon extends CI_Controller {
 		$update['status_pinjaman'] 			= $this->input->post('status_pinjaman');
 		$update['uang_kurang'] 				= $this->input->post('uang_kurang');
 		$update['janji'] 					= $this->input->post('janji');
+		$update['jumlah_pinjaman_sebelumnya'] = $this->input->post('jumlah_pinjaman_sebelumnya');
+		if($this->input->post('tanggal_pinjaman_sebelumnya') != NULL) {
+			$update['tanggal_pinjaman_sebelumnya'] 	= date("Y-m-d",strtotime($this->input->post('tanggal_pinjaman_sebelumnya')));	
+		}
+		
 		$this->pinjamanmodel->updateData($id_pinjaman, $update);
 
 		$id_nasabah = $update['id_nasabah'];
@@ -333,6 +343,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['detail_angsuran'] 	= $this->detailangsuranmodel->get_detail_angsuran_by_id_pinjaman($id_pinjaman);
 		$data['detail_jaminan'] 	= $this->detailjaminanmodel->get_detail_jaminan_by_id_pinjaman($id_pinjaman);
 		$data['scansurattagihan'] 	= $this->scansurattagihanmodel->get_scan_surat_tagihan_by_id_pinjaman($id_pinjaman);
+		$data['detail_penagihan'] 	= $this->detailpenagihanmodel->get_detail_penagihan_by_id_pinjaman($id_pinjaman);
 		$data['max_bulanke_angsuran'] = $this->detailangsuranmodel->get_max_bulanke($id_pinjaman);
 		$id_nasabah					= $data['pinjaman']->id_nasabah;
 		$data['nasabah'] 			= $this->nasabahmodel->get_nasabah_by_id($id_nasabah);
@@ -677,6 +688,55 @@ class TransaksianggotaCon extends CI_Controller {
 		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);
 	}
 
+	function insert_detail_penagihan() {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+		// Insert Detail Penagihan ke dalam table detail_jaminan
+		$input['id'] 				= $this->detailpenagihanmodel->getNewId();
+		$input['id_pinjaman'] 		= $this->input->post('detail_penagihan-id_pinjaman');
+		$input['waktu'] 			= $this->input->post('detail_penagihan-waktu');
+		$input['penagihan_ke'] 		= $this->input->post('detail_penagihan-penagihan_ke');
+		$input['janji'] 			= $this->input->post('detail_penagihan-janji');
+		$input['followup'] 			= $this->input->post('detail_penagihan-followup');
+		$input['keterangan'] 		= $this->input->post('detail_penagihan-keterangan');
+		$this->detailpenagihanmodel->inputData($input);
+
+		redirect('transaksianggotacon/view_pinjaman/'.$this->input->post('detail_penagihan-id_pinjaman'));
+	}
+
+	function update_detail_penagihan() {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+		// Insert Detail Penagihan ke dalam table detail_jaminan
+		$id 						= $this->input->post('detail_penagihan-id');
+		$input['id_pinjaman'] 		= $this->input->post('detail_penagihan-id_pinjaman');
+		$input['waktu'] 			= $this->input->post('detail_penagihan-waktu');
+		$input['penagihan_ke'] 		= $this->input->post('detail_penagihan-penagihan_ke');
+		$input['janji'] 			= $this->input->post('detail_penagihan-janji');
+		$input['followup'] 			= $this->input->post('detail_penagihan-followup');
+		$input['keterangan'] 		= $this->input->post('detail_penagihan-keterangan');
+		$this->detailpenagihanmodel->updateData($id, $input);
+
+		redirect('transaksianggotacon/view_pinjaman/'.$this->input->post('detail_penagihan-id_pinjaman'));
+	}
+
+	function delete_detail_penagihan($id_pinjaman, $id_detail_penagihan) {
+		$session_data = $this->session->userdata('mubasyirin_logged_in');
+		if($session_data == NULL) {
+			redirect("usercon/login", "refresh");
+		}
+		$this->detailpenagihanmodel->deleteData($id_detail_penagihan);	
+		redirect('transaksianggotacon/view_pinjaman/'.$id_pinjaman);	
+	}
+
+	function edit_detail_penagihan($id) {
+		echo json_encode($this->detailpenagihanmodel->get_detail_penagihan_by_id($id));
+	}
+
 	function insert_scan_surat_tagihan($id_nasabah){
 		$session_data = $this->session->userdata('mubasyirin_logged_in');
 		if($session_data == NULL) {
@@ -748,15 +808,6 @@ class TransaksianggotaCon extends CI_Controller {
 		}
 		if($this->input->post('jatuh_tempo_sesudah') != NULL) {
 			$input['jatuh_tempo_sesudah'] 	= date("Y-m-d",strtotime($this->input->post('jatuh_tempo_sesudah')));	
-		}
-		if($this->input->post('janji') != NULL) {
-			$input['janji'] 				= date("Y-m-d",strtotime($this->input->post('janji')));	
-		}
-		if($this->input->post('penagihan') != NULL) {
-			$input['penagihan'] 	= date("Y-m-d",strtotime($this->input->post('penagihan')));
-		}
-		if($this->input->post('followup') != NULL) {
-			$input['followup'] 	= date("Y-m-d",strtotime($this->input->post('followup')));
 		}
 
 		$id_pinjaman = $this->input->post('id_pinjaman');
@@ -927,6 +978,7 @@ class TransaksianggotaCon extends CI_Controller {
 		$data['max_bulanke_angsuran'] = $this->detailangsuranmodel->get_max_bulanke($id_pinjaman);
 		$id_nasabah						= $data['pinjaman']->id_nasabah;
 		$data['detail_angsuran'] 		= $this->detailangsuranmodel->get_detail_angsuran_by_id_pinjaman($id_pinjaman);
+		$data['detail_penagihan'] 	= $this->detailpenagihanmodel->get_detail_penagihan_by_id_pinjaman($id_pinjaman);
 		$data['detail_jaminan'] 		= $this->detailjaminanmodel->get_detail_jaminan_by_id_pinjaman($id_pinjaman);
 		$data['scansurattagihan'] 		= $this->scansurattagihanmodel->get_scan_surat_tagihan_by_id_pinjaman($id_pinjaman);
 		$data['edit_detail_angsuran'] 	= $this->detailangsuranmodel->get_detail_angsuran_by_id($id_detail_angsuran);
@@ -985,15 +1037,6 @@ class TransaksianggotaCon extends CI_Controller {
 		}
 		if($this->input->post('edit_jatuh_tempo_sesudah') != NULL) {
 			$input['jatuh_tempo_sesudah'] 	= date("Y-m-d",strtotime($this->input->post('edit_jatuh_tempo_sesudah')));	
-		}
-		if($this->input->post('edit_janji') != NULL) {
-			$input['janji'] 				= date("Y-m-d",strtotime($this->input->post('edit_janji')));	
-		}
-		if($this->input->post('edit_penagihan') != NULL) {
-			$input['penagihan'] 	= date("Y-m-d",strtotime($this->input->post('edit_penagihan')));
-		}
-		if($this->input->post('edit_followup') != NULL) {
-			$input['followup'] 	= date("Y-m-d",strtotime($this->input->post('edit_followup')));
 		}
 
 		$id_pinjaman = $this->input->post('edit_id_pinjaman');
@@ -1104,8 +1147,6 @@ class TransaksianggotaCon extends CI_Controller {
 		if($jatuh_tempo != NULL) {
 			$tgl_jatuh_tempo = date_create($jatuh_tempo);
 			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, date_format($tgl_jatuh_tempo, "Y-m-d"));
-		} else {
-			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, NULL);
 		}
 		/*END OF UPDATE Jatuh Tempo */
 

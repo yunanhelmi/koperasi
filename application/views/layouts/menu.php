@@ -66,6 +66,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body class="hold-transition skin-red fixed sidebar-mini">
 <div class="wrapper">
 
+<style>
+    th {
+        vertical-align: middle !important;
+        text-align: center !important;
+        padding: 10px;
+    }
+</style>
+
+
   <header class="main-header">
     <!-- Logo -->
     <a href="<?php echo base_url(''); ?>index.php/homecon/index" class="logo">

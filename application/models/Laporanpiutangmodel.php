@@ -111,8 +111,9 @@ class LaporanpiutangModel extends CI_Model {
 									ds.jasa_terakhir_angsuran,
 									ds.bulanke_terakhir_angsuran,
 									ds.bulan_tahun_terakhir_angsuran,
-									ds.janji,
-									ds.penagihan
+									dp.waktu as penagihan,
+									dp.janji as janji,
+									dp.followup as followup
 								FROM 
 									(
 										SELECT 
@@ -125,9 +126,7 @@ class LaporanpiutangModel extends CI_Model {
 											MAX(waktu) as waktu_terakhir_angsuran,
 											MAX(jasa) as jasa_terakhir_angsuran,
 											MAX(bulan_ke) as bulanke_terakhir_angsuran,
-											MAX(bulan_tahun) as bulan_tahun_terakhir_angsuran,
-											MAX(janji) as janji,
-											MAX(penagihan) as penagihan
+											MAX(bulan_tahun) as bulan_tahun_terakhir_angsuran
 										FROM 
 											detail_angsuran
 										WHERE 
@@ -144,7 +143,17 @@ class LaporanpiutangModel extends CI_Model {
 									nasabah 
 								ON 
 									pinjaman.id_nasabah = nasabah.id
-									
+								LEFT JOIN 
+							    (
+							        -- Subquery untuk mendapatkan baris terakhir dari detail_penagihan
+							        SELECT dp1.*
+							        FROM detail_penagihan dp1
+							        WHERE dp1.waktu = (
+							            SELECT MAX(dp2.waktu) 
+							            FROM detail_penagihan dp2 
+							            WHERE dp2.id_pinjaman = dp1.id_pinjaman
+							        )
+							    ) AS dp ON pinjaman.id = dp.id_pinjaman
 								");
 		$a = $query->result_array();
 		return $a;

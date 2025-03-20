@@ -300,6 +300,23 @@ function rupiah($angka){
                     <option value='Perpanjangan' <?php echo $pinjaman->status_pinjaman == 'Perpanjangan' ? 'selected' : ''?> >Perpanjangan</option>
                     </select>
                   </div>
+                  <div class="form-group col-xs-6">
+                    <label for="exampleInputPassword1">Jumlah Pinjaman Sebelumnya</label>
+                    <div class="input-group margin-bottom-sm">
+                      <span class="input-group-addon">Rp</span>
+                      <input type="text" class="form-control" id="jumlah_pinjaman_sebelumnya" name="jumlah_pinjaman_sebelumnya" value="<?= $pinjaman->jumlah_pinjaman_sebelumnya ?>">
+                    </div>
+                    <div id="label_jumlah_pinjaman_sebelumnya" class="alert-danger"></div>
+                  </div>
+                  <div class="form-group col-xs-6">
+                    <label for="exampleInputPassword1">Tanggal Pinjaman Sebelumnya</label>
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" name="tanggal_pinjaman_sebelumnya" id="tanggal_pinjaman_sebelumnya" data-date-format="dd-mm-yyyy" value="<?php echo $pinjaman->tanggal_pinjaman_sebelumnya != NULL ? date("d-m-Y", strtotime($pinjaman->tanggal_pinjaman_sebelumnya)) : ''?>">
+                    </div>
+                  </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
@@ -1048,6 +1065,11 @@ function rupiah($angka){
         $("#label_uang_kurang").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(uang_kurang)));
       }
 
+      function label_jumlah_pinjaman_sebelumnya() {
+        var jumlah_pinjaman_sebelumnya = $('#jumlah_pinjaman_sebelumnya').val();
+        $("#label_jumlah_pinjaman_sebelumnya").html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp'+formatRupiah(Math.floor(jumlah_pinjaman_sebelumnya)));
+      }
+
       function hitung_angsuran_perbulan() {
         //var e = document.getElementById("jenis_pinjaman");
         //if(e.options[e.selectedIndex].value == "Angsuran") {
@@ -1128,6 +1150,7 @@ function rupiah($angka){
       $(document).ready(function(){
         $('.select2').select2();
         $('#waktu').datepicker({}).on('changeDate', function(ev){});
+        $('#tanggal_pinjaman_sebelumnya').datepicker({}).on('changeDate', function(ev){});
 
         $( "#id_nasabah" ).change(function() {
           $.ajax({
@@ -1151,6 +1174,11 @@ function rupiah($angka){
         label_jasa_perbulan();
         label_total_angsuran_perbulan();
         label_uang_kurang();
+        label_jumlah_pinjaman_sebelumnya();
+
+        $('#jumlah_pinjaman_sebelumnya').keyup(function() {
+          label_jumlah_pinjaman_sebelumnya();
+        });
 
         $('#jenis_pinjaman').change(function() {
           hitung_jasa_perbulan();
