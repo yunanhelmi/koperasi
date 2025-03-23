@@ -745,7 +745,7 @@ function rupiah($angka){
                   </div>
                   <div class="form-group col-xs-6">
                     <label for="exampleInputFile">Foto Aset</label>
-                    <input type="file" accept=".jpg, .jpeg" name="file_img" <?php echo $asetkekayaan->file_img == (NULL || "") ? "required" : "" ?>>
+                    <input type="file" accept=".jpg, .jpeg" name="file_img">
                   </div>
                 </div>
                 <div class="box-footer">
