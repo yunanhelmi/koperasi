@@ -297,11 +297,12 @@ function rupiah($angka){
                     <label for="exampleInputPassword1">Status Pinjaman</label>
                     <select id="status_pinjaman" name="status_pinjaman" class="form-control" style="width: 100%;">
                       <option value='Baru' <?php echo $pinjaman->status_pinjaman == 'Baru' ? 'selected' : ''?> >Baru</option>
-                    <option value='Perpanjangan' <?php echo $pinjaman->status_pinjaman == 'Perpanjangan' ? 'selected' : ''?> >Perpanjangan</option>
+                      <option value='Perbaikan' <?php echo $pinjaman->status_pinjaman == 'Perpanjangan' ? 'selected' : ''?> >Perpanjangan</option>
+                      <option value='Perbaikan' <?php echo $pinjaman->status_pinjaman == 'Perbaikan' ? 'selected' : ''?> >Perbaikan</option>
                     </select>
                   </div>
                   <div class="form-group col-xs-6">
-                    <label for="exampleInputPassword1">Jumlah Pinjaman Sebelumnya</label>
+                    <label for="exampleInputPassword1">Jumlah Pinjaman Periode Sebelumnya (Musiman)</label>
                     <div class="input-group margin-bottom-sm">
                       <span class="input-group-addon">Rp</span>
                       <input type="text" class="form-control" id="jumlah_pinjaman_sebelumnya" name="jumlah_pinjaman_sebelumnya" value="<?= $pinjaman->jumlah_pinjaman_sebelumnya ?>">
@@ -309,7 +310,7 @@ function rupiah($angka){
                     <div id="label_jumlah_pinjaman_sebelumnya" class="alert-danger"></div>
                   </div>
                   <div class="form-group col-xs-6">
-                    <label for="exampleInputPassword1">Tanggal Pinjaman Sebelumnya</label>
+                    <label for="exampleInputPassword1">Tanggal Pinjaman Periode Sebelumnya (Musiman)</label>
                     <div class="input-group date">
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>

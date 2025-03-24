@@ -342,7 +342,7 @@
 	    <th>LAMA DARI JATUH TEMPO</th>
         <th>JANJI</th>
         <th>PENAGIHAN</th>
-        <th>FOLLOW UP</th>
+        <th>FOLLOW UP JANJI</th>
         <th>DURASI PENAGIHAN</th>
 	    <th>KET.</th>
 	</tr>
@@ -370,11 +370,11 @@
                         <?php
                         if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
                         ?>
-                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>">Cetak</a></td>
                         <?php
                         } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
                         ?>              
-                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>">Cetak</a></td>
                         <?php
                         }
                         ?>
@@ -449,11 +449,11 @@
                         <?php
                         if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
                         ?>
-                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>">Cetak</a></td>
                         <?php
                         } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
                         ?>              
-                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>">Cetak</a></td>
                         <?php
                         }
                         ?>
@@ -530,11 +530,11 @@
                         <?php
                         if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
                         ?>
-                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>">Cetak</a></td>
                         <?php
                         } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
                         ?>              
-                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>">Cetak</a></td>
                         <?php
                         }
                         ?>
@@ -609,11 +609,11 @@
                         <?php
                         if($data[$a]['jenis_pinjaman'] == 'Angsuran') {
                         ?>
-                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_angsuran/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>">Cetak</a></td>
                         <?php
                         } else if($data[$a]['jenis_pinjaman'] == 'Musiman') {
                         ?>              
-                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>"><i class="fa fa-file-text"></i></a></td>
+                            <td style='text-align: center'><a class="btn btn-primary" href="<?php echo site_url("surattagihancon/cetak_surat_musiman/".$tanggal_laporan."/".$data[$a]['id_pinjaman']); ?>">Cetak</a></td>
                         <?php
                         }
                         ?>

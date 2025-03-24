@@ -806,11 +806,12 @@ class TransaksianggotaCon extends CI_Controller {
 		if($this->input->post('jatuh_tempo_sebelum') != NULL) {
 			$input['jatuh_tempo_sebelum'] 	= date("Y-m-d",strtotime($this->input->post('jatuh_tempo_sebelum')));	
 		}
+
 		if($this->input->post('jatuh_tempo_sesudah') != NULL) {
 			$input['jatuh_tempo_sesudah'] 	= date("Y-m-d",strtotime($this->input->post('jatuh_tempo_sesudah')));	
 		}
 
-		$id_pinjaman = $this->input->post('id_pinjaman');
+		$id_pinjaman = $this->input->post('id_pinjamanin');
 		$data['pinjaman'] = $this->pinjamanmodel->get_pinjaman_by_id($id_pinjaman);
 
 		if($data['pinjaman']->jenis_pinjaman == 'Angsuran') {
@@ -918,7 +919,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$tgl_jatuh_tempo = date_create($jatuh_tempo);
 			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, date_format($tgl_jatuh_tempo, "Y-m-d"));
 		} else {
-			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, NULL);
+			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, '');
 		}
 		/*END OF UPDATE Jatuh Tempo */
 		
@@ -1034,9 +1035,13 @@ class TransaksianggotaCon extends CI_Controller {
 		$input['keterangan']			= $this->input->post('edit_keterangan');
 		if($this->input->post('edit_jatuh_tempo_sebelum') != NULL) {
 			$input['jatuh_tempo_sebelum'] 	= date("Y-m-d",strtotime($this->input->post('edit_jatuh_tempo_sebelum')));	
+		} else {
+			$input['jatuh_tempo_sebelum'] = NULL;
 		}
 		if($this->input->post('edit_jatuh_tempo_sesudah') != NULL) {
 			$input['jatuh_tempo_sesudah'] 	= date("Y-m-d",strtotime($this->input->post('edit_jatuh_tempo_sesudah')));	
+		} else {
+			$input['jatuh_tempo_sesudah'] = NULL;
 		}
 
 		$id_pinjaman = $this->input->post('edit_id_pinjaman');
@@ -1147,6 +1152,8 @@ class TransaksianggotaCon extends CI_Controller {
 		if($jatuh_tempo != NULL) {
 			$tgl_jatuh_tempo = date_create($jatuh_tempo);
 			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, date_format($tgl_jatuh_tempo, "Y-m-d"));
+		} else {
+			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, '');
 		}
 		/*END OF UPDATE Jatuh Tempo */
 
@@ -1205,7 +1212,7 @@ class TransaksianggotaCon extends CI_Controller {
 		//Delete Detail Angsuran
 		$this->detailangsuranmodel->deleteData($id_detail_angsuran);
 
-		/* UPDATE Jatuh Tempo */
+		/*
 		if($update->jenis_pinjaman == 'Angsuran') {
 			if($prev->jenis == 'Angsuran') {
 				$wkt_pinjam			= $update->waktu;
@@ -1277,6 +1284,16 @@ class TransaksianggotaCon extends CI_Controller {
 				
 				$this->pinjamanmodel->update_jatuh_tempo($update->id, $jatuh_tempo->format('Y-m-d'));
 			}
+		}*/
+
+		/* UPDATE Jatuh Tempo */
+		//$tgl_jatuh_tempo = date_create($this->input->post('jatuh_tempo'));
+		$jatuh_tempo = $this->detailangsuranmodel->get_max_jatuh_tempo_sesudah($data['pinjaman']->id);
+		if($jatuh_tempo != NULL) {
+			$tgl_jatuh_tempo = date_create($jatuh_tempo);
+			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, date_format($tgl_jatuh_tempo, "Y-m-d"));
+		} else {
+			$this->pinjamanmodel->update_jatuh_tempo($data['pinjaman']->id, '');
 		}
 		/*END OF UPDATE Jatuh Tempo */
 

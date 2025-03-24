@@ -355,7 +355,7 @@
         <th>LAMA DARI JATUH TEMPO</th>
         <th>JANJI</th>
         <th>PENAGIHAN</th>
-        <th>FOLLOW UP</th>
+        <th>FOLLOW UP JANJI</th>
 	    <th>DURASI PENAGIHAN</th>
 	    <!--<th>LAMA TERAKHIR BAYAR</th>
 	    <th>LAMA JATUH TEMPO</th>-->
