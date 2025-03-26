@@ -811,7 +811,7 @@ class TransaksianggotaCon extends CI_Controller {
 			$input['jatuh_tempo_sesudah'] 	= date("Y-m-d",strtotime($this->input->post('jatuh_tempo_sesudah')));	
 		}
 
-		$id_pinjaman = $this->input->post('id_pinjamanin');
+		$id_pinjaman = $this->input->post('id_pinjaman');
 		$data['pinjaman'] = $this->pinjamanmodel->get_pinjaman_by_id($id_pinjaman);
 
 		if($data['pinjaman']->jenis_pinjaman == 'Angsuran') {

@@ -2176,6 +2176,7 @@ function rupiah($angka){
         $('#id_pinjaman').val(<?= $pinjaman->id ?>);
         $('#jenis').val("Angsuran");
         $('#jasa').val(<?= $pinjaman->jasa_perbulan ?>);
+        label_jasa();
         document.getElementById("jenis").readOnly = true;
         document.getElementById("field_ds-bulan_ke").style.display = 'block';
         document.getElementById("field_ds-bulan_tahun").style.display = 'block';
