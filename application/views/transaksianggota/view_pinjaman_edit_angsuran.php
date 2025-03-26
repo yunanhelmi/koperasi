@@ -176,348 +176,244 @@ function rupiah($angka){
           </ul>
           <div class="tab-content">
             <div class="active tab-pane" id="pinjaman">
-
-
               <div class="row">
                <div class="col-md-12 pull-left">
                   <?php 
                     $date = strtotime( $pinjaman->waktu );
                     $mydate = date( 'd-m-Y', $date );
                   ?>
-                  <!-- <div class="box box-danger">
+                  
+                  <div class="box box-danger">
                     <legend style="text-align:center;">DETAIL PINJAMAN</legend>
-
                     <div class="box-body">
-                        <div class="form-group col-xs-3">
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
                           <label for="exampleInputEmail1">Nama Anggota</label>
-                          <p><?php echo $pinjaman->nama_nasabah;?></p>
                         </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Alamat</label>
-                          <p><?php echo $pinjaman->kelurahan." ".$pinjaman->dusun;?></p>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
                         </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Jenis Pinjaman</label>
-                          <p><?php echo $pinjaman->jenis_pinjaman;?></p>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= $pinjaman->nama_nasabah;?></p>
                         </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Jaminan</label>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Alamat</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= $pinjaman->kelurahan." ".$pinjaman->dusun;?></p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Jaminan</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
                           <?php
-                            $jaminan = json_decode($pinjaman->jaminan);
-                            $test = @json_decode($pinjaman->jaminan);
-                            if ($test)  {
-                              $str_jaminan = '';
-                              for($a = 0; $a < sizeof($jaminan); $a++) {
-                                $str_jaminan .= $jaminan[$a]->keterangan;
-                                $str_jaminan .= '; ';
+                              $jaminan = json_decode($pinjaman->jaminan);
+                              $test = @json_decode($pinjaman->jaminan);
+                              if ($test)  {
+                                $str_jaminan = '';
+                                for($a = 0; $a < sizeof($jaminan); $a++) {
+                                  $str_jaminan .= $jaminan[$a]->keterangan;
+                                  $str_jaminan .= '; ';
+                                }
+                                $str_jaminan = substr($str_jaminan, 0, -2);
+                              } else {
+                                $str_jaminan = $pinjaman->jaminan;
                               }
-                              $str_jaminan = substr($str_jaminan, 0, -2);
+                              
+                            ?>
+                            <p><?= $str_jaminan;?></p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Jenis Pinjaman</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= $pinjaman->jenis_pinjaman;?></p>
+                        </div>
+                      </div>
+                      <legend></legend>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Jumlah Pinjaman Periode Sebelumnya (Musiman)</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= "Rp " . number_format($pinjaman->jumlah_pinjaman_sebelumnya,2,',','.'); ?></p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Tanggal Pinjaman Periode Sebelumnya (Musiman)</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= $pinjaman->tanggal_pinjaman_sebelumnya != NULL && $pinjaman->tanggal_pinjaman_sebelumnya != '0000-00-00' ? date('d-m-Y', strtotime($pinjaman->tanggal_pinjaman_sebelumnya)) : ''; ?></p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Jumlah Pinjaman Sekarang</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= "Rp " . number_format($pinjaman->jumlah_pinjaman,2,',','.'); ?></p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Jumlah Angsuran</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= $pinjaman->jumlah_angsuran; ?></p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Tanggal Pinjaman</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= date( 'd-m-Y', strtotime($pinjaman->waktu) ); ?></p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Tanggal Jatuh Tempo</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= $pinjaman->jatuh_tempo != NULL && $pinjaman->jatuh_tempo != '0000-00-00' ? date( 'd-m-Y', strtotime($pinjaman->jatuh_tempo) ) : ''; ?></p>
+                        </div>
+                      </div>
+                      <legend></legend>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Sisa Pinjaman</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= "Rp " . number_format($pinjaman->sisa_angsuran,2,',','.');?></p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Angsuran Per Bulan</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= "Rp " . number_format($pinjaman->angsuran_perbulan,2,',','.');?></p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Jasa Per Bulan</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= "Rp " . number_format($pinjaman->jasa_perbulan,2,',','.');?></p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Total Angsuran Per Bulan</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= "Rp " . number_format($pinjaman->total_angsuran_perbulan,2,',','.');?></p>
+                        </div>
+                      </div>
+                      <legend></legend>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Lama Hari</label>
+                        </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
+                        </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <?php
+                            if($lama_hari_long != "LUNAS") {
+                          ?>
+                            <p><?= $lama_hari." (".$lama_hari_long->y." Tahun ".$lama_hari_long->m." Bulan ".$lama_hari_long->d." Hari)";?></p>
+                          <?php
                             } else {
-                              $str_jaminan = $pinjaman->jaminan;
+                          ?>
+                            <p><?= $lama_hari?></p>
+                          <?php
                             }
-                            
                           ?>
-                          <p><?php echo $str_jaminan;?></p>
                         </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Tanggal Pinjaman</label>
-                          <?php 
-                            $date = strtotime( $pinjaman->waktu );
-                            $mydate = date( 'd-m-Y', $date );
-                          ?>
-                          <p><?php echo $mydate;?></p>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Uang Kurang</label>
                         </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Tanggal Jatuh Tempo</label>
-                          <?php 
-                            $jatuh_tempo = strtotime( $pinjaman->jatuh_tempo );
-                            $jatuh_tempo1 = date( 'd-m-Y', $jatuh_tempo );
-                          ?>
-                          <p><?php echo $jatuh_tempo1;?></p>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
                         </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Jumlah Pinjaman Awal</label>
-                          <p><?php echo "Rp " . number_format($pinjaman->jumlah_pinjaman,2,',','.');?></p>
-                        </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Jumlah Angsuran</label>
-                          <p><?php echo $pinjaman->jumlah_angsuran;?></p>
-                        </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Sisa Pinjaman</label>
-                          <p><?php echo "Rp " . number_format($pinjaman->sisa_angsuran,2,',','.');?></p>
-                        </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Angsuran Per Bulan</label>
-                          <p><?php echo "Rp " . number_format($pinjaman->angsuran_perbulan,2,',','.');?></p>
-                        </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Jasa Per Bulan</label>
-                          <p><?php echo "Rp " . number_format($pinjaman->jasa_perbulan,2,',','.');?></p>
-                        </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Total Angsuran Per Bulan</label>
-                          <p><?php echo "Rp " . number_format($pinjaman->total_angsuran_perbulan,2,',','.');?></p>
-                        </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Keterangan</label>
-                          <p><?php echo $pinjaman->keterangan;?></p>
-                        </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Lama Hari</label>
-                        <?php
-                          if($lama_hari_long != "LUNAS") {
-                        ?>
-                          <p><?php echo $lama_hari." (".$lama_hari_long->y." Tahun ".$lama_hari_long->m." Bulan ".$lama_hari_long->d." Hari)";?></p>
-                        <?php
-                          } else {
-                        ?>
-                          <p><?php echo $lama_hari?></p>
-                        <?php
-                          }
-                        ?>
-                        </div>
-                        <div class="form-group col-xs-3">
-                          <label for="exampleInputPassword1">Uang Kurang</label>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
                           <p><?php echo "Rp " . number_format($pinjaman->uang_kurang,2,',','.');?></p>
                         </div>
-                        <div class="form-group col-xs-6">
-                          <label for="exampleInputPassword1">Janji</label>
-                          <p><?php echo $pinjaman->janji;?></p>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Keterangan</label>
                         </div>
-                      </div> -->
-                    
-                    <div class="box box-danger">
-                      <legend style="text-align:center;">DETAIL PINJAMAN</legend>
-                      <div class="box-body">
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Nama Anggota</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= $pinjaman->nama_nasabah;?></p>
-                          </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
                         </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Alamat</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= $pinjaman->kelurahan." ".$pinjaman->dusun;?></p>
-                          </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= $pinjaman->keterangan; ?></p>
                         </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Jaminan</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <?php
-                                $jaminan = json_decode($pinjaman->jaminan);
-                                $test = @json_decode($pinjaman->jaminan);
-                                if ($test)  {
-                                  $str_jaminan = '';
-                                  for($a = 0; $a < sizeof($jaminan); $a++) {
-                                    $str_jaminan .= $jaminan[$a]->keterangan;
-                                    $str_jaminan .= '; ';
-                                  }
-                                  $str_jaminan = substr($str_jaminan, 0, -2);
-                                } else {
-                                  $str_jaminan = $pinjaman->jaminan;
-                                }
-                                
-                              ?>
-                              <p><?= $str_jaminan;?></p>
-                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-xs-2" style="margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">Janji</label>
                         </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Jenis Pinjaman</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= $pinjaman->jenis_pinjaman;?></p>
-                          </div>
+                        <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
+                          <label for="exampleInputEmail1">:</label>
                         </div>
-                        <legend></legend>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Jumlah Pinjaman Periode Sebelumnya (Musiman)</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= "Rp " . number_format($pinjaman->jumlah_pinjaman_sebelumnya,2,',','.'); ?></p>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Tanggal Pinjaman Periode Sebelumnya (Musiman)</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= $pinjaman->tanggal_pinjaman_sebelumnya != NULL && $pinjaman->tanggal_pinjaman_sebelumnya != '0000-00-00' ? date('d-m-Y', strtotime($pinjaman->tanggal_pinjaman_sebelumnya)) : ''; ?></p>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Jumlah Pinjaman Sekarang</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= "Rp " . number_format($pinjaman->jumlah_pinjaman,2,',','.'); ?></p>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Jumlah Angsuran</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= $pinjaman->jumlah_angsuran; ?></p>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Tanggal Pinjaman</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= date( 'd-m-Y', strtotime($pinjaman->waktu) ); ?></p>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Tanggal Jatuh Tempo</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= $pinjaman->jatuh_tempo != NULL && $pinjaman->jatuh_tempo != '0000-00-00' ? date( 'd-m-Y', strtotime($pinjaman->jatuh_tempo) ) : ''; ?></p>
-                          </div>
-                        </div>
-                        <legend></legend>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Sisa Pinjaman</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= "Rp " . number_format($pinjaman->sisa_angsuran,2,',','.');?></p>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Angsuran Per Bulan</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= "Rp " . number_format($pinjaman->angsuran_perbulan,2,',','.');?></p>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Jasa Per Bulan</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= "Rp " . number_format($pinjaman->jasa_perbulan,2,',','.');?></p>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Total Angsuran Per Bulan</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= "Rp " . number_format($pinjaman->total_angsuran_perbulan,2,',','.');?></p>
-                          </div>
-                        </div>
-                        <legend></legend>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Lama Hari</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <?php
-                              if($lama_hari_long != "LUNAS") {
-                            ?>
-                              <p><?= $lama_hari." (".$lama_hari_long->y." Tahun ".$lama_hari_long->m." Bulan ".$lama_hari_long->d." Hari)";?></p>
-                            <?php
-                              } else {
-                            ?>
-                              <p><?= $lama_hari?></p>
-                            <?php
-                              }
-                            ?>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Uang Kurang</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?php echo "Rp " . number_format($pinjaman->uang_kurang,2,',','.');?></p>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Keterangan</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= $pinjaman->keterangan; ?></p>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group col-xs-2" style="margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">Janji</label>
-                          </div>
-                          <div class="form-group col-xs-1" style="text-align: right; margin-bottom: -3px;">
-                            <label for="exampleInputEmail1">:</label>
-                          </div>
-                          <div class="form-group col-xs-9" style="margin-bottom: -3px;">
-                            <p><?= $pinjaman->janji; ?></p>
-                          </div>
+                        <div class="form-group col-xs-9" style="margin-bottom: -3px;">
+                          <p><?= $pinjaman->janji; ?></p>
                         </div>
                       </div>
                     </div>
+                  </div>
 
                     <div class="box-body">
                       <legend style="text-align:center;">DETAIL ANGSURAN</legend>
@@ -676,7 +572,6 @@ function rupiah($angka){
                         <button onclick="tambahAngsuran()" type="submit" class="btn btn-success" style="float: right;">Tambah Angsuran</button>
                       </div>
                     </div>
-                  </div>
 
                   <div class="box box-danger" id="div_tambah_angsuran" style="display:none">
                     <legend style="text-align:center;" id="judulDetailAngsuran"></legend>
