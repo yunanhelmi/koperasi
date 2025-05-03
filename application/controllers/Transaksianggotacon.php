@@ -1082,13 +1082,13 @@ class TransaksianggotaCon extends CI_Controller {
 					$lama_bayar = $waktu_bayar->diff($jatuh_tempo_sebelum)->format("%a");
 				}
 				$status_angsuran = 'Hijau';
-				if ($lama_bayar > 125 && $lama_bayar <= 131) {
+				if ($lama_bayar >= 5 && $lama_bayar <= 11) {
 	                $status_angsuran = 'Hijau Tempo';
-	            } else if ($lama_bayar > 131 && $lama_bayar <= 180) {
+	            } else if ($lama_bayar > 11 && $lama_bayar <= 60) {
 	                $status_angsuran = 'Kuning 1';
-	            } else if ($lama_bayar > 180 && $lama_bayar <= 240) {
+	            } else if ($lama_bayar > 6 && $lama_bayar <= 120) {
 	                $status_angsuran = 'Kuning 2';
-	            } else if ($lama_bayar > 240) {
+	            } else if ($lama_bayar > 120) {
 	                $status_angsuran = 'Merah';
 	            }
 	            $input['lama_bayar'] = $lama_bayar;
