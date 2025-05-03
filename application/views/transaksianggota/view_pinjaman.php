@@ -842,7 +842,7 @@ function rupiah($angka){
                         ?>
                           <tr>
                             <td><?= $no++; ?></td>
-                            <td><?= $dp['waktu']; ?></td>
+                            <td><?= date('d-m-Y', strtotime($dp['waktu'])); ?></td>
                             <td><?= $dp['penagihan_ke']; ?></td>
                             <td><?= $dp['keterangan']; ?></td>
                             <td><?= $dp['janji']; ?></td>
@@ -893,7 +893,7 @@ function rupiah($angka){
                                         </div>
                                         <div class="form-group">
                                             <label>Penagihan Ke-</label>
-                                            <input type="text" name="detail_penagihan-penagihan_ke" id="detail_penagihan-penagihan_ke" class="form-control">
+                                            <input type="number" name="detail_penagihan-penagihan_ke" id="detail_penagihan-penagihan_ke" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>Janji</label>
