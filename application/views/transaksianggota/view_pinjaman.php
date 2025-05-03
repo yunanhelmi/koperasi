@@ -845,8 +845,8 @@ function rupiah($angka){
                             <td><?= date('d-m-Y', strtotime($dp['waktu'])); ?></td>
                             <td><?= $dp['penagihan_ke']; ?></td>
                             <td><?= $dp['keterangan']; ?></td>
-                            <td><?= $dp['janji']; ?></td>
-                            <td><?= $dp['followup']; ?></td>
+                            <td><?= date('d-m-Y', strtotime($dp['janji'])); ?></td>
+                            <td><?= date('d-m-Y', strtotime($dp['followup'])); ?></td>
                             <?php 
                               $today = new Datetime(date('Y-m-d'));
                               $waktu_penagihan = new Datetime(date('Y-m-d', strtotime($dp['waktu'])));
