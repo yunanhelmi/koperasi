@@ -848,15 +848,20 @@ function rupiah($angka){
                             <td><?= date('d-m-Y', strtotime($dp['janji'])); ?></td>
                             <td><?= date('d-m-Y', strtotime($dp['followup'])); ?></td>
                             <?php 
-                              $today = new Datetime(date('Y-m-d'));
-                              $waktu_penagihan = new Datetime(date('Y-m-d', strtotime($dp['waktu'])));
-                              if($today < $waktu_penagihan) {
-                                $durasi = $today->diff($waktu_penagihan)->format("%a") * -1;
+                              if($pinjaman->sisa_angsuran > 0) {
+                                $today = new Datetime(date('Y-m-d'));
+                                $waktu_penagihan = new Datetime(date('Y-m-d', strtotime($dp['waktu'])));
+                                if($today < $waktu_penagihan) {
+                                  $durasi = $today->diff($waktu_penagihan)->format("%a") * -1;
+                                } else {
+                                  $durasi = $today->diff($waktu_penagihan)->format("%a");
+                                }  
                               } else {
-                                $durasi = $today->diff($waktu_penagihan)->format("%a");
+                                $durasi = 'LUNAS';
                               }
+                              
                             ?>
-                            <td><?= $durasi.' Hari' ?></td>
+                            <td><?= $pinjaman->sisa_angsuran > 0 ? $durasi.' Hari' : $durasi ?></td>
                             <td>
                               <button class="btn btn-warning btn-sm" onclick="editDetailPenagihan(<?= $dp['id']; ?>)"><i class="fa fa-pencil-square-o"></i></button>
                             </td>
