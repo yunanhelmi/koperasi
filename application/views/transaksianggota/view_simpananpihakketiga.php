@@ -828,7 +828,7 @@ function rupiah($angka){
                           </tr>
                           <?php $no++;}?>
                           <tr>
-                            <td colspan='3'><strong>TOTAL</strong></td>
+                            <td colspan='4'><strong>TOTAL</strong></td>
                             <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_debet,2,',','.');?></strong></td>
                             <td style='text-align: right'><strong><?php echo "Rp " . number_format($total_kredit,2,',','.');?></strong></td>
                           </tr>
